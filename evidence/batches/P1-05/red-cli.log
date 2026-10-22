@@ -1,0 +1,3 @@
+{
+  "stdout": "# github.com/Loz888/-MGAR-v2-/cmd/mgarctl [github.com/Loz888/-MGAR-v2-/cmd/mgarctl.test]\ncmd/mgarctl/main_test.go:20:10: undefined: run\ncmd/mgarctl/main_test.go:57:5: undefined: run\ncmd/mgarctl/main_test.go:62:14: undefined: run\nFAIL\tgithub.com/Loz888/-MGAR-v2-/cmd/mgarctl [build failed]\nFAIL\n"
+}

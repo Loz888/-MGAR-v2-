@@ -61,11 +61,14 @@ func (s *Store) ClaimTask(ctx context.Context, run string, id WorkerIdentity, tt
 	c.Owner = id.Owner
 	c.Role = id.Role
 	c.PlanVersion = version
-	err = tx.QueryRow(ctx, "SELECT t.task_id,t.node_key,t.state,t.epoch,t.revision,t.attempts,t.max_attempts FROM task_instances t JOIN plan_nodes n ON n.task_instance_id=t.task_id WHERE n.run_id=$1 AND n.plan_version=$2 AND t.role=$3 AND t.attempts<t.max_attempts AND (t.state='ready' OR (t.state IN ('claimed','executing') AND t.lease_until<=clock_timestamp())) ORDER BY t.task_id LIMIT 1 FOR UPDATE OF t SKIP LOCKED", run, version, id.Role).Scan(&c.TaskID, &c.NodeKey, &taskState, &c.Epoch, &c.Revision, &attempts, &maxAttempts)
+	err = tx.QueryRow(ctx, "SELECT t.task_id,n.node_key,t.state,t.epoch,t.revision,t.attempts,t.max_attempts FROM task_instances t JOIN plan_nodes n ON n.task_instance_id=t.task_id AND n.run_id=t.run_id WHERE n.run_id=$1 AND n.plan_version=$2 AND t.role=$3 AND n.role=t.role AND t.attempts<t.max_attempts AND (t.state='ready' OR (t.state IN ('claimed','executing') AND t.lease_until<=clock_timestamp())) ORDER BY t.task_id LIMIT 1 FOR UPDATE OF t SKIP LOCKED", run, version, id.Role).Scan(&c.TaskID, &c.NodeKey, &taskState, &c.Epoch, &c.Revision, &attempts, &maxAttempts)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return c, ErrNoReady
 	}
 	if err != nil {
+		return c, err
+	}
+	if err = validateTaskInputs(ctx, tx, run, version, c.TaskID, c.NodeKey); err != nil {
 		return c, err
 	}
 	first := taskState == "ready"
@@ -124,17 +127,17 @@ func (s *Store) guardTask(ctx context.Context, c TaskClaim, budget bool) (pgx.Tx
 			return fail(e)
 		}
 	}
-	var owner, role, taskState string
+	var owner, role, planRole, taskState, nodeKey string
 	var epoch, revision int64
 	var live bool
-	e = tx.QueryRow(ctx, "SELECT COALESCE(owner,''),role,state,epoch,revision,COALESCE(lease_until>clock_timestamp(),false) FROM task_instances WHERE run_id=$1 AND task_id=$2 FOR UPDATE", c.RunID, c.TaskID).Scan(&owner, &role, &taskState, &epoch, &revision, &live)
+	e = tx.QueryRow(ctx, "SELECT COALESCE(t.owner,''),t.role,n.role,t.state,t.epoch,t.revision,COALESCE(t.lease_until>clock_timestamp(),false),n.node_key FROM task_instances t JOIN plan_nodes n ON n.run_id=t.run_id AND n.task_instance_id=t.task_id AND n.plan_version=$3 WHERE t.run_id=$1 AND t.task_id=$2 FOR UPDATE OF t", c.RunID, c.TaskID, version).Scan(&owner, &role, &planRole, &taskState, &epoch, &revision, &live, &nodeKey)
 	if errors.Is(e, pgx.ErrNoRows) {
 		return fail(ErrFenced)
 	}
 	if e != nil {
 		return fail(e)
 	}
-	if role != c.Role {
+	if role != c.Role || planRole != role {
 		return fail(ErrPolicy)
 	}
 	if owner != c.Owner || epoch != c.Epoch {
@@ -146,8 +149,102 @@ func (s *Store) guardTask(ctx context.Context, c TaskClaim, budget bool) (pgx.Tx
 	if revision != c.Revision {
 		return fail(ErrCASConflict)
 	}
+	if e = validateTaskInputs(ctx, tx, c.RunID, version, c.TaskID, nodeKey); e != nil {
+		return fail(e)
+	}
 	return tx, taskState, nil
 }
+
+// validateTaskInputs rechecks the fixed snapshot against the actual current-plan
+// dependencies. The caller already holds workflow, optional budget, and task locks.
+func validateTaskInputs(ctx context.Context, tx pgx.Tx, run string, version int, task, nodeKey string) error {
+	type dependency struct {
+		Node, Task, State, Artifact, Kind string
+	}
+	rows, err := tx.Query(ctx, `SELECT n.node_key,p.task_id,p.state,COALESCE(p.result_artifact_id::text,''),n.requirements->>'required_output_kind'
+	 FROM plan_edges e JOIN plan_nodes n ON n.run_id=e.run_id AND n.plan_version=e.plan_version AND n.node_key=e.from_key
+	 JOIN task_instances p ON p.run_id=n.run_id AND p.task_id=n.task_instance_id
+	 WHERE e.run_id=$1 AND e.plan_version=$2 AND e.to_key=$3 ORDER BY p.result_artifact_id,p.task_id`, run, version, nodeKey)
+	if err != nil {
+		return err
+	}
+	parents := []dependency{}
+	for rows.Next() {
+		var p dependency
+		if err = rows.Scan(&p.Node, &p.Task, &p.State, &p.Artifact, &p.Kind); err != nil {
+			rows.Close()
+			return err
+		}
+		parents = append(parents, p)
+	}
+	rows.Close()
+	if err = rows.Err(); err != nil {
+		return err
+	}
+	for _, p := range parents {
+		if p.State != "succeeded" || p.Artifact == "" {
+			return ErrStaleInput
+		}
+		// Verdict inserts take a foreign-key key-share lock on this artifact.
+		// Lock first, then read the latest verdict in a fresh statement so a
+		// verdict committed while this lock was waiting is also observed.
+		var locked string
+		err = tx.QueryRow(ctx, "SELECT artifact_id FROM artifacts WHERE run_id=$1 AND artifact_id=$2 FOR UPDATE", run, p.Artifact).Scan(&locked)
+		if errors.Is(err, pgx.ErrNoRows) {
+			return ErrStaleInput
+		}
+		if err != nil {
+			return err
+		}
+	}
+	expected := map[string]inputRef{}
+	for _, p := range parents {
+		ref := inputRef{ID: p.Artifact, Producer: p.Node}
+		var producer, kind string
+		var verified bool
+		err = tx.QueryRow(ctx, `SELECT a.content_sha256,a.source_plan_version,a.producer_task,a.kind,
+		 COALESCE((SELECT v.passed FROM artifact_verdicts v WHERE v.artifact_id=a.artifact_id ORDER BY v.created_at DESC,v.verdict_id DESC LIMIT 1),false)
+		 FROM artifacts a WHERE a.run_id=$1 AND a.artifact_id=$2`, run, p.Artifact).
+			Scan(&ref.Hash, &ref.Version, &producer, &kind, &verified)
+		if errors.Is(err, pgx.ErrNoRows) {
+			return ErrStaleInput
+		}
+		if err != nil {
+			return err
+		}
+		if !verified || producer != p.Task || ref.Version != version || kind != p.Kind {
+			return ErrStaleInput
+		}
+		if _, duplicate := expected[ref.ID]; duplicate {
+			return ErrStaleInput
+		}
+		expected[ref.ID] = ref
+	}
+	rows, err = tx.Query(ctx, "SELECT artifact_id,content_sha256,producer_node,source_plan_version FROM task_inputs WHERE run_id=$1 AND task_id=$2", run, task)
+	if err != nil {
+		return err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var have inputRef
+		if err = rows.Scan(&have.ID, &have.Hash, &have.Producer, &have.Version); err != nil {
+			return err
+		}
+		want, exists := expected[have.ID]
+		if !exists || have != want {
+			return ErrStaleInput
+		}
+		delete(expected, have.ID)
+	}
+	if err = rows.Err(); err != nil {
+		return err
+	}
+	if len(expected) != 0 {
+		return ErrStaleInput
+	}
+	return nil
+}
+
 func (s *Store) StartTask(ctx context.Context, c TaskClaim) (TaskClaim, error) {
 	tx, state, err := s.guardTask(ctx, c, false)
 	if err != nil {

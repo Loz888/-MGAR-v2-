@@ -1,0 +1,1402 @@
+{
+  "card_id": "P1-05",
+  "status": "PASS",
+  "git_commit": null,
+  "base_git_commit": "9207836f0cb612f2fd116c0e45717b40379b190f",
+  "environment": {
+    "platform": "linux",
+    "python": "3.12.14",
+    "go": "1.27.3",
+    "postgres": "16.11"
+  },
+  "commands": [
+    {
+      "command": [
+        "go",
+        "test",
+        "./internal/config/...",
+        "-run",
+        "TestDSNQuery"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P1-05/red-dsn.log",
+      "timestamp_utc": "2026-10-22T13:50:10.609418+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "./internal/config/..."
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/dsn.log",
+      "timestamp_utc": "2026-10-22T13:50:56.509974+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "./tests/e2e/..."
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P1-05/red-lifecycle.log",
+      "timestamp_utc": "2026-10-22T13:53:14.705171+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-v",
+        "./tests/e2e/..."
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/lifecycle.log",
+      "timestamp_utc": "2026-10-22T13:55:11.228807+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "./cmd/mgarctl"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P1-05/red-cli.log",
+      "timestamp_utc": "2026-10-22T14:01:10.674786+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-v",
+        "./cmd/mgarctl"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/cli.log",
+      "timestamp_utc": "2026-10-22T14:02:19.059946+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "./internal/control"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P1-05/red-readiness.log",
+      "timestamp_utc": "2026-10-22T14:02:42.411674+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "./cmd/...",
+        "./internal/scheduler/...",
+        "./tests/e2e/..."
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/command-card.log",
+      "timestamp_utc": "2026-10-22T14:03:06.923647+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-v",
+        "./internal/control"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/readiness.log",
+      "timestamp_utc": "2026-10-22T14:03:37.229752+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_fingerprint.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/fingerprint.log",
+      "timestamp_utc": "2026-10-22T14:03:37.790904+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/smoke_health.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/http-smoke.log",
+      "timestamp_utc": "2026-10-22T14:03:38.422594+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/smoke_lifecycle.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/cli-process-smoke.log",
+      "timestamp_utc": "2026-10-22T14:04:29.186564+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/setup.sh"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/setup-repeat.log",
+      "timestamp_utc": "2026-10-22T14:04:29.811935+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "-c",
+        "source scripts/dev-env.sh && docker compose --env-file .local/db.env -f deploy/compose.yaml config --quiet && docker compose --env-file .local/db.env -f deploy/compose.yaml up -d --wait && go run ./cmd/mgarmigrate && go build ./... && python scripts/smoke_health.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/startup-repeat.log",
+      "timestamp_utc": "2026-10-22T14:05:58.245483+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "./cmd/...",
+        "./internal/scheduler/...",
+        "./tests/e2e/..."
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/command-card-final.log",
+      "timestamp_utc": "2026-10-22T14:11:18.114775+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/smoke_lifecycle.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/cli-process-final.log",
+      "timestamp_utc": "2026-10-22T14:11:19.306904+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P1-05/offline.log",
+      "timestamp_utc": "2026-10-22T14:11:39.011045+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/final-source-audit.log",
+      "timestamp_utc": "2026-10-22T14:12:01.449263+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_plan_docs.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/document-fixture-fix.log",
+      "timestamp_utc": "2026-10-22T14:12:36.723367+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/offline-final.log",
+      "timestamp_utc": "2026-10-22T14:12:56.182722+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/accept.sh",
+        "P1-05"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/accept.log",
+      "timestamp_utc": "2026-10-22T14:13:52.368684+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "build",
+        "./..."
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/build-final.log",
+      "timestamp_utc": "2026-10-22T14:13:53.065718+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/final-audit.log",
+      "timestamp_utc": "2026-10-22T14:13:53.129942+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-05/diff-check.log",
+      "timestamp_utc": "2026-10-22T14:13:53.159082+00:00"
+    }
+  ],
+  "positive_assertions": [
+    {
+      "name": "command-card-final",
+      "passed": true
+    },
+    {
+      "name": "cli-process-final",
+      "passed": true
+    },
+    {
+      "name": "offline-final",
+      "passed": true
+    },
+    {
+      "name": "accept",
+      "passed": true
+    },
+    {
+      "name": "build-final",
+      "passed": true
+    },
+    {
+      "name": "final-audit",
+      "passed": true
+    },
+    {
+      "name": "diff-check",
+      "passed": true
+    }
+  ],
+  "negative_assertions": [
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/cmd/mgarctl/TestCLIWorkflowAndTerminalGuards",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/cmd/mgarctl/TestCLIHealthAndInvalidCommandsDoNotOpenDatabase",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestRealProviderDeniedWithoutCredential",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestProductionDatabaseDenied",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/control/TestHealthRejectsUnavailableDatabase",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/schema_version_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/node_role_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/node_extra_case-fold_field",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/edge_from_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/edge_extra_case-fold_field",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/null_input_item",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/mixed_null_input_item",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/top-level_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/nodes",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/depth",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/fanout",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleCancelFinishCrossProcessSingleTerminal",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleTerminalIDResubmitDoesNotOverwrite",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestFenceRevisionLeaseRoleAndOutputCommit",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleRollbackNoPartialResultOrCancellation",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestOrchestratorFenceAndRenew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/apply_without_verdict",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/finalize_pending",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/budget_available",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanInvalidDependencyLeavesDBUnchanged",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanRollbackOnOutboxFailure",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsRevokedReadyArtifact",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/start",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/renew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/save",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/start",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/renew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/save",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/takeover",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/missing",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/hash",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/producer",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/source_plan",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/extra",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaCatalogTerminalAndReader",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/invalid_FK",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/invalid_role",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/negative_budget",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestMigrationRollbackAndChecksum",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/empty_owner",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/blank_owner",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/zero_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/negative_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/oversized_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/empty_goal",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/zero_delegations",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/oversized_delegations",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim",
+      "passed": true
+    }
+  ],
+  "known_limitations": [
+    "Evidence captured before the local batch commit. See stage-summary.json and Git history for the final delivery SHA; commits have not been pushed.",
+    "Single-host Linux/WSL2 validation only. SIGKILL covers one explicit orchestrator checkpoint, with synthetic lease expiry injection; no host-power-loss, disk-failure, network-partition or multi-host guarantee.",
+    "P1 submit creates a fixed offline design fixture; no Worker/Agent Loop, Artifact CAS, independent Verifier execution, Tool Gateway or sandbox is implemented.",
+    "Trusted Go CLI/Store only; not a completed multi-user authentication/capability boundary. Artifact/verdict rows in protocol tests are explicitly synthetic fixtures.",
+    "Unknown/reserved model or non-idempotent side effects fail closed and retain reservations; manual reconciliation is not implemented and resume remains denied until safety conditions hold.",
+    "A crash before initial plan commit leaves a recoverable planning checkpoint; recovery does not invent a plan. A trusted control-plane caller must provide a validated proposal.",
+    "DB wall-clock jumps can alter lease duration. No distributed or monotonic-clock protocol is claimed.",
+    "No paid model calls or production database operations. P2-P8 and full project release gates remain outside this delivery.",
+    "Cloud install_script/start_skill draft saved, requires user review/save/publish in environment settings; publication and fresh-task restoration were not performed. Local-only commit restoration is unverified."
+  ],
+  "unverified": [],
+  "artifacts": [
+    {
+      "path": "TASK_QUEUE.md",
+      "sha256": "a5a49d5c30de4a42db5fa88618df6cd63e0d203e0b5c0a48aa39151f52f7e1b5"
+    },
+    {
+      "path": "cmd/mgarctl/main.go",
+      "sha256": "c8e4e8e2337865d244f14fdd8464f6e91250371a1a3759774913e9e0089944db"
+    },
+    {
+      "path": "cmd/orchestratord/main.go",
+      "sha256": "f0d70f70ebfde2046c65c3d8f54ea2747bcb7906487d8b234e59b2f7caf86b83"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "b7f37895b218b92aed6f1366fc99ef19ee4559758bd71b7bc0ec1c6e8530e88c"
+    },
+    {
+      "path": "docs/development.md",
+      "sha256": "42f1990b084e281a1da5aaea0b472ec1de681c1398efc4875f2aa33a527be2de"
+    },
+    {
+      "path": "internal/config/config.go",
+      "sha256": "d00b3beaf785bfdc951908a401c1bec71da461820c9548f58955d7a6723ec83e"
+    },
+    {
+      "path": "internal/config/config_test.go",
+      "sha256": "663b5db5e9efffa82b8d03110a8f64197b2fd2ee5a16461f5c000730ebfc4eae"
+    },
+    {
+      "path": "internal/control/http.go",
+      "sha256": "bc709cbc3cb5dfc0331a2c517191feb762094137f9e061d59e5a2e29648bdefb"
+    },
+    {
+      "path": "internal/control/http_test.go",
+      "sha256": "eaf347fee90a065a15d7e004d1b8a31ddf18760f14373c3e271c0bffd49774f2"
+    },
+    {
+      "path": "internal/planner/validate.go",
+      "sha256": "69f153d1a41f68b8f400450ebb880dffe45a9c783a382952bd53458b1c5ce168"
+    },
+    {
+      "path": "internal/scheduler/ready.go",
+      "sha256": "86c7e6d088d8f89b1b7dcf3f2bfcee15254e522aeee876b7c3dd5db5d7cf3b86"
+    },
+    {
+      "path": "internal/store/leases.go",
+      "sha256": "d9ebd73b336bc06ec1bf372a7d08afbbb2ab2dfd9a334ad1aab99e8e98e8f545"
+    },
+    {
+      "path": "scripts/source_fingerprint.py",
+      "sha256": "29deac5ba00bbd8f626fd622ec2531bece6a061efce4895c243204652dd1dd88"
+    },
+    {
+      "path": "tests/test_plan_docs.py",
+      "sha256": "73daad2c1bac9b3e1f51b2eadfe0461a3731dc4e143c103f04cadba441177af7"
+    },
+    {
+      "path": "cmd/mgarctl/main_test.go",
+      "sha256": "e156d402cf77ae779352165928bded9f257bf7df12f2cc006a039cf757e21299"
+    },
+    {
+      "path": "docs/adr/ADR-0002.md",
+      "sha256": "894f4da5fc07ff3567bc64d386e601156cabf5ccf3f7d6aea6096f0036abce77"
+    },
+    {
+      "path": "docs/limitations.md",
+      "sha256": "175d40c098402dda4800148818dc833df57d9ffdeff2e3072c792ab16d963de1"
+    },
+    {
+      "path": "evidence/batches/P1-05/accept.log",
+      "sha256": "4e64a82b9ee2cff732b7b9572986e3aac7bdc7f1a509efcfe12fee9d2280c227"
+    },
+    {
+      "path": "evidence/batches/P1-05/batch-notes.json",
+      "sha256": "537e426ab859e46f8e1997dc81d66d7fdc2d6d40ed07714b89cc9f6a2b69f204"
+    },
+    {
+      "path": "evidence/batches/P1-05/build-final.log",
+      "sha256": "b4ba12673cbed1a6b5424f5da9e830d424b33e76a678147ecc696974b3350dd0"
+    },
+    {
+      "path": "evidence/batches/P1-05/cli-process-final.log",
+      "sha256": "c0a6492bbb1392b6a0237cf7e837deeabcd2f58ef199cfedc13bd2a9a3db48d7"
+    },
+    {
+      "path": "evidence/batches/P1-05/cli-process-smoke.log",
+      "sha256": "d2e2307662b322e623eca4594a8e8deded7335aa8fb8a5d4b6f9d1e3c9b382a3"
+    },
+    {
+      "path": "evidence/batches/P1-05/cli.log",
+      "sha256": "70672fc9f565120e5089454d63ff1ae79cd0320746478d919453f2c070cee3ea"
+    },
+    {
+      "path": "evidence/batches/P1-05/cloud-setup-draft.json",
+      "sha256": "e81e3cc26458ee19326fe49133d3e3fe2ef94096e5a3ba86613c1df202af8183"
+    },
+    {
+      "path": "evidence/batches/P1-05/command-card-final.log",
+      "sha256": "9e35167b9fd856ea0ea1c68e68927a3617568e250cf7ea339d697e1bb564c153"
+    },
+    {
+      "path": "evidence/batches/P1-05/command-card.log",
+      "sha256": "5a2daa9e9ef54ea4de0e7a85ba126c7f16228decaa384f4ebc55232b9ebebe64"
+    },
+    {
+      "path": "evidence/batches/P1-05/commands.json",
+      "sha256": "2acd6a24049ad0394158416ddc0f4b27fff144cc0b5c07777d1aa963eff44166"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-audit-submission-green.json",
+      "sha256": "77b896075ac316d49044a8409e8c113e69c006b8d941666c44a03c01148d17c9"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-audit-submission-red.json",
+      "sha256": "f622d8216394012f4ebf5a19288bc8042068c56650655f5a3d0b78082240ae96"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-fingerprint-red.json",
+      "sha256": "0bdd7e64d1903db010a48f2bdf7bee2e196071ffceed4733be94441fdbe53ada"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-lifecycle-after_fix.json",
+      "sha256": "72fb7f08a26329c458e7f9ef24953873cee960d553fcb4861cb0533e92bfe6e9"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-lifecycle-before_fix.json",
+      "sha256": "84f2ff05e33604d53ff1e447906cbe5bc481337d4eb456ffed59a3e8bb439a64"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-lifecycle-integration_regression.json",
+      "sha256": "cc3be66e0b98d10f35d2986276efa1d5b9b2f094e92906be059fa547b14ddaf6"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-planner-strict-green.json",
+      "sha256": "9e1c3761243ae74b6d276f4e02f75504416d7f0196fc2af05e1d627983c56f1a"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-planner-strict-red.json",
+      "sha256": "69b5908223cf17bf07e794c1d67160ec3b4de6a93ff98caf6b879b14dc1e1702"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-planner-vet.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-resume-precondition.json",
+      "sha256": "f93daa6269eb0326395e79a5c51fd9dc353fa0ef5014671082010e47e259ef80"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-resume-targeted.json",
+      "sha256": "b81bab639e439d7cc19700431b68fe262eb3338792b31bb40fedc2d3102ffe76"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-revocation-final.json",
+      "sha256": "21e4e5a511383f06cd569f8e3b691b3e978faf4e6ccf1e2b3a68e31bc7d0b1d1"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-revocation-green.json",
+      "sha256": "0f323eaaab8f9f843808e76959ec11738ed278f3decfa12098b6cdfdf183f61a"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-revocation-red.json",
+      "sha256": "5b69d95042e2e14ed333fea233fa12266ddda635e6541114e5df2605f0a99d72"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-typed-edges-after.json",
+      "sha256": "ba6373b0b02c178b21eb0f9e7450a01047ce75decf48e6d51838c9294626d65a"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-typed-edges-before.json",
+      "sha256": "a843768b3708cf7aa346d6efb6268df2e0f512b4cc529e0b921319d5b2c39fdb"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-typed-edges-vet.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P1-05/delegated-validation.json",
+      "sha256": "9e8960f4f24742cfc886e9877cf4ae699b5134981fe1885c771ee54f4c8d15ab"
+    },
+    {
+      "path": "evidence/batches/P1-05/diff-check.log",
+      "sha256": "b4ba12673cbed1a6b5424f5da9e830d424b33e76a678147ecc696974b3350dd0"
+    },
+    {
+      "path": "evidence/batches/P1-05/document-fixture-fix.log",
+      "sha256": "fd7dfae3c2677814e0ccbc07c220dd99e9e4e9697a001f7e9565b09cc9da6e27"
+    },
+    {
+      "path": "evidence/batches/P1-05/dsn.log",
+      "sha256": "8a6d94c8825bbe4b400735584d79364d242e5c39bb6c9e16b2ee39aec2d4aa34"
+    },
+    {
+      "path": "evidence/batches/P1-05/final-audit.log",
+      "sha256": "68ef14f62bf25afdf062cdda25bbf023b8563f326cde0175fcbabe541ebe729b"
+    },
+    {
+      "path": "evidence/batches/P1-05/final-source-audit.log",
+      "sha256": "e6e38e56ef242b55eca330151899e86a5384d88f5935de810f8d63d2f1319af1"
+    },
+    {
+      "path": "evidence/batches/P1-05/fingerprint.log",
+      "sha256": "699df378acd06c5d3783082e4097068786076b969dfa3b40a3e577c8c5e12092"
+    },
+    {
+      "path": "evidence/batches/P1-05/http-smoke.log",
+      "sha256": "2eb8e1f7516acacda48964d26aae4b3fa517b377b12eb2e3823b84ff6a693bf0"
+    },
+    {
+      "path": "evidence/batches/P1-05/lifecycle.log",
+      "sha256": "26a26432b42c4d5508d96381d3f9fa4ef101286473c69c82cabce76f6a917b54"
+    },
+    {
+      "path": "evidence/batches/P1-05/offline-accept.json",
+      "sha256": "666627d452f2eda512c9c7d73d4c76e50cb224937e9e418ad7b35a8cbf355e43"
+    },
+    {
+      "path": "evidence/batches/P1-05/offline-docs.json.json",
+      "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+    },
+    {
+      "path": "evidence/batches/P1-05/offline-final.log",
+      "sha256": "b647df219fc0e6173938fa16606609bf793c6a1457832be49eaa4c46d1543e55"
+    },
+    {
+      "path": "evidence/batches/P1-05/offline-fingerprint.json",
+      "sha256": "ef4d66f816dedb437c1a5be6362b39cdc19a578a4f7233f43802a5683c2f8a66"
+    },
+    {
+      "path": "evidence/batches/P1-05/offline-first-artifacts.json",
+      "sha256": "371cd0b9bf2c6f327ab9e94f2389619b1394679d0993f25b2282c733f15c4e4e"
+    },
+    {
+      "path": "evidence/batches/P1-05/offline-go.json.json",
+      "sha256": "3aabf1610472d2d78ef9ed73591e80db7e90cbb3ed325e4b9dd54eab551dbce3"
+    },
+    {
+      "path": "evidence/batches/P1-05/offline-mypy.log.json",
+      "sha256": "b8837e5e1066daee9776ba2149d95fb1c6be84a908661c3b8562151ff2bf49de"
+    },
+    {
+      "path": "evidence/batches/P1-05/offline-pytest.log.json",
+      "sha256": "47a981eb024c6c2eaa083e743d432b12e618af85260e6c2afeaeddf2e4cc2b15"
+    },
+    {
+      "path": "evidence/batches/P1-05/offline-pytest.xml.json",
+      "sha256": "ac0b0488021435e82f68f465f89e481b2d3c9e7330d7a18a2e30204e87d77604"
+    },
+    {
+      "path": "evidence/batches/P1-05/offline-report.json.json",
+      "sha256": "9690e8f050b4b4b0a4e547bedae210668f722c70f122febbb395169d18467db9"
+    },
+    {
+      "path": "evidence/batches/P1-05/offline-ruff.log.json",
+      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+    },
+    {
+      "path": "evidence/batches/P1-05/offline-vet.log.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P1-05/offline.log",
+      "sha256": "b09d4057f3207efcde286888857d97ffb37485da507d1894fc294cb9c3b0034d"
+    },
+    {
+      "path": "evidence/batches/P1-05/readiness.log",
+      "sha256": "c3f098ab434bf328bcc0cc1726e4f01f8ec13243ab38423a0806c07872be62c3"
+    },
+    {
+      "path": "evidence/batches/P1-05/red-cli.log",
+      "sha256": "c5087815bf0e09daf1f8dae8b2888db6a3019da8d042c6c8e6c40fd078412369"
+    },
+    {
+      "path": "evidence/batches/P1-05/red-dsn.log",
+      "sha256": "aa1e1e5efe84e6006f3eb6877d804359b8d207c3b4855d0da5bbd148fc8cdb88"
+    },
+    {
+      "path": "evidence/batches/P1-05/red-lifecycle.log",
+      "sha256": "4ae32806732c955ba5f6e69bd4370ec1c5ac4f313befddebf2df1ba6213cb503"
+    },
+    {
+      "path": "evidence/batches/P1-05/red-readiness.log",
+      "sha256": "aa9e673f67a84b36732ec31f5e4bd2011336ae836fabbd8264b8df907bcd50e8"
+    },
+    {
+      "path": "evidence/batches/P1-05/setup-repeat.log",
+      "sha256": "38056a25e9cd9f224c5fd0f18395b08d193a3647b62e0eb3986a6a31043bac90"
+    },
+    {
+      "path": "evidence/batches/P1-05/startup-repeat.log",
+      "sha256": "b24e3edac59c002e22b612f5b2ebbed872a2f066af16fd30a239aff072431bbf"
+    },
+    {
+      "path": "internal/planner/strict_json_test.go",
+      "sha256": "fec1ed9d7da9e4d6b24f5b585526884dc8f8374fed223b8f67af0373877e8095"
+    },
+    {
+      "path": "internal/scheduler/recovery.go",
+      "sha256": "c49517bfbdff488ec6d7783db3621b2d20c9ff05debf0e6109eb1a2f6dade84a"
+    },
+    {
+      "path": "internal/store/lifecycle.go",
+      "sha256": "bca718fe41a215fe94585d61c84f2ed4669a6ceeea4b387aaff91c994d50e218"
+    },
+    {
+      "path": "scripts/smoke_lifecycle.py",
+      "sha256": "8abb057a55c665de10d4c99fb9547e772dee841e755801fdd84e487ef5ab8f46"
+    },
+    {
+      "path": "tests/e2e/lifecycle_test.go",
+      "sha256": "b25d448f8ee23b098ee13484324f21e0fe7ecfe2c1c128fd36d4793ad9492adc"
+    },
+    {
+      "path": "tests/e2e/resume_test.go",
+      "sha256": "43023c9cb6620bf4fb8e20ae1fa48d8a96741a93c0d477cee6b209888f01083c"
+    },
+    {
+      "path": "tests/integration/lifecycle_race_test.go",
+      "sha256": "4c0d36fa89f2eb16bde29699fde1ad0033f22c28df8b535cef43fef2277ab5f4"
+    },
+    {
+      "path": "tests/integration/revocation_test.go",
+      "sha256": "f002b68b7a875a9fd36077226d32029fe26359bfbebae03cea703dde678e1b8f"
+    },
+    {
+      "path": "tests/integration/submission_test.go",
+      "sha256": "d060aa91937a5aa778339eba9c2c773c62149b70b1dab89e0fd3f44cc8f1da2a"
+    },
+    {
+      "path": "tests/test_fingerprint.py",
+      "sha256": "7d69292e3ce49b776e34cdf9f664b93e550823686e1a18435425c015178bf851"
+    }
+  ],
+  "timestamp_utc": "2026-10-22T14:14:07.331492+00:00",
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 115,
+      "passed": 115,
+      "failed_events": 0,
+      "skipped": 0
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 39,
+      "passed": 39,
+      "failed": 0,
+      "skipped_or_xfailed": 0
+    },
+    "status": "PASS"
+  },
+  "test_assertions": [
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/cmd/mgarctl/TestCLIWorkflowAndTerminalGuards",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/cmd/mgarctl/TestCLIHealthAndInvalidCommandsDoNotOpenDatabase",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestOfflineDefaults",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestRealProviderDeniedWithoutCredential",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestProductionDatabaseDenied",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestDSNQueryCannotOverrideSyntheticTarget",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/control/TestFunctionalHealth",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/control/TestHealthRejectsUnavailableDatabase",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/schema_version_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/node_role_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/node_extra_case-fold_field",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/edge_from_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/edge_extra_case-fold_field",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/null_input_item",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/mixed_null_input_item",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/top-level_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_node_node_key",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_node_role",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_node_goal",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_node_required_inputs",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_node_required_output_kind",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_edge_from",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_edge_to",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/input_item_null",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/input_item_boolean",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/input_item_number",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/input_item_object",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/input_item_array",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONPreservesPermittedStringsAndEmptyArrays",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestTypedPlanEdgeLimit",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanSchemaStrict",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/nodes",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/depth",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/fanout",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/scheduler/TestClaimPolicyBeforeDatabaseAccess",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleProcessHelper",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleSIGKILLRecoveryRebuildsReady",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleExpiredAttemptLimitFailsWithoutRetry",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimCrossProcessGlobalBudget/1",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleCancelFinishCrossProcessSingleTerminal",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimCrossProcessGlobalBudget/8",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimCrossProcessGlobalBudget",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleTerminalIDResubmitDoesNotOverwrite",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestFenceRevisionLeaseRoleAndOutputCommit",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleRollbackNoPartialResultOrCancellation",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeSafeBlockedAndInterrupted/blocked/planned=false",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimUnknownSideEffectNotReplayed",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestOrchestratorFenceAndRenew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeSafeBlockedAndInterrupted/blocked/planned=true",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeSafeBlockedAndInterrupted/interrupted/planned=false",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyInputSnapshotCannotBeInjected",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeSafeBlockedAndInterrupted/interrupted/planned=true",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeSafeBlockedAndInterrupted",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeUnknownOrReservedModelCallFailsClosed/unknown",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeUnknownOrReservedModelCallFailsClosed/reserved",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeUnknownOrReservedModelCallFailsClosed",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeExhaustedBudgetStaysBlockedWithoutAttempts",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeVerdictAndFinalizePersistSeparateCheckpoints",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestReadyFanInDuplicateAndCrossProcess",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyFailureAndStaleArtifactBlocked/failed",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyFailureAndStaleArtifactBlocked/cancelled",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyFailureAndStaleArtifactBlocked/unverified",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyFailureAndStaleArtifactBlocked/stale",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyFailureAndStaleArtifactBlocked",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestApplyVerdictsWaitsForConcurrentRevocation",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestFinalizeWaitsForConcurrentRevocation",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestRecoveryRollsBackWhenLeaseExpiresDuringLockWait",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/apply_without_verdict",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/finalize_pending",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/budget_available",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanCrossProcessCAS",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanInvalidDependencyLeavesDBUnchanged",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanConcurrentCASAndHistory",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanRollbackOnOutboxFailure",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestProcessHelper",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsRevokedReadyArtifact",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/start",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/renew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/save",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/start",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/renew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/save",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/takeover",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/missing",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/hash",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/producer",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/source_plan",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/extra",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRechecksVerdictCommittedDuringArtifactLockWait",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestRecoveryReleasesOldPlanReservation",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaCatalogTerminalAndReader",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/invalid_FK",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/invalid_role",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/negative_budget",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestMigrationRollbackAndChecksum",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionInitialOwnerCannotBeStolenBeforePlan",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/empty_owner",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/blank_owner",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/zero_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/negative_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/oversized_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/empty_goal",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/zero_delegations",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/oversized_delegations",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionClaimOutboxFailureRollsBackEverything",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionDuplicateIDPreservesInitialClaim",
+      "passed": true
+    }
+  ],
+  "scope": "Authorized P0 prerequisites then all P1 cards; P1-05 lifecycle/CLI/recovery and final P1 regression corrections only. P2 and later not implemented.",
+  "audit_findings": [
+    {
+      "finding": "Ready task authorization survived revoked upstream verdict or forged current-plan labels",
+      "resolution": "Claim/Start/Renew/Save revalidate actual membership, fixed input provenance/hash and current verdict after artifact locking; real PG contention tests."
+    },
+    {
+      "finding": "Lifecycle verdict decisions and lease checks could become stale during lock waits",
+      "resolution": "Lock current artifacts before fresh verdict reads; recheck orchestrator lease before controlled commit; real blocked-transaction tests."
+    },
+    {
+      "finding": "CLI CreateRun then TakeOrchestrator allowed daemon to steal initial ownership",
+      "resolution": "CreateRunClaimed atomically persists workflow, budget, initial lease, events and outbox; deterministic interleaving and rollback tests."
+    },
+    {
+      "finding": "URI query options could reroute a seemingly synthetic DB target",
+      "resolution": "Restrict URI query options and validate pgx resolved target/fallbacks as well as exact loopback port and synthetic DB namespace."
+    },
+    {
+      "finding": "Go struct JSON decoding accepted case-folded fields and null string-array elements",
+      "resolution": "Check exact raw JSON object keys, required nonnull values and array element types before typed decoding; negative tests."
+    },
+    {
+      "finding": "Evidence fingerprint omitted contracts/docs/Compose/candidate files",
+      "resolution": "Hash all Git tracked+candidate inputs except generated evidence and task queue; real temporary Git repository invalidation tests."
+    },
+    {
+      "finding": "Typed edge-count hardening",
+      "resolution": "Added explicit planner envelope bound and 96/97 boundary tests; pre-existing DAG layer already rejected 97, so no false red claim."
+    },
+    {
+      "finding": "Final offline regression first failed isolated documentation-link fixture checks",
+      "resolution": "Preserved raw failure. Added newly linked P1 docs to the temporary document fixture; unchanged validator and broken-link negative assertions. Targeted and full regressions rerun."
+    }
+  ],
+  "review_evidence": "evidence/batches/P1-05/delegated-validation.json"
+}

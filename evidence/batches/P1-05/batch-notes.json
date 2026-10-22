@@ -1,0 +1,50 @@
+{
+  "scope": "Authorized P0 prerequisites then all P1 cards; P1-05 lifecycle/CLI/recovery and final P1 regression corrections only. P2 and later not implemented.",
+  "known_limitations": [
+    "Evidence captured before the local batch commit. See stage-summary.json and Git history for the final delivery SHA; commits have not been pushed.",
+    "Single-host Linux/WSL2 validation only. SIGKILL covers one explicit orchestrator checkpoint, with synthetic lease expiry injection; no host-power-loss, disk-failure, network-partition or multi-host guarantee.",
+    "P1 submit creates a fixed offline design fixture; no Worker/Agent Loop, Artifact CAS, independent Verifier execution, Tool Gateway or sandbox is implemented.",
+    "Trusted Go CLI/Store only; not a completed multi-user authentication/capability boundary. Artifact/verdict rows in protocol tests are explicitly synthetic fixtures.",
+    "Unknown/reserved model or non-idempotent side effects fail closed and retain reservations; manual reconciliation is not implemented and resume remains denied until safety conditions hold.",
+    "A crash before initial plan commit leaves a recoverable planning checkpoint; recovery does not invent a plan. A trusted control-plane caller must provide a validated proposal.",
+    "DB wall-clock jumps can alter lease duration. No distributed or monotonic-clock protocol is claimed.",
+    "No paid model calls or production database operations. P2-P8 and full project release gates remain outside this delivery.",
+    "Cloud install_script/start_skill draft saved, requires user review/save/publish in environment settings; publication and fresh-task restoration were not performed. Local-only commit restoration is unverified."
+  ],
+  "audit_findings": [
+    {
+      "finding": "Ready task authorization survived revoked upstream verdict or forged current-plan labels",
+      "resolution": "Claim/Start/Renew/Save revalidate actual membership, fixed input provenance/hash and current verdict after artifact locking; real PG contention tests."
+    },
+    {
+      "finding": "Lifecycle verdict decisions and lease checks could become stale during lock waits",
+      "resolution": "Lock current artifacts before fresh verdict reads; recheck orchestrator lease before controlled commit; real blocked-transaction tests."
+    },
+    {
+      "finding": "CLI CreateRun then TakeOrchestrator allowed daemon to steal initial ownership",
+      "resolution": "CreateRunClaimed atomically persists workflow, budget, initial lease, events and outbox; deterministic interleaving and rollback tests."
+    },
+    {
+      "finding": "URI query options could reroute a seemingly synthetic DB target",
+      "resolution": "Restrict URI query options and validate pgx resolved target/fallbacks as well as exact loopback port and synthetic DB namespace."
+    },
+    {
+      "finding": "Go struct JSON decoding accepted case-folded fields and null string-array elements",
+      "resolution": "Check exact raw JSON object keys, required nonnull values and array element types before typed decoding; negative tests."
+    },
+    {
+      "finding": "Evidence fingerprint omitted contracts/docs/Compose/candidate files",
+      "resolution": "Hash all Git tracked+candidate inputs except generated evidence and task queue; real temporary Git repository invalidation tests."
+    },
+    {
+      "finding": "Typed edge-count hardening",
+      "resolution": "Added explicit planner envelope bound and 96/97 boundary tests; pre-existing DAG layer already rejected 97, so no false red claim."
+    },
+    {
+      "finding": "Final offline regression first failed isolated documentation-link fixture checks",
+      "resolution": "Preserved raw failure. Added newly linked P1 docs to the temporary document fixture; unchanged validator and broken-link negative assertions. Targeted and full regressions rerun."
+    }
+  ],
+  "review_evidence": "evidence/batches/P1-05/delegated-validation.json",
+  "unverified": []
+}

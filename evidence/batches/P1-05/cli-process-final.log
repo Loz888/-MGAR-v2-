@@ -1,0 +1,3 @@
+{
+  "stdout": "{\"run_id\": \"3442db08-88d0-489c-ae2c-c004d90fe757\", \"submit\": \"running\", \"restart_scan\": \"completed\", \"cancel\": \"cancelled\", \"terminal_immutable\": true, \"paid_provider\": \"rejected\"}\n"
+}

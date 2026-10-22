@@ -4,6 +4,10 @@ Version: architecture.v1
 Implementation: DESIGN_ONLY
 Boundary: SINGLE_HOST_LINUX_WSL2
 
+本文保留 P0-01 的设计冻结快照；下文“当前未实现”指该批次的验收范围。
+P1 控制面实现与剩余边界见 [阶段限制](limitations.md)、[开发入口](development.md)；
+生命周期、恢复与终态决策补充见 [ADR-0002](adr/ADR-0002.md)，以各批次真实证据判定实现状态。
+
 本卡只冻结设计与离线静态检查。Go 控制面、Python Agent、数据库、沙箱和模型能力均**当前未实现**。
 依据：[项目宪章](../01_PROJECT_CHARTER.md)、[架构契约](../02_ARCHITECTURE_CONTRACTS.md)、
 [工作协议](../03_CODEX_WORK_PROTOCOL.md)、[实现决策](../07_IMPLEMENTATION_PLAYBOOK.md)。

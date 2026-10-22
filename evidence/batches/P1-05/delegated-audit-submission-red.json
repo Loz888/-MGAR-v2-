@@ -1,0 +1,3 @@
+{
+  "raw_text": "=== RUN   TestSubmissionInitialOwnerCannotBeStolenBeforePlan\n    submission_test.go:28: new submission lost its initial owner before it could publish a plan: FENCED\n--- FAIL: TestSubmissionInitialOwnerCannotBeStolenBeforePlan (0.08s)\nFAIL\nFAIL\tgithub.com/Loz888/-MGAR-v2-/tests/integration\t0.080s\nFAIL\nEXIT_CODE=1\n"
+}

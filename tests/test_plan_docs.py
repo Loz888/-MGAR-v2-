@@ -18,7 +18,10 @@ DOCUMENTS = (
     "07_IMPLEMENTATION_PLAYBOOK.md",
     "docs/architecture.md",
     "docs/protocols.md",
+    "docs/development.md",
+    "docs/limitations.md",
     "docs/adr/ADR-0001.md",
+    "docs/adr/ADR-0002.md",
     "contracts/README.md",
 )
 

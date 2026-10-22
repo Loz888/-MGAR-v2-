@@ -1,14 +1,30 @@
 import hashlib
+import os
 from pathlib import Path
+import subprocess
 
 
 def fingerprint():
+    """Hash tracked and candidate inputs, excluding acceptance bookkeeping."""
+    root = Path(subprocess.check_output(["git", "rev-parse", "--show-toplevel"]).decode().rstrip("\n"))
+    names = subprocess.check_output(
+        ["git", "ls-files", "-z", "-co", "--exclude-standard"], cwd=root,
+    ).split(b"\0")
     h = hashlib.sha256()
-    files = [Path(p) for p in ("go.mod", "go.sum", "pyproject.toml", "uv.lock") if Path(p).is_file()]
-    for directory in ("internal", "cmd", "agentkit", "tests", "scripts", "migrations"):
-        files.extend(p for p in Path(directory).rglob("*") if p.is_file() and p.suffix in {".go", ".py", ".sh", ".sql"} and "__pycache__" not in p.parts)
-    for p in sorted(files):
-        h.update(str(p).encode() + b"\0" + p.read_bytes() + b"\0")
+    for name in sorted(set(names) - {b""}):
+        if name.startswith(b"evidence/") or name == b"TASK_QUEUE.md":
+            continue
+        path = root / os.fsdecode(name)
+        if path.is_symlink():
+            # The repository input is the link, not an external target's bytes.
+            content = b"symlink\0" + os.fsencode(path.readlink())
+        elif path.is_file():
+            content = b"file\0" + path.read_bytes()
+        else:
+            # Deleted tracked paths have no current input bytes.
+            continue
+        h.update(len(name).to_bytes(8, "big") + name)
+        h.update(hashlib.sha256(content).digest())
     return h.hexdigest()
 
 

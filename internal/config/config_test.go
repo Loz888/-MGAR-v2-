@@ -29,3 +29,17 @@ func TestProductionDatabaseDenied(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestDSNQueryCannotOverrideSyntheticTarget(t *testing.T) {
+	for _, dsn := range []string{
+		"postgres://localhost:55432/mgar_test?host=remote.example&dbname=production",
+		"postgres://localhost:55432/mgar_test?database=production",
+		"postgres://localhost:55432/mgar_test?service=production",
+		"postgres://localhost:5432/mgar_test",
+		"postgres://localhost:55432/mgar_test_production",
+	} {
+		if ValidateTestDSN(dsn) == nil {
+			t.Fatalf("routing override accepted: %s", dsn)
+		}
+	}
+}

@@ -1,0 +1,3 @@
+{
+  "stdout": "# github.com/Loz888/-MGAR-v2-/internal/control [github.com/Loz888/-MGAR-v2-/internal/control.test]\ninternal/control/http_test.go:27:2: undefined: HandlerWithReadiness\nFAIL\tgithub.com/Loz888/-MGAR-v2-/internal/control [build failed]\nFAIL\n"
+}

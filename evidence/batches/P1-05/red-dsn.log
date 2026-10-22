@@ -1,0 +1,3 @@
+{
+  "stdout": "--- FAIL: TestDSNQueryCannotOverrideSyntheticTarget (0.00s)\n    config_test.go:40: routing override accepted: postgres://localhost:55432/mgar_test?host=remote.example&dbname=production\nFAIL\nFAIL\tgithub.com/Loz888/-MGAR-v2-/internal/config\t0.002s\nFAIL\n"
+}

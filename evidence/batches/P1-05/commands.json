@@ -1,0 +1,256 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/config/...",
+      "-run",
+      "TestDSNQuery"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P1-05/red-dsn.log",
+    "timestamp_utc": "2026-10-22T13:50:10.609418+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/config/..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/dsn.log",
+    "timestamp_utc": "2026-10-22T13:50:56.509974+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./tests/e2e/..."
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P1-05/red-lifecycle.log",
+    "timestamp_utc": "2026-10-22T13:53:14.705171+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./tests/e2e/..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/lifecycle.log",
+    "timestamp_utc": "2026-10-22T13:55:11.228807+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./cmd/mgarctl"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P1-05/red-cli.log",
+    "timestamp_utc": "2026-10-22T14:01:10.674786+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./cmd/mgarctl"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/cli.log",
+    "timestamp_utc": "2026-10-22T14:02:19.059946+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/control"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P1-05/red-readiness.log",
+    "timestamp_utc": "2026-10-22T14:02:42.411674+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./cmd/...",
+      "./internal/scheduler/...",
+      "./tests/e2e/..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/command-card.log",
+    "timestamp_utc": "2026-10-22T14:03:06.923647+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/control"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/readiness.log",
+    "timestamp_utc": "2026-10-22T14:03:37.229752+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_fingerprint.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/fingerprint.log",
+    "timestamp_utc": "2026-10-22T14:03:37.790904+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "scripts/smoke_health.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/http-smoke.log",
+    "timestamp_utc": "2026-10-22T14:03:38.422594+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "scripts/smoke_lifecycle.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/cli-process-smoke.log",
+    "timestamp_utc": "2026-10-22T14:04:29.186564+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/setup.sh"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/setup-repeat.log",
+    "timestamp_utc": "2026-10-22T14:04:29.811935+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "-c",
+      "source scripts/dev-env.sh && docker compose --env-file .local/db.env -f deploy/compose.yaml config --quiet && docker compose --env-file .local/db.env -f deploy/compose.yaml up -d --wait && go run ./cmd/mgarmigrate && go build ./... && python scripts/smoke_health.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/startup-repeat.log",
+    "timestamp_utc": "2026-10-22T14:05:58.245483+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./cmd/...",
+      "./internal/scheduler/...",
+      "./tests/e2e/..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/command-card-final.log",
+    "timestamp_utc": "2026-10-22T14:11:18.114775+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "scripts/smoke_lifecycle.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/cli-process-final.log",
+    "timestamp_utc": "2026-10-22T14:11:19.306904+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P1-05/offline.log",
+    "timestamp_utc": "2026-10-22T14:11:39.011045+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/final-source-audit.log",
+    "timestamp_utc": "2026-10-22T14:12:01.449263+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_plan_docs.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/document-fixture-fix.log",
+    "timestamp_utc": "2026-10-22T14:12:36.723367+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/offline-final.log",
+    "timestamp_utc": "2026-10-22T14:12:56.182722+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/accept.sh",
+      "P1-05"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/accept.log",
+    "timestamp_utc": "2026-10-22T14:13:52.368684+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/build-final.log",
+    "timestamp_utc": "2026-10-22T14:13:53.065718+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/final-audit.log",
+    "timestamp_utc": "2026-10-22T14:13:53.129942+00:00"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-05/diff-check.log",
+    "timestamp_utc": "2026-10-22T14:13:53.159082+00:00"
+  }
+]

@@ -1,0 +1,3 @@
+{
+  "stdout": "=== RUN   TestFunctionalHealth\n--- PASS: TestFunctionalHealth (0.00s)\n=== RUN   TestHealthRejectsUnavailableDatabase\n--- PASS: TestHealthRejectsUnavailableDatabase (0.00s)\nPASS\nok  \tgithub.com/Loz888/-MGAR-v2-/internal/control\t0.005s\n"
+}

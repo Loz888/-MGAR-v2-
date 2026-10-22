@@ -1,0 +1,138 @@
+[
+  {
+    "label": "planner-strict-red",
+    "executor": "/root/strict_plan_json",
+    "command_reported_by_agent": "go test -count=1 -v ./internal/planner/...",
+    "exit_code_reported_by_agent": 1,
+    "raw_log": "evidence/batches/P1-05/delegated-planner-strict-red.json",
+    "note": "Imported from agent execution; not represented as a second root execution."
+  },
+  {
+    "label": "planner-strict-green",
+    "executor": "/root/strict_plan_json",
+    "command_reported_by_agent": "go test -count=1 -v ./internal/planner/...",
+    "exit_code_reported_by_agent": 0,
+    "raw_log": "evidence/batches/P1-05/delegated-planner-strict-green.json",
+    "note": "Imported from agent execution; not represented as a second root execution."
+  },
+  {
+    "label": "planner-vet",
+    "executor": "/root/strict_plan_json",
+    "command_reported_by_agent": "go vet ./internal/planner/...",
+    "exit_code_reported_by_agent": 0,
+    "raw_log": "evidence/batches/P1-05/delegated-planner-vet.json",
+    "note": "Imported from agent execution; not represented as a second root execution."
+  },
+  {
+    "label": "typed-edges-before",
+    "executor": "/root/strict_plan_json",
+    "command_reported_by_agent": null,
+    "exit_code_reported_by_agent": 0,
+    "raw_log": "evidence/batches/P1-05/delegated-typed-edges-before.json",
+    "note": "Exact command flags were not retained in this raw log; final root-run full regression also covers these assertions."
+  },
+  {
+    "label": "typed-edges-after",
+    "executor": "/root/strict_plan_json",
+    "command_reported_by_agent": null,
+    "exit_code_reported_by_agent": 0,
+    "raw_log": "evidence/batches/P1-05/delegated-typed-edges-after.json",
+    "note": "Exact command flags were not retained in this raw log; final root-run full regression also covers these assertions."
+  },
+  {
+    "label": "typed-edges-vet",
+    "executor": "/root/strict_plan_json",
+    "command_reported_by_agent": "go vet ./internal/planner/...",
+    "exit_code_reported_by_agent": 0,
+    "raw_log": "evidence/batches/P1-05/delegated-typed-edges-vet.json",
+    "note": "Imported from agent execution; not represented as a second root execution."
+  },
+  {
+    "label": "revocation-red",
+    "executor": "/root/audit_p1",
+    "command_reported_by_agent": null,
+    "exit_code_reported_by_agent": 1,
+    "raw_log": "evidence/batches/P1-05/delegated-revocation-red.json",
+    "note": "Exact command flags were not retained in this raw log; final root-run full regression also covers these assertions."
+  },
+  {
+    "label": "revocation-green",
+    "executor": "/root/audit_p1",
+    "command_reported_by_agent": null,
+    "exit_code_reported_by_agent": 0,
+    "raw_log": "evidence/batches/P1-05/delegated-revocation-green.json",
+    "note": "Exact command flags were not retained in this raw log; final root-run full regression also covers these assertions."
+  },
+  {
+    "label": "revocation-final",
+    "executor": "/root/audit_p1",
+    "command_reported_by_agent": "go test ./tests/integration -run 'TestClaimRejects|TestTaskGuardRejects|TestClaimRechecks|TestRecoveryReleasesOldPlanReservation' -count=1 -v",
+    "exit_code_reported_by_agent": 0,
+    "raw_log": "evidence/batches/P1-05/delegated-revocation-final.json",
+    "note": "Imported from agent execution; not represented as a second root execution."
+  },
+  {
+    "label": "fingerprint-red",
+    "executor": "/root/lifecycle_tests",
+    "command_reported_by_agent": "python -m unittest discover -s tests -p test_fingerprint.py -v",
+    "exit_code_reported_by_agent": 1,
+    "raw_log": "evidence/batches/P1-05/delegated-fingerprint-red.json",
+    "note": "Imported from agent execution; not represented as a second root execution."
+  },
+  {
+    "label": "resume-precondition",
+    "executor": "/root/lifecycle_tests",
+    "command_reported_by_agent": null,
+    "exit_code_reported_by_agent": 0,
+    "raw_log": "evidence/batches/P1-05/delegated-resume-precondition.json",
+    "note": "Exact command flags were not retained in this raw log; final root-run full regression also covers these assertions."
+  },
+  {
+    "label": "resume-targeted",
+    "executor": "/root/lifecycle_tests",
+    "command_reported_by_agent": "go test -count=1 -v ./tests/e2e/... -run '^TestResume'",
+    "exit_code_reported_by_agent": 0,
+    "raw_log": "evidence/batches/P1-05/delegated-resume-targeted.json",
+    "note": "Imported from agent execution; not represented as a second root execution."
+  },
+  {
+    "label": "lifecycle-before_fix",
+    "executor": "/root/audit_p1",
+    "command_reported_by_agent": "source scripts/dev-env.sh && go test ./tests/integration -run 'TestApplyVerdictsWaits|TestFinalizeWaits|TestRecoveryRollsBack|TestLifecycleReadOnlyPaths' -count=1 -v",
+    "exit_code_reported_by_agent": 1,
+    "raw_log": "evidence/batches/P1-05/delegated-lifecycle-before_fix.json",
+    "note": "Imported from agent execution; not represented as a second root execution."
+  },
+  {
+    "label": "lifecycle-after_fix",
+    "executor": "/root/audit_p1",
+    "command_reported_by_agent": "source scripts/dev-env.sh && go test ./tests/integration -run 'TestApplyVerdictsWaits|TestFinalizeWaits|TestRecoveryRollsBack|TestLifecycleReadOnlyPaths' -count=1 -v",
+    "exit_code_reported_by_agent": 0,
+    "raw_log": "evidence/batches/P1-05/delegated-lifecycle-after_fix.json",
+    "note": "Imported from agent execution; not represented as a second root execution."
+  },
+  {
+    "label": "lifecycle-integration_regression",
+    "executor": "/root/audit_p1",
+    "command_reported_by_agent": "source scripts/dev-env.sh && go test -race ./tests/integration -count=1 -v",
+    "exit_code_reported_by_agent": 0,
+    "raw_log": "evidence/batches/P1-05/delegated-lifecycle-integration_regression.json",
+    "note": "Imported from agent execution; not represented as a second root execution."
+  },
+  {
+    "label": "mgar-audit-submission-red",
+    "executor": "/root/audit_p1",
+    "command_reported_by_agent": "source scripts/dev-env.sh && go test ./tests/integration -run TestSubmissionInitialOwnerCannotBeStolenBeforePlan -count=1 -v",
+    "exit_code_reported_by_agent": 1,
+    "raw_log": "evidence/batches/P1-05/delegated-audit-submission-red.json",
+    "note": "Imported from actual delegated execution; not a second root execution."
+  },
+  {
+    "label": "mgar-audit-submission-green",
+    "executor": "/root/audit_p1",
+    "command_reported_by_agent": "source scripts/dev-env.sh && go test -race ./tests/integration -run TestSubmission -count=1 -v",
+    "exit_code_reported_by_agent": 0,
+    "raw_log": "evidence/batches/P1-05/delegated-audit-submission-green.json",
+    "note": "Imported from actual delegated execution; not a second root execution."
+  }
+]

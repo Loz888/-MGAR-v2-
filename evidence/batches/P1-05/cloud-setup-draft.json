@@ -1,0 +1,12 @@
+{
+  "status": "saved",
+  "requires_publish": true,
+  "draft_id": "64f0fe10-52cd-45e3-8912-b05b607f792a~cecfgdraft_6ada18b2b00881a0b03690dfc533bc9b",
+  "fields": [
+    "install_script",
+    "start_skill"
+  ],
+  "network_or_secrets_modified": false,
+  "publication": "NOT_RUN",
+  "fresh_task_restoration": "NOT_RUN; local-only coding commits not pushed"
+}

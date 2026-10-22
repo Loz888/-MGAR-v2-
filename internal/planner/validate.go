@@ -33,7 +33,7 @@ func validText(v string, max int) bool {
 	return strings.TrimSpace(v) != "" && utf8.RuneCountInString(v) <= max
 }
 func Validate(p Proposal) error {
-	if p.SchemaVersion != "plan.v1" || p.BaseVersion < 0 || !validText(p.Rationale, 4096) || p.Edges == nil {
+	if p.SchemaVersion != "plan.v1" || p.BaseVersion < 0 || !validText(p.Rationale, 4096) || p.Edges == nil || len(p.Edges) > 96 {
 		return errors.New("invalid plan envelope")
 	}
 	roles := map[string]bool{"research": true, "data": true, "action": true, "verify": true, "aggregate": true}
@@ -93,10 +93,111 @@ func uniqueValue(d *json.Decoder) error {
 	_, err = d.Token()
 	return err
 }
+
+// exactObject checks wire names before encoding/json can case-fold struct fields.
+// Every property in the current plan/node/edge schemas is required.
+func exactObject(data json.RawMessage, fields ...string) (map[string]json.RawMessage, error) {
+	var object map[string]json.RawMessage
+	if err := json.Unmarshal(data, &object); err != nil {
+		return nil, err
+	}
+	if object == nil || len(object) != len(fields) {
+		return nil, errors.New("missing or unknown object property")
+	}
+	for _, field := range fields {
+		value, ok := object[field]
+		if !ok || bytes.Equal(bytes.TrimSpace(value), []byte("null")) {
+			return nil, errors.New("missing or null required property")
+		}
+	}
+	return object, nil
+}
+
+func jsonArray(data json.RawMessage, maximum int) ([]json.RawMessage, error) {
+	var values []json.RawMessage
+	if err := json.Unmarshal(data, &values); err != nil {
+		return nil, err
+	}
+	if values == nil || len(values) > maximum {
+		return nil, errors.New("invalid array or array size")
+	}
+	return values, nil
+}
+
+func jsonString(data json.RawMessage) error {
+	data = bytes.TrimSpace(data)
+	if len(data) == 0 || data[0] != '"' {
+		return errors.New("expected JSON string")
+	}
+	var value string
+	return json.Unmarshal(data, &value)
+}
+
+// validateJSONShape preserves distinctions lost by struct decoding: absent vs
+// null, exact field spelling, and null vs empty-string array elements.
+func validateJSONShape(data []byte) error {
+	object, err := exactObject(data, "schema_version", "base_version", "nodes", "edges", "rationale")
+	if err != nil {
+		return err
+	}
+	for _, field := range []string{"schema_version", "rationale"} {
+		if err = jsonString(object[field]); err != nil {
+			return err
+		}
+	}
+	var baseVersion int
+	if err = json.Unmarshal(object["base_version"], &baseVersion); err != nil {
+		return err
+	}
+	nodes, err := jsonArray(object["nodes"], 24)
+	if err != nil {
+		return err
+	}
+	for _, raw := range nodes {
+		node, err := exactObject(raw, "node_key", "role", "goal", "required_inputs", "required_output_kind")
+		if err != nil {
+			return err
+		}
+		for _, field := range []string{"node_key", "role", "goal", "required_output_kind"} {
+			if err = jsonString(node[field]); err != nil {
+				return err
+			}
+		}
+		inputs, err := jsonArray(node["required_inputs"], 16)
+		if err != nil {
+			return err
+		}
+		for _, input := range inputs {
+			if err = jsonString(input); err != nil {
+				return err
+			}
+		}
+	}
+	edges, err := jsonArray(object["edges"], 96)
+	if err != nil {
+		return err
+	}
+	for _, raw := range edges {
+		edge, err := exactObject(raw, "from", "to")
+		if err != nil {
+			return err
+		}
+		for _, field := range []string{"from", "to"} {
+			if err = jsonString(edge[field]); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
 func Decode(data []byte) (Proposal, error) {
 	var p Proposal
 	if len(data) > 1<<20 {
 		return p, errors.New("plan input too large")
+	}
+	if !utf8.Valid(data) {
+		return p, errors.New("plan must be valid UTF-8 JSON")
 	}
 	unique := json.NewDecoder(bytes.NewReader(data))
 	if err := uniqueValue(unique); err != nil {
@@ -106,14 +207,8 @@ func Decode(data []byte) (Proposal, error) {
 	if err := unique.Decode(&extra); err != io.EOF {
 		return p, errors.New("trailing JSON")
 	}
-	var raw map[string]json.RawMessage
-	if err := json.Unmarshal(data, &raw); err != nil {
+	if err := validateJSONShape(data); err != nil {
 		return p, err
-	}
-	for _, key := range []string{"schema_version", "base_version", "nodes", "edges", "rationale"} {
-		if v, ok := raw[key]; !ok || bytes.Equal(v, []byte("null")) {
-			return p, errors.New("missing required field")
-		}
 	}
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
