@@ -1,0 +1,25 @@
+[project]
+name = "mgar-agents"
+version = "0.0.1"
+requires-python = ">=3.12,<3.13"
+dependencies = []
+
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["agentkit"]
+
+[dependency-groups]
+dev = ["pytest==9.0.2", "ruff==0.14.3", "mypy==1.19.1"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.mypy]
+files = ["agentkit"]
+strict = true
+
+[tool.ruff]
+include = ["agentkit/**/*.py", "tests/test_provider.py", "tests/test_claim.py", "tests/test_pipeline.py"]

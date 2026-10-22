@@ -1,0 +1,3 @@
+{
+  "stdout": "?   \tgithub.com/Loz888/-MGAR-v2-/cmd/mgarctl\t[no test files]\n?   \tgithub.com/Loz888/-MGAR-v2-/cmd/orchestratord\t[no test files]\nok  \tgithub.com/Loz888/-MGAR-v2-/internal/config\t1.009s\nok  \tgithub.com/Loz888/-MGAR-v2-/internal/control\t1.013s\n"
+}

@@ -1,0 +1,415 @@
+{
+  "card_id": "P0-02",
+  "status": "PASS",
+  "git_commit": null,
+  "base_git_commit": "a1f06b169b306d7772c23901c748127978509bf2",
+  "environment": {
+    "platform": "linux",
+    "python": "3.12.14",
+    "go": "1.27.3",
+    "postgres": "16.11"
+  },
+  "commands": [
+    {
+      "command": [
+        "go",
+        "test",
+        "./internal/config/..."
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P0-02/red-config.log",
+      "timestamp_utc": "2026-10-22T13:04:42.271949+00:00",
+      "log_encoding": "JSON object, stdout contains original command output"
+    },
+    {
+      "command": [
+        "go",
+        "build",
+        "./..."
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-02/go-build.log",
+      "timestamp_utc": "2026-10-22T13:06:33.319052+00:00",
+      "log_encoding": "JSON object, stdout contains original command output"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "./..."
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-02/go-tests.log",
+      "timestamp_utc": "2026-10-22T13:06:49.632797+00:00",
+      "log_encoding": "JSON object, stdout contains original command output"
+    },
+    {
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-02/go-vet.log",
+      "timestamp_utc": "2026-10-22T13:06:51.572137+00:00",
+      "log_encoding": "JSON object, stdout contains original command output"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-02/python-tests.log",
+      "timestamp_utc": "2026-10-22T13:07:24.597416+00:00",
+      "log_encoding": "JSON object, stdout contains original command output"
+    },
+    {
+      "command": [
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-02/ruff.log",
+      "timestamp_utc": "2026-10-22T13:07:24.631671+00:00",
+      "log_encoding": "JSON object, stdout contains original command output"
+    },
+    {
+      "command": [
+        "mypy"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-02/mypy.log",
+      "timestamp_utc": "2026-10-22T13:07:25.564323+00:00",
+      "log_encoding": "JSON object, stdout contains original command output"
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".local/db.env",
+        "-f",
+        "deploy/compose.yaml",
+        "config",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-02/compose-config.log",
+      "timestamp_utc": "2026-10-22T13:07:25.644744+00:00",
+      "log_encoding": "JSON object, stdout contains original command output"
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".local/db.env",
+        "-f",
+        "deploy/compose.yaml",
+        "exec",
+        "-T",
+        "postgres",
+        "psql",
+        "-U",
+        "mgar_test_admin",
+        "-d",
+        "mgar_test",
+        "-c",
+        "SELECT current_database(), version();"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-02/database.log",
+      "timestamp_utc": "2026-10-22T13:07:25.800033+00:00",
+      "log_encoding": "JSON object, stdout contains original command output"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-health-smoke.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-02/health-smoke.log",
+      "timestamp_utc": "2026-10-22T13:07:31.985072+00:00",
+      "log_encoding": "JSON object, stdout contains original command output"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_plan_docs.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-02/static.log",
+      "timestamp_utc": "2026-10-22T13:07:32.043781+00:00",
+      "log_encoding": "JSON object, stdout contains original command output"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/smoke_health.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-02/health-reproducible.log",
+      "timestamp_utc": "2026-10-22T13:08:35.262099+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/setup.sh"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-02/setup.log",
+      "timestamp_utc": "2026-10-22T13:08:35.369230+00:00"
+    },
+    {
+      "command": [
+        "bash scripts/setup.sh",
+        "go build ./...",
+        "python -m pytest -q",
+        "docker compose config --quiet"
+      ],
+      "context": "fresh temporary source tree without .venv, .local or build outputs; frozen install",
+      "exit_code": 1,
+      "log_path": "evidence/batches/P0-02/clean-source-tree-first.log"
+    },
+    {
+      "command": [
+        "bash scripts/setup.sh",
+        "go build ./...",
+        "python -m pytest -q",
+        "docker compose config --quiet"
+      ],
+      "context": "fresh temporary Git source snapshot without .venv, .local or build outputs; frozen install; avoids invalid parent /tmp/.git marker",
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-02/clean-source-tree.log"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/check_secrets.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-02/secrets.log",
+      "timestamp_utc": "2026-10-22T13:10:06.904272+00:00"
+    }
+  ],
+  "positive_assertions": [
+    {
+      "name": "go-build",
+      "passed": true
+    },
+    {
+      "name": "go-tests",
+      "passed": true
+    },
+    {
+      "name": "go-vet",
+      "passed": true
+    },
+    {
+      "name": "python-tests",
+      "passed": true
+    },
+    {
+      "name": "ruff",
+      "passed": true
+    },
+    {
+      "name": "mypy",
+      "passed": true
+    },
+    {
+      "name": "compose-config",
+      "passed": true
+    },
+    {
+      "name": "database",
+      "passed": true
+    },
+    {
+      "name": "health-reproducible",
+      "passed": true
+    },
+    {
+      "name": "setup",
+      "passed": true
+    },
+    {
+      "name": "clean-source-tree",
+      "passed": true
+    },
+    {
+      "name": "secrets",
+      "passed": true
+    }
+  ],
+  "negative_assertions": [],
+  "known_limitations": [
+    "Evidence captured before local batch commit; commit is recorded in subsequent Git history.",
+    "No paid model calls or production database operations."
+  ],
+  "unverified": [],
+  "artifacts": [
+    {
+      "path": "TASK_QUEUE.md",
+      "sha256": "c460be15ca6906c5b57f927079a172a259bbd1521f9d6ec33cf47125b0111dfa"
+    },
+    {
+      "path": ".env.example",
+      "sha256": "39e777ff5b2864600bed9fa319685973797aaf6fe47242588286ae66ee7da303"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "a05b27fa0a01e0d3a4a7ce37e9b51eb885d8683b5c5404283cdb4419c1d0c93a"
+    },
+    {
+      "path": ".python-version",
+      "sha256": "7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d"
+    },
+    {
+      "path": "agentkit/mgar_agents/__init__.py",
+      "sha256": "cd446491e8f4f04a8f80dfc3c3cc6bf37a764eefd8579550df6e6c47d9fdbe84"
+    },
+    {
+      "path": "agentkit/mgar_agents/provider.py",
+      "sha256": "57de7d8de9d6a5ce5c95053508fe14dd1e661f681d242d5c65f00f757bcac8bb"
+    },
+    {
+      "path": "cmd/mgarctl/main.go",
+      "sha256": "4e816371d1e6a611fc177fe602c6ca022c49df0b34855db1d343b724ab94ac3d"
+    },
+    {
+      "path": "cmd/orchestratord/main.go",
+      "sha256": "280f33a5b5c4cf7e38a6d9ea940b2f26aa1a211a7fc752c2743cbfd5ae779b95"
+    },
+    {
+      "path": "deploy/compose.yaml",
+      "sha256": "c1d8dd1222476b4f91a109d7ff57b862c95afffcbc53325223fbdf9439212597"
+    },
+    {
+      "path": "docs/development.md",
+      "sha256": "a7ad11e4b3e5c54107561f0b49069893755acfdde4f2ce38f92e19cecfa07c3a"
+    },
+    {
+      "path": "evidence/batches/P0-02/clean-source-tree-first.log",
+      "sha256": "98f517ef8edfa80e5b5f76cd71319e00cdd118a79acce7555f4bcedfb8447d3d"
+    },
+    {
+      "path": "evidence/batches/P0-02/clean-source-tree.log",
+      "sha256": "6ee80b52650b8638a81ad0f2735e884fa5c97531790b40f11eddf65c1119b91e"
+    },
+    {
+      "path": "evidence/batches/P0-02/commands.json",
+      "sha256": "dfaf3b5c9b3c94d1486dfafc2c8345356613c37fb0a99813f5bd99c3076b349a"
+    },
+    {
+      "path": "evidence/batches/P0-02/compose-config.log",
+      "sha256": "b4ba12673cbed1a6b5424f5da9e830d424b33e76a678147ecc696974b3350dd0"
+    },
+    {
+      "path": "evidence/batches/P0-02/database.log",
+      "sha256": "e3e44f5566cc617989fdead65704ba48d3b929baebd797036ee3a7eede3c3da7"
+    },
+    {
+      "path": "evidence/batches/P0-02/go-build.log",
+      "sha256": "b4ba12673cbed1a6b5424f5da9e830d424b33e76a678147ecc696974b3350dd0"
+    },
+    {
+      "path": "evidence/batches/P0-02/go-tests.log",
+      "sha256": "118d783afcda4000f34273a09d738589eb373f5573c8cad64a604fce4d4ac117"
+    },
+    {
+      "path": "evidence/batches/P0-02/go-vet.log",
+      "sha256": "b4ba12673cbed1a6b5424f5da9e830d424b33e76a678147ecc696974b3350dd0"
+    },
+    {
+      "path": "evidence/batches/P0-02/health-reproducible.log",
+      "sha256": "1658f1314a322bcf63b127c2c69be6c744b863409c0600cfae050ff6d8e71499"
+    },
+    {
+      "path": "evidence/batches/P0-02/health-smoke.log",
+      "sha256": "1658f1314a322bcf63b127c2c69be6c744b863409c0600cfae050ff6d8e71499"
+    },
+    {
+      "path": "evidence/batches/P0-02/mypy.log",
+      "sha256": "988d1d89d8397fa6ab32f27275819368a828d105e302e27c36d2852a23f2cdbe"
+    },
+    {
+      "path": "evidence/batches/P0-02/python-tests.log",
+      "sha256": "097c3dcfae2c42505ef0374e14692535be2485c9f038cb7636fc97b64d015121"
+    },
+    {
+      "path": "evidence/batches/P0-02/red-config.log",
+      "sha256": "1b440a32bc2fa4655ff37b06acd64b2936296dd63d62181295ffec5d0cd7b768"
+    },
+    {
+      "path": "evidence/batches/P0-02/ruff.log",
+      "sha256": "9a703557e17ca66280bc5d5e57766b72749dd48d4dc62a6fc66be915df314fed"
+    },
+    {
+      "path": "evidence/batches/P0-02/secrets.log",
+      "sha256": "9ce678744586824b14d064cad82308b46aa07f04dfb8d8bd774a821c3d08ec16"
+    },
+    {
+      "path": "evidence/batches/P0-02/setup.log",
+      "sha256": "c87f4c8a3d2e47b57b81d5d09c23ab43bccbcec67eaa784be1c1eb47f6b6be3c"
+    },
+    {
+      "path": "evidence/batches/P0-02/static.log",
+      "sha256": "22224502b99caaa076eb71c1492c264560bde22f7810cbef2e401856dd9ce19a"
+    },
+    {
+      "path": "go.mod",
+      "sha256": "5a1fe2344d795b9a888074cafcbfeef28827b3230dec83bd0f3da3c95e14d931"
+    },
+    {
+      "path": "internal/config/config.go",
+      "sha256": "86dc70d7abbb2644442377648f1030c2c2a2cea8712945929a9aedcb9611d922"
+    },
+    {
+      "path": "internal/config/config_test.go",
+      "sha256": "c5512ad00874122eb5bfe45130b550d7816b4936642126f49d48ce173332cd5e"
+    },
+    {
+      "path": "internal/control/http.go",
+      "sha256": "7fee88abb7de6c347e0f854e6a0be5b42f260a6c2844406f2dadcf4041736577"
+    },
+    {
+      "path": "internal/control/http_test.go",
+      "sha256": "f1bff6df0cf718626b7dfb8b1f1063da43fdfd4a2afe3c2a963c2051e34ba459"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "184728cd24dddb6188170bc12574bc413b825219cd43d4072cac9117f0909beb"
+    },
+    {
+      "path": "scripts/check_secrets.py",
+      "sha256": "e029743b92f30ca76f7417b2c769dc7c38c499f81ee0b01b7dad15cd54c86773"
+    },
+    {
+      "path": "scripts/dev-env.sh",
+      "sha256": "08530289a9a605dcba54c1869f4af8e2c01aa2d006cf2e9ddec2a042af9f9484"
+    },
+    {
+      "path": "scripts/setup.sh",
+      "sha256": "750a129c698c9b7d9c81e07cb6fbba1488c7d01599f49f3d8b22941a166bd538"
+    },
+    {
+      "path": "scripts/smoke_health.py",
+      "sha256": "e5c4ef87bd8d83e90d4d8bcb6dda21c569a01321f2a41af524eeb9bc157677de"
+    },
+    {
+      "path": "tests/test_provider.py",
+      "sha256": "1a719b0b5d25e8b1290de15c9b963093399bf28033e86ada51705a196e05978c"
+    },
+    {
+      "path": "uv.lock",
+      "sha256": "ed87ab09f7d7595a9e48a31e0358b8f6c97ada2304fbfce3c4e078d591ac27be"
+    }
+  ],
+  "timestamp_utc": "2026-10-22T13:10:15.720045+00:00"
+}

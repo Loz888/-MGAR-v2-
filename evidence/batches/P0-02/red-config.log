@@ -1,0 +1,3 @@
+{
+  "stdout": "# ./internal/config/...\npattern ./internal/config/...: directory prefix internal/config does not contain main module or its selected dependencies\nFAIL\t./internal/config/... [setup failed]\nFAIL\n"
+}

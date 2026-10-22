@@ -1,0 +1,188 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/config/..."
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P0-02/red-config.log",
+    "timestamp_utc": "2026-10-22T13:04:42.271949+00:00",
+    "log_encoding": "JSON object, stdout contains original command output"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-02/go-build.log",
+    "timestamp_utc": "2026-10-22T13:06:33.319052+00:00",
+    "log_encoding": "JSON object, stdout contains original command output"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-02/go-tests.log",
+    "timestamp_utc": "2026-10-22T13:06:49.632797+00:00",
+    "log_encoding": "JSON object, stdout contains original command output"
+  },
+  {
+    "command": [
+      "go",
+      "vet",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-02/go-vet.log",
+    "timestamp_utc": "2026-10-22T13:06:51.572137+00:00",
+    "log_encoding": "JSON object, stdout contains original command output"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-02/python-tests.log",
+    "timestamp_utc": "2026-10-22T13:07:24.597416+00:00",
+    "log_encoding": "JSON object, stdout contains original command output"
+  },
+  {
+    "command": [
+      "ruff",
+      "check",
+      "."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-02/ruff.log",
+    "timestamp_utc": "2026-10-22T13:07:24.631671+00:00",
+    "log_encoding": "JSON object, stdout contains original command output"
+  },
+  {
+    "command": [
+      "mypy"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-02/mypy.log",
+    "timestamp_utc": "2026-10-22T13:07:25.564323+00:00",
+    "log_encoding": "JSON object, stdout contains original command output"
+  },
+  {
+    "command": [
+      "docker",
+      "compose",
+      "--env-file",
+      ".local/db.env",
+      "-f",
+      "deploy/compose.yaml",
+      "config",
+      "--quiet"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-02/compose-config.log",
+    "timestamp_utc": "2026-10-22T13:07:25.644744+00:00",
+    "log_encoding": "JSON object, stdout contains original command output"
+  },
+  {
+    "command": [
+      "docker",
+      "compose",
+      "--env-file",
+      ".local/db.env",
+      "-f",
+      "deploy/compose.yaml",
+      "exec",
+      "-T",
+      "postgres",
+      "psql",
+      "-U",
+      "mgar_test_admin",
+      "-d",
+      "mgar_test",
+      "-c",
+      "SELECT current_database(), version();"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-02/database.log",
+    "timestamp_utc": "2026-10-22T13:07:25.800033+00:00",
+    "log_encoding": "JSON object, stdout contains original command output"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-health-smoke.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-02/health-smoke.log",
+    "timestamp_utc": "2026-10-22T13:07:31.985072+00:00",
+    "log_encoding": "JSON object, stdout contains original command output"
+  },
+  {
+    "command": [
+      "python",
+      "scripts/validate_plan_docs.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-02/static.log",
+    "timestamp_utc": "2026-10-22T13:07:32.043781+00:00",
+    "log_encoding": "JSON object, stdout contains original command output"
+  },
+  {
+    "command": [
+      "python",
+      "scripts/smoke_health.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-02/health-reproducible.log",
+    "timestamp_utc": "2026-10-22T13:08:35.262099+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/setup.sh"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-02/setup.log",
+    "timestamp_utc": "2026-10-22T13:08:35.369230+00:00"
+  },
+  {
+    "command": [
+      "bash scripts/setup.sh",
+      "go build ./...",
+      "python -m pytest -q",
+      "docker compose config --quiet"
+    ],
+    "context": "fresh temporary source tree without .venv, .local or build outputs; frozen install",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P0-02/clean-source-tree-first.log"
+  },
+  {
+    "command": [
+      "bash scripts/setup.sh",
+      "go build ./...",
+      "python -m pytest -q",
+      "docker compose config --quiet"
+    ],
+    "context": "fresh temporary Git source snapshot without .venv, .local or build outputs; frozen install; avoids invalid parent /tmp/.git marker",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-02/clean-source-tree.log"
+  },
+  {
+    "command": [
+      "python",
+      "scripts/check_secrets.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-02/secrets.log",
+    "timestamp_utc": "2026-10-22T13:10:06.904272+00:00"
+  }
+]
