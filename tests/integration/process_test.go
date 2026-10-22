@@ -49,6 +49,12 @@ func TestProcessHelper(t *testing.T) {
 	run := os.Getenv("MGAR_TEST_RUN")
 	ctx := context.Background()
 	switch kind {
+	case "ready":
+		ready, e := s.RefreshReady(ctx, run, store.OrchestratorClaim{Owner: "orchestrator", Epoch: 1, Revision: 0})
+		if e != nil {
+			t.Fatal(e)
+		}
+		fmt.Println("RESULT ready", len(ready))
 	case "plan":
 		_, e := s.ProposeAndCommit(ctx, run, store.OrchestratorClaim{Owner: "orchestrator", Epoch: 1, Revision: 0}, simplePlan())
 		if e == nil {
