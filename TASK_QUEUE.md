@@ -10,7 +10,7 @@
 | [P1-01](tasks/P1-01.md) | P1 | 数据库迁移与状态机 Schema | P0-03 | PASS | `evidence/batches/P1-01/accept.json` |
 | [P1-02](tasks/P1-02.md) | P1 | 版本化 DAG 校验与原子 Plan Commit | P1-01 | PASS | `evidence/batches/P1-02/accept.json` |
 | [P1-03](tasks/P1-03.md) | P1 | 依赖就绪、Fan-out/Fan-in 和取消传播 | P1-02 | PASS | `evidence/batches/P1-03/accept.json` |
-| [P1-04](tasks/P1-04.md) | P1 | 最小任务 Claim / Lease / Epoch / Revision | P1-03 | TODO | `evidence/batches/P1-04/accept.json` |
+| [P1-04](tasks/P1-04.md) | P1 | 最小任务 Claim / Lease / Epoch / Revision | P1-03 | PASS | `evidence/batches/P1-04/accept.json` |
 | [P1-05](tasks/P1-05.md) | P1 | Run 生命周期、恢复扫描与 CLI | P1-04 | TODO | `evidence/batches/P1-05/accept.json` |
 | [P2-01](tasks/P2-01.md) | P2 | Python Agent SDK 与受控 Loop | P1-05 | TODO | `evidence/batches/P2-01/accept.json` |
 | [P2-02](tasks/P2-02.md) | P2 | 模型 Provider、解析与有限重试 | P2-01 | TODO | `evidence/batches/P2-02/accept.json` |

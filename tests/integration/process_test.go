@@ -49,6 +49,15 @@ func TestProcessHelper(t *testing.T) {
 	run := os.Getenv("MGAR_TEST_RUN")
 	ctx := context.Background()
 	switch kind {
+	case "claim":
+		_, e := s.ClaimTask(ctx, run, store.WorkerIdentity{Owner: "worker-" + os.Getenv("MGAR_TEST_ACTOR"), Role: "research"}, time.Minute)
+		if e == nil {
+			fmt.Println("RESULT winner")
+		} else if errors.Is(e, store.ErrNoReady) || errors.Is(e, store.ErrBudget) {
+			fmt.Println("RESULT denied")
+		} else {
+			t.Fatal(e)
+		}
 	case "ready":
 		ready, e := s.RefreshReady(ctx, run, store.OrchestratorClaim{Owner: "orchestrator", Epoch: 1, Revision: 0})
 		if e != nil {

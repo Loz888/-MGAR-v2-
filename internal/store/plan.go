@@ -25,7 +25,7 @@ func emit(ctx context.Context, tx pgx.Tx, run, entityType, entity string, revisi
 		return err
 	}
 	var event string
-	if err = tx.QueryRow(ctx, "INSERT INTO workflow_events(run_id,entity_type,entity_id,entity_revision,kind,payload) VALUES($1,$2,$3,$4,$5,$6) RETURNING event_id", run, entityType, entity, revision, kind, body).Scan(&event); err != nil {
+	if err = tx.QueryRow(ctx, "INSERT INTO workflow_events(run_id,entity_type,entity_id,entity_revision,kind,payload,trace_id) VALUES($1,$2,$3,$4,$5,$6,$1) RETURNING event_id", run, entityType, entity, revision, kind, body).Scan(&event); err != nil {
 		return err
 	}
 	_, err = tx.Exec(ctx, "INSERT INTO outbox_events(event_id,aggregate_type,aggregate_id,event_kind,payload) VALUES($1,$2,$3,$4,$5)", event, entityType, entity, kind, body)
@@ -100,12 +100,12 @@ func (s *Store) ProposeAndCommit(ctx context.Context, run string, claim Orchestr
 			return 0, err
 		}
 	}
-	tag, err := tx.Exec(ctx, "UPDATE workflow_runs SET state='running',active_plan_version=$2,revision=revision+1 WHERE run_id=$1 AND revision=$3", run, next, revision)
+	tag, err := tx.Exec(ctx, "UPDATE workflow_runs SET state='running',active_plan_version=$2,revision=revision+1 WHERE run_id=$1 AND revision=$3 AND EXISTS(SELECT 1 FROM orchestrator_leases l WHERE l.run_id=$1 AND l.owner_id=$4 AND l.epoch=$5 AND l.revision=$6 AND l.lease_until>clock_timestamp())", run, next, revision, claim.Owner, claim.Epoch, claim.Revision)
 	if err != nil {
 		return 0, err
 	}
 	if tag.RowsAffected() != 1 {
-		return 0, ErrPlanConflict
+		return 0, ErrFenced
 	}
 	if err = emit(ctx, tx, run, "workflow", run, revision+1, "plan_committed", map[string]int{"plan_version": next}); err != nil {
 		return 0, err

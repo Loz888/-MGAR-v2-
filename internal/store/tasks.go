@@ -170,7 +170,7 @@ func (s *Store) RefreshReady(ctx context.Context, run string, c OrchestratorClai
 				}
 			}
 		}
-		tag, e := tx.Exec(ctx, "UPDATE task_instances SET state=$2,revision=revision+1 WHERE task_id=$1 AND revision=$3 AND state='pending'", n.ID, target, n.Revision)
+		tag, e := tx.Exec(ctx, "UPDATE task_instances SET state=$2,revision=revision+1 WHERE task_id=$1 AND revision=$3 AND state='pending' AND EXISTS(SELECT 1 FROM orchestrator_leases l WHERE l.run_id=$4 AND l.owner_id=$5 AND l.epoch=$6 AND l.revision=$7 AND l.lease_until>clock_timestamp())", n.ID, target, n.Revision, run, c.Owner, c.Epoch, c.Revision)
 		if e != nil {
 			return nil, e
 		}
