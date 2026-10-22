@@ -6,7 +6,7 @@
 |---|---|---|---|---|---|
 | [P0-01](tasks/P0-01.md) | P0 | 冻结边界、ADR 与契约索引 | 无 | PASS | `evidence/batches/P0-01/accept.json` |
 | [P0-02](tasks/P0-02.md) | P0 | 仓库脚手架与依赖锁定 | P0-01 | PASS | `evidence/batches/P0-02/accept.json` |
-| [P0-03](tasks/P0-03.md) | P0 | 严格测试/证据流水线 | P0-02 | TODO | `evidence/batches/P0-03/accept.json` |
+| [P0-03](tasks/P0-03.md) | P0 | 严格测试/证据流水线 | P0-02 | PASS | `evidence/batches/P0-03/accept.json` |
 | [P1-01](tasks/P1-01.md) | P1 | 数据库迁移与状态机 Schema | P0-03 | TODO | `evidence/batches/P1-01/accept.json` |
 | [P1-02](tasks/P1-02.md) | P1 | 版本化 DAG 校验与原子 Plan Commit | P1-01 | TODO | `evidence/batches/P1-02/accept.json` |
 | [P1-03](tasks/P1-03.md) | P1 | 依赖就绪、Fan-out/Fan-in 和取消传播 | P1-02 | TODO | `evidence/batches/P1-03/accept.json` |

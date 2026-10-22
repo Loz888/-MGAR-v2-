@@ -16,6 +16,7 @@ dev = ["pytest==9.0.2", "ruff==0.14.3", "mypy==1.19.1"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+xfail_strict = true
 
 [tool.mypy]
 files = ["agentkit"]

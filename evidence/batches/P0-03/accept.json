@@ -1,0 +1,223 @@
+{
+  "card_id": "P0-03",
+  "status": "PASS",
+  "git_commit": null,
+  "base_git_commit": "df9d3b0f31056fbcd4066d7f55a83bc97d145f96",
+  "environment": {
+    "platform": "linux",
+    "python": "3.12.14",
+    "go": "1.27.3",
+    "postgres": "16.11"
+  },
+  "commands": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_pipeline.py"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P0-03/red-pipeline.log",
+      "timestamp_utc": "2026-10-22T13:11:55.019592+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_pipeline.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-03/pipeline-tests.log",
+      "timestamp_utc": "2026-10-22T13:12:56.510196+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/bootstrap.sh",
+        "--fresh-test-db"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-03/bootstrap.log",
+      "timestamp_utc": "2026-10-22T13:12:57.347956+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-03/offline.log",
+      "timestamp_utc": "2026-10-22T13:13:01.315140+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/accept.sh",
+        "P0-03"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-03/acceptance.log",
+      "timestamp_utc": "2026-10-22T13:13:01.381782+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-03/offline-final.log",
+      "timestamp_utc": "2026-10-22T13:14:14.172175+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/accept.sh",
+        "P0-03"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-03/acceptance-final.log",
+      "timestamp_utc": "2026-10-22T13:14:14.231074+00:00"
+    }
+  ],
+  "positive_assertions": [
+    {
+      "name": "pipeline-tests",
+      "passed": true
+    },
+    {
+      "name": "bootstrap",
+      "passed": true
+    },
+    {
+      "name": "offline-final",
+      "passed": true
+    },
+    {
+      "name": "acceptance-final",
+      "passed": true
+    }
+  ],
+  "negative_assertions": [],
+  "known_limitations": [
+    "Evidence captured before local batch commit; commit is recorded in subsequent Git history.",
+    "No paid model calls or production database operations."
+  ],
+  "unverified": [],
+  "artifacts": [
+    {
+      "path": "TASK_QUEUE.md",
+      "sha256": "3853f0138022ae560d1b88e2f3437d272e5776ff3da872f47de7332066ea35ad"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "28c6f77fd3006b688f731f1f9f2fa55cfc19adf490146faa52a33160032143de"
+    },
+    {
+      "path": "evidence/batches/P0-03/acceptance-final.log",
+      "sha256": "2c3239096a5849b1e21ac22485cadcc4a04bbad07d3b95a35667c8c59175f8f6"
+    },
+    {
+      "path": "evidence/batches/P0-03/acceptance.log",
+      "sha256": "2c3239096a5849b1e21ac22485cadcc4a04bbad07d3b95a35667c8c59175f8f6"
+    },
+    {
+      "path": "evidence/batches/P0-03/bootstrap.log",
+      "sha256": "e52c2b10e1598fd0cf92fe4c592765a22ad1904525a0ad73f5da470987f19139"
+    },
+    {
+      "path": "evidence/batches/P0-03/commands.json",
+      "sha256": "831145d55867d9b39479a38c8402f41c64a813e86b05728e05471deb0bcb48f4"
+    },
+    {
+      "path": "evidence/batches/P0-03/offline-accept.json",
+      "sha256": "1e93bcbc329948de66413df15ecc77ce8aba2c54242eb3b4ce719cc8742c0931"
+    },
+    {
+      "path": "evidence/batches/P0-03/offline-docs.json.json",
+      "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+    },
+    {
+      "path": "evidence/batches/P0-03/offline-final.log",
+      "sha256": "c6946e4d811589f8fb38312f65cfd4d0cefb9760eacebd17ec6b4225fdc549d3"
+    },
+    {
+      "path": "evidence/batches/P0-03/offline-fingerprint.json",
+      "sha256": "0c6b95d7345a963a1ac282153c0c263219909508ce09e3421e013f1fdd8d8801"
+    },
+    {
+      "path": "evidence/batches/P0-03/offline-go.json.json",
+      "sha256": "b271da1ca6b76c621a2339191ffabc23c520299f1e5fa2229bbf174da98a282f"
+    },
+    {
+      "path": "evidence/batches/P0-03/offline-mypy.log.json",
+      "sha256": "8724e6f1b18c003fd4d88bebb19aee0a932402ba19b05bdad805de43a15c74c6"
+    },
+    {
+      "path": "evidence/batches/P0-03/offline-pytest.log.json",
+      "sha256": "c19955b33d7747acac1928290e1837273af6c02a41e3f9859ce5b29cb9fd8af5"
+    },
+    {
+      "path": "evidence/batches/P0-03/offline-pytest.xml.json",
+      "sha256": "8b7941f5731110e6028c304061216c6d78e9c9b7d9fdd9380717c00b7675a418"
+    },
+    {
+      "path": "evidence/batches/P0-03/offline-report.json.json",
+      "sha256": "06b9d11969b262bd33d6d2683a4f302a293d89b25d19007f9f88540cabf73f8e"
+    },
+    {
+      "path": "evidence/batches/P0-03/offline-ruff.log.json",
+      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+    },
+    {
+      "path": "evidence/batches/P0-03/offline-vet.log.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P0-03/offline.log",
+      "sha256": "9e03a7d7b1def75f86a98fb27ddc2b5360b959984bd6bcb9ca95d0e8acb76c1a"
+    },
+    {
+      "path": "evidence/batches/P0-03/pipeline-tests.log",
+      "sha256": "3acf0ece3742e0a6b097eeea2b9f072de7ff86afecd9020941a1f14134f36031"
+    },
+    {
+      "path": "evidence/batches/P0-03/red-pipeline.log",
+      "sha256": "db440b700b8347eb392dfecc88aa88d681595ee258f32429dba9b7b2f39f90bb"
+    },
+    {
+      "path": "scripts/accept.sh",
+      "sha256": "605a32178de26ce18dcd64b16fe4ffd979dba9f36192a17d9ad6c9745112c8eb"
+    },
+    {
+      "path": "scripts/bootstrap.sh",
+      "sha256": "5a89c5d7b068560fe1962ea35f47238de4517fc76fcc8720ea11708535695c8e"
+    },
+    {
+      "path": "scripts/preflight.sh",
+      "sha256": "40b3f1b4d6497b999345397a5c79f9712621b02d56966bfbf7a0758d7208f0bd"
+    },
+    {
+      "path": "scripts/source_fingerprint.py",
+      "sha256": "cb6271afad9a4c89bcd48a3f6fe78cda73bb908876be43b850f92a770810c263"
+    },
+    {
+      "path": "scripts/test.sh",
+      "sha256": "4672711043ecab30f778fc5e31e1400e0e06c27090a49175c90948f709282bc5"
+    },
+    {
+      "path": "scripts/verify_results.py",
+      "sha256": "205dc33bc9930848a47d4873a1622507b9d3136f17c67fa784628982fbbcf278"
+    },
+    {
+      "path": "tests/test_pipeline.py",
+      "sha256": "b7ae54bf8a04db141a63da17b38c75049b602fb7ef4b366327955577e541674f"
+    }
+  ],
+  "timestamp_utc": "2026-10-22T13:15:16.173437+00:00"
+}
