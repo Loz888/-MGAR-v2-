@@ -1,0 +1,192 @@
+{
+  "scope": "P0-01 static design only",
+  "checks": [
+    {
+      "id": "file:01_PROJECT_CHARTER.md",
+      "passed": true,
+      "detail": "readable UTF-8 file"
+    },
+    {
+      "id": "file:02_ARCHITECTURE_CONTRACTS.md",
+      "passed": true,
+      "detail": "readable UTF-8 file"
+    },
+    {
+      "id": "file:docs/architecture.md",
+      "passed": true,
+      "detail": "readable UTF-8 file"
+    },
+    {
+      "id": "file:docs/protocols.md",
+      "passed": true,
+      "detail": "readable UTF-8 file"
+    },
+    {
+      "id": "file:docs/adr/ADR-0001.md",
+      "passed": true,
+      "detail": "readable UTF-8 file"
+    },
+    {
+      "id": "file:contracts/README.md",
+      "passed": true,
+      "detail": "readable UTF-8 file"
+    },
+    {
+      "id": "version:docs/architecture.md",
+      "passed": true,
+      "detail": "architecture.v1"
+    },
+    {
+      "id": "design-only:docs/architecture.md",
+      "passed": true,
+      "detail": "runtime remains unimplemented"
+    },
+    {
+      "id": "version:docs/protocols.md",
+      "passed": true,
+      "detail": "protocols.v1"
+    },
+    {
+      "id": "design-only:docs/protocols.md",
+      "passed": true,
+      "detail": "runtime remains unimplemented"
+    },
+    {
+      "id": "version:docs/adr/ADR-0001.md",
+      "passed": true,
+      "detail": "adr.v1"
+    },
+    {
+      "id": "design-only:docs/adr/ADR-0001.md",
+      "passed": true,
+      "detail": "runtime remains unimplemented"
+    },
+    {
+      "id": "version:contracts/README.md",
+      "passed": true,
+      "detail": "contracts-index.v1"
+    },
+    {
+      "id": "design-only:contracts/README.md",
+      "passed": true,
+      "detail": "runtime remains unimplemented"
+    },
+    {
+      "id": "single-host",
+      "passed": true,
+      "detail": "single-host Linux/WSL2; no cross-host guarantee"
+    },
+    {
+      "id": "glossary",
+      "passed": true,
+      "detail": "17 distinct terms with definitions"
+    },
+    {
+      "id": "entities",
+      "passed": true,
+      "detail": "all 16 entities, fields/indexes and duties match 02.B"
+    },
+    {
+      "id": "invariants",
+      "passed": true,
+      "detail": "I1-I12 match 01.6 without semantic rewriting"
+    },
+    {
+      "id": "trust-boundaries",
+      "passed": true,
+      "detail": "authority, worker, model, reader, sandbox, verifier, aggregator and ledger boundaries"
+    },
+    {
+      "id": "workflow-transitions",
+      "passed": true,
+      "detail": "02.C main path, explicit cancellation and terminal closure; no added edges"
+    },
+    {
+      "id": "task-transitions",
+      "passed": true,
+      "detail": "02.C main path, explicit cancellation and terminal closure; no added edges"
+    },
+    {
+      "id": "exceptional-states",
+      "passed": true,
+      "detail": "unspecified exception edges are not silently authorized"
+    },
+    {
+      "id": "write-guards",
+      "passed": true,
+      "detail": "all six controlled-write guards"
+    },
+    {
+      "id": "plan-limits",
+      "passed": true,
+      "detail": "02.D DAG bounds"
+    },
+    {
+      "id": "recovery",
+      "passed": true,
+      "detail": "takeover fences prior owners and preserves unknown side effects"
+    },
+    {
+      "id": "transactions",
+      "passed": true,
+      "detail": "07.A five transaction responsibilities, not implementations"
+    },
+    {
+      "id": "interface-index",
+      "passed": true,
+      "detail": "8 CLI entries and Go/Python/adapter design interfaces"
+    },
+    {
+      "id": "adapter-decision",
+      "passed": true,
+      "detail": "standalone default, optional old-runtime integration, no copying"
+    },
+    {
+      "id": "lock-order",
+      "passed": true,
+      "detail": "Workflow -> lease -> budget -> task -> outbox, never inverse"
+    },
+    {
+      "id": "schema-index",
+      "passed": true,
+      "detail": "exactly five design schema entries"
+    },
+    {
+      "id": "schema:plan",
+      "passed": true,
+      "detail": "contracts/plan.schema.json: version, required list and object shape match index; not instance validation"
+    },
+    {
+      "id": "schema:artifact",
+      "passed": true,
+      "detail": "contracts/artifact.schema.json: version, required list and object shape match index; not instance validation"
+    },
+    {
+      "id": "schema:context_snapshot",
+      "passed": true,
+      "detail": "contracts/context_snapshot.schema.json: version, required list and object shape match index; not instance validation"
+    },
+    {
+      "id": "schema:evidence",
+      "passed": true,
+      "detail": "contracts/evidence.schema.json: version, required list and object shape match index; not instance validation"
+    },
+    {
+      "id": "schema:verdict",
+      "passed": true,
+      "detail": "contracts/verdict.schema.json: version, required list and object shape match index; not instance validation"
+    },
+    {
+      "id": "local-links",
+      "passed": true,
+      "detail": "all local document/schema/evidence links resolve inside checkout"
+    },
+    {
+      "id": "claims",
+      "passed": true,
+      "detail": "no detected mock-as-real, cross-host or external exactly-once assertions"
+    }
+  ],
+  "passed": 37,
+  "failed": 0
+}

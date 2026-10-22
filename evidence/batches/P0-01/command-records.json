@@ -1,0 +1,83 @@
+[
+  {
+    "phase": "baseline",
+    "command": "python scripts/validate_plan_docs.py",
+    "exit_code": 2,
+    "log_path": "evidence/batches/P0-01/baseline-missing-validator.log",
+    "expected_failure": true,
+    "timestamp_utc": "2026-10-22T12:01:25.492757+00:00"
+  },
+  {
+    "phase": "red",
+    "command": "python tests/test_plan_docs.py PlanDocsTests.test_valid_documents",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P0-01/red-validator-test.log",
+    "expected_failure": true,
+    "timestamp_utc": "2026-10-22T12:02:49.104819+00:00"
+  },
+  {
+    "phase": "validation",
+    "command": "python scripts/validate_plan_docs.py",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P0-01/static-first-run.log",
+    "timestamp_utc": "2026-10-22T12:07:43.855509+00:00"
+  },
+  {
+    "phase": "validation",
+    "command": "python tests/test_plan_docs.py",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P0-01/tests-first-run.log",
+    "timestamp_utc": "2026-10-22T12:07:44.895526+00:00"
+  },
+  {
+    "phase": "validation",
+    "command": "git diff --check",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-01/diff-first-run.log",
+    "timestamp_utc": "2026-10-22T12:07:44.898453+00:00"
+  },
+  {
+    "phase": "final-validation",
+    "command": "python scripts/validate_plan_docs.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-01/static-final.log",
+    "timestamp_utc": "2026-10-22T12:08:12.725519+00:00"
+  },
+  {
+    "phase": "final-validation",
+    "command": "python tests/test_plan_docs.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-01/tests-final.log",
+    "timestamp_utc": "2026-10-22T12:08:13.757573+00:00"
+  },
+  {
+    "phase": "final-validation",
+    "command": "git diff --check",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-01/diff-final.log",
+    "timestamp_utc": "2026-10-22T12:08:13.760327+00:00"
+  },
+  {
+    "phase": "final-review",
+    "command": "git diff --check",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-01/diff-review.log",
+    "timestamp_utc": "2026-10-22T12:11:04.601931+00:00"
+  },
+  {
+    "phase": "evidence-review",
+    "command": "git diff --cached --check",
+    "context": "isolated temporary index with all batch files; generated patch contained blank context markers",
+    "exit_code": 2,
+    "log_path": "evidence/batches/P0-01/all-new-files-whitespace.failure.json",
+    "resolution": "Preserve exact diagnostic text in JSON; regenerate worktree patch with --unified=0 to remove context-only whitespace."
+  },
+  {
+    "phase": "final-review",
+    "command": "git diff --cached --check",
+    "context": "isolated temporary GIT_INDEX_FILE populated with HEAD and all batch files; user staging area unchanged",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-01/all-new-files-whitespace-final.log",
+    "timestamp_utc": "2026-10-22T12:11:51.592877+00:00"
+  }
+]

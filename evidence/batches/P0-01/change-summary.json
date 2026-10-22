@@ -1,0 +1,17 @@
+{
+  "tracked_modified": [
+    "TASK_QUEUE.md",
+    "contracts/README.md"
+  ],
+  "new_source_and_document_files": [
+    "docs/adr/ADR-0001.md",
+    "docs/architecture.md",
+    "docs/protocols.md",
+    "scripts/validate_plan_docs.py",
+    "tests/test_plan_docs.py"
+  ],
+  "initial_worktree": "clean, observed before edits",
+  "batch_commit": "not committed",
+  "preserved_base_files": 71,
+  "source_documents_and_five_schemas_unchanged": true
+}

@@ -1,0 +1,32 @@
+$ python tests/test_plan_docs.py
+test_broken_local_link_is_rejected (__main__.PlanDocsTests.test_broken_local_link_is_rejected) ... ok
+test_changed_invariant_is_rejected (__main__.PlanDocsTests.test_changed_invariant_is_rejected) ... ok
+test_dag_limit_drift_is_rejected (__main__.PlanDocsTests.test_dag_limit_drift_is_rejected) ... ok
+test_default_root_does_not_depend_on_cwd (__main__.PlanDocsTests.test_default_root_does_not_depend_on_cwd) ... ok
+test_disclaimers_are_not_prohibited_claims (__main__.PlanDocsTests.test_disclaimers_are_not_prohibited_claims) ... ok
+test_exceptional_states_cannot_be_silently_enabled (__main__.PlanDocsTests.test_exceptional_states_cannot_be_silently_enabled) ... ok
+test_implemented_claim_is_rejected (__main__.PlanDocsTests.test_implemented_claim_is_rejected) ... ok
+test_local_adapter_decision_is_required (__main__.PlanDocsTests.test_local_adapter_decision_is_required) ... ok
+test_lock_order_drift_is_rejected (__main__.PlanDocsTests.test_lock_order_drift_is_rejected) ... ok
+test_missing_document_is_rejected (__main__.PlanDocsTests.test_missing_document_is_rejected) ... ok
+test_missing_entity_field_is_rejected (__main__.PlanDocsTests.test_missing_entity_field_is_rejected) ... ok
+test_missing_fencing_guard_is_rejected (__main__.PlanDocsTests.test_missing_fencing_guard_is_rejected) ... ok
+test_missing_interface_is_rejected (__main__.PlanDocsTests.test_missing_interface_is_rejected) ... ok
+test_missing_schema_file_is_rejected (__main__.PlanDocsTests.test_missing_schema_file_is_rejected) ... ok
+test_missing_state_edge_is_rejected (__main__.PlanDocsTests.test_missing_state_edge_is_rejected) ... ok
+test_missing_term_is_rejected (__main__.PlanDocsTests.test_missing_term_is_rejected) ... ok
+test_missing_trust_boundary_is_rejected (__main__.PlanDocsTests.test_missing_trust_boundary_is_rejected) ... ok
+test_missing_version_is_rejected (__main__.PlanDocsTests.test_missing_version_is_rejected) ... ok
+test_prohibited_claims_are_rejected (__main__.PlanDocsTests.test_prohibited_claims_are_rejected) ... ok
+test_recovery_must_advance_epoch (__main__.PlanDocsTests.test_recovery_must_advance_epoch) ... ok
+test_schema_index_required_fields_must_match (__main__.PlanDocsTests.test_schema_index_required_fields_must_match) ... ok
+test_schema_index_version_must_match (__main__.PlanDocsTests.test_schema_index_version_must_match) ... ok
+test_terminal_reopening_is_rejected (__main__.PlanDocsTests.test_terminal_reopening_is_rejected) ... ok
+test_valid_documents (__main__.PlanDocsTests.test_valid_documents) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.971s
+
+OK
+
+exit_code=0

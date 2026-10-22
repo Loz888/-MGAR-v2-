@@ -1,0 +1,6 @@
+{
+  "original_log_path": "evidence/batches/P0-01/all-new-files-whitespace.log",
+  "raw_log_text": "Temporary GIT_INDEX_FILE; git read-tree HEAD; git add only batch files; git diff --cached --check\nevidence/batches/P0-01/working-tree.diff:6: trailing whitespace.\n+ \nevidence/batches/P0-01/working-tree.diff:16: trailing whitespace.\n+ \nevidence/batches/P0-01/working-tree.diff:28: trailing whitespace.\n+ \nevidence/batches/P0-01/working-tree.diff:33: trailing whitespace.\n+ \n\nexit_code=2\n",
+  "exit_code": 2,
+  "diagnosis": "Generated patch context uses a single leading space for blank context lines. This is evidence formatting, not a source-file defect."
+}

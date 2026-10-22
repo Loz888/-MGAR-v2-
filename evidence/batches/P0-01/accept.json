@@ -1,0 +1,554 @@
+{
+  "card_id": "P0-01",
+  "status": "PASS",
+  "scope": "design documentation and offline static specification checks only",
+  "git_commit": null,
+  "base_git_commit": "1930720d3573173dab1b0f178b53fe8fb13bc99a",
+  "repository": "Loz888/-MGAR-v2-",
+  "working_directory": "/workspace/-MGAR-v2-",
+  "worktree": {
+    "tracked_modified": [
+      "TASK_QUEUE.md",
+      "contracts/README.md"
+    ],
+    "new_source_and_document_files": [
+      "docs/adr/ADR-0001.md",
+      "docs/architecture.md",
+      "docs/protocols.md",
+      "scripts/validate_plan_docs.py",
+      "tests/test_plan_docs.py"
+    ],
+    "initial_worktree": "clean, observed before edits",
+    "batch_commit": "not committed",
+    "preserved_base_files": 71,
+    "source_documents_and_five_schemas_unchanged": true
+  },
+  "environment": {
+    "os": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "python": "3.12.14",
+    "git": "git version 2.52.0",
+    "go": "NOT_RUN: no Go module at batch baseline",
+    "postgres": "NOT_RUN: P0-01 does not use a database service"
+  },
+  "commands": [
+    {
+      "phase": "baseline",
+      "command": "python scripts/validate_plan_docs.py",
+      "exit_code": 2,
+      "log_path": "evidence/batches/P0-01/baseline-missing-validator.log",
+      "expected_failure": true,
+      "timestamp_utc": "2026-10-22T12:01:25.492757+00:00"
+    },
+    {
+      "phase": "red",
+      "command": "python tests/test_plan_docs.py PlanDocsTests.test_valid_documents",
+      "exit_code": 1,
+      "log_path": "evidence/batches/P0-01/red-validator-test.log",
+      "expected_failure": true,
+      "timestamp_utc": "2026-10-22T12:02:49.104819+00:00"
+    },
+    {
+      "phase": "validation",
+      "command": "python scripts/validate_plan_docs.py",
+      "exit_code": 1,
+      "log_path": "evidence/batches/P0-01/static-first-run.log",
+      "timestamp_utc": "2026-10-22T12:07:43.855509+00:00"
+    },
+    {
+      "phase": "validation",
+      "command": "python tests/test_plan_docs.py",
+      "exit_code": 1,
+      "log_path": "evidence/batches/P0-01/tests-first-run.log",
+      "timestamp_utc": "2026-10-22T12:07:44.895526+00:00"
+    },
+    {
+      "phase": "validation",
+      "command": "git diff --check",
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-01/diff-first-run.log",
+      "timestamp_utc": "2026-10-22T12:07:44.898453+00:00"
+    },
+    {
+      "phase": "final-validation",
+      "command": "python scripts/validate_plan_docs.py",
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-01/static-final.log",
+      "timestamp_utc": "2026-10-22T12:08:12.725519+00:00"
+    },
+    {
+      "phase": "final-validation",
+      "command": "python tests/test_plan_docs.py",
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-01/tests-final.log",
+      "timestamp_utc": "2026-10-22T12:08:13.757573+00:00"
+    },
+    {
+      "phase": "final-validation",
+      "command": "git diff --check",
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-01/diff-final.log",
+      "timestamp_utc": "2026-10-22T12:08:13.760327+00:00"
+    },
+    {
+      "phase": "final-review",
+      "command": "git diff --check",
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-01/diff-review.log",
+      "timestamp_utc": "2026-10-22T12:11:04.601931+00:00"
+    },
+    {
+      "phase": "evidence-review",
+      "command": "git diff --cached --check",
+      "context": "isolated temporary index with all batch files; generated patch contained blank context markers",
+      "exit_code": 2,
+      "log_path": "evidence/batches/P0-01/all-new-files-whitespace.failure.json",
+      "resolution": "Preserve exact diagnostic text in JSON; regenerate worktree patch with --unified=0 to remove context-only whitespace."
+    },
+    {
+      "phase": "final-review",
+      "command": "git diff --cached --check",
+      "context": "isolated temporary GIT_INDEX_FILE populated with HEAD and all batch files; user staging area unchanged",
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-01/all-new-files-whitespace-final.log",
+      "timestamp_utc": "2026-10-22T12:11:51.592877+00:00"
+    }
+  ],
+  "test_summary": {
+    "runner": "stdlib unittest",
+    "tests_run": 24,
+    "passed": 24,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "expected_failures": 0,
+    "unexpected_successes": 0,
+    "prohibited_claim_subcases": 7,
+    "log_path": "evidence/batches/P0-01/tests-final.log"
+  },
+  "positive_assertions": [
+    {
+      "name": "file:01_PROJECT_CHARTER.md",
+      "passed": true
+    },
+    {
+      "name": "file:02_ARCHITECTURE_CONTRACTS.md",
+      "passed": true
+    },
+    {
+      "name": "file:docs/architecture.md",
+      "passed": true
+    },
+    {
+      "name": "file:docs/protocols.md",
+      "passed": true
+    },
+    {
+      "name": "file:docs/adr/ADR-0001.md",
+      "passed": true
+    },
+    {
+      "name": "file:contracts/README.md",
+      "passed": true
+    },
+    {
+      "name": "version:docs/architecture.md",
+      "passed": true
+    },
+    {
+      "name": "design-only:docs/architecture.md",
+      "passed": true
+    },
+    {
+      "name": "version:docs/protocols.md",
+      "passed": true
+    },
+    {
+      "name": "design-only:docs/protocols.md",
+      "passed": true
+    },
+    {
+      "name": "version:docs/adr/ADR-0001.md",
+      "passed": true
+    },
+    {
+      "name": "design-only:docs/adr/ADR-0001.md",
+      "passed": true
+    },
+    {
+      "name": "version:contracts/README.md",
+      "passed": true
+    },
+    {
+      "name": "design-only:contracts/README.md",
+      "passed": true
+    },
+    {
+      "name": "single-host",
+      "passed": true
+    },
+    {
+      "name": "glossary",
+      "passed": true
+    },
+    {
+      "name": "entities",
+      "passed": true
+    },
+    {
+      "name": "invariants",
+      "passed": true
+    },
+    {
+      "name": "trust-boundaries",
+      "passed": true
+    },
+    {
+      "name": "workflow-transitions",
+      "passed": true
+    },
+    {
+      "name": "task-transitions",
+      "passed": true
+    },
+    {
+      "name": "exceptional-states",
+      "passed": true
+    },
+    {
+      "name": "write-guards",
+      "passed": true
+    },
+    {
+      "name": "plan-limits",
+      "passed": true
+    },
+    {
+      "name": "recovery",
+      "passed": true
+    },
+    {
+      "name": "transactions",
+      "passed": true
+    },
+    {
+      "name": "interface-index",
+      "passed": true
+    },
+    {
+      "name": "adapter-decision",
+      "passed": true
+    },
+    {
+      "name": "lock-order",
+      "passed": true
+    },
+    {
+      "name": "schema-index",
+      "passed": true
+    },
+    {
+      "name": "schema:plan",
+      "passed": true
+    },
+    {
+      "name": "schema:artifact",
+      "passed": true
+    },
+    {
+      "name": "schema:context_snapshot",
+      "passed": true
+    },
+    {
+      "name": "schema:evidence",
+      "passed": true
+    },
+    {
+      "name": "schema:verdict",
+      "passed": true
+    },
+    {
+      "name": "local-links",
+      "passed": true
+    },
+    {
+      "name": "claims",
+      "passed": true
+    }
+  ],
+  "negative_assertions": [
+    {
+      "name": "test_broken_local_link_is_rejected",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_changed_invariant_is_rejected",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_dag_limit_drift_is_rejected",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_exceptional_states_cannot_be_silently_enabled",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_implemented_claim_is_rejected",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_local_adapter_decision_is_required",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_lock_order_drift_is_rejected",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_missing_document_is_rejected",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_missing_entity_field_is_rejected",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_missing_fencing_guard_is_rejected",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_missing_interface_is_rejected",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_missing_schema_file_is_rejected",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_missing_state_edge_is_rejected",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_missing_term_is_rejected",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_missing_trust_boundary_is_rejected",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_missing_version_is_rejected",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_prohibited_claims_are_rejected",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_recovery_must_advance_epoch",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_schema_index_required_fields_must_match",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_schema_index_version_must_match",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    },
+    {
+      "name": "test_terminal_reopening_is_rejected",
+      "passed": true,
+      "log_path": "evidence/batches/P0-01/tests-final.log"
+    }
+  ],
+  "failure_history": [
+    {
+      "logs": [
+        "baseline-missing-validator.log",
+        "red-validator-test.log"
+      ],
+      "diagnosis": "Validator absent at baseline; valid-document test failed before implementation.",
+      "resolution": "Implemented validator and design documents; final runs pass."
+    },
+    {
+      "logs": [
+        "static-first-run.log",
+        "tests-first-run.log"
+      ],
+      "diagnosis": "Markdown backticks normalized on only one side of invariant comparison: 36/37 static checks passed, 3/24 tests failed.",
+      "resolution": "Normalize inline-code formatting on both sides without changing normative text; final 37/37 checks and 24/24 tests pass."
+    },
+    {
+      "logs": [
+        "all-new-files-whitespace.failure.json"
+      ],
+      "diagnosis": "Generated patch blank context markers triggered whitespace check, exit 2.",
+      "resolution": "Preserve exact failed log text losslessly in JSON and regenerate patch with --unified=0; isolated-index review of all batch files then exits 0."
+    }
+  ],
+  "known_limitations": [
+    "Application and runtime capabilities remain DESIGN_ONLY; static PASS is not runtime acceptance.",
+    "02.C does not enumerate every exceptional-state edge; unspecified edges remain fail-closed and need reviewed ADR before implementation.",
+    "Finite lexical claim checks do not prove arbitrary natural-language semantics; manual review remains necessary.",
+    "FILE_MANIFEST.json remains the original imported taskbook manifest, not a manifest of the modified working tree.",
+    "Batch changes are uncommitted and unpushed; review working-tree.diff and hashes of new files."
+  ],
+  "unverified": [
+    {
+      "check": "go build/test/race/vet and pre-existing Go regression",
+      "status": "NOT_RUN",
+      "reason": "No Go module/packages at baseline; scaffold belongs to P0-02."
+    },
+    {
+      "check": "pytest/ruff/project type-check gates",
+      "status": "NOT_RUN",
+      "reason": "No existing Python application suite, pyproject or pinned tools at baseline. All 24 stdlib tests introduced by this card were executed."
+    },
+    {
+      "check": "PostgreSQL concurrency, crash recovery, sandbox isolation",
+      "status": "NOT_RUN",
+      "reason": "No database or runtime protocol is implemented by P0-01."
+    },
+    {
+      "check": "real model/provider experiments",
+      "status": "NOT_RUN",
+      "reason": "Outside P0-01; no paid-call authorization or model calls."
+    }
+  ],
+  "specification_conflicts": [],
+  "artifacts": [
+    {
+      "path": "TASK_QUEUE.md",
+      "bytes": 6367,
+      "sha256": "384d0a65242ef5641cee802938dd97cbc46b3355ca5de364eaa5586bc828082d"
+    },
+    {
+      "path": "contracts/README.md",
+      "bytes": 2553,
+      "sha256": "cdd6963b1b15549bb90adc23e26ce9bb87ac72a28b94c7296b8c559aef0b9897"
+    },
+    {
+      "path": "docs/adr/ADR-0001.md",
+      "bytes": 3525,
+      "sha256": "18583e7596bc46d64e04e54cb11c6f0c6ab3d0ffb4759abf7b970c73c632cc6d"
+    },
+    {
+      "path": "docs/architecture.md",
+      "bytes": 10840,
+      "sha256": "ebb0de027f86985334155143d52cc05fe9a7eb6544b9f56e9080cca90f494276"
+    },
+    {
+      "path": "docs/protocols.md",
+      "bytes": 6990,
+      "sha256": "d83b2dfc8bf2751ab847b5003d1c4a0b84fd0945b3c9608ecb01dff6a421ba68"
+    },
+    {
+      "path": "evidence/batches/P0-01/all-new-files-whitespace-final.log",
+      "bytes": 110,
+      "sha256": "f48971d62492a6e93212ab09258d03162633fa940541b54294aa51d1670d8505"
+    },
+    {
+      "path": "evidence/batches/P0-01/all-new-files-whitespace.failure.json",
+      "bytes": 668,
+      "sha256": "2a74795b3941854b4da01806ed8b556902727b6902e60fb1bdc8968e556ff54b"
+    },
+    {
+      "path": "evidence/batches/P0-01/baseline-missing-validator.log",
+      "bytes": 166,
+      "sha256": "9a27ddb1da4757c84ea64ab03a27e86d46a2c2186f103ef275b50ab2e30b4ca4"
+    },
+    {
+      "path": "evidence/batches/P0-01/change-summary.json",
+      "bytes": 443,
+      "sha256": "d087a70cd08741dece6e4b414226fcbc48bcfd2ab3689f842fb876aa33339a66"
+    },
+    {
+      "path": "evidence/batches/P0-01/command-records.json",
+      "bytes": 2882,
+      "sha256": "5a97a400e85347e30114729979d86394b9e93535bb632ec94e896cd49e0bfc41"
+    },
+    {
+      "path": "evidence/batches/P0-01/diff-final.log",
+      "bytes": 32,
+      "sha256": "fa77ab6dcf895a30623113e37b6ee812c6cd35b0cbb9693a0c18de550e6b1cf6"
+    },
+    {
+      "path": "evidence/batches/P0-01/diff-first-run.log",
+      "bytes": 32,
+      "sha256": "fa77ab6dcf895a30623113e37b6ee812c6cd35b0cbb9693a0c18de550e6b1cf6"
+    },
+    {
+      "path": "evidence/batches/P0-01/diff-review.log",
+      "bytes": 32,
+      "sha256": "fa77ab6dcf895a30623113e37b6ee812c6cd35b0cbb9693a0c18de550e6b1cf6"
+    },
+    {
+      "path": "evidence/batches/P0-01/red-validator-test.log",
+      "bytes": 1039,
+      "sha256": "b6759ad33694711273bf2c078229f5909f97fa6d0ad572a31f32bf745fc9e844"
+    },
+    {
+      "path": "evidence/batches/P0-01/static-assertions.json",
+      "bytes": 5171,
+      "sha256": "617bccd4ad6105551958f8a0f3f1e98d0d79b8c76cfce357db12743ff8b8268c"
+    },
+    {
+      "path": "evidence/batches/P0-01/static-final.log",
+      "bytes": 5223,
+      "sha256": "117b7d65af708a62f5cb648039b8040870952af594cb4e1401259ef4577131bb"
+    },
+    {
+      "path": "evidence/batches/P0-01/static-first-run.log",
+      "bytes": 5224,
+      "sha256": "c6a94f91dbd0da7484b263ace9fa0a16a003c8169f698ea377974e63dd02ff56"
+    },
+    {
+      "path": "evidence/batches/P0-01/tests-final.log",
+      "bytes": 2667,
+      "sha256": "7d1bd896115f30aada5ce33edb779a6038a21c3595c12b191eab5679cb90efed"
+    },
+    {
+      "path": "evidence/batches/P0-01/tests-first-run.log",
+      "bytes": 19905,
+      "sha256": "b6517de82431f40f2cfa1cf4b14dd0d8a92073565547d655fa7d4aa24323f9c1"
+    },
+    {
+      "path": "evidence/batches/P0-01/working-tree.diff",
+      "bytes": 2755,
+      "sha256": "3d9e27c65817c6d7ae4772b1c8377c9141cd595ed92da10f41887c2086f96d3e"
+    },
+    {
+      "path": "scripts/validate_plan_docs.py",
+      "bytes": 12969,
+      "sha256": "2f2ac197020f9dd38dd24acf55eb8e01824cb063136090d9da11594642c01080"
+    },
+    {
+      "path": "tests/test_plan_docs.py",
+      "bytes": 7601,
+      "sha256": "6ef0826c23835c627231314d10f53b6da102203670a555407dbd3fcc541c4e3d"
+    }
+  ],
+  "next_card_suggestion": "P0-02, only after explicit next-batch instruction",
+  "timestamp_utc": "2026-10-22T12:12:26.399527+00:00"
+}

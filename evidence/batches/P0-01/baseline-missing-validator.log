@@ -1,0 +1,4 @@
+$ python scripts/validate_plan_docs.py
+python: can't open file '/workspace/-MGAR-v2-/scripts/validate_plan_docs.py': [Errno 2] No such file or directory
+
+exit_code=2

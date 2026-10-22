@@ -4,7 +4,7 @@
 
 | 卡号 | 阶段 | 标题 | 依赖 | 状态 | Evidence |
 |---|---|---|---|---|---|
-| [P0-01](tasks/P0-01.md) | P0 | 冻结边界、ADR 与契约索引 | 无 | TODO | `evidence/batches/P0-01/accept.json` |
+| [P0-01](tasks/P0-01.md) | P0 | 冻结边界、ADR 与契约索引 | 无 | PASS | `evidence/batches/P0-01/accept.json` |
 | [P0-02](tasks/P0-02.md) | P0 | 仓库脚手架与依赖锁定 | P0-01 | TODO | `evidence/batches/P0-02/accept.json` |
 | [P0-03](tasks/P0-03.md) | P0 | 严格测试/证据流水线 | P0-02 | TODO | `evidence/batches/P0-03/accept.json` |
 | [P1-01](tasks/P1-01.md) | P1 | 数据库迁移与状态机 Schema | P0-03 | TODO | `evidence/batches/P1-01/accept.json` |
@@ -49,3 +49,7 @@
 **备注：** 每张卡只应在单次 Codex 会话实施；如失败继续同一张，禁止跳卡。任务 `P7-06` 需要额外用户付费授权；无授权保持 BLOCKED/NOT_RUN，不应阻塞工程版发布但阻塞“真实模型实验完全验收”的声明。
 
 **特别门禁**：P7-06 唯一可在用户不授权付费时以 `NOT_RUN` 进入 P8 的工程审计；P8 只能签发 `ENGINEERING_ONLY`。其他卡必须 PASS 才前进。
+
+**P0-01 验收说明：** 设计冻结与离线静态检查 PASS（37 项检查、24 个测试）；运行时能力当前未实现。
+本卡未运行 Go/数据库/沙箱/真实模型验收，未进行付费调用。异常状态未定义的转移默认拒绝，后续实现前须先受审 ADR。
+本批变更尚未提交；证据与原始失败记录见 `evidence/batches/P0-01/accept.json`。后续卡仍为 TODO，等待用户指令。

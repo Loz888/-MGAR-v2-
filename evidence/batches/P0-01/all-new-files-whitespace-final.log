@@ -1,0 +1,3 @@
+Temporary GIT_INDEX_FILE; git read-tree HEAD; git add all batch files; git diff --cached --check
+
+exit_code=0

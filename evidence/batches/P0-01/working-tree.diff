@@ -1,0 +1,39 @@
+diff --git a/TASK_QUEUE.md b/TASK_QUEUE.md
+index 96a7c5d..4ef4e63 100644
+--- a/TASK_QUEUE.md
++++ b/TASK_QUEUE.md
+@@ -7 +7 @@
+-| [P0-01](tasks/P0-01.md) | P0 | 冻结边界、ADR 与契约索引 | 无 | TODO | `evidence/batches/P0-01/accept.json` |
++| [P0-01](tasks/P0-01.md) | P0 | 冻结边界、ADR 与契约索引 | 无 | PASS | `evidence/batches/P0-01/accept.json` |
+@@ -51,0 +52,4 @@
++
++**P0-01 验收说明：** 设计冻结与离线静态检查 PASS（37 项检查、24 个测试）；运行时能力当前未实现。
++本卡未运行 Go/数据库/沙箱/真实模型验收，未进行付费调用。异常状态未定义的转移默认拒绝，后续实现前须先受审 ADR。
++本批变更尚未提交；证据与原始失败记录见 `evidence/batches/P0-01/accept.json`。后续卡仍为 TODO，等待用户指令。
+diff --git a/contracts/README.md b/contracts/README.md
+index 36298c3..0dbd172 100644
+--- a/contracts/README.md
++++ b/contracts/README.md
+@@ -2,0 +3,3 @@
++Version: contracts-index.v1
++Implementation: DESIGN_ONLY
++
+@@ -10,0 +14,18 @@
++
++## 冻结索引（P0-01）
++
++下表逐项列出当前样本的实际 required 列表，不代表已实现生产校验器；本卡不修改 Schema。
++协议变化需先 ADR 与对应任务的正负例；示例不能替代 02/07 的身份、预算、图结构和信任约束。
++
++| Schema | schema_version | required | 实现任务 |
++|---|---|---|---|
++| [plan.schema.json](plan.schema.json) | plan.v1 | schema_version, base_version, nodes, edges, rationale | P1-02（未实现） |
++| [artifact.schema.json](artifact.schema.json) | artifact.v1 | schema_version, artifact_id, kind, content_sha256, byte_length, producer_task_id, source_plan_version, storage_uri | P3-01（未实现） |
++| [context_snapshot.schema.json](context_snapshot.schema.json) | context.v1 | schema_version, task_id, plan_version, model_config_version, tool_policy_version, artifacts | P3-02（未实现） |
++| [evidence.schema.json](evidence.schema.json) | evidence.v1 | schema_version, claim, kind, artifact_id, content_sha256, input_snapshot_id, tool_version, execution_status | P5-01（未实现） |
++| [verdict.schema.json](verdict.schema.json) | verdict.v1 | schema_version, artifact_id, status, checks, verifier_version | P5-01（未实现） |
++
++实体和术语见 [架构](../docs/architecture.md)，CLI/内部接口与状态转移见 [协议目录](../docs/protocols.md)，
++适配器和锁顺序见 [ADR-0001](../docs/adr/ADR-0001.md)。
++这些 Schema 没有穷举运行时契约；例如 evidence 样本的结构合法本身不能证明来源、重执行和预期观察满足 07.F。
++后续任务必须补足相应语义校验和测试，不可把静态索引检查当作运行时验证通过。

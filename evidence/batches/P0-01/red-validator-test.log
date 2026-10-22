@@ -1,0 +1,21 @@
+$ python tests/test_plan_docs.py PlanDocsTests.test_valid_documents
+test_valid_documents (__main__.PlanDocsTests.test_valid_documents) ... FAIL
+
+======================================================================
+FAIL: test_valid_documents (__main__.PlanDocsTests.test_valid_documents)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/-MGAR-v2-/tests/test_plan_docs.py", line 63, in test_valid_documents
+    report = self.run_validator()
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/-MGAR-v2-/tests/test_plan_docs.py", line 52, in run_validator
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+AssertionError: 2 != 0 : /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python: can't open file '/workspace/-MGAR-v2-/scripts/validate_plan_docs.py': [Errno 2] No such file or directory
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.012s
+
+FAILED (failures=1)
+
+exit_code=1
