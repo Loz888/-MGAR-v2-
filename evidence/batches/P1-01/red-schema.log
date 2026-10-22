@@ -1,0 +1,3 @@
+{
+  "stdout": "# github.com/Loz888/-MGAR-v2-/tests/integration\ntests/integration/schema_test.go:3:74: no required module provides package github.com/Loz888/-MGAR-v2-/internal/store; to add it:\n\tgo get github.com/Loz888/-MGAR-v2-/internal/store\nFAIL\tgithub.com/Loz888/-MGAR-v2-/tests/integration [setup failed]\nFAIL\n"
+}

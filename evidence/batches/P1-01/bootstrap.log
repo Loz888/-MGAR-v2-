@@ -1,0 +1,3 @@
+{
+  "stdout": " Container mgar-v2-dev-postgres-1  Running\n Container mgar-v2-dev-postgres-1  Waiting\n Container mgar-v2-dev-postgres-1  Healthy\nsynthetic database unavailable\nexit status 1\n"
+}

@@ -1,0 +1,3 @@
+{
+  "stdout": " Container mgar-v2-dev-postgres-1  Running\n Container mgar-v2-dev-postgres-1  Waiting\n Container mgar-v2-dev-postgres-1  Healthy\nmigration 001 applied/verified\nPrepared new synthetic database: mgar_test_e9791b184004fb3a\n"
+}

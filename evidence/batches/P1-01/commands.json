@@ -1,0 +1,75 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "./tests/integration/..."
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P1-01/red-schema.log",
+    "timestamp_utc": "2026-10-22T13:16:41.397891+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/bootstrap.sh",
+      "--fresh-test-db"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P1-01/bootstrap.log",
+    "timestamp_utc": "2026-10-22T13:19:06.770985+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/bootstrap.sh",
+      "--fresh-test-db"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-01/bootstrap-retry.log",
+    "timestamp_utc": "2026-10-22T13:20:22.766218+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/store/...",
+      "./tests/integration/..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-01/schema.log",
+    "timestamp_utc": "2026-10-22T13:20:24.146723+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/bootstrap.sh",
+      "--fresh-test-db"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-01/bootstrap-final.log",
+    "timestamp_utc": "2026-10-22T13:21:05.384386+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-01/offline.log",
+    "timestamp_utc": "2026-10-22T13:21:16.142513+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/accept.sh",
+      "P1-01"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-01/acceptance.log",
+    "timestamp_utc": "2026-10-22T13:21:16.200327+00:00"
+  }
+]
