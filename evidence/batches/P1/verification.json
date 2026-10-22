@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "exit_code": 0,
+  "checks": [
+    "All P0/P1 accepted card evidence and task queue rows agree",
+    "All P1-05 delivery artifact SHA256 hashes match",
+    "Current source fingerprint matches final passing regression",
+    "P2 rows remain TODO",
+    "Every stage coverage reference appears in actual passing Go events"
+  ],
+  "artifacts_verified": 83,
+  "source_fingerprint": "e418e153be12647d4162804c1159439a2bd9c74d8b99eb97d0bb8db83e38e9c3",
+  "timestamp_utc": "2026-10-22T14:15:16.076425+00:00"
+}

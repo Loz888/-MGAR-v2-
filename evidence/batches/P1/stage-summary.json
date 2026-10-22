@@ -1,0 +1,253 @@
+{
+  "stage": "P1",
+  "status": "PASS",
+  "scope": "Authorized completion of missing P0-02/P0-03 followed by P1-01 through P1-05 only; not a full-system release.",
+  "code_commit": "8693e0305349ac3158e43cd5fa8c256e0b72334e",
+  "source_fingerprint": "e418e153be12647d4162804c1159439a2bd9c74d8b99eb97d0bb8db83e38e9c3",
+  "cards": [
+    {
+      "card_id": "P0-01",
+      "status": "PASS",
+      "delivery_commit": "a1f06b169b306d7772c23901c748127978509bf2",
+      "acceptance": "evidence/batches/P0-01/accept.json",
+      "test_summary_at_card_delivery": {
+        "runner": "stdlib unittest",
+        "tests_run": 24,
+        "passed": 24,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0,
+        "expected_failures": 0,
+        "unexpected_successes": 0,
+        "prohibited_claim_subcases": 7,
+        "log_path": "evidence/batches/P0-01/tests-final.log"
+      },
+      "note": "Historical batch evidence; final regression is P1-05, including audit corrections."
+    },
+    {
+      "card_id": "P0-02",
+      "status": "PASS",
+      "delivery_commit": "df9d3b0f31056fbcd4066d7f55a83bc97d145f96",
+      "acceptance": "evidence/batches/P0-02/accept.json",
+      "test_summary_at_card_delivery": null,
+      "note": "Historical batch evidence; final regression is P1-05, including audit corrections."
+    },
+    {
+      "card_id": "P0-03",
+      "status": "PASS",
+      "delivery_commit": "e01b6517b45f2cbc33610d6bd8272476c4925314",
+      "acceptance": "evidence/batches/P0-03/accept.json",
+      "test_summary_at_card_delivery": null,
+      "note": "Historical batch evidence; final regression is P1-05, including audit corrections."
+    },
+    {
+      "card_id": "P1-01",
+      "status": "PASS",
+      "delivery_commit": "645ee73a874bd00345a41f3209bc171700dd6025",
+      "acceptance": "evidence/batches/P1-01/accept.json",
+      "test_summary_at_card_delivery": {
+        "go": {
+          "status": "PASS",
+          "tests": 10,
+          "passed": 10,
+          "failed_events": 0,
+          "skipped": 0
+        },
+        "python": {
+          "status": "PASS",
+          "tests": 32,
+          "passed": 32,
+          "failed": 0,
+          "skipped_or_xfailed": 0
+        },
+        "status": "PASS"
+      },
+      "note": "Historical batch evidence; final regression is P1-05, including audit corrections."
+    },
+    {
+      "card_id": "P1-02",
+      "status": "PASS",
+      "delivery_commit": "b6e4f3ca7b5fd47fa577772baeea21bf251433bc",
+      "acceptance": "evidence/batches/P1-02/accept.json",
+      "test_summary_at_card_delivery": {
+        "go": {
+          "status": "PASS",
+          "tests": 20,
+          "passed": 20,
+          "failed_events": 0,
+          "skipped": 0
+        },
+        "python": {
+          "status": "PASS",
+          "tests": 32,
+          "passed": 32,
+          "failed": 0,
+          "skipped_or_xfailed": 0
+        },
+        "status": "PASS"
+      },
+      "note": "Historical batch evidence; final regression is P1-05, including audit corrections."
+    },
+    {
+      "card_id": "P1-03",
+      "status": "PASS",
+      "delivery_commit": "e81b5087e6053abf3f81045c444148346d724055",
+      "acceptance": "evidence/batches/P1-03/accept.json",
+      "test_summary_at_card_delivery": {
+        "go": {
+          "status": "PASS",
+          "tests": 27,
+          "passed": 27,
+          "failed_events": 0,
+          "skipped": 0
+        },
+        "python": {
+          "status": "PASS",
+          "tests": 32,
+          "passed": 32,
+          "failed": 0,
+          "skipped_or_xfailed": 0
+        },
+        "status": "PASS"
+      },
+      "note": "Historical batch evidence; final regression is P1-05, including audit corrections."
+    },
+    {
+      "card_id": "P1-04",
+      "status": "PASS",
+      "delivery_commit": "9207836f0cb612f2fd116c0e45717b40379b190f",
+      "acceptance": "evidence/batches/P1-04/accept.json",
+      "test_summary_at_card_delivery": {
+        "go": {
+          "status": "PASS",
+          "tests": 34,
+          "passed": 34,
+          "failed_events": 0,
+          "skipped": 0
+        },
+        "python": {
+          "status": "PASS",
+          "tests": 34,
+          "passed": 34,
+          "failed": 0,
+          "skipped_or_xfailed": 0
+        },
+        "status": "PASS"
+      },
+      "note": "Historical batch evidence; final regression is P1-05, including audit corrections."
+    },
+    {
+      "card_id": "P1-05",
+      "status": "PASS",
+      "delivery_commit": "8693e0305349ac3158e43cd5fa8c256e0b72334e",
+      "acceptance": "evidence/batches/P1-05/accept.json",
+      "test_summary_at_card_delivery": {
+        "go": {
+          "status": "PASS",
+          "tests": 115,
+          "passed": 115,
+          "failed_events": 0,
+          "skipped": 0
+        },
+        "python": {
+          "status": "PASS",
+          "tests": 39,
+          "passed": 39,
+          "failed": 0,
+          "skipped_or_xfailed": 0
+        },
+        "status": "PASS"
+      },
+      "note": "Historical batch evidence; final regression is P1-05, including audit corrections."
+    }
+  ],
+  "final_regression": {
+    "go": {
+      "status": "PASS",
+      "tests": 115,
+      "passed": 115,
+      "failed_events": 0,
+      "skipped": 0
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 39,
+      "passed": 39,
+      "failed": 0,
+      "skipped_or_xfailed": 0
+    },
+    "status": "PASS"
+  },
+  "validation": {
+    "card_command_exit_code": 0,
+    "offline_command_exit_code": 0,
+    "build_exit_code": 0,
+    "functional_http_and_cli_smoke_exit_code": 0,
+    "artifact_hashes_verified": 83,
+    "tested_source_fingerprint_matches": true
+  },
+  "coverage": {
+    "D01": [
+      "TestDAGInvalidAndBounds",
+      "TestPlanStrictJSONRejectsAliasesAndNullArrayItems"
+    ],
+    "D02": [
+      "TestPlanInvalidDependencyLeavesDBUnchanged"
+    ],
+    "D03_D04": [
+      "TestReadyFanInDuplicateAndCrossProcess"
+    ],
+    "D05": [
+      "TestPlanCrossProcessCAS",
+      "TestPlanConcurrentCASAndHistory"
+    ],
+    "D06": [
+      "TestClaimCrossProcessGlobalBudget"
+    ],
+    "D07_D08_D09": [
+      "TestFenceRevisionLeaseRoleAndOutputCommit",
+      "TestOrchestratorFenceAndRenew"
+    ],
+    "D10": [
+      "TestLifecycleCancelFinishCrossProcessSingleTerminal",
+      "TestLifecycleTerminalIDResubmitDoesNotOverwrite"
+    ],
+    "D11": [
+      "TestLifecycleRollbackNoPartialResultOrCancellation",
+      "TestPlanRollbackOnOutboxFailure",
+      "TestSubmissionClaimOutboxFailureRollsBackEverything"
+    ],
+    "D12": [
+      "TestLifecycleSIGKILLRecoveryRebuildsReady"
+    ],
+    "audit_hardening": [
+      "TestClaimRejectsRevokedReadyArtifact",
+      "TestTaskGuardRejectsForgedPlanGeneration",
+      "TestClaimRechecksVerdictCommittedDuringArtifactLockWait",
+      "TestApplyVerdictsWaitsForConcurrentRevocation",
+      "TestFinalizeWaitsForConcurrentRevocation",
+      "TestRecoveryRollsBackWhenLeaseExpiresDuringLockWait",
+      "TestSubmissionInitialOwnerCannotBeStolenBeforePlan",
+      "TestDSNQueryCannotOverrideSyntheticTarget"
+    ]
+  },
+  "preserved_failure_logs": [
+    "evidence/batches/P1-05/offline-first-artifacts.json",
+    "evidence/batches/P1-05/delegated-validation.json"
+  ],
+  "limitations_document": "docs/limitations.md",
+  "known_limitations": [
+    "Evidence captured before the local batch commit. See stage-summary.json and Git history for the final delivery SHA; commits have not been pushed.",
+    "Single-host Linux/WSL2 validation only. SIGKILL covers one explicit orchestrator checkpoint, with synthetic lease expiry injection; no host-power-loss, disk-failure, network-partition or multi-host guarantee.",
+    "P1 submit creates a fixed offline design fixture; no Worker/Agent Loop, Artifact CAS, independent Verifier execution, Tool Gateway or sandbox is implemented.",
+    "Trusted Go CLI/Store only; not a completed multi-user authentication/capability boundary. Artifact/verdict rows in protocol tests are explicitly synthetic fixtures.",
+    "Unknown/reserved model or non-idempotent side effects fail closed and retain reservations; manual reconciliation is not implemented and resume remains denied until safety conditions hold.",
+    "A crash before initial plan commit leaves a recoverable planning checkpoint; recovery does not invent a plan. A trusted control-plane caller must provide a validated proposal.",
+    "DB wall-clock jumps can alter lease duration. No distributed or monotonic-clock protocol is claimed.",
+    "No paid model calls or production database operations. P2-P8 and full project release gates remain outside this delivery.",
+    "Cloud install_script/start_skill draft saved, requires user review/save/publish in environment settings; publication and fresh-task restoration were not performed. Local-only commit restoration is unverified."
+  ],
+  "github_push": "NOT_RUN for coding commits; prior taskbook import was pushed.",
+  "next_card": "P2-01 (suggested only; not executed)",
+  "timestamp_utc": "2026-10-22T14:15:16.076425+00:00"
+}
