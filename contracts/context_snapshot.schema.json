@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/mgar/v2/context_snapshot.schema.json",
+  "title": "MGAR Context Snapshot V1",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "task_id", "plan_version", "model_config_version", "tool_policy_version", "artifacts"],
+  "properties": {
+    "schema_version": {"const": "context.v1"},
+    "task_id": {"type": "string", "format": "uuid"},
+    "plan_version": {"type": "integer", "minimum": 1},
+    "model_config_version": {"type": "string", "minLength": 1},
+    "tool_policy_version": {"type": "string", "minLength": 1},
+    "artifacts": {"type": "array", "maxItems": 64, "items": {
+      "type": "object", "additionalProperties": false, "required": ["artifact_id", "content_sha256", "purpose"],
+      "properties": {
+        "artifact_id": {"type": "string", "format": "uuid"},
+        "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "purpose": {"type": "string", "maxLength": 512}
+      }
+    }}
+  }
+}

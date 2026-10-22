@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/mgar/v2/evidence.schema.json",
+  "title": "MGAR Evidence Claim V1",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "claim", "kind", "artifact_id", "content_sha256", "input_snapshot_id", "tool_version", "execution_status"],
+  "properties": {
+    "schema_version": {"const": "evidence.v1"},
+    "claim": {"type": "string", "minLength": 1, "maxLength": 4096},
+    "kind": {"type": "string", "enum": ["test_run", "sql_result", "file_hash", "log_excerpt", "quote", "metric"]},
+    "artifact_id": {"type": "string", "format": "uuid"},
+    "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "input_snapshot_id": {"type": "string", "minLength": 1},
+    "tool_version": {"type": "string", "minLength": 1},
+    "execution_status": {"type": "string", "enum": ["succeeded", "failed", "unknown"]},
+    "replay_recipe": {"type": "object"},
+    "observed": {"type": "object"}
+  }
+}

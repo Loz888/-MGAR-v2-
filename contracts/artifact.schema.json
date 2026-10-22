@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/mgar/v2/artifact.schema.json",
+  "title": "MGAR Immutable Artifact Metadata V1",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "artifact_id", "kind", "content_sha256", "byte_length", "producer_task_id", "source_plan_version", "storage_uri"],
+  "properties": {
+    "schema_version": {"const": "artifact.v1"},
+    "artifact_id": {"type": "string", "format": "uuid"},
+    "kind": {"type": "string", "enum": ["finding", "sql_evidence", "patch", "verdict", "report", "summary", "trace"]},
+    "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "byte_length": {"type": "integer", "minimum": 0},
+    "producer_task_id": {"type": "string", "format": "uuid"},
+    "source_plan_version": {"type": "integer", "minimum": 1},
+    "storage_uri": {"type": "string", "pattern": "^artifact://[A-Za-z0-9_-]+$"},
+    "input_snapshot_id": {"type": ["string", "null"]},
+    "tool_schema_version": {"type": ["string", "null"]}
+  }
+}
