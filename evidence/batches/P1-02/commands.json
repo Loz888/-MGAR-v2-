@@ -1,0 +1,77 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/planner/...",
+      "./tests/integration/...",
+      "-run",
+      "Plan|DAG"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P1-02/red-plan.log",
+    "timestamp_utc": "2026-10-22T13:23:34.511275+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/dag/...",
+      "./internal/planner/...",
+      "./tests/integration/...",
+      "-run",
+      "Plan|DAG"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-02/plan.log",
+    "timestamp_utc": "2026-10-22T13:24:30.771672+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/dag/...",
+      "./internal/planner/...",
+      "./tests/integration/...",
+      "-run",
+      "Plan|DAG"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-02/plan-cross-process.log",
+    "timestamp_utc": "2026-10-22T13:25:50.025372+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P1-02/offline.log",
+    "timestamp_utc": "2026-10-22T13:25:54.415799+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-02/offline-final.log",
+    "timestamp_utc": "2026-10-22T13:28:26.085410+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/accept.sh",
+      "P1-02"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P1-02/acceptance.log",
+    "timestamp_utc": "2026-10-22T13:28:26.145737+00:00"
+  }
+]

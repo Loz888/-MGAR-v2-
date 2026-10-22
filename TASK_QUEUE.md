@@ -8,7 +8,7 @@
 | [P0-02](tasks/P0-02.md) | P0 | 仓库脚手架与依赖锁定 | P0-01 | PASS | `evidence/batches/P0-02/accept.json` |
 | [P0-03](tasks/P0-03.md) | P0 | 严格测试/证据流水线 | P0-02 | PASS | `evidence/batches/P0-03/accept.json` |
 | [P1-01](tasks/P1-01.md) | P1 | 数据库迁移与状态机 Schema | P0-03 | PASS | `evidence/batches/P1-01/accept.json` |
-| [P1-02](tasks/P1-02.md) | P1 | 版本化 DAG 校验与原子 Plan Commit | P1-01 | TODO | `evidence/batches/P1-02/accept.json` |
+| [P1-02](tasks/P1-02.md) | P1 | 版本化 DAG 校验与原子 Plan Commit | P1-01 | PASS | `evidence/batches/P1-02/accept.json` |
 | [P1-03](tasks/P1-03.md) | P1 | 依赖就绪、Fan-out/Fan-in 和取消传播 | P1-02 | TODO | `evidence/batches/P1-03/accept.json` |
 | [P1-04](tasks/P1-04.md) | P1 | 最小任务 Claim / Lease / Epoch / Revision | P1-03 | TODO | `evidence/batches/P1-04/accept.json` |
 | [P1-05](tasks/P1-05.md) | P1 | Run 生命周期、恢复扫描与 CLI | P1-04 | TODO | `evidence/batches/P1-05/accept.json` |

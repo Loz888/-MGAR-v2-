@@ -1,0 +1,368 @@
+{
+  "card_id": "P1-02",
+  "status": "PASS",
+  "git_commit": null,
+  "base_git_commit": "645ee73a874bd00345a41f3209bc171700dd6025",
+  "environment": {
+    "platform": "linux",
+    "python": "3.12.14",
+    "go": "1.27.3",
+    "postgres": "16.11"
+  },
+  "commands": [
+    {
+      "command": [
+        "go",
+        "test",
+        "./internal/planner/...",
+        "./tests/integration/...",
+        "-run",
+        "Plan|DAG"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P1-02/red-plan.log",
+      "timestamp_utc": "2026-10-22T13:23:34.511275+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-v",
+        "./internal/dag/...",
+        "./internal/planner/...",
+        "./tests/integration/...",
+        "-run",
+        "Plan|DAG"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-02/plan.log",
+      "timestamp_utc": "2026-10-22T13:24:30.771672+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-v",
+        "./internal/dag/...",
+        "./internal/planner/...",
+        "./tests/integration/...",
+        "-run",
+        "Plan|DAG"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-02/plan-cross-process.log",
+      "timestamp_utc": "2026-10-22T13:25:50.025372+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P1-02/offline.log",
+      "timestamp_utc": "2026-10-22T13:25:54.415799+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-02/offline-final.log",
+      "timestamp_utc": "2026-10-22T13:28:26.085410+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/accept.sh",
+        "P1-02"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P1-02/acceptance.log",
+      "timestamp_utc": "2026-10-22T13:28:26.145737+00:00"
+    }
+  ],
+  "positive_assertions": [
+    {
+      "name": "plan-cross-process",
+      "passed": true
+    },
+    {
+      "name": "offline-final",
+      "passed": true
+    },
+    {
+      "name": "acceptance",
+      "passed": true
+    }
+  ],
+  "negative_assertions": [
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestRealProviderDeniedWithoutCredential",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestProductionDatabaseDenied",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/nodes",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/depth",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/fanout",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanInvalidDependencyLeavesDBUnchanged",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanRollbackOnOutboxFailure",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaCatalogTerminalAndReader",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/negative_budget",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/invalid_FK",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/invalid_role",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestMigrationRollbackAndChecksum",
+      "passed": true
+    }
+  ],
+  "known_limitations": [
+    "Evidence captured before local batch commit; commit is recorded in subsequent Git history.",
+    "No paid model calls or production database operations."
+  ],
+  "unverified": [],
+  "artifacts": [
+    {
+      "path": "TASK_QUEUE.md",
+      "sha256": "68dd8b6a1e7d146b8c874ca03f302818d3acbe89cc957a74df3be99634437730"
+    },
+    {
+      "path": "evidence/batches/P1-02/acceptance.log",
+      "sha256": "46e601fc855eb6aa0bd49809f5cf92f8cc3b0809aab9b6c6cf8568ac4cbaed6f"
+    },
+    {
+      "path": "evidence/batches/P1-02/commands.json",
+      "sha256": "bf8ebe481068a3b2fc53584145814ff3ffc2e49046ae644da5817c0aeaafb506"
+    },
+    {
+      "path": "evidence/batches/P1-02/offline-accept.json",
+      "sha256": "443e062753af7deed8fad2b96e7f24c9718bdb7c2e5b29ee1539d169caa1faf6"
+    },
+    {
+      "path": "evidence/batches/P1-02/offline-docs.json.json",
+      "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+    },
+    {
+      "path": "evidence/batches/P1-02/offline-final.log",
+      "sha256": "1f1044fb08fcece3e70eb214ef1461355715e31aa4465f9655014042da41f39a"
+    },
+    {
+      "path": "evidence/batches/P1-02/offline-fingerprint.json",
+      "sha256": "ab8ff36337b74a21d8198635267c70583ef392937540416c49847707a15e9827"
+    },
+    {
+      "path": "evidence/batches/P1-02/offline-first-artifacts.json",
+      "sha256": "d6f632bd85a990ea0192d4e2b32628c6f228a55b03bf54f7354ae5a7ef328d6f"
+    },
+    {
+      "path": "evidence/batches/P1-02/offline-go.json.json",
+      "sha256": "552feeed885d9b82a577f5a3e152874c74511dd238a106fa63ccfe582b16dab7"
+    },
+    {
+      "path": "evidence/batches/P1-02/offline-mypy.log.json",
+      "sha256": "8724e6f1b18c003fd4d88bebb19aee0a932402ba19b05bdad805de43a15c74c6"
+    },
+    {
+      "path": "evidence/batches/P1-02/offline-pytest.log.json",
+      "sha256": "b6ebaf9a30aeb7ed873467a9ef29d0bffd96c488668659dc492b0b789ea9d9a0"
+    },
+    {
+      "path": "evidence/batches/P1-02/offline-pytest.xml.json",
+      "sha256": "ddffde5e0550c6304b0fcac810d092889636a75a89b2ba61197da2297a065b3a"
+    },
+    {
+      "path": "evidence/batches/P1-02/offline-report.json.json",
+      "sha256": "db2d4b0bfeb6fb01ab6108f88614d8d42590d586959b8870a8c93ecef4a57a26"
+    },
+    {
+      "path": "evidence/batches/P1-02/offline-ruff.log.json",
+      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+    },
+    {
+      "path": "evidence/batches/P1-02/offline-vet.log.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P1-02/offline.log",
+      "sha256": "52d48a1375c24e3f4b800e10366f99af964590ce0dffa96232e3b2c8bea5d9cd"
+    },
+    {
+      "path": "evidence/batches/P1-02/plan-cross-process.log",
+      "sha256": "c6975e55c1a4f3869b5fa821441a983029523c924abdde87c40afcd843aec770"
+    },
+    {
+      "path": "evidence/batches/P1-02/plan.log",
+      "sha256": "9d0e0781a9c8a10d2963df9848df431ac7db4ccc9e434b8e162e2de73ea9afe7"
+    },
+    {
+      "path": "evidence/batches/P1-02/red-plan.log",
+      "sha256": "b939a74520acd02c238f1020252b2ff85f2b3ab26b60669b0ebf9b641a3fbf9f"
+    },
+    {
+      "path": "internal/dag/dag.go",
+      "sha256": "36fa450619c5f55b28ff22e9760a884bb4159d69aeb77c3175383748b51c8681"
+    },
+    {
+      "path": "internal/planner/validate.go",
+      "sha256": "60390df0d179c47b9d7d72548eb216fce20aacf1d3ce9c8ad285e3af6716c296"
+    },
+    {
+      "path": "internal/planner/validate_test.go",
+      "sha256": "338a4513c6b55791220c21ac2eb3a79f57a91fa3208b5f615ee20863d1bd7ee7"
+    },
+    {
+      "path": "internal/store/plan.go",
+      "sha256": "a716738f61447a377141f5b1d02db74785395e1f4def19e91ac51f22bcc1041d"
+    },
+    {
+      "path": "tests/integration/plan_test.go",
+      "sha256": "46239dd932145a38e34974ff2f1d84babae8c5483f62d8c7c89ba2ed19e900c5"
+    },
+    {
+      "path": "tests/integration/process_test.go",
+      "sha256": "b201637805deb9481bff8f360d2e6c9172773b0f524b1ab05faa8ce8ce2ac14f"
+    }
+  ],
+  "timestamp_utc": "2026-10-22T13:28:34.689074+00:00",
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 20,
+      "passed": 20,
+      "failed_events": 0,
+      "skipped": 0
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 32,
+      "passed": 32,
+      "failed": 0,
+      "skipped_or_xfailed": 0
+    },
+    "status": "PASS"
+  },
+  "test_assertions": [
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestOfflineDefaults",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestRealProviderDeniedWithoutCredential",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestProductionDatabaseDenied",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/control/TestFunctionalHealth",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanSchemaStrict",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/nodes",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/depth",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/fanout",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanCrossProcessCAS",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanInvalidDependencyLeavesDBUnchanged",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanConcurrentCASAndHistory",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanRollbackOnOutboxFailure",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestProcessHelper",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaCatalogTerminalAndReader",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/negative_budget",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/invalid_FK",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/invalid_role",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestMigrationRollbackAndChecksum",
+      "passed": true
+    }
+  ]
+}
