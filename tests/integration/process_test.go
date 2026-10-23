@@ -53,6 +53,24 @@ func TestProcessHelper(t *testing.T) {
 	run := os.Getenv("MGAR_TEST_RUN")
 	ctx := context.Background()
 	switch kind {
+	case "merge":
+		var claim store.TaskClaim
+		if e := json.Unmarshal([]byte(os.Getenv("MGAR_TEST_CLAIM")), &claim); e != nil {
+			t.Fatal(e)
+		}
+		cas, e := artifact.New(os.Getenv("MGAR_TEST_CAS_ROOT"))
+		if e != nil {
+			t.Fatal(e)
+		}
+		defer cas.Close()
+		_, _, e = s.PublishMerge(ctx, claim, cas, os.Getenv("MGAR_TEST_SNAPSHOT"))
+		if e == nil {
+			fmt.Println("RESULT winner")
+		} else if errors.Is(e, store.ErrBadState) || errors.Is(e, store.ErrCASConflict) {
+			fmt.Println("RESULT denied")
+		} else {
+			t.Fatal(e)
+		}
 	case "replan":
 		configs := map[string]inputcontext.ExecutionConfig{}
 		if e := json.Unmarshal([]byte(os.Getenv("MGAR_TEST_CONFIGS")), &configs); e != nil {

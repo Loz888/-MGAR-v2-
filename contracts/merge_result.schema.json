@@ -1,0 +1,18 @@
+{
+ "$schema":"https://json-schema.org/draft/2020-12/schema",
+ "$id":"https://example.invalid/mgar/v2/merge_result.schema.json",
+ "title":"Provenance-preserving merge result",
+ "type":"object","additionalProperties":false,
+ "required":["schema_version","facts","conflicts","missing","can_finalize"],
+ "properties":{
+  "schema_version":{"const":"merge_result.v1"},
+  "facts":{"type":"array","maxItems":256,"items":{"$ref":"#/$defs/fact"}},
+  "conflicts":{"type":"array","maxItems":256,"items":{"type":"object","additionalProperties":false,"required":["key","alternatives"],"properties":{"key":{"type":"string"},"alternatives":{"type":"array","minItems":2,"maxItems":24,"items":{"$ref":"#/$defs/fact"}}}}},
+  "missing":{"type":"array","maxItems":24,"items":{"type":"object","additionalProperties":false,"required":["node","required","reason"],"properties":{"node":{"type":"string","minLength":1,"maxLength":64},"required":{"type":"boolean"},"reason":{"type":"string","minLength":1,"maxLength":128}}}},
+  "can_finalize":{"type":"boolean"}
+ },
+ "$defs":{
+  "fact":{"type":"object","additionalProperties":false,"required":["key","value","verified","sources"],"properties":{"key":{"type":"string","minLength":1,"maxLength":128},"value":{"type":["string","number","boolean"]},"verified":{"type":"boolean"},"sources":{"type":"array","minItems":1,"maxItems":24,"items":{"$ref":"#/$defs/citation"}}}},
+  "citation":{"type":"object","additionalProperties":false,"required":["artifact_id","content_sha256","purpose","producer_node","producer_task_id","source_plan_version","tool_schema_version","byte_length","kind","content_type","verified"],"properties":{"artifact_id":{"type":"string"},"content_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},"purpose":{"type":"string"},"producer_node":{"type":"string"},"producer_task_id":{"type":"string"},"source_plan_version":{"type":"integer","minimum":1},"tool_schema_version":{"type":"string"},"byte_length":{"type":"integer","minimum":0},"kind":{"type":"string"},"content_type":{"type":"string"},"verified":{"type":"boolean"}}}
+ }
+}

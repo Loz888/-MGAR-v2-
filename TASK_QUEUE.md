@@ -23,7 +23,7 @@
 | [P3-04](tasks/P3-04.md) | P3 | 依赖追踪、过期输入与增量复用 | P3-03 | PASS | `evidence/batches/P3-04/accept.json` |
 | [P4-01](tasks/P4-01.md) | P4 | Transactional Outbox + Inbox | P3-04 | PASS | `evidence/batches/P4-01/accept.json` |
 | [P4-02](tasks/P4-02.md) | P4 | Dynamic Replanner 的有限计划增量修改 | P4-01 | PASS | `evidence/batches/P4-02/accept.json` |
-| [P4-03](tasks/P4-03.md) | P4 | Fan-in Merge 与冲突/失败传播 | P4-02 | TODO | `evidence/batches/P4-03/accept.json` |
+| [P4-03](tasks/P4-03.md) | P4 | Fan-in Merge 与冲突/失败传播 | P4-02 | PASS | `evidence/batches/P4-03/accept.json` |
 | [P4-04](tasks/P4-04.md) | P4 | 跨 Agent 故障注入与恢复扫描 | P4-03 | TODO | `evidence/batches/P4-04/accept.json` |
 | [P4-05](tasks/P4-05.md) | P4 | 未知模型副作用与验证后收尾恢复 | P4-04 | TODO | `evidence/batches/P4-05/accept.json` |
 | [P5-01](tasks/P5-01.md) | P5 | 证据契约与独立 Verifier | P4-05 | TODO | `evidence/batches/P5-01/accept.json` |

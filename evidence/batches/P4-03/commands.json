@@ -1,0 +1,97 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/handoff/...",
+      "./internal/scheduler/...",
+      "./tests/integration/...",
+      "-run",
+      "FanIn|Merge"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P4-03/card-red.log",
+    "timestamp_utc": "2026-10-23T11:29:32.778722+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/handoff/...",
+      "./internal/scheduler/...",
+      "./tests/integration/...",
+      "-run",
+      "FanIn|Merge",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-03/card-first.log",
+    "timestamp_utc": "2026-10-23T11:31:15.627410+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/handoff/...",
+      "./internal/scheduler/...",
+      "-run",
+      "FanIn|Merge"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-03/card-final.log",
+    "timestamp_utc": "2026-10-23T11:32:41.651973+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./tests/integration/...",
+      "-run",
+      "FanIn|Merge",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-03/integration-final.log",
+    "timestamp_utc": "2026-10-23T11:32:43.185277+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-03/full-offline.log",
+    "timestamp_utc": "2026-10-23T11:33:58.979175+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-03/go-test.log",
+    "timestamp_utc": "2026-10-23T11:35:45.529941+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-03/go-build.log",
+    "timestamp_utc": "2026-10-23T11:35:46.241724+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-03/final-check.log",
+    "timestamp_utc": "2026-10-23T11:35:46.317441+00:00"
+  }
+]
