@@ -1,0 +1,27 @@
+{
+  "command": "source scripts/dev-env.sh && python /tmp/mgar-p3-stage.py",
+  "exit_code": 0,
+  "historical_artifact_hashes_verified": 176,
+  "final_regression_artifact_hashes_verified": 9,
+  "source_fingerprint_matches": true,
+  "all_P3_pass": true,
+  "all_P4_todo": true,
+  "code_commit": "41f3357d67c91b2c04fd2e56b07ce0f1f2d814b9",
+  "final_regression": {
+    "go": {
+      "status": "PASS",
+      "tests": 140,
+      "passed": 140,
+      "failed_events": 0,
+      "skipped": 0
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 284,
+      "passed": 284,
+      "failed": 0,
+      "skipped_or_xfailed": 0
+    },
+    "status": "PASS"
+  }
+}
