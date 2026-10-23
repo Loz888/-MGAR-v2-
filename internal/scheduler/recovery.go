@@ -39,11 +39,14 @@ func (s Scheduler) RecoverRun(ctx context.Context, run, owner string) (store.Wor
 	if w.ActivePlanVersion == 0 {
 		return w, nil
 	}
-	unsafe, err := s.Store.UnsafeRun(ctx, run)
+	action, err := handoff.Reconcile(ctx, s.Store, run, handoff.Authority{Owner: c.Owner, Epoch: c.Epoch, Revision: c.Revision})
 	if err != nil {
 		return w, err
 	}
-	if unsafe {
+	if action == "wait" {
+		return s.Store.Workflow(ctx, run)
+	}
+	if action == "stop_unknown" {
 		return s.Store.InterruptWorkflow(ctx, run, c, "interrupted", "unknown_or_non_idempotent_side_effect")
 	}
 	if err = s.Store.RecoverExpired(ctx, run, c); errors.Is(err, store.ErrUnsafeReplay) {

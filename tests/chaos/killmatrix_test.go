@@ -35,6 +35,7 @@ type barrier struct {
 	Owner    store.OrchestratorClaim `json:"orchestrator"`
 	Snapshot string                  `json:"snapshot_id"`
 	Hash     string                  `json:"snapshot_hash"`
+	CallID   string                  `json:"call_id,omitempty"`
 }
 
 func childStore(t *testing.T) *store.Store {
@@ -149,7 +150,9 @@ func TestChaosProcess(t *testing.T) {
 		}
 		send(barrier{Point: "fenced", Claim: c})
 	default:
-		t.Fatal("unknown owned test operation")
+		if !modelChild(t, s, run, mode, send, pause) {
+			t.Fatal("unknown owned test operation")
+		}
 	}
 }
 

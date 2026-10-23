@@ -34,6 +34,10 @@ func (s *Store) PublishArtifact(ctx context.Context, c TaskClaim, cas *artifact.
 		pre.Rollback(ctx)
 		return a, ErrBadState
 	}
+	if e = requireSettledModels(ctx, pre, c); e != nil {
+		pre.Rollback(ctx)
+		return a, e
+	}
 	var preKind string
 	e = pre.QueryRow(ctx, "SELECT requirements->>'required_output_kind' FROM plan_nodes WHERE run_id=$1 AND plan_version=$2 AND task_instance_id=$3", c.RunID, c.PlanVersion, c.TaskID).Scan(&preKind)
 	if e != nil {
@@ -72,6 +76,9 @@ func (s *Store) PublishArtifact(ctx context.Context, c TaskClaim, cas *artifact.
 	defer tx.Rollback(ctx)
 	if state != "executing" {
 		return a, ErrBadState
+	}
+	if e = requireSettledModels(ctx, tx, c); e != nil {
+		return a, e
 	}
 	var expected string
 	if e = tx.QueryRow(ctx, "SELECT requirements->>'required_output_kind' FROM plan_nodes WHERE run_id=$1 AND plan_version=$2 AND task_instance_id=$3", c.RunID, c.PlanVersion, c.TaskID).Scan(&expected); e != nil {

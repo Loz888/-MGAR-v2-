@@ -1,0 +1,21 @@
+[
+  {
+    "log": "card-red.log",
+    "exit_code": 1,
+    "cause": "New durable model ledger interface absent before implementation",
+    "resolution": "Added budget types, reconciliation and real PostgreSQL ledger implementation"
+  },
+  {
+    "log": "output-guard-red.log",
+    "exit_code": 1,
+    "cause": "Existing output API accepted artifacts while model outcome was reserved or unknown",
+    "resolution": "Both output entrypoints now require settled model calls; negative tests retained"
+  },
+  {
+    "log": "full-offline.log",
+    "exit_code": 1,
+    "cause": "Earlier E2E test required expired model ledger status to remain reserved",
+    "resolution": "P4-05 requires explicit unknown; test now checks unknown, unchanged reservations/attempts, no settlement, unchanged estimate and empty unknown usage",
+    "preserved_raw_log": "failed-offline-go.json.json"
+  }
+]

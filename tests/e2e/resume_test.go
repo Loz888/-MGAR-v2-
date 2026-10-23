@@ -173,8 +173,14 @@ func TestResumeUnknownOrReservedModelCallFailsClosed(t *testing.T) {
 			}
 			var calls int
 			var actual string
-			if err = s.Pool.QueryRow(ctx, "SELECT count(*),min(status) FROM model_calls WHERE run_id=$1", w.RunID).Scan(&calls, &actual); err != nil || calls != 1 || actual != status {
+			// P4-05 now explicitly reconciles an abandoned reservation to unknown.
+			// The upper-bound counters and retry/attempt assertions above stay intact.
+			if err = s.Pool.QueryRow(ctx, "SELECT count(*),min(status) FROM model_calls WHERE run_id=$1", w.RunID).Scan(&calls, &actual); err != nil || calls != 1 || actual != "unknown" {
 				t.Fatalf("recovery replayed/settled fixture model call: count=%d status=%s %v", calls, actual, err)
+			}
+			var honest bool
+			if err = s.Pool.QueryRow(ctx, `SELECT NOT usage_known AND usage='{}'::jsonb AND settlement IS NULL AND estimate_bound=.1 AND reservation='{"tokens":123}'::jsonb FROM model_calls WHERE run_id=$1`, w.RunID).Scan(&honest); err != nil || !honest {
+				t.Fatal("unknown usage or bound was fabricated", honest, err)
 			}
 			assertResumeWorkflowEvents(t, s, persisted, "workflow_queued", "workflow_planning", "plan_committed", "workflow_interrupted")
 		})

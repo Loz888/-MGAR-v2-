@@ -1,0 +1,3 @@
+{
+  "stdout": "# github.com/Loz888/-MGAR-v2-/internal/handoff\ninternal/handoff/reconcile_test.go:7:2: no required module provides package github.com/Loz888/-MGAR-v2-/internal/budget; to add it:\n\tgo get github.com/Loz888/-MGAR-v2-/internal/budget\nFAIL\tgithub.com/Loz888/-MGAR-v2-/internal/handoff [setup failed]\nok  \tgithub.com/Loz888/-MGAR-v2-/tests/chaos\t0.003s [no tests to run]\nFAIL\n"
+}

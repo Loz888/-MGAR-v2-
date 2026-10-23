@@ -157,3 +157,16 @@ python eval/context_selection/report.py
 go test ./internal/context/... ./internal/planner/... -run 'Invalidate|Reuse'
 go test ./tests/integration/... -run 'Invalidate|Reuse'
 ```
+
+P4 的持久化交接、有界重规划、证据合并与故障恢复见
+[Handoff](handoff.md)、[Fan-in](fanin.md)、[故障矩阵](chaos.md) 和
+[模型调用恢复及人工处理路径](model-recovery.md)。专项验证：
+
+```bash
+bash scripts/kill_matrix.sh --set core
+go test ./internal/handoff/... ./tests/chaos/... -run 'Unknown|VerifiedRecovery'
+```
+
+这些测试创建自己的 PostgreSQL schema 和进程组，HTTP 仅指向本机合成 Provider。
+当前没有自动调用 Python Worker 的完整调度闭环；P5 Verifier/Gateway/Sandbox 与
+P6 全局预算尚待对应任务实施，不能由合成测试通过推断为已交付。

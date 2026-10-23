@@ -1,0 +1,30 @@
+[
+  {
+    "card": "P4-01",
+    "delivery_commit": "5124e04afcbb2fc53da60ec3ee59306dbd340579",
+    "accept_sha256": "77112d89d799a076b3ba9d31c3524f570e178eae07da7829c14a2de508b77b4a",
+    "artifacts_verified": 30,
+    "status": "PASS"
+  },
+  {
+    "card": "P4-02",
+    "delivery_commit": "d70b5ac32607d77e28ee33ee1f774377ed396cc9",
+    "accept_sha256": "edebe82d84b0ac94d9438c07c366035bade7a1f3e42015e45ebba61e6af81572",
+    "artifacts_verified": 27,
+    "status": "PASS"
+  },
+  {
+    "card": "P4-03",
+    "delivery_commit": "3253e2d013c218119a166fd7af6f7447ec5d682e",
+    "accept_sha256": "94c4b10d0eb453a609fc4ca0556b10b4e723226dbdd67a0b00c75982cf838b13",
+    "artifacts_verified": 29,
+    "status": "PASS"
+  },
+  {
+    "card": "P4-04",
+    "delivery_commit": "4b24ae49f078419fabd3cc9247630e61fff6b557",
+    "accept_sha256": "80307e2abc42458528ed0c96e3fa833b7409719dd9eaaf1a42a96e4e985a032f",
+    "artifacts_verified": 22,
+    "status": "PASS"
+  }
+]

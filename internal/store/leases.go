@@ -299,6 +299,9 @@ func (s *Store) CommitOutput(ctx context.Context, c TaskClaim, artifact string) 
 	if state != "executing" {
 		return ErrBadState
 	}
+	if err = requireSettledModels(ctx, tx, c); err != nil {
+		return err
+	}
 	var valid bool
 	err = tx.QueryRow(ctx, "SELECT EXISTS(SELECT 1 FROM artifacts a JOIN plan_nodes n ON n.task_instance_id=a.producer_task AND n.run_id=a.run_id AND n.plan_version=a.source_plan_version WHERE a.artifact_id=$1 AND a.run_id=$2 AND a.producer_task=$3 AND a.source_plan_version=$4 AND a.kind=n.requirements->>'required_output_kind')", artifact, c.RunID, c.TaskID, c.PlanVersion).Scan(&valid)
 	if err != nil {

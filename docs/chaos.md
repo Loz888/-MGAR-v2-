@@ -21,6 +21,10 @@ Version: kill-matrix.v1
 每个窗口日志包含 PID/PGID、旧/新 epoch、active plan、Workflow 状态和数据库 trace 事件。
 新 Task 的 epoch 可从 1 开始；F-H 的防线是不同 Task ID + Plan Version，不伪造跨实例 epoch 递增。
 
-P4-01 另有 H01–H04 的真实结果提交/投递窗口；P3 已有 CAS 临时文件窗口。F-F/F-G 在 P4-05 实施。
+P4-01 另有 H01–H04 的真实结果提交/投递窗口；P3 已有 CAS 临时文件窗口。
+P4-05 的 F-F/F-G（对应 H11/H12）使用独立入口：
+`go test ./internal/handoff/... ./tests/chaos/... -run 'Unknown|VerifiedRecovery'`。
+它们在本机 HTTP 请求未返回、独立 fixture verdict 已落库的实际边界发送 SIGKILL，
+检查 unknown 上界保留以及 Provider/验证请求均不重复；详情见 [模型恢复](model-recovery.md)。
 这些结果仅说明本机 Linux、PostgreSQL、进程 SIGKILL 下的恢复行为，不代表跨主机或断电容错。
 恢复路径读取数据库权威状态；没有在本卡新增外部通信、付费请求或自动 Python Worker。

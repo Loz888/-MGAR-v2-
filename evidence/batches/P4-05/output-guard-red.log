@@ -1,0 +1,3 @@
+{
+  "stdout": "--- FAIL: TestUnknownOutputCannotPublish (0.28s)\n    --- FAIL: TestUnknownOutputCannotPublish/reserved (0.14s)\n        model_unknown_test.go:303: unconfirmed result published <nil>\n    --- FAIL: TestUnknownOutputCannotPublish/unknown (0.14s)\n        model_unknown_test.go:303: unconfirmed result published <nil>\nFAIL\nFAIL\tgithub.com/Loz888/-MGAR-v2-/tests/chaos\t0.283s\nFAIL\n"
+}

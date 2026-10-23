@@ -1,0 +1,136 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/handoff/...",
+      "./tests/chaos/...",
+      "-run",
+      "Unknown|VerifiedRecovery"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P4-05/card-red.log",
+    "timestamp_utc": "2026-10-23T16:07:27.172014+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-timeout=120s",
+      "-v",
+      "./internal/handoff/...",
+      "./tests/chaos/...",
+      "-run",
+      "Unknown|VerifiedRecovery"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-05/card-first.log",
+    "timestamp_utc": "2026-10-23T16:11:01.319709+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./tests/chaos/...",
+      "-run",
+      "^TestUnknownOutputCannotPublish$"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P4-05/output-guard-red.log",
+    "timestamp_utc": "2026-10-23T16:11:39.641583+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./tests/chaos/...",
+      "-run",
+      "^TestUnknownOutputCannotPublish$"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-05/output-guard-green.log",
+    "timestamp_utc": "2026-10-23T16:11:56.041731+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-timeout=120s",
+      "-v",
+      "./internal/handoff/...",
+      "./tests/chaos/...",
+      "-run",
+      "Unknown|VerifiedRecovery"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-05/card-final.log",
+    "timestamp_utc": "2026-10-23T16:13:51.408864+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P4-05/full-offline.log",
+    "timestamp_utc": "2026-10-23T16:15:04.726819+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./tests/e2e/...",
+      "-run",
+      "^TestResumeUnknownOrReservedModelCallFailsClosed$"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-05/legacy-recovery-green.log",
+    "timestamp_utc": "2026-10-23T16:15:53.192741+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-05/full-offline-final.log",
+    "timestamp_utc": "2026-10-23T16:16:53.455522+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-05/go-test.log",
+    "timestamp_utc": "2026-10-23T16:17:28.895057+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-05/go-build.log",
+    "timestamp_utc": "2026-10-23T16:17:29.620291+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-05/final-check.log",
+    "timestamp_utc": "2026-10-23T16:17:29.701941+00:00"
+  }
+]
