@@ -1,0 +1,144 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/context/..."
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P3-03/card-red.log",
+    "timestamp_utc": "2026-10-23T06:29:59.556658+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/context/..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-03/selector-green.log",
+    "timestamp_utc": "2026-10-23T06:32:04.226711+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "eval/context_selection/"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P3-03/wire-schema-red.log",
+    "timestamp_utc": "2026-10-23T06:33:24.029950+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "eval/context_selection/"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P3-03/wire-accounting-red.log",
+    "timestamp_utc": "2026-10-23T06:34:13.057256+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "eval/context_selection/"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-03/wire-green.log",
+    "timestamp_utc": "2026-10-23T06:35:38.089632+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/context/...",
+      "./tests/integration/...",
+      "-run",
+      "Context|Summary"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P3-03/pg-summary.log",
+    "timestamp_utc": "2026-10-23T06:35:39.641580+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "eval/context_selection/"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-03/wire-final.log",
+    "timestamp_utc": "2026-10-23T06:37:20.224077+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/context_selection/report.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-03/selection-report.log",
+    "timestamp_utc": "2026-10-23T06:37:20.647072+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P3-03/full-offline.log",
+    "timestamp_utc": "2026-10-23T06:37:44.540549+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/context/...",
+      "./tests/integration/...",
+      "-run",
+      "Context|Summary"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-03/pg-summary-fixed.log",
+    "timestamp_utc": "2026-10-23T06:38:09.166439+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-03/full-offline-final.log",
+    "timestamp_utc": "2026-10-23T06:38:39.964459+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-03/final-audit.log",
+    "timestamp_utc": "2026-10-23T06:40:16.478150+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/accept.sh",
+      "P3-03"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-03/export-offline.log",
+    "timestamp_utc": "2026-10-23T06:40:16.549193+00:00"
+  }
+]

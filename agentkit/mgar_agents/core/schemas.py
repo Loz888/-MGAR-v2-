@@ -104,6 +104,22 @@ class ContextSnapshot:
     def __post_init__(self) -> None:
         raw = strict_json(self._json)
         validate(json.loads((CONTRACTS / "context_snapshot.schema.json").read_text()), raw)
+        selection = raw.get('context_selection')
+        if selection is not None:
+            base = {key: value for key, value in raw.items() if key != 'context_selection'}
+            if hashlib.sha256(canonical_json(base).encode()).hexdigest() != selection['source_snapshot_sha256']:
+                raise ValueError('selected context has a different source snapshot')
+            refs = {ref['artifact_id']: ref for ref in raw['artifacts']}
+            seen: set[str] = set()
+            for item in selection['items']:
+                ref = refs.get(item['artifact_id'])
+                if ref is None or item['artifact_id'] in seen or ref['content_sha256'] != item['content_sha256']:
+                    raise ValueError('selected context is outside the fixed references')
+                seen.add(item['artifact_id'])
+                if item['original']:
+                    body = item['text'].encode()
+                    if hashlib.sha256(body).hexdigest() != item['content_sha256'] or len(body) != ref.get('byte_length'):
+                        raise ValueError('selected original differs from source content')
         object.__setattr__(self, "_json", canonical_json(raw))
 
     @classmethod

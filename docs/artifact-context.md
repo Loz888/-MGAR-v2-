@@ -30,3 +30,22 @@ Go 与 Python SDK 的实际序列化/哈希互通经过子进程验证。
 新的 CAS 发布必须已有固定快照，并在同一发布事务中写 artifact_contexts，建立输出到输入的来源链。
 执行入口须先构造快照再调用模型；尚无自动 Go→Python Worker 调度服务。
 遗留 P1 协议测试可以显式预置合成元数据，不能把这些 fixture 当成真实发布结果。
+
+## P3-03 上下文选择与实际计量
+
+`PrepareContext` 先经过固定快照授权和 CAS 重校验，再运行确定性选择器。
+full 保留授权集合的完整内容并按上限记录截断；summary 生成最多 256 UTF-8 字节的规则摘录；
+selected 按角色、证据种类和目标实体匹配评分，稳定按 ID 打破平分，并记录纳入/排除原因。
+这里的“全部历史”以当前快照有权访问的集合为界，不能扩展到整个 Run 的私有资料。
+关键证据无法放入预算时阻止请求；低相关日志可以省略，固定输入来源清单不会被改写。
+
+预算统计实际送给 Provider 的 snapshot_json，包括来源元数据及转义开销，
+不包含目标、工具声明、后续 Observation 或 HTTP 外壳。Token 采用显式命名的
+utf8_bytes_div4.v1 估算，不等于真实分词器、usage 或美元计费；这些仍由 P6/真实实验处理。
+Python SDK 校验所选内容与原快照、引用哈希和原文字节一致；不允许摘要冒充原文或声明 verified。
+
+真实 PrepareContext 的 summary 模式把有损摘录作为 kind=summary 的派生 Artifact 写入 CAS 和不可变元数据，
+保留原 Artifact ID/hash、快照 hash、lossy=true、verified=false，且不改变 Task 成功状态。
+同源摘要有确定的 UUIDv8，重复/并发准备只产生一份元数据和事件；原始内容不被摘要替换。
+离线 contextselect CLI 只用于可信评测 fixture，不提供身份认证或数据库授权。
+Mock Provider 收到的实际字节在 eval/context_selection 测试与报告中核对，不能据此宣称真实模型效果。

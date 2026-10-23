@@ -1,0 +1,3 @@
+{
+  "stdout": "{\"modes\": [{\"mode\": \"full\", \"actual_context_bytes\": 8675, \"estimated_tokens\": 2169}, {\"mode\": \"summary\", \"actual_context_bytes\": 2080, \"estimated_tokens\": 520}, {\"mode\": \"selected\", \"actual_context_bytes\": 1483, \"estimated_tokens\": 371}], \"saved_bytes_selected_vs_full\": 7192}\n"
+}

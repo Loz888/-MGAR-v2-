@@ -51,6 +51,25 @@ func TestProcessHelper(t *testing.T) {
 	run := os.Getenv("MGAR_TEST_RUN")
 	ctx := context.Background()
 	switch kind {
+	case "selection":
+		var c store.TaskClaim
+		if e := json.Unmarshal([]byte(os.Getenv("MGAR_TEST_CLAIM")), &c); e != nil {
+			t.Fatal(e)
+		}
+		cas, e := artifact.New(os.Getenv("MGAR_TEST_CAS_ROOT"))
+		if e != nil {
+			t.Fatal(e)
+		}
+		defer cas.Close()
+		snap, e := s.BuildSnapshot(ctx, c, "mock.v1", "action.v1", cas)
+		if e != nil {
+			t.Fatal(e)
+		}
+		chosen, e := s.PrepareContext(ctx, c, cas, snap.ID, "duplicate paid orders", "summary", 16384, 4096)
+		if e != nil || chosen.Blocked {
+			t.Fatal(e)
+		}
+		fmt.Println("RESULT summary", chosen.Summaries[0].ID)
 	case "context":
 		var c store.TaskClaim
 		if e := json.Unmarshal([]byte(os.Getenv("MGAR_TEST_CLAIM")), &c); e != nil {

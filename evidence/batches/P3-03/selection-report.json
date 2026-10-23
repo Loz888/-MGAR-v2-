@@ -1,0 +1,125 @@
+{
+  "scope": "One fixed-shape synthetic fixture; accounting only, no model quality or latency claim.",
+  "max_context_bytes": 16384,
+  "max_estimated_tokens": 4096,
+  "budget_scope": "Actual snapshot_json context, including metadata; excludes goal, tools, observations and HTTP envelope.",
+  "fixture": {
+    "snapshot": {
+      "schema_version": "context.v1",
+      "snapshot_id": "489b2c25-36ee-4dc3-a784-60caec31d9cc",
+      "run_id": "97d49de5-bf8d-4eff-960c-eb6df0310b63",
+      "task_id": "bb254b10-5a69-402a-9853-27f9c8485f47",
+      "role": "action",
+      "plan_version": 1,
+      "model_config_version": "mock.v1",
+      "tool_policy_version": "action.v1",
+      "artifacts": [
+        {
+          "artifact_id": "00000000-0000-4000-8000-000000000010",
+          "content_sha256": "6771ee5495f61b5ed55c96b5d393852d7fae83089e613974ed97a39a864a27d7",
+          "purpose": "direct_dependency:A",
+          "producer_node": "A",
+          "producer_task_id": "afe23804-dcb1-4aec-81cf-b0fed0c68bc8",
+          "source_plan_version": 1,
+          "tool_schema_version": "fixture.v1",
+          "byte_length": 7000,
+          "kind": "trace",
+          "content_type": "text/plain"
+        },
+        {
+          "artifact_id": "00000000-0000-4000-8000-000000000020",
+          "content_sha256": "162e132d3e76d65119a5fa298a5d8e953ac72a27325bcf447212e7f89216f4c8",
+          "purpose": "direct_dependency:A",
+          "producer_node": "A",
+          "producer_task_id": "982cbfef-e600-4cf6-82ce-e18e6b97023e",
+          "source_plan_version": 1,
+          "tool_schema_version": "fixture.v1",
+          "byte_length": 31,
+          "kind": "finding",
+          "content_type": "text/plain"
+        }
+      ]
+    },
+    "content_hashes": {
+      "00000000-0000-4000-8000-000000000010": "6771ee5495f61b5ed55c96b5d393852d7fae83089e613974ed97a39a864a27d7",
+      "00000000-0000-4000-8000-000000000020": "162e132d3e76d65119a5fa298a5d8e953ac72a27325bcf447212e7f89216f4c8"
+    }
+  },
+  "modes": [
+    {
+      "mode": "full",
+      "actual_context_bytes": 8675,
+      "estimated_tokens": 2169,
+      "token_estimator": "utf8_bytes_div4.v1",
+      "actual_context_sha256": "069590dd8d7fe5e7c1923853ef3df0346de7dd22e2bd1e4723a6d079e615d864",
+      "admitted": [
+        {
+          "artifact_id": "00000000-0000-4000-8000-000000000010",
+          "reason": "admitted_full",
+          "score": 0
+        },
+        {
+          "artifact_id": "00000000-0000-4000-8000-000000000020",
+          "reason": "admitted_full",
+          "score": 130
+        }
+      ],
+      "rejected": [],
+      "provider_requests": 1,
+      "provider": "structured_mock",
+      "command_exit_code": 0
+    },
+    {
+      "mode": "summary",
+      "actual_context_bytes": 2080,
+      "estimated_tokens": 520,
+      "token_estimator": "utf8_bytes_div4.v1",
+      "actual_context_sha256": "7de2623ec33ff73154a63e458e2fd1cfa28140c07cb4c90f57c69a9a4fe67c7b",
+      "admitted": [
+        {
+          "artifact_id": "00000000-0000-4000-8000-000000000010",
+          "reason": "admitted_summary",
+          "score": 0
+        },
+        {
+          "artifact_id": "00000000-0000-4000-8000-000000000020",
+          "reason": "admitted_summary",
+          "score": 130
+        }
+      ],
+      "rejected": [],
+      "provider_requests": 1,
+      "provider": "structured_mock",
+      "command_exit_code": 0
+    },
+    {
+      "mode": "selected",
+      "actual_context_bytes": 1483,
+      "estimated_tokens": 371,
+      "token_estimator": "utf8_bytes_div4.v1",
+      "actual_context_sha256": "1e296568b57b4b71f8cb733781c68728f957b1e01100f6e662e996b695d817ac",
+      "admitted": [
+        {
+          "artifact_id": "00000000-0000-4000-8000-000000000020",
+          "reason": "admitted_selected",
+          "score": 130
+        }
+      ],
+      "rejected": [
+        {
+          "artifact_id": "00000000-0000-4000-8000-000000000010",
+          "reason": "low_relevance",
+          "score": 0
+        }
+      ],
+      "provider_requests": 1,
+      "provider": "structured_mock",
+      "command_exit_code": 0
+    }
+  ],
+  "saved_bytes_selected_vs_full": 7192,
+  "notes": [
+    "Token estimates are UTF-8 bytes/4 rounded up, not an actual model tokenizer or billing measurement.",
+    "CLI fixtures do not authenticate Workers; real PG authorization/summary persistence are independently tested."
+  ]
+}

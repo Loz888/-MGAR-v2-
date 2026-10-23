@@ -5,6 +5,31 @@
   "type": "object", "additionalProperties": false,
   "required": ["schema_version", "task_id", "plan_version", "model_config_version", "tool_policy_version", "artifacts"],
   "properties": {
+    "context_selection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_snapshot_sha256", "mode", "policy_version", "token_estimator", "items"],
+      "properties": {
+        "source_snapshot_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "mode": {"enum": ["full", "summary", "selected"]},
+        "policy_version": {"const": "artifact-selector.v1"},
+        "token_estimator": {"const": "utf8_bytes_div4.v1"},
+        "items": {"type": "array", "maxItems": 64, "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["artifact_id", "content_sha256", "text", "original", "lossy", "verified"],
+          "properties": {
+            "artifact_id": {"type": "string", "format": "uuid"},
+            "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+            "text": {"type": "string", "maxLength": 65536},
+            "original": {"type": "boolean"}, "lossy": {"type": "boolean"}, "verified": {"const": false},
+            "derived_artifact_uri": {"type": "string", "pattern": "^artifact://[0-9a-f-]{36}$"}
+          },
+          "allOf": [
+            {"if": {"properties": {"original": {"const": true}}}, "then": {"properties": {"lossy": {"const": false}}, "not": {"required": ["derived_artifact_uri"]}}},
+            {"if": {"properties": {"original": {"const": false}}}, "then": {"required": ["derived_artifact_uri"], "properties": {"lossy": {"const": true}}}}
+          ]
+        }}
+      }
+    },
     "snapshot_id": {"type": "string", "format": "uuid"},
     "run_id": {"type": "string", "format": "uuid"},
     "role": {"enum": ["research", "data", "action", "verify", "aggregate"]},

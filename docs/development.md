@@ -140,3 +140,13 @@ Context Snapshot/ACL 专项：
 ```bash
 go test ./internal/context/... ./tests/integration/... -run 'Context|ACL'
 ```
+
+Context Selector 专项与单样本字节计量：
+
+```bash
+go test ./internal/context/...
+python -m pytest -q eval/context_selection/
+python eval/context_selection/report.py
+```
+
+此评测目录已纳入全量 pytest；报告只测实际上下文字节与 Token 估算，不测真实模型效果。

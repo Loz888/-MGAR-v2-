@@ -1,0 +1,12 @@
+{
+  "scope": "P3-03 deterministic full/summary/selected context, actual SDK Provider wire accounting and immutable lossy summary artifacts.",
+  "known_limitations": [
+    "One synthetic fixture measured full 8675, summary 2080 and selected 1483 actual UTF-8 context bytes. This is accounting evidence, not a model quality, latency or general performance claim.",
+    "Budget covers actual snapshot_json including references and escaping; excludes goal, tool declarations, observations and HTTP envelope. Token estimates use named ceil(UTF-8 bytes/4), not actual tokenizer usage or billing.",
+    "The authorized candidate set is the fixed snapshot's direct-dependency set, not arbitrary Run history. Goal/retrieved text can affect relevance scores but cannot change tools or ACL.",
+    "Summary mode in trusted Store writes CAS bytes, immutable kind=summary metadata, source IDs/hashes, snapshot lineage and an audit event without marking Task succeeded. Actual independent processes checked summary idempotence. The offline CLI only exercises trusted fixtures and does not authenticate Workers.",
+    "Retained actual failures include missing selection schema, Unicode separator wire mismatch and PostgreSQL UUID/text parameter inference. Final regression has no skip/xfail.",
+    "No independent Verifier, autonomous Worker dispatch, paid model calls or production database operations. Evidence captured before local commit; coding commits not pushed."
+  ],
+  "unverified": []
+}
