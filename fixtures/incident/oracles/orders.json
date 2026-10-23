@@ -1,0 +1,7 @@
+{
+  "version": "incident-oracle.v1",
+  "description": "Human-authored oracle independent of Agent/Verifier answers. Paid order 101 counts once, order 102 counts once, pending order 103 is excluded.",
+  "paid_total": 150,
+  "distinct_paid_orders": [[101, 100], [102, 50]],
+  "all_events": [[1, 101, "paid", 100], [2, 101, "paid", 100], [3, 102, "paid", 50], [4, 103, "pending", 70]]
+}

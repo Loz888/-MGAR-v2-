@@ -1,0 +1,20 @@
+package aggregate
+
+// Human-authored oracle fix, kept separate from Agent output.
+type Order struct {
+	ID int
+	Status string
+	Amount int
+}
+
+func PaidTotal(orders []Order) int {
+	seen := map[int]bool{}
+	total := 0
+	for _, order := range orders {
+		if order.Status == "paid" && !seen[order.ID] {
+			seen[order.ID] = true
+			total += order.Amount
+		}
+	}
+	return total
+}

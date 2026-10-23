@@ -48,7 +48,7 @@ func verifierFixture(t *testing.T) (*store.Store, string, store.OrchestratorClai
 	if e != nil {
 		t.Fatal(e)
 	}
-	a, e := s.PublishArtifact(ctx, worker, cas, "finding", "text/plain", "research.v1", []byte("independent fixed input"))
+	a, e := s.PublishArtifact(ctx, worker, cas, "finding", "application/json", "research.v1", []byte(`{"exit_code":0,"tests":1}`))
 	if e != nil {
 		t.Fatal(e)
 	}

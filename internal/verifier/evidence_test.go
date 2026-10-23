@@ -50,6 +50,10 @@ func TestVerifierEvidenceBoundaries(t *testing.T) {
 				} else {
 					want = "unverifiable"
 				}
+				p.Bytes, _ = json.Marshal(e.Observed)
+				p.Metadata.Hash = artifact.Digest(p.Bytes)
+				p.Metadata.ByteLength = int64(len(p.Bytes))
+				e.Hash = p.Metadata.Hash
 			case "missing_reference":
 				start, end := 0, 2
 				e.Kind = "quote"

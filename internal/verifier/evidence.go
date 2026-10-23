@@ -237,7 +237,7 @@ func (engine Engine) Check(ctx context.Context, raw []byte, p Proof, r Requireme
 		return v
 	}
 	v.add("provenance", "passed", "authorized metadata and immutable bytes match")
-	if e.Kind != r.Kind || e.ToolVersion != r.ToolVersion || !reflect.DeepEqual(e.Recipe, r.Recipe) || !reflect.DeepEqual(e.Expected, r.Expected) {
+	if e.Kind != r.Kind || e.ToolVersion != r.ToolVersion || !reflect.DeepEqual(e.Recipe, r.Recipe) || !EqualObservation(e.Expected, r.Expected) {
 		v.add("requirement", "failed", "claim differs from the trusted verification requirement")
 		return v
 	}
@@ -276,7 +276,22 @@ func (engine Engine) Check(ctx context.Context, raw []byte, p Proof, r Requireme
 			v.add("quote", "passed", "exact source bytes match; prose outside the quotation is not proved")
 		}
 	case "test_run", "sql_result", "metric":
-		if !reflect.DeepEqual(e.Observed, e.Expected) {
+		// The evidence must describe the actual artifact, not a detached correct
+		// observation placed beside a forged result artifact.
+		var reported Observation
+		if StrictJSON(p.Bytes, &reported) != nil || !validObservation(reported) || !EqualObservation(reported, e.Observed) {
+			v.add("result_binding", "failed", "reported observation is not the artifact content")
+			return v
+		}
+		if e.Kind == "test_run" && (e.Expected.ExitCode == nil || *e.Expected.ExitCode != 0 || e.Expected.Tests == nil || *e.Expected.Tests < 1) {
+			v.add("test_requirement", "failed", "success requires an explicit zero exit and executed tests")
+			return v
+		}
+		if e.Kind != "test_run" && (e.Expected.RowCount == nil || len(e.Expected.Rows) == 0) {
+			v.add("sql_requirement", "failed", "SQL proof requires explicit rows and row count")
+			return v
+		}
+		if !EqualObservation(e.Observed, e.Expected) {
 			v.add("observation", "failed", "reported result disagrees with required observation")
 			return v
 		}
@@ -295,4 +310,18 @@ func (engine Engine) Check(ctx context.Context, raw []byte, p Proof, r Requireme
 	}
 	return v
 }
-func EqualObservation(a, b Observation) bool { return reflect.DeepEqual(a, b) }
+func EqualObservation(a, b Observation) bool {
+	if len(a.Rows) > 0 || len(b.Rows) > 0 {
+		left, e := NormalizeRows(a.Rows)
+		if e != nil {
+			return false
+		}
+		right, e := NormalizeRows(b.Rows)
+		if e != nil || left != right {
+			return false
+		}
+		a.Rows = nil
+		b.Rows = nil
+	}
+	return reflect.DeepEqual(a, b)
+}
