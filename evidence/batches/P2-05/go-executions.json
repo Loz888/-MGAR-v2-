@@ -1,0 +1,65 @@
+[
+  {
+    "patch_id": "baseline",
+    "command": [
+      "/workspace/.mgar-tools/go/bin/go",
+      "test",
+      "-count=1",
+      "-json",
+      "./..."
+    ],
+    "exit_code": 1,
+    "workspace_sha256": "57808c9ca206c24e41ffb9219e66be2ac01fc94f2ccd332794172f29446ebc12",
+    "output_sha256": "653f9b9f31f34604e007f8d4467d4e972f6e552ba83ed5e06b14034dd5c10735",
+    "log_path": "evidence/batches/P2-05/actual-go-baseline.json",
+    "tests_run": [
+      "TestPaidDeduplicatedTotal"
+    ],
+    "passed": false,
+    "ground_truth_line": "got=320",
+    "timestamp_utc": "2026-10-23T06:01:49.530846+00:00",
+    "origin": "Imported actual local Action executor run from the full regression; not a second go test execution."
+  },
+  {
+    "patch_id": "deduplicate-only",
+    "command": [
+      "/workspace/.mgar-tools/go/bin/go",
+      "test",
+      "-count=1",
+      "-json",
+      "./..."
+    ],
+    "exit_code": 1,
+    "workspace_sha256": "59dd02835292d2a2811638d10288ec2c8243470b62e6280eeef426f13dd34ff8",
+    "output_sha256": "45ebd131d73a75e79fe9641c9970f6e587365f4811c9fb3ddf05244166f11fd1",
+    "log_path": "evidence/batches/P2-05/actual-go-deduplicate-only.json",
+    "tests_run": [
+      "TestPaidDeduplicatedTotal"
+    ],
+    "passed": false,
+    "ground_truth_line": "got=220",
+    "timestamp_utc": "2026-10-23T06:01:49.697076+00:00",
+    "origin": "Imported actual local Action executor run from the full regression; not a second go test execution."
+  },
+  {
+    "patch_id": "deduplicate-paid",
+    "command": [
+      "/workspace/.mgar-tools/go/bin/go",
+      "test",
+      "-count=1",
+      "-json",
+      "./..."
+    ],
+    "exit_code": 0,
+    "workspace_sha256": "d373b68e0769aaced0bd69e2271b9f838e2a9253bb9b4e0f13baf8ab6461dc7a",
+    "output_sha256": "ca588d6182630741855e0e7c7a14fbde376f259f303e554e9e6545af313e91fe",
+    "log_path": "evidence/batches/P2-05/actual-go-deduplicate-paid.json",
+    "tests_run": [
+      "TestPaidDeduplicatedTotal"
+    ],
+    "passed": true,
+    "ground_truth_line": "got=150",
+    "timestamp_utc": "2026-10-23T06:01:49.854398+00:00",
+    "origin": "Imported actual local Action executor run from the full regression; not a second go test execution."
+  }
+]

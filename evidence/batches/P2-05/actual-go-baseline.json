@@ -1,0 +1,35 @@
+{
+  "schema_version": "go_execution.v1",
+  "argv": [
+    "/workspace/.mgar-tools/go/bin/go",
+    "test",
+    "-count=1",
+    "-json",
+    "./..."
+  ],
+  "exit_code": 1,
+  "raw_go_json": "{\"Time\":\"2026-10-23T06:01:49.526303652Z\",\"Action\":\"start\",\"Package\":\"example.invalid/mgar/incident\"}\n{\"Time\":\"2026-10-23T06:01:49.527555593Z\",\"Action\":\"run\",\"Package\":\"example.invalid/mgar/incident\",\"Test\":\"TestPaidDeduplicatedTotal\"}\n{\"Time\":\"2026-10-23T06:01:49.527638666Z\",\"Action\":\"output\",\"Package\":\"example.invalid/mgar/incident\",\"Test\":\"TestPaidDeduplicatedTotal\",\"Output\":\"=== RUN   TestPaidDeduplicatedTotal\\n\",\"OutputType\":\"frame\"}\n{\"Time\":\"2026-10-23T06:01:49.527687248Z\",\"Action\":\"output\",\"Package\":\"example.invalid/mgar/incident\",\"Test\":\"TestPaidDeduplicatedTotal\",\"Output\":\"    aggregate_test.go:8: got=320\\n\"}\n{\"Time\":\"2026-10-23T06:01:49.527690973Z\",\"Action\":\"output\",\"Package\":\"example.invalid/mgar/incident\",\"Test\":\"TestPaidDeduplicatedTotal\",\"Output\":\"    aggregate_test.go:10: deduplicated paid total: got=320 want=150\\n\",\"OutputType\":\"error\"}\n{\"Time\":\"2026-10-23T06:01:49.527697884Z\",\"Action\":\"output\",\"Package\":\"example.invalid/mgar/incident\",\"Test\":\"TestPaidDeduplicatedTotal\",\"Output\":\"--- FAIL: TestPaidDeduplicatedTotal (0.00s)\\n\",\"OutputType\":\"frame\"}\n{\"Time\":\"2026-10-23T06:01:49.527700948Z\",\"Action\":\"fail\",\"Package\":\"example.invalid/mgar/incident\",\"Test\":\"TestPaidDeduplicatedTotal\",\"Elapsed\":0}\n{\"Time\":\"2026-10-23T06:01:49.527727738Z\",\"Action\":\"output\",\"Package\":\"example.invalid/mgar/incident\",\"Output\":\"FAIL\\n\",\"OutputType\":\"frame\"}\n{\"Time\":\"2026-10-23T06:01:49.527800776Z\",\"Action\":\"output\",\"Package\":\"example.invalid/mgar/incident\",\"Output\":\"FAIL\\texample.invalid/mgar/incident\\t0.001s\\n\",\"OutputType\":\"frame\"}\n{\"Time\":\"2026-10-23T06:01:49.527813935Z\",\"Action\":\"fail\",\"Package\":\"example.invalid/mgar/incident\",\"Elapsed\":0.002}\n",
+  "output_sha256": "653f9b9f31f34604e007f8d4467d4e972f6e552ba83ed5e06b14034dd5c10735",
+  "stop_reason": null,
+  "workspace_sha256": "57808c9ca206c24e41ffb9219e66be2ac01fc94f2ccd332794172f29446ebc12",
+  "files": {
+    "aggregate.go": "fdb55481f7b24ef7b3b3ca8de27ae224fc8639d9403227c490b0c515274f585b",
+    "aggregate_test.go": "467f3a45b5785ffed04aa1e4a323ba69dfb974b83832802b4a0b5f18f096edcd",
+    "go.mod": "6afc983df3a9d3ae24fa580644b235e0cec3b9cb900ca63a8598fcf95cd4ae16"
+  },
+  "patch_id": "baseline",
+  "run_id": "602d3419-6790-4c0d-b00c-0b25441a110d",
+  "task_id": "11436b98-e07e-4128-bd25-0059a1a28305",
+  "case_id": "incident-action",
+  "plan_version": 1,
+  "epoch": 1,
+  "revision": 0,
+  "tool_policy_version": "action_fixture.v1",
+  "passed": false,
+  "tests_run": [
+    "TestPaidDeduplicatedTotal"
+  ],
+  "skipped": 0,
+  "complete": true,
+  "ground_truth_line": "got=320"
+}

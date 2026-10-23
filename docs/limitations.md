@@ -1,6 +1,6 @@
-# P1 阶段能力与限制
+# P1/P2 阶段能力与限制
 
-Version: limitations.v1
+Version: limitations.v2
 
 P1 实现的是单机持久化控制面：真实 PostgreSQL 约束与事务、版本化 DAG、
 编排器和 Task 租约、预算预留、生命周期与恢复扫描。
@@ -42,12 +42,28 @@ P1 的 PostgreSQL 与跨进程测试可以预置合成 Artifact 元数据和 app
 用于验证控制面接入已存在受信记录后的状态转换、依赖、撤销和事务行为。
 这些 fixture 不能证明内容真实、文件已持久化、验证者独立或真实 Agent 已完成任务。
 
+P2 的 Python SDK 已实现有限回合的模型决策、工具调用与 Observation 反馈。
+ResearchAgent 读取固定合成来源，DataAgent 使用独立 Reader 凭据查询合成订单表，
+ActionAgent 在自己拥有的临时副本中选择人工构造的补丁并执行真实 Go 测试。
+角色验收通过结构化 Mock 决策驱动真实工具；没有用 Mock 返回值替代文件读取、SQL 或 Go 测试。
+角色测试使用合成 Claim/ContextSnapshot，尚未接通 Go Worker 派发、真实租约维护及结果提交。
+因此 Python 局部任务完成不等于持久 Task/Workflow 完成。
+
+SQL 工具的 AST 策略、Reader ACL、只读事务与资源限制分别验收。
+Action 工具只允许固定合成模块、有限白名单补丁和固定 Go 命令；临时目录与进程组清理
+不能作为任意生成代码的宿主隔离保证。P5 前不允许把模型提供的任意 Go 代码交给此适配器执行。
+来源哈希、精确引用、SQL 单元格和实际测试记录证明执行来源，不能代替独立语义验证。
+角色产出的 Artifact 引用均为未持久化、未验证的候选，不能作为 durable CAS 或独立 verdict。
+具体接口和授权边界见 [agent-sdk.md](agent-sdk.md)。
+
 以下能力尚未交付：
 
-- P2 的 Agent Loop 与实际 Worker 执行闭环。
+- Go 控制面与 Python Agent 之间的实际 Worker 执行闭环。
 - P3 的 Artifact 内容寻址存储（CAS）、真实内容写入及其故障恢复。
-- P5 的独立 Verifier 执行与完整信任边界验收。
+- P5 的独立 Verifier、完整 Tool Gateway、不可信代码 Sandbox 与完整信任边界验收。
 - 真实模型与付费 Provider 调用、真实外部工具副作用和生产数据库接入。
 
-默认只允许 mock Provider；离线验收不使用模型密钥，不授权付费调用。
-阶段证据仅对应实际执行的命令和覆盖窗口，见 [`evidence/batches/P1-05/`](../evidence/batches/P1-05/)。
+默认只允许 mock Provider；DeepSeek 传输适配器仅使用本机 HTTP stub 验收。
+真实付费路径尚无持久 Go 调用账本接入，保持拒绝；离线验收不使用模型密钥、不授权付费调用。
+阶段证据仅对应实际执行的命令和覆盖窗口，见 [`P1-05`](../evidence/batches/P1-05/)
+和 [`P2-05`](../evidence/batches/P2-05/)。

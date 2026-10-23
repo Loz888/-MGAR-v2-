@@ -16,7 +16,7 @@
 | [P2-02](tasks/P2-02.md) | P2 | 模型 Provider、解析与有限重试 | P2-01 | PASS | `evidence/batches/P2-02/accept.json` |
 | [P2-03](tasks/P2-03.md) | P2 | ResearchAgent：来源约束的多轮检索 | P2-02 | PASS | `evidence/batches/P2-03/accept.json` |
 | [P2-04](tasks/P2-04.md) | P2 | DataAgent：只读 SQL 与数值证据 | P2-03 | PASS | `evidence/batches/P2-04/accept.json` |
-| [P2-05](tasks/P2-05.md) | P2 | ActionAgent：测试环境内受控操作 | P2-04 | TODO | `evidence/batches/P2-05/accept.json` |
+| [P2-05](tasks/P2-05.md) | P2 | ActionAgent：测试环境内受控操作 | P2-04 | PASS | `evidence/batches/P2-05/accept.json` |
 | [P3-01](tasks/P3-01.md) | P3 | 内容寻址 Artifact Store 与身份 | P2-05 | TODO | `evidence/batches/P3-01/accept.json` |
 | [P3-02](tasks/P3-02.md) | P3 | Context Snapshot 与依赖授权 | P3-01 | TODO | `evidence/batches/P3-02/accept.json` |
 | [P3-03](tasks/P3-03.md) | P3 | Context Selector 与 Token/字节预算 | P3-02 | TODO | `evidence/batches/P3-03/accept.json` |

@@ -1,0 +1,3 @@
+{
+  "stdout": "Verified/exported 3 real Go invocations: actual exits 1, 1, 0; totals 320, 220, 150; one executed test per invocation; no skip.\n"
+}

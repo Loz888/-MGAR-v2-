@@ -4,6 +4,8 @@ Version: agent-sdk.v1
 
 P2 在 P1 持久控制面之外提供 Python 决策和角色工具适配层。SDK 不持有控制面管理员凭据，
 不直接更新 Task、Workflow、计划、预算账本或独立验证结论。
+这里指 SDK/工具对象的能力边界：本阶段的受信 Python 测试进程仍可读取本机测试配置，
+测试基础设施也负责建立 Reader。尚未提供敌对 Python 代码的进程凭据隔离。
 `Agent.run(task, snapshot, tools, budget)` 的最终输出是未验证候选结果；
 受信调用者须继续使用 Go 的 Claim/Epoch/Revision/Lease 和版本守卫才能提交 output_ready。
 SDK 局部回合与工具额度不代替 PostgreSQL 的全局成本预留，SDK 事件也不代替数据库审计。
@@ -70,3 +72,22 @@ Observation 记录实际 SQL、参数、数据库快照、fixture 版本、列�
 最终数值引用必须对应本轮实际查询得到的单元格及类型；模型自行填写的数字不能替代查询结果。
 金额等精确数值保留数据库精度，不因 JSON 浮点转换伪造精度。
 数据证据依然是未验证候选；真实生产库、独立 Verifier 和持久 Artifact CAS 不在本卡范围。
+
+## P2-05 可信 fixture 内的受控操作
+
+`ActionWorkspace` 只复制固定哈希的 `go.mod`、`aggregate.go`、`aggregate_test.go` 到自己拥有的临时目录。
+`action.inspect` 返回文件哈希与候选补丁 ID；模型可通过 `action.apply_patch` 选择人工编写的有限补丁，
+不能上传任意 Go 源码或修改测试。参数必须匹配当前工作目录及文件哈希，文件清单与哈希在执行前后重新检查。
+路径、符号链接、硬链接、额外文件、清单漂移和越权角色被拒绝。
+
+`action.go_test` 只运行固定 Go 工具链的 `go test -count=1 -json ./...`，不接收 shell 或自定义命令。
+子进程使用明确的最小环境，不继承数据库、模型凭据及 Go 环境覆盖；本地编译缓存仅服务这些可信 fixture。
+执行限制时间和流式输出，超时、输出超限及 SDK 中断都会清理自己创建的进程组并回收直接子进程。
+记录原始 Go JSON、真实退出码、固定 argv、版本哈希、Task/Run 身份和失败原因。
+成功必须包含指定测试的 run/pass 及包完成事件；无测试、跳过或不完整输出不能算通过。
+
+实际失败 Observation 会引导下一轮选择另一补丁；重复测试包含变化后的 workspace 哈希，
+不能绕过 SDK 的完全重复调用守卫。最终建议必须绑定本轮最新、当前文件版本的真实成功记录。
+测试通过只支持修复候选，不赋予 verified 权限。补丁 diff 和测试证据组成带 Producer 身份的未持久化候选。
+测试中的上游引用由受信 harness 构造，尚无持久 Artifact 检索或自动 Worker/角色交接。
+临时副本和进程组不是敌对代码沙箱；P5-03/P5-04 必须接入 Gateway/Sandbox 后才能执行不可信代码。

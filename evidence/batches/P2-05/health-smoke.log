@@ -1,0 +1,3 @@
+{
+  "stdout": "HTTP functional response: {'status': 'ok', 'provider': 'mock', 'runtime': 'control_plane'}\n"
+}

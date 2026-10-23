@@ -1,0 +1,35 @@
+{
+  "schema_version": "go_execution.v1",
+  "argv": [
+    "/workspace/.mgar-tools/go/bin/go",
+    "test",
+    "-count=1",
+    "-json",
+    "./..."
+  ],
+  "exit_code": 0,
+  "raw_go_json": "{\"Time\":\"2026-10-23T06:01:49.850606803Z\",\"Action\":\"start\",\"Package\":\"example.invalid/mgar/incident\"}\n{\"Time\":\"2026-10-23T06:01:49.852260628Z\",\"Action\":\"run\",\"Package\":\"example.invalid/mgar/incident\",\"Test\":\"TestPaidDeduplicatedTotal\"}\n{\"Time\":\"2026-10-23T06:01:49.852356931Z\",\"Action\":\"output\",\"Package\":\"example.invalid/mgar/incident\",\"Test\":\"TestPaidDeduplicatedTotal\",\"Output\":\"=== RUN   TestPaidDeduplicatedTotal\\n\",\"OutputType\":\"frame\"}\n{\"Time\":\"2026-10-23T06:01:49.852393074Z\",\"Action\":\"output\",\"Package\":\"example.invalid/mgar/incident\",\"Test\":\"TestPaidDeduplicatedTotal\",\"Output\":\"    aggregate_test.go:8: got=150\\n\"}\n{\"Time\":\"2026-10-23T06:01:49.852398332Z\",\"Action\":\"output\",\"Package\":\"example.invalid/mgar/incident\",\"Test\":\"TestPaidDeduplicatedTotal\",\"Output\":\"--- PASS: TestPaidDeduplicatedTotal (0.00s)\\n\",\"OutputType\":\"frame\"}\n{\"Time\":\"2026-10-23T06:01:49.852400956Z\",\"Action\":\"pass\",\"Package\":\"example.invalid/mgar/incident\",\"Test\":\"TestPaidDeduplicatedTotal\",\"Elapsed\":0}\n{\"Time\":\"2026-10-23T06:01:49.852405453Z\",\"Action\":\"output\",\"Package\":\"example.invalid/mgar/incident\",\"Output\":\"PASS\\n\",\"OutputType\":\"frame\"}\n{\"Time\":\"2026-10-23T06:01:49.852548174Z\",\"Action\":\"output\",\"Package\":\"example.invalid/mgar/incident\",\"Output\":\"ok  \\texample.invalid/mgar/incident\\t0.002s\\n\"}\n{\"Time\":\"2026-10-23T06:01:49.852570286Z\",\"Action\":\"pass\",\"Package\":\"example.invalid/mgar/incident\",\"Elapsed\":0.002}\n",
+  "output_sha256": "ca588d6182630741855e0e7c7a14fbde376f259f303e554e9e6545af313e91fe",
+  "stop_reason": null,
+  "workspace_sha256": "d373b68e0769aaced0bd69e2271b9f838e2a9253bb9b4e0f13baf8ab6461dc7a",
+  "files": {
+    "aggregate.go": "af07b885a425c36bbb60dc2cafee94944ed179343113af8adc185af1ec55b55b",
+    "aggregate_test.go": "467f3a45b5785ffed04aa1e4a323ba69dfb974b83832802b4a0b5f18f096edcd",
+    "go.mod": "6afc983df3a9d3ae24fa580644b235e0cec3b9cb900ca63a8598fcf95cd4ae16"
+  },
+  "patch_id": "deduplicate-paid",
+  "run_id": "602d3419-6790-4c0d-b00c-0b25441a110d",
+  "task_id": "11436b98-e07e-4128-bd25-0059a1a28305",
+  "case_id": "incident-action",
+  "plan_version": 1,
+  "epoch": 1,
+  "revision": 0,
+  "tool_policy_version": "action_fixture.v1",
+  "passed": true,
+  "tests_run": [
+    "TestPaidDeduplicatedTotal"
+  ],
+  "skipped": 0,
+  "complete": true,
+  "ground_truth_line": "got=150"
+}

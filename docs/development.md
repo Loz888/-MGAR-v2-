@@ -21,7 +21,8 @@ Bootstrap 每次生成新的 `mgar_test_<随机后缀>` 数据库，保留旧数
 连接仅允许回环主机 `127.0.0.1` / `localhost`、精确端口 `55432`，数据库名必须是
 `mgar_test` 或 `mgar_test_` 后接 16 位小写十六进制字符；不允许任意同前缀数据库。
 不提交该文件，不打印 DSN。
-Python 不持有控制面管理员权限；Mock 路径不需要任何模型密钥，真实 Provider 尚未启用。
+Python Agent 不持有控制面管理员权限；测试基础设施可用本地合成库管理员创建其拥有的 schema/Reader。
+Mock 路径不需要任何模型密钥，真实 Provider 尚未启用。
 
 ```bash
 bash scripts/setup.sh
@@ -114,3 +115,14 @@ python -m pytest -q tests/e2e/data_test.py tests/security/test_sql_policy.py
 ```
 
 测试只创建和清理自己拥有的随机 schema 与 Reader role，不删除其他数据库或业务数据。
+
+ActionAgent 专项检查使用固定可信 Go fixture，需要上述固定工具链：
+
+```bash
+source scripts/dev-env.sh
+python -m pytest -q tests/e2e/action_test.py
+```
+
+测试在临时副本执行真实 `go test`，保留失败补丁和成功补丁的退出码及 Go JSON 事件。
+只能选择人工构造的有限补丁；完整不可信代码隔离属于 P5。角色测试不会修改用户检出目录。
+完成当前源文件的完整回归后，使用 `bash scripts/accept.sh P2-05` 导出匹配指纹的记录。

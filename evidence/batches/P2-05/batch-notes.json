@@ -1,0 +1,15 @@
+{
+  "scope": "P2-05 ActionAgent, finite human-authored patch catalog and fixed real Go execution inside owned temporary fixture copies; P2 stage documentation and startup notes updated.",
+  "known_limitations": [
+    "Only three fixed trusted Go files and two reviewed finite patches are accepted. Model-supplied arbitrary source, shell commands and changes to user checkouts are forbidden. An owned temporary copy is used; no new Git worktree is created.",
+    "Temporary files, fixed argv, minimized environment and owned process-group cleanup are local trusted-adapter controls, not an untrusted-code sandbox. P5 Gateway/Sandbox integration is still required.",
+    "The structural Go test oracle runs one fixed synthetic test at every source version. Baseline and incomplete patch genuinely exit 1 with totals 320 and 220; the paid-deduplicated patch genuinely exits 0 with total 150. These expected negative executions are preserved, not hidden as passing Go runs.",
+    "Action proposals retain diff, hashes and execution evidence but remain persisted=false and verified=false. P3 CAS, P5 independent Verifier, Go Worker dispatch/lease/result integration and durable role handoff are not implemented.",
+    "Upstream context is explicitly a trusted synthetic handoff fixture. No automatic Artifact retrieval or full multi-agent production workflow is claimed.",
+    "The Action owner stopped before writing files because of its usage limit; root implemented and verified P2-05. No independent Action review is claimed.",
+    "No paid model calls or production database operations. DeepSeek was tested only through local HTTP stubs; real durable call-ledger integration remains absent.",
+    "Cloud startup draft saved with requires_publish=true; environment settings still require review/save/publish. Fresh-task restoration of local-only commits has not been verified.",
+    "Evidence captured before local commit; delivery SHA is in Git history. Coding commits have not been pushed."
+  ],
+  "unverified": []
+}
