@@ -1,0 +1,13 @@
+{
+ "$schema":"https://json-schema.org/draft/2020-12/schema",
+ "$id":"https://example.invalid/mgar/v2/replan.schema.json",
+ "title":"Bounded replan suggestion v1",
+ "type":"object","additionalProperties":false,
+ "required":["schema_version","failure_kind","failed_node","proposal"],
+ "properties":{
+  "schema_version":{"const":"replan.v1"},
+  "failure_kind":{"enum":["evidence_rejected","permanent"]},
+  "failed_node":{"type":"string","pattern":"^[A-Za-z][A-Za-z0-9_-]{0,63}$"},
+  "proposal":{"$ref":"plan.schema.json"}
+ }
+}

@@ -1,0 +1,83 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/planner/...",
+      "./tests/integration/...",
+      "-run",
+      "Replan"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P4-02/card-red.log",
+    "timestamp_utc": "2026-10-23T11:24:22.670133+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/planner/...",
+      "./tests/integration/...",
+      "-run",
+      "Replan",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-02/card-first.log",
+    "timestamp_utc": "2026-10-23T11:25:37.115089+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/planner/...",
+      "./tests/integration/...",
+      "-run",
+      "Replan",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-02/card-final.log",
+    "timestamp_utc": "2026-10-23T11:26:25.821566+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-02/go-test.log",
+    "timestamp_utc": "2026-10-23T11:27:46.254997+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-02/go-build.log",
+    "timestamp_utc": "2026-10-23T11:27:46.969473+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-02/final-check.log",
+    "timestamp_utc": "2026-10-23T11:27:47.042354+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-02/full-offline.log",
+    "timestamp_utc": "2026-10-23T11:27:59.545542+00:00"
+  }
+]

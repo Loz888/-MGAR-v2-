@@ -53,6 +53,24 @@ func TestProcessHelper(t *testing.T) {
 	run := os.Getenv("MGAR_TEST_RUN")
 	ctx := context.Background()
 	switch kind {
+	case "replan":
+		configs := map[string]inputcontext.ExecutionConfig{}
+		if e := json.Unmarshal([]byte(os.Getenv("MGAR_TEST_CONFIGS")), &configs); e != nil {
+			t.Fatal(e)
+		}
+		cas, e := artifact.New(os.Getenv("MGAR_TEST_CAS_ROOT"))
+		if e != nil {
+			t.Fatal(e)
+		}
+		defer cas.Close()
+		_, e = s.Replan(ctx, run, store.OrchestratorClaim{Owner: "orchestrator", Epoch: 1, Revision: 0}, []byte(os.Getenv("MGAR_TEST_PROPOSAL")), configs, replanPolicy(), cas)
+		if e == nil {
+			fmt.Println("RESULT winner")
+		} else if errors.Is(e, store.ErrPlanConflict) {
+			fmt.Println("RESULT conflict")
+		} else {
+			t.Fatal(e)
+		}
 	case "incremental":
 		p, e := planner.Decode([]byte(os.Getenv("MGAR_TEST_PROPOSAL")))
 		if e != nil {

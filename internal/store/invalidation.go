@@ -101,6 +101,18 @@ func (s *Store) ProposeIncremental(ctx context.Context, run string, claim Orches
 		return 0, empty, e
 	}
 	defer tx.Rollback(ctx)
+	next, decision, e := s.proposeIncrementalTx(ctx, tx, run, claim, p, configs, cas)
+	if e != nil {
+		return 0, empty, e
+	}
+	if e = commitControl(ctx, tx, run, claim); e != nil {
+		return 0, empty, e
+	}
+	return next, decision, nil
+}
+
+func (s *Store) proposeIncrementalTx(ctx context.Context, tx pgx.Tx, run string, claim OrchestratorClaim, p planner.Proposal, configs map[string]inputcontext.ExecutionConfig, cas *artifact.CAS) (int, planner.Invalidation, error) {
+	empty := planner.Invalidation{}
 	state, version, revision, e := lockWorkflow(ctx, tx, run)
 	if e != nil {
 		return 0, empty, e
@@ -168,9 +180,6 @@ func (s *Store) ProposeIncremental(ctx context.Context, run string, claim Orches
 		return 0, empty, ErrCASConflict
 	}
 	if e = emit(ctx, tx, run, "workflow", run, revision+1, "plan_committed", map[string]any{"plan_version": next, "base_version": version, "mode": "incremental", "rationale": p.Rationale, "decision": decision}); e != nil {
-		return 0, empty, e
-	}
-	if e = commitControl(ctx, tx, run, claim); e != nil {
 		return 0, empty, e
 	}
 	return next, decision, nil
