@@ -1,0 +1,6 @@
+{
+  "operation": "python /tmp/mgar-accept-card.py P4-01 ...",
+  "status": "FAIL",
+  "observed_error": "FileNotFoundError: .local/offline-current; export invoked before full-offline-final completed",
+  "effect": "No accept.json or PASS status written. Source commit 81c59b3 was created by the following shell command; final acceptance is recorded separately after the actual full run passed."
+}

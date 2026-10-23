@@ -89,5 +89,15 @@
     "exit_code": 0,
     "log_path": "evidence/batches/P4-01/final-check.log",
     "timestamp_utc": "2026-10-23T11:22:28.591032+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-01/full-offline-final.log",
+    "timestamp_utc": "2026-10-23T11:22:32.067542+00:00"
   }
 ]
