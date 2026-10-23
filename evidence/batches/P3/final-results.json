@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "source_fingerprint": "572b2671c24080c4a3d96ffa4f0cffc37f60d6adcb088a36bc4ede9f57156bcb",
+  "report": {
+    "go": {
+      "status": "PASS",
+      "tests": 140,
+      "passed": 140,
+      "failed_events": 0,
+      "skipped": 0
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 284,
+      "passed": 284,
+      "failed": 0,
+      "skipped_or_xfailed": 0
+    },
+    "status": "PASS"
+  },
+  "artifacts": [
+    {
+      "path": "evidence/batches/P3/final-pytest.log.json",
+      "sha256": "16d5138e87268e488e7d674f512f5ad77d71caff0d74bc178172728aaffc1c7f"
+    },
+    {
+      "path": "evidence/batches/P3/final-fingerprint.json",
+      "sha256": "d7d9e1e9e991e78654ed08130d3942bec81fc6afcd0c7b691130ce856d441d3d"
+    },
+    {
+      "path": "evidence/batches/P3/final-mypy.log.json",
+      "sha256": "1ae3ea7bf8af27311c624bc172fc6cae5875fe3d5975ba54e6fe9ac981f6a84b"
+    },
+    {
+      "path": "evidence/batches/P3/final-ruff.log.json",
+      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+    },
+    {
+      "path": "evidence/batches/P3/final-pytest.xml.json",
+      "sha256": "6fd8e11d58595ecd9cc5ab9a776e5e976b099878eb6ce4b95323e14548642f2f"
+    },
+    {
+      "path": "evidence/batches/P3/final-report.json.json",
+      "sha256": "0ce493c303e2098abddae61deec351a38b1d28a62daf5a22286e0a91f0cb8dbf"
+    },
+    {
+      "path": "evidence/batches/P3/final-docs.json.json",
+      "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+    },
+    {
+      "path": "evidence/batches/P3/final-vet.log.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P3/final-go.json.json",
+      "sha256": "404b4a8e4805539d0256cf631d07f17e8b5faca736536f6ab680789cb01f62e3"
+    }
+  ],
+  "note": "Actual final stage regression, including the additional real CAS SIGKILL window. Per-card historical evidence remains unchanged."
+}

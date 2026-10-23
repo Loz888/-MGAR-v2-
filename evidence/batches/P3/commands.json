@@ -1,0 +1,44 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/artifact/...",
+      "-run",
+      "SIGKILL|Crash"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3/crash-window.log",
+    "timestamp_utc": "2026-10-23T06:58:10.469641+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3/full-offline.log",
+    "timestamp_utc": "2026-10-23T06:59:34.842177+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-p3-export-stage.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3/export-final.log",
+    "timestamp_utc": "2026-10-23T06:59:55.257067+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3/final-audit.log",
+    "timestamp_utc": "2026-10-23T06:59:55.328958+00:00"
+  }
+]

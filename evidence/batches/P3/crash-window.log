@@ -1,0 +1,3 @@
+{
+  "stdout": "=== RUN   TestCASCrashProcessHelper\n--- PASS: TestCASCrashProcessHelper (0.00s)\n=== RUN   TestCASActualSIGKILLStagingInventory\n    crash_test.go:96: Confirmed child SIGKILL after real temp fsync; no published object; one preserved staging file; no destructive cleanup.\n--- PASS: TestCASActualSIGKILLStagingInventory (0.00s)\nPASS\nok  \tgithub.com/Loz888/-MGAR-v2-/internal/artifact\t0.003s\n"
+}

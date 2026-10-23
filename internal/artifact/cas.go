@@ -40,6 +40,9 @@ type CAS struct {
 	root *os.Root
 	lock *os.File
 	mu   sync.Mutex
+	// Nil in production. The package crash test installs a deterministic
+	// barrier after temp fsync and before rename; it grants no public hook.
+	afterStage func()
 }
 
 func New(path string) (*CAS, error) {
@@ -139,6 +142,9 @@ func (c *CAS) Put(body []byte) (string, error) {
 	}
 	if e = f.Close(); e != nil {
 		return "", e
+	}
+	if c.afterStage != nil {
+		c.afterStage()
 	}
 	if e = c.root.Rename(temp, hash); e != nil {
 		return "", e

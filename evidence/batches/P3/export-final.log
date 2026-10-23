@@ -1,0 +1,3 @@
+{
+  "stdout": "{\"exported_files\": 9, \"source_fingerprint_matches\": true, \"report\": {\"go\": {\"status\": \"PASS\", \"tests\": 140, \"passed\": 140, \"failed_events\": 0, \"skipped\": 0}, \"python\": {\"status\": \"PASS\", \"tests\": 284, \"passed\": 284, \"failed\": 0, \"skipped_or_xfailed\": 0}, \"status\": \"PASS\"}}\n"
+}
