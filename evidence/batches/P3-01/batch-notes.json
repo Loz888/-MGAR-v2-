@@ -1,0 +1,12 @@
+{
+  "scope": "P3-01 local bounded CAS and fenced publication; append-only migration 002; no P3-02 context authorization yet.",
+  "known_limitations": [
+    "Four independent OS processes published actual bytes through PostgreSQL; one physical object and four distinct Producer records were checked. Historical P1 artifact fixtures do not establish content persistence.",
+    "CAS publication and database transactions are not a cross-store atomic transaction. Actual Outbox failure preserves an inventory-visible orphan. No automatic destructive GC; pending temp inventory is read-only.",
+    "Only Linux private local filesystem and guarded synthetic PostgreSQL were tested. No host power-loss, disk-failure, cross-host or mathematical collision-impossibility claim.",
+    "The trusted Go API atomically commits metadata, output_ready, running-slot release and audit/outbox; contents remain unverified. Python Worker dispatch and automatic role result publication are not wired.",
+    "Direct-dependency snapshot authorization is the next card; P5 Gateway/Sandbox and independent Verifier remain later tasks.",
+    "No paid model calls or production database operations. Evidence captured before local commit; delivery SHA follows in Git history; coding commits not pushed."
+  ],
+  "unverified": []
+}

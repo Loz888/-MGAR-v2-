@@ -28,7 +28,10 @@ func Open(ctx context.Context, dsn string) (*Store, error) {
 	return &Store{Pool: pool}, nil
 }
 func Migrate(ctx context.Context, pool *pgxpool.Pool) error {
-	return ApplyMigration(ctx, pool, "001_control", migrations.ControlSQL)
+	if err := ApplyMigration(ctx, pool, "001_control", migrations.ControlSQL); err != nil {
+		return err
+	}
+	return ApplyMigration(ctx, pool, "002_artifact_cas", migrations.ArtifactSQL)
 }
 func ApplyMigration(ctx context.Context, pool *pgxpool.Pool, version, sql string) error {
 	tx, err := pool.Begin(ctx)

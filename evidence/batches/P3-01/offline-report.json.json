@@ -1,0 +1,3 @@
+{
+  "raw_text": "{\n  \"go\": {\n    \"status\": \"PASS\",\n    \"tests\": 120,\n    \"passed\": 120,\n    \"failed_events\": 0,\n    \"skipped\": 0\n  },\n  \"python\": {\n    \"status\": \"PASS\",\n    \"tests\": 267,\n    \"passed\": 267,\n    \"failed\": 0,\n    \"skipped_or_xfailed\": 0\n  },\n  \"status\": \"PASS\"\n}\n"
+}

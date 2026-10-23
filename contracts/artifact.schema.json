@@ -14,6 +14,8 @@
     "source_plan_version": {"type": "integer", "minimum": 1},
     "storage_uri": {"type": "string", "pattern": "^artifact://[A-Za-z0-9_-]+$"},
     "input_snapshot_id": {"type": ["string", "null"]},
+    "producer_run_id": {"type": "string", "format": "uuid"},
+    "content_type": {"enum": ["application/json", "text/plain", "application/octet-stream"]},
     "tool_schema_version": {"type": ["string", "null"]}
   }
 }

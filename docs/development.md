@@ -126,3 +126,11 @@ python -m pytest -q tests/e2e/action_test.py
 测试在临时副本执行真实 `go test`，保留失败补丁和成功补丁的退出码及 Go JSON 事件。
 只能选择人工构造的有限补丁；完整不可信代码隔离属于 P5。角色测试不会修改用户检出目录。
 完成当前源文件的完整回归后，使用 `bash scripts/accept.sh P2-05` 导出匹配指纹的记录。
+
+Artifact/CAS 专项检查：
+
+```bash
+go test ./internal/artifact/... ./tests/integration/... -run 'Artifact|CAS'
+```
+
+协议与边界见 [artifact-context.md](artifact-context.md)。测试使用自己的随机 PG schema 与私有临时目录。

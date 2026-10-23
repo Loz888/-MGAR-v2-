@@ -1,0 +1,3 @@
+{
+  "stdout": "github.com/Loz888/-MGAR-v2-/internal/artifact: no non-test Go files in /workspace/-MGAR-v2-/internal/artifact\n# github.com/Loz888/-MGAR-v2-/internal/artifact [github.com/Loz888/-MGAR-v2-/internal/artifact.test]\ninternal/artifact/cas_test.go:12:7: undefined: New\ninternal/artifact/cas_test.go:24:57: undefined: New\ninternal/artifact/cas_test.go:26:27: undefined: MaxBytes\ninternal/artifact/cas_test.go:35:9: undefined: New\nFAIL\tgithub.com/Loz888/-MGAR-v2-/internal/artifact [build failed]\nFAIL\tgithub.com/Loz888/-MGAR-v2-/tests/integration [build failed]\nFAIL\n"
+}

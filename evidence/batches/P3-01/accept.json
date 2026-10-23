@@ -1,0 +1,2623 @@
+{
+  "card_id": "P3-01",
+  "status": "PASS",
+  "git_commit": null,
+  "base_git_commit": "0d93207d2a84f17398c0764689591b81a99975b5",
+  "environment": {
+    "platform": "linux",
+    "python": "3.12.14",
+    "go": "1.27.3",
+    "postgres": "16.11"
+  },
+  "commands": [
+    {
+      "command": [
+        "go",
+        "test",
+        "./internal/artifact/...",
+        "./tests/integration/...",
+        "-run",
+        "Artifact|CAS"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P3-01/card-red.log",
+      "timestamp_utc": "2026-10-23T06:13:11.199593+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "./internal/artifact/...",
+        "./tests/integration/...",
+        "-run",
+        "Artifact|CAS"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P3-01/card-first-green.log",
+      "timestamp_utc": "2026-10-23T06:15:43.772546+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "./internal/artifact/...",
+        "./tests/integration/...",
+        "-run",
+        "Artifact|CAS"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P3-01/card-process-green.log",
+      "timestamp_utc": "2026-10-23T06:16:21.378617+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "run",
+        "./cmd/mgarmigrate"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P3-01/migrate-upgrade.log",
+      "timestamp_utc": "2026-10-23T06:17:35.094952+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P3-01/full-offline.log",
+      "timestamp_utc": "2026-10-23T06:18:01.334017+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "./internal/artifact/...",
+        "./tests/integration/...",
+        "-run",
+        "Artifact|CAS"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P3-01/card-final.log",
+      "timestamp_utc": "2026-10-23T06:19:03.672879+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "run",
+        "./cmd/mgarmigrate"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P3-01/migrate-final.log",
+      "timestamp_utc": "2026-10-23T06:19:04.063963+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P3-01/full-offline-final.log",
+      "timestamp_utc": "2026-10-23T06:19:30.384979+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P3-01/final-audit.log",
+      "timestamp_utc": "2026-10-23T06:20:49.489862+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/accept.sh",
+        "P3-01"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P3-01/export-offline.log",
+      "timestamp_utc": "2026-10-23T06:20:49.555525+00:00"
+    }
+  ],
+  "positive_assertions": [
+    {
+      "name": "card-final",
+      "passed": true
+    },
+    {
+      "name": "migrate-final",
+      "passed": true
+    },
+    {
+      "name": "full-offline-final",
+      "passed": true
+    },
+    {
+      "name": "final-audit",
+      "passed": true
+    },
+    {
+      "name": "export-offline",
+      "passed": true
+    }
+  ],
+  "negative_assertions": [
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestRealProviderDeniedWithoutCredential",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestProductionDatabaseDenied",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/cmd/mgarctl/TestCLIWorkflowAndTerminalGuards",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/cmd/mgarctl/TestCLIHealthAndInvalidCommandsDoNotOpenDatabase",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/control/TestHealthRejectsUnavailableDatabase",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/mixed_null_input_item",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/top-level_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/schema_version_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/node_role_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/node_extra_case-fold_field",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/edge_from_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/edge_extra_case-fold_field",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/null_input_item",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/nodes",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/depth",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/fanout",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestArtifactRollbackLeavesInventoryOrphanAndLeaseRejects",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleCancelFinishCrossProcessSingleTerminal",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleTerminalIDResubmitDoesNotOverwrite",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleRollbackNoPartialResultOrCancellation",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestFenceRevisionLeaseRoleAndOutputCommit",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestOrchestratorFenceAndRenew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/apply_without_verdict",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/finalize_pending",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/budget_available",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanInvalidDependencyLeavesDBUnchanged",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanRollbackOnOutboxFailure",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsRevokedReadyArtifact",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/start",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/renew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/save",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/start",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/renew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/save",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/takeover",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/missing",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/hash",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/producer",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/source_plan",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/extra",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaCatalogTerminalAndReader",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/invalid_role",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/negative_budget",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/invalid_FK",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestMigrationRollbackAndChecksum",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/empty_owner",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/blank_owner",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/zero_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/negative_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/oversized_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/empty_goal",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/zero_delegations",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/oversized_delegations",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_rejects_stale_or_arbitrary_patch[hash]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_rejects_stale_or_arbitrary_patch[workspace]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_rejects_stale_or_arbitrary_patch[patch]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_rejects_stale_or_arbitrary_patch[extra]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_identity_role_and_command_arguments_denied",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_real_go_timeout_retains_failed_execution",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_real_go_output_is_capped_and_unsafe_env_not_inherited",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.data_test/test_data_rejects_forged_numeric_evidence[wrong_value]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.data_test/test_data_rejects_forged_numeric_evidence[unknown_call]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.data_test/test_data_rejects_forged_numeric_evidence[unknown_column]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.data_test/test_data_rejects_forged_numeric_evidence[boolean_integer]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.data_test/test_data_rejects_forged_numeric_evidence[verified]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_rejects_unsupported_or_self_verified_findings[missing]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_rejects_unsupported_or_self_verified_findings[wrong_hash]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_rejects_unsupported_or_self_verified_findings[wrong_quote]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_rejects_unsupported_or_self_verified_findings[no_read]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_rejects_unsupported_or_self_verified_findings[empty]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_rejects_unsupported_or_self_verified_findings[verified]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_model_cannot_supply_paths_or_unlisted_sources[unknown]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_manifest_is_fixed_and_search_limits_output",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_changed_snapshot_is_rejected_before_tools",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_source_size_and_encoding_are_bounded[\\xff\\xfeinvalid-utf8]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_zero_skipped_incomplete_or_forged_sequences[actions0]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_zero_skipped_incomplete_or_forged_sequences[actions1]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_zero_skipped_incomplete_or_forged_sequences[actions2]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_zero_skipped_incomplete_or_forged_sequences[actions3]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_zero_skipped_incomplete_or_forged_sequences[actions4]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_zero_skipped_incomplete_or_forged_sequences[actions5]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_zero_skipped_incomplete_or_forged_sequences[actions6]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_zero_skipped_incomplete_or_forged_sequences[actions7]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_plain_claims_and_foreign_events[PASS]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_plain_claims_and_foreign_events[{\"Action\":\"pass\"}]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_plain_claims_and_foreign_events[[]]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_plain_claims_and_foreign_events[{invalid]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_plain_claims_and_foreign_events[{\"Package\": \"foreign/package\", \"Action\": \"start\"}\\n{\"Package\": \"foreign/package\", \"Action\": \"run\", \"Test\": \"TestPaidDeduplicatedTotal\"}\\n{\"Package\": \"foreign/package\", \"Action\": \"pass\", \"Test\": \"TestPaidDeduplicatedTotal\"}\\n{\"Package\": \"foreign/package\", \"Action\": \"pass\"}]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_capture_owns_and_reaps_timeout_process",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_capture_timeout_stops_owned_descendant_group",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_outer_sdk_timeout_still_records_actual_exit_and_reaps_process",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_rejects_injection_and_multi_statement[; DELETE FROM x]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_rejects_injection_and_multi_statement[ -- bypass\\n]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_rejects_injection_and_multi_statement[ /* bypass */]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_rejects_injection_and_multi_statement[ FOR UPDATE]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_rejects_injection_and_multi_statement[ UNION SELECT 1]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_rejects_injection_and_multi_statement[ CROSS JOIN pg_catalog.pg_authid]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[DELETE FROM {s}.orders]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[UPDATE {s}.orders SET amount=0]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[CREATE TABLE x(n int)]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[SELECT order_id INTO x FROM {s}.orders]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[WITH x AS (DELETE FROM {s}.orders RETURNING *) SELECT * FROM x]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[SELECT pg_read_file('/etc/passwd') FROM {s}.orders]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[SELECT pg_sleep(10) FROM {s}.orders]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[SELECT * FROM pg_catalog.pg_authid]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[SELECT * FROM public.workflow_runs]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[SELECT * FROM another_schema.orders]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[SELECT current_setting('data_directory') FROM {s}.orders]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[SELECT order_id FROM {s}.orders LIMIT 999999999]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_rejects_routing_overrides_and_nonsynthetic_targets[postgres://reader:stub@127.0.0.1:5432/mgar_test]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_rejects_routing_overrides_and_nonsynthetic_targets[postgres://reader:stub@example.com:55432/mgar_test]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_rejects_routing_overrides_and_nonsynthetic_targets[postgres://reader:stub@127.0.0.1:55432/production]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_rejects_routing_overrides_and_nonsynthetic_targets[postgres://reader:stub@127.0.0.1:55432/mgar_test?host=example.com]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_rejects_routing_overrides_and_nonsynthetic_targets[postgres://reader:stub@127.0.0.1:55432/mgar_test?hostaddr=192.0.2.1]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_rejects_routing_overrides_and_nonsynthetic_targets[postgres://reader:stub@127.0.0.1:55432/mgar_test?options=-csearch_path=public]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_rejects_routing_overrides_and_nonsynthetic_targets[postgres://reader:stub@127.0.0.1:55432/mgar_test?service=production]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_enforces_its_own_limit_validation",
+      "passed": true
+    },
+    {
+      "name": "tests.test_claim.ClaimTests/test_bad_epoch_and_role_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_claim.ClaimTests/test_claim_is_immutable_and_fenced_identity_checked",
+      "passed": true
+    },
+    {
+      "name": "tests.test_fingerprint.FingerprintTests/test_contract_document_and_compose_changes_invalidate_evidence",
+      "passed": true
+    },
+    {
+      "name": "tests.test_pipeline.PipelineTests/test_go_fail_and_skip_are_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_pipeline.PipelineTests/test_incomplete_go_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_pipeline.PipelineTests/test_pytest_failure_skip_xfail_are_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_broken_local_link_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_changed_invariant_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_dag_limit_drift_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_implemented_claim_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_lock_order_drift_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_document_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_entity_field_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_fencing_guard_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_interface_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_schema_file_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_state_edge_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_term_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_trust_boundary_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_version_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_prohibited_claims_are_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_terminal_reopening_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_provider.ProviderTests/test_real_provider_denied",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{broken-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\":\"final\",\"type\":\"final\",\"output\":{}}-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\":\"final\",\"output\":{\"x\":NaN}}-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"Type\":\"final\",\"output\":{}}-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\": \"tool_call\", \"call_id\": \"call-1\", \"name\": \"shell\", \"arguments\": {}}-policy_denied]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\": \"tool_call\", \"call_id\": \"call-1\", \"name\": \"read_fixture\", \"arguments\": {\"execute\": \"rm fake\"}}-policy_denied]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\":\"final\",\"output\":{},\"verified\":true}-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_role_and_effect_denials_are_terminal",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_timeout_interrupts_tool_and_restores_signal_handler",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[max_turns-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[max_turns-1.0]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[max_tool_calls-False]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[max_observation_bytes-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[timeout_s-nan]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[timeout_s-inf]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[timeout_s-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_task_rejects_noninteger_claim_versions[revision-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_task_rejects_noninteger_claim_versions[plan_version-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_task_rejects_noninteger_claim_versions[revision-1.0]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_declaration_rejects_external_schema_references[$ref-https://schemas.example.invalid/args.json]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_declaration_rejects_external_schema_references[$ref-file:///etc/passwd]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_declaration_rejects_external_schema_references[$dynamicRef-http://schemas.example.invalid/args.json]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_declaration_rejects_external_schema_references[$ref-../outside-schema.json]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_outer_sdk_deadline_records_unknown_and_retains_reservation",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_valid_usage_is_preserved_when_the_model_decision_is_invalid",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_ambiguous_sent_request_is_unknown_without_replay[response0]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_ambiguous_sent_request_is_unknown_without_replay[response1]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_ambiguous_sent_request_is_unknown_without_replay[disconnect]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_ambiguous_sent_request_is_unknown_without_replay[timeout]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_malformed_response_rejected_and_usage_not_invented[{\"choices\":]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_malformed_response_rejected_and_usage_not_invented[{\"choices\":[],\"choices\":[]}]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_malformed_response_rejected_and_usage_not_invented[{\"id\": \"stub-response\", \"object\": \"chat.completion\", \"model\": \"deepseek-chat\", \"choices\": [{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": \"{\\\"type\\\":\\\"final\\\",\\\"output\\\":{\\\"n\\\":NaN}}\"}, \"finish_reason\": \"stop\"}]}]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_malformed_response_rejected_and_usage_not_invented[{\"id\": \"stub-response\", \"object\": \"chat.completion\", \"model\": \"deepseek-chat\", \"choices\": [{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": \"{\\\"type\\\":\\\"final\\\",\\\"output\\\":null}\"}, \"finish_reason\": \"stop\"}]}]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_malformed_response_rejected_and_usage_not_invented[{\"id\": \"stub-response\", \"object\": \"chat.completion\", \"model\": \"deepseek-chat\", \"choices\": [{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": \"{\\\"type\\\":\\\"final\\\",\\\"output\\\":{\\\"answer\\\":7}}\"}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": true, \"completion_tokens\": 2}}]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_missing_usage_remains_unknown_even_for_success",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_response_limit_redirect_and_secret_redaction",
+      "passed": true
+    }
+  ],
+  "known_limitations": [
+    "Four independent OS processes published actual bytes through PostgreSQL; one physical object and four distinct Producer records were checked. Historical P1 artifact fixtures do not establish content persistence.",
+    "CAS publication and database transactions are not a cross-store atomic transaction. Actual Outbox failure preserves an inventory-visible orphan. No automatic destructive GC; pending temp inventory is read-only.",
+    "Only Linux private local filesystem and guarded synthetic PostgreSQL were tested. No host power-loss, disk-failure, cross-host or mathematical collision-impossibility claim.",
+    "The trusted Go API atomically commits metadata, output_ready, running-slot release and audit/outbox; contents remain unverified. Python Worker dispatch and automatic role result publication are not wired.",
+    "Direct-dependency snapshot authorization is the next card; P5 Gateway/Sandbox and independent Verifier remain later tasks.",
+    "No paid model calls or production database operations. Evidence captured before local commit; delivery SHA follows in Git history; coding commits not pushed."
+  ],
+  "unverified": [],
+  "artifacts": [
+    {
+      "path": "TASK_QUEUE.md",
+      "sha256": "ff3b9a74ddddc3a90db436c44f36946c433e6eebdc2d5ca917a76fb1e45bd0a8"
+    },
+    {
+      "path": "cmd/mgarmigrate/main.go",
+      "sha256": "81bc5ee3c70b0917e3fa5065bfdd846654ebc44a3254d684d97b1b286e2ca396"
+    },
+    {
+      "path": "contracts/README.md",
+      "sha256": "91e43f75c00fb8ec99962c32c8cc040cb281bf605400eb47bd9db64128ecd372"
+    },
+    {
+      "path": "contracts/artifact.schema.json",
+      "sha256": "35d8483ecc655a2e2feff2121c2aa21471e0dacec1842a4d8c4c79a34bf8acda"
+    },
+    {
+      "path": "docs/development.md",
+      "sha256": "637ca606c03c1181fd370af2c13da096917c49ec13489bd93c75834f62123ca6"
+    },
+    {
+      "path": "internal/store/schema.go",
+      "sha256": "8ac894e625a5c6b04541ff19c7cd9bd932393086a0dc2273aa012570820c19c3"
+    },
+    {
+      "path": "migrations/embed.go",
+      "sha256": "8fc3abe181111e0009ab7e93ab462ca31f6a776a13ccbc1eaa2867911d193831"
+    },
+    {
+      "path": "tests/integration/process_test.go",
+      "sha256": "ae6c40849077c677153ce30d367be9a2e57e8f0403bf68248148a66727763edf"
+    },
+    {
+      "path": "tests/integration/schema_test.go",
+      "sha256": "86486e4cc8d884550efe507ef823806b87283bb7c5de35eebda58db207fffcf8"
+    },
+    {
+      "path": "tests/test_plan_docs.py",
+      "sha256": "881b004e26b9cc40648c382de69e6d29b785ec6dbc07c74f818f4c0faefd5932"
+    },
+    {
+      "path": "docs/adr/ADR-0003.md",
+      "sha256": "663693b60f132d07278f61bf2fce1d24e573c196a0646330bc5c4fffe6a0b0d2"
+    },
+    {
+      "path": "docs/artifact-context.md",
+      "sha256": "2cb5127604e328f60e40e7d2e06534db2fcc96ee8f3e9a47e89ae6e0dc0e8a6f"
+    },
+    {
+      "path": "evidence/batches/P3-01/batch-notes.json",
+      "sha256": "048d1617861e2c0864f717c9abbc1b14957a5fa901849b0b7c3a93cbeed56eb4"
+    },
+    {
+      "path": "evidence/batches/P3-01/card-final.log",
+      "sha256": "001ec2f87197dd70cb023ed2666920e587d766808ab1c9c1985f1bea29176eed"
+    },
+    {
+      "path": "evidence/batches/P3-01/card-first-green.log",
+      "sha256": "250f27e8e3285883463c8e109205c5100f9142e7cb010e80e278a9ffe42bda4c"
+    },
+    {
+      "path": "evidence/batches/P3-01/card-process-green.log",
+      "sha256": "3e1b56a1a74534d844709f81d02df7b5657ad7c1ae5cccb53a4eeadd90d34481"
+    },
+    {
+      "path": "evidence/batches/P3-01/card-red.log",
+      "sha256": "f24143e630a2244d2f09fe3761c3f53622765f14dbb14e70c9fdd262b64bd054"
+    },
+    {
+      "path": "evidence/batches/P3-01/commands.json",
+      "sha256": "6fed0c597b51e76c7bcf75c477d7f19d6632bef80a6f96f7649f2df853fa60da"
+    },
+    {
+      "path": "evidence/batches/P3-01/export-offline.log",
+      "sha256": "082507485b45fd2449e96a854eec920d579d392c41efb01f283b0c658f92c4d8"
+    },
+    {
+      "path": "evidence/batches/P3-01/final-audit.log",
+      "sha256": "b6b99950c2b8ecb4d9e7527a85dc2c6ac93c5431f881410e8c9e1c38be632659"
+    },
+    {
+      "path": "evidence/batches/P3-01/full-offline-final.log",
+      "sha256": "4bf86491c44ad6066218197c514a92e6ccaa586f39835d82ae877af5109b7e92"
+    },
+    {
+      "path": "evidence/batches/P3-01/full-offline.log",
+      "sha256": "551f0ffb78cdf80961aaea7148263f571bdff73d9386949f70782631c7dc4505"
+    },
+    {
+      "path": "evidence/batches/P3-01/migrate-final.log",
+      "sha256": "f49a5641a86051351ae8340198de889feb920abef8c37d522567f5507a4f5846"
+    },
+    {
+      "path": "evidence/batches/P3-01/migrate-upgrade.log",
+      "sha256": "c519f3a102f4c2c788860830843367c4430415167fcba76e08fe67618abd5b52"
+    },
+    {
+      "path": "evidence/batches/P3-01/offline-accept.json",
+      "sha256": "65b0e916eaf37c8232ed37f908af83abd0c8514cfbf44d5aed41994b30d0a124"
+    },
+    {
+      "path": "evidence/batches/P3-01/offline-docs.json.json",
+      "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+    },
+    {
+      "path": "evidence/batches/P3-01/offline-fingerprint.json",
+      "sha256": "596cf7b74c86569519dbd53c08e6c474121a1454ba9e8879c20bd1977e005880"
+    },
+    {
+      "path": "evidence/batches/P3-01/offline-go.json.json",
+      "sha256": "4f72a6c59acf6ca43c155e8fcb2eb6ba5c334bcdd5f7dafa1ebf2a0160d7f704"
+    },
+    {
+      "path": "evidence/batches/P3-01/offline-mypy.log.json",
+      "sha256": "1ae3ea7bf8af27311c624bc172fc6cae5875fe3d5975ba54e6fe9ac981f6a84b"
+    },
+    {
+      "path": "evidence/batches/P3-01/offline-pytest.log.json",
+      "sha256": "3e1963ed10969823fc70731376fa4eb178807c9ece2f1b7beb9aeda5a272703f"
+    },
+    {
+      "path": "evidence/batches/P3-01/offline-pytest.xml.json",
+      "sha256": "bed87ebec3f0ded168e914b6d80a87e55e77086fa0103bd7b2735886adb0b539"
+    },
+    {
+      "path": "evidence/batches/P3-01/offline-report.json.json",
+      "sha256": "12473b0af64c2e9194f8c7b8daaffe3c238672e372f58c647228978779924b5b"
+    },
+    {
+      "path": "evidence/batches/P3-01/offline-ruff.log.json",
+      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+    },
+    {
+      "path": "evidence/batches/P3-01/offline-vet.log.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "internal/artifact/cas.go",
+      "sha256": "ae668c9b8be58774425ba6b6a7146b94369ac54b803bcde4ce4fbd4c2eec90e2"
+    },
+    {
+      "path": "internal/artifact/cas_test.go",
+      "sha256": "f5697adede194cfc1c3b2ed472adbade232396a132a115b0827c7ab02b363a72"
+    },
+    {
+      "path": "internal/store/artifacts.go",
+      "sha256": "dabf843a3d5680f46128c6eb725bf41af04a2ec71cccc6905d0f4ab13d581e9e"
+    },
+    {
+      "path": "migrations/002_artifact_cas.sql",
+      "sha256": "4b2eb593e547c9aae6c88480fd8ac1304eeb86ebc572d8b2fc2a2da448787bbd"
+    },
+    {
+      "path": "tests/integration/artifacts_test.go",
+      "sha256": "5f8b1230b5ff62e56783bf94b8abee8ba129cd92021ba7057fd03cab6f0ca9fa"
+    }
+  ],
+  "timestamp_utc": "2026-10-23T06:20:49.588722+00:00",
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 120,
+      "passed": 120,
+      "failed_events": 0,
+      "skipped": 0
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 267,
+      "passed": 267,
+      "failed": 0,
+      "skipped_or_xfailed": 0
+    },
+    "status": "PASS"
+  },
+  "test_assertions": [
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/artifact/TestCASDedupIntegrityAndInventory",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/artifact/TestCASPathSymlinkHardlinkAndBounds",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestOfflineDefaults",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestRealProviderDeniedWithoutCredential",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestProductionDatabaseDenied",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestDSNQueryCannotOverrideSyntheticTarget",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/cmd/mgarctl/TestCLIWorkflowAndTerminalGuards",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/cmd/mgarctl/TestCLIHealthAndInvalidCommandsDoNotOpenDatabase",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/control/TestFunctionalHealth",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/control/TestHealthRejectsUnavailableDatabase",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/mixed_null_input_item",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/top-level_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/schema_version_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/node_role_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/node_extra_case-fold_field",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/edge_from_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/edge_extra_case-fold_field",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/null_input_item",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_node_node_key",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_node_role",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_node_goal",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_node_required_inputs",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_node_required_output_kind",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_edge_from",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_edge_to",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/input_item_object",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/input_item_array",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/input_item_null",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/input_item_boolean",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/input_item_number",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONPreservesPermittedStringsAndEmptyArrays",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestTypedPlanEdgeLimit",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanSchemaStrict",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/nodes",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/depth",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/fanout",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/scheduler/TestClaimPolicyBeforeDatabaseAccess",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleProcessHelper",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleSIGKILLRecoveryRebuildsReady",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleExpiredAttemptLimitFailsWithoutRetry",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestArtifactCASCrossProcessDedupDistinctProducers",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestArtifactPublicationDedupProvenanceAndFencing",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestArtifactRollbackLeavesInventoryOrphanAndLeaseRejects",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleCancelFinishCrossProcessSingleTerminal",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleTerminalIDResubmitDoesNotOverwrite",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleRollbackNoPartialResultOrCancellation",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeSafeBlockedAndInterrupted/blocked/planned=false",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeSafeBlockedAndInterrupted/blocked/planned=true",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeSafeBlockedAndInterrupted/interrupted/planned=false",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeSafeBlockedAndInterrupted/interrupted/planned=true",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeSafeBlockedAndInterrupted",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimCrossProcessGlobalBudget/1",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeUnknownOrReservedModelCallFailsClosed/unknown",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeUnknownOrReservedModelCallFailsClosed/reserved",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeUnknownOrReservedModelCallFailsClosed",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeExhaustedBudgetStaysBlockedWithoutAttempts",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeVerdictAndFinalizePersistSeparateCheckpoints",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimCrossProcessGlobalBudget/8",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimCrossProcessGlobalBudget",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestFenceRevisionLeaseRoleAndOutputCommit",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimUnknownSideEffectNotReplayed",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestOrchestratorFenceAndRenew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyInputSnapshotCannotBeInjected",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestReadyFanInDuplicateAndCrossProcess",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyFailureAndStaleArtifactBlocked/failed",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyFailureAndStaleArtifactBlocked/cancelled",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyFailureAndStaleArtifactBlocked/unverified",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyFailureAndStaleArtifactBlocked/stale",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyFailureAndStaleArtifactBlocked",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestApplyVerdictsWaitsForConcurrentRevocation",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestFinalizeWaitsForConcurrentRevocation",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestRecoveryRollsBackWhenLeaseExpiresDuringLockWait",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/apply_without_verdict",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/finalize_pending",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/budget_available",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanCrossProcessCAS",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanInvalidDependencyLeavesDBUnchanged",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanConcurrentCASAndHistory",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanRollbackOnOutboxFailure",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestProcessHelper",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsRevokedReadyArtifact",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/start",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/renew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/save",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/start",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/renew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/save",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/takeover",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/missing",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/hash",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/producer",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/source_plan",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/extra",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRechecksVerdictCommittedDuringArtifactLockWait",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestRecoveryReleasesOldPlanReservation",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaCatalogTerminalAndReader",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/invalid_role",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/negative_budget",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/invalid_FK",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestMigrationRollbackAndChecksum",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionInitialOwnerCannotBeStolenBeforePlan",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/empty_owner",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/blank_owner",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/zero_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/negative_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/oversized_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/empty_goal",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/zero_delegations",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/oversized_delegations",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionClaimOutboxFailureRollsBackEverything",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionDuplicateIDPreservesInitialClaim",
+      "passed": true
+    }
+  ],
+  "python_test_assertions": [
+    {
+      "name": "tests.e2e.action_test/test_action_observes_failed_patch_then_selects_real_fix",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_patch_path_is_finite[../escape.go]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_patch_path_is_finite[/tmp/escape.go]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_patch_path_is_finite[go.mod]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_patch_path_is_finite[aggregate_test.go]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_patch_path_is_finite[aggregate.go;touch x]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_rejects_stale_or_arbitrary_patch[hash]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_rejects_stale_or_arbitrary_patch[workspace]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_rejects_stale_or_arbitrary_patch[patch]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_rejects_stale_or_arbitrary_patch[extra]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_workspace_inventory_and_hashes_are_rechecked[symlink]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_workspace_inventory_and_hashes_are_rechecked[test-change]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_workspace_inventory_and_hashes_are_rechecked[extra]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_workspace_inventory_and_hashes_are_rechecked[hardlink]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_final_claim_cannot_forge_actual_test_success[no-test]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_final_claim_cannot_forge_actual_test_success[fake-pass]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_final_claim_cannot_forge_actual_test_success[verified]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_final_claim_cannot_forge_actual_test_success[wrong-call]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_final_claim_cannot_forge_actual_test_success[wrong-hash]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_identity_role_and_command_arguments_denied",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_real_go_timeout_retains_failed_execution",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_real_go_output_is_capped_and_unsafe_env_not_inherited",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_fixture_is_trusted_fixed_content_only[symlink-root]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_fixture_is_trusted_fixed_content_only[changed-source]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_fixture_is_trusted_fixed_content_only[changed-test]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_fixture_is_trusted_fixed_content_only[oversized]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.action_test/test_action_fixture_is_trusted_fixed_content_only[extra-file]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.data_test/test_data_real_sql_observations_drive_next_turn_and_numeric_finding",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.data_test/test_data_normal_paid_aggregation_matches_ground_truth",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.data_test/test_data_rejects_forged_numeric_evidence[wrong_value]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.data_test/test_data_rejects_forged_numeric_evidence[unknown_call]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.data_test/test_data_rejects_forged_numeric_evidence[unknown_column]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.data_test/test_data_rejects_forged_numeric_evidence[boolean_integer]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.data_test/test_data_rejects_forged_numeric_evidence[verified]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.data_test/test_data_role_cannot_be_substituted",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.data_test/test_data_row_and_output_caps_are_real",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.data_test/test_data_statement_deadline_cancels_actual_postgresql_lock_wait",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_search_read_and_cite_real_versioned_content",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_candidate_identity_is_per_producer",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_low_quality_source_cannot_be_promoted_to_verified",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_rejects_unsupported_or_self_verified_findings[missing]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_rejects_unsupported_or_self_verified_findings[wrong_hash]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_rejects_unsupported_or_self_verified_findings[wrong_quote]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_rejects_unsupported_or_self_verified_findings[no_read]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_rejects_unsupported_or_self_verified_findings[empty]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_rejects_unsupported_or_self_verified_findings[verified]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_prompt_injection_cannot_execute_command",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_model_cannot_supply_paths_or_unlisted_sources[../../private.txt]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_model_cannot_supply_paths_or_unlisted_sources[/etc/passwd]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_model_cannot_supply_paths_or_unlisted_sources[unknown]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_source_hash_drift_fails_closed",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_symlink_source_and_root_are_refused",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_capability_role_and_source_bounds",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_manifest_is_fixed_and_search_limits_output",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_changed_snapshot_is_rejected_before_tools",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_source_size_and_encoding_are_bounded[xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx]",
+      "passed": true
+    },
+    {
+      "name": "tests.e2e.research_test/test_research_source_size_and_encoding_are_bounded[\\xff\\xfeinvalid-utf8]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_has_complete_positive_control",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_zero_skipped_incomplete_or_forged_sequences[actions0]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_zero_skipped_incomplete_or_forged_sequences[actions1]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_zero_skipped_incomplete_or_forged_sequences[actions2]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_zero_skipped_incomplete_or_forged_sequences[actions3]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_zero_skipped_incomplete_or_forged_sequences[actions4]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_zero_skipped_incomplete_or_forged_sequences[actions5]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_zero_skipped_incomplete_or_forged_sequences[actions6]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_zero_skipped_incomplete_or_forged_sequences[actions7]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_plain_claims_and_foreign_events[PASS]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_plain_claims_and_foreign_events[{\"Action\":\"pass\"}]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_plain_claims_and_foreign_events[[]]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_plain_claims_and_foreign_events[{invalid]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_go_parser_rejects_plain_claims_and_foreign_events[{\"Package\": \"foreign/package\", \"Action\": \"start\"}\\n{\"Package\": \"foreign/package\", \"Action\": \"run\", \"Test\": \"TestPaidDeduplicatedTotal\"}\\n{\"Package\": \"foreign/package\", \"Action\": \"pass\", \"Test\": \"TestPaidDeduplicatedTotal\"}\\n{\"Package\": \"foreign/package\", \"Action\": \"pass\"}]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_capture_owns_and_reaps_timeout_process",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_capture_enforces_streaming_output_cap",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_capture_timeout_stops_owned_descendant_group",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_action_boundaries/test_outer_sdk_timeout_still_records_actual_exit_and_reaps_process",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_untrusted_dsn_cannot_change_the_exact_synthetic_target[postgres://reader:dummy@127.0.0.1:5432/mgar_test]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_untrusted_dsn_cannot_change_the_exact_synthetic_target[postgres://reader:dummy@127.0.0.1:55432/production]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_untrusted_dsn_cannot_change_the_exact_synthetic_target[postgres://reader:dummy@127.0.0.1:55432/mgar_test?hostaddr=203.0.113.1]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_untrusted_dsn_cannot_change_the_exact_synthetic_target[postgres://reader:dummy@127.0.0.1:55432/mgar_test?host=203.0.113.1]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_untrusted_dsn_cannot_change_the_exact_synthetic_target[postgres://reader:dummy@127.0.0.1:55432/mgar_test?service=unexpected]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_untrusted_dsn_cannot_change_the_exact_synthetic_target[postgres://reader:dummy@127.0.0.1:55432/mgar_test?options=-cdefault_transaction_read_only=off]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_untrusted_dsn_cannot_change_the_exact_synthetic_target[postgres://reader:dummy@127.0.0.1:55432/mgar_test?sslmode=disable&sslmode=require]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_untrusted_dsn_cannot_change_the_exact_synthetic_target[host=127.0.0.1 port=55432 dbname=mgar_test user=reader password=dummy]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_environment_cannot_override_hostaddr_or_readonly_options",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_database_acl_blocks_writes_even_without_readonly_guc",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_actual_query_and_metrics_have_a_positive_control",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_model_metrics_must_match_the_exact_observed_cell[wrong_value]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_model_metrics_must_match_the_exact_observed_cell[numeric_type]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_model_metrics_must_match_the_exact_observed_cell[wrong_call]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_model_metrics_must_match_the_exact_observed_cell[wrong_column]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_model_metrics_must_match_the_exact_observed_cell[wrong_row]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_model_metrics_must_match_the_exact_observed_cell[verified]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_a_new_task_cannot_borrow_earlier_reader_observations",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_non_data_role_does_not_invoke_the_provider",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_sql_parser_errors_are_not_normalized_into_an_authorized_query[ WHERE-parameters0]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_sql_parser_errors_are_not_normalized_into_an_authorized_query[ WHERE amount =-parameters1]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_sql_parser_errors_are_not_normalized_into_an_authorized_query[ WHERE (status = %s) trailing_garbage-parameters2]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_data_boundaries/test_expired_parse_budget_does_not_start_a_database_connection",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_research_scope/test_authorized_observed_source_has_a_real_positive_control",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_research_scope/test_a_later_task_cannot_borrow_prior_task_read_history",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_research_scope/test_forged_verified_property_does_not_override_research_output",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_research_scope/test_file_replacement_cannot_escape_or_skip_hash_validation[changed]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_research_scope/test_file_replacement_cannot_escape_or_skip_hash_validation[final_symlink]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_research_scope/test_file_replacement_cannot_escape_or_skip_hash_validation[directory_symlink]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_research_scope/test_file_replacement_cannot_escape_or_skip_hash_validation[root_symlink]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_research_scope/test_file_replacement_cannot_escape_or_skip_hash_validation[fifo]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_research_scope/test_citation_quote_must_come_from_the_observed_bytes",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_research_scope/test_model_path_and_execution_requests_cannot_become_capabilities",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_rejects_injection_and_multi_statement[; DELETE FROM x]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_rejects_injection_and_multi_statement[ -- bypass\\n]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_rejects_injection_and_multi_statement[ /* bypass */]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_rejects_injection_and_multi_statement[ FOR UPDATE]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_rejects_injection_and_multi_statement[ UNION SELECT 1]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_rejects_injection_and_multi_statement[ CROSS JOIN pg_catalog.pg_authid]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[DELETE FROM {s}.orders]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[UPDATE {s}.orders SET amount=0]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[CREATE TABLE x(n int)]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[SELECT order_id INTO x FROM {s}.orders]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[WITH x AS (DELETE FROM {s}.orders RETURNING *) SELECT * FROM x]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[SELECT pg_read_file('/etc/passwd') FROM {s}.orders]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[SELECT pg_sleep(10) FROM {s}.orders]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[SELECT * FROM pg_catalog.pg_authid]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[SELECT * FROM public.workflow_runs]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[SELECT * FROM another_schema.orders]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[SELECT current_setting('data_directory') FROM {s}.orders]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_policy_ast_rejects_dangerous_shapes[SELECT order_id FROM {s}.orders LIMIT 999999999]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_sql_parameter_binding_does_not_interpret_injection_text",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_credentials_are_independent_acl_even_with_readonly_disabled",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_readonly_transaction_is_a_separate_database_guard",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_rejects_routing_overrides_and_nonsynthetic_targets[postgres://reader:stub@127.0.0.1:5432/mgar_test]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_rejects_routing_overrides_and_nonsynthetic_targets[postgres://reader:stub@example.com:55432/mgar_test]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_rejects_routing_overrides_and_nonsynthetic_targets[postgres://reader:stub@127.0.0.1:55432/production]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_rejects_routing_overrides_and_nonsynthetic_targets[postgres://reader:stub@127.0.0.1:55432/mgar_test?host=example.com]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_rejects_routing_overrides_and_nonsynthetic_targets[postgres://reader:stub@127.0.0.1:55432/mgar_test?hostaddr=192.0.2.1]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_rejects_routing_overrides_and_nonsynthetic_targets[postgres://reader:stub@127.0.0.1:55432/mgar_test?options=-csearch_path=public]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_rejects_routing_overrides_and_nonsynthetic_targets[postgres://reader:stub@127.0.0.1:55432/mgar_test?service=production]",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_admin_credentials_are_refused_before_user_query",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_enforces_its_own_limit_validation",
+      "passed": true
+    },
+    {
+      "name": "tests.security.test_sql_policy/test_reader_refuses_non_superuser_credentials_that_have_writes",
+      "passed": true
+    },
+    {
+      "name": "tests.test_claim.ClaimTests/test_bad_epoch_and_role_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_claim.ClaimTests/test_claim_is_immutable_and_fenced_identity_checked",
+      "passed": true
+    },
+    {
+      "name": "tests.test_fingerprint.FingerprintTests/test_contract_document_and_compose_changes_invalidate_evidence",
+      "passed": true
+    },
+    {
+      "name": "tests.test_fingerprint.FingerprintTests/test_evidence_and_queue_status_do_not_change_the_fingerprint",
+      "passed": true
+    },
+    {
+      "name": "tests.test_fingerprint.FingerprintTests/test_ignored_local_outputs_do_not_change_the_fingerprint",
+      "passed": true
+    },
+    {
+      "name": "tests.test_fingerprint.FingerprintTests/test_repeated_evaluation_and_git_metadata_are_stable",
+      "passed": true
+    },
+    {
+      "name": "tests.test_fingerprint.FingerprintTests/test_untracked_candidate_inputs_are_included",
+      "passed": true
+    },
+    {
+      "name": "tests.test_pipeline.PipelineTests/test_empty_go_is_not_pass",
+      "passed": true
+    },
+    {
+      "name": "tests.test_pipeline.PipelineTests/test_go_fail_and_skip_are_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_pipeline.PipelineTests/test_incomplete_go_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_pipeline.PipelineTests/test_pytest_failure_skip_xfail_are_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_pipeline.PipelineTests/test_zero_pytest_is_not_pass",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_broken_local_link_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_changed_invariant_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_dag_limit_drift_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_default_root_does_not_depend_on_cwd",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_disclaimers_are_not_prohibited_claims",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_exceptional_states_cannot_be_silently_enabled",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_implemented_claim_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_local_adapter_decision_is_required",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_lock_order_drift_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_document_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_entity_field_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_fencing_guard_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_interface_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_schema_file_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_state_edge_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_term_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_trust_boundary_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_version_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_prohibited_claims_are_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_recovery_must_advance_epoch",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_schema_index_required_fields_must_match",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_schema_index_version_must_match",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_terminal_reopening_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_valid_documents",
+      "passed": true
+    },
+    {
+      "name": "tests.test_provider.ProviderTests/test_default_offline",
+      "passed": true
+    },
+    {
+      "name": "tests.test_provider.ProviderTests/test_mock_without_keys",
+      "passed": true
+    },
+    {
+      "name": "tests.test_provider.ProviderTests/test_real_provider_denied",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_two_turns_observe_real_tool_before_final",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{broken-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\":\"final\",\"type\":\"final\",\"output\":{}}-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\":\"final\",\"output\":{\"x\":NaN}}-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"Type\":\"final\",\"output\":{}}-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\": \"tool_call\", \"call_id\": \"call-1\", \"name\": \"shell\", \"arguments\": {}}-policy_denied]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\": \"tool_call\", \"call_id\": \"call-1\", \"name\": \"read_fixture\", \"arguments\": {\"execute\": \"rm fake\"}}-policy_denied]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\":\"final\",\"output\":{},\"verified\":true}-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_repeat_call_stops_before_second_execution",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_role_and_effect_denials_are_terminal",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_turn_and_tool_budgets_are_not_model_controlled",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_timeout_interrupts_tool_and_restores_signal_handler",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_provider_deadline_is_enforced_not_just_passed_as_argument",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_tool_permission_exception_stops_without_leaking_secret",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_result_schema_and_snapshot_identity_guards",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_task_uuid_matches_result_schema_spelling[123456781234123412341234567890ab]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_task_uuid_matches_result_schema_spelling[{12345678-1234-1234-1234-1234567890ab}]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_deep_json_returns_locatable_failure_without_executing[final]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_deep_json_returns_locatable_failure_without_executing[tool_call]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[max_turns-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[max_turns-1.0]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[max_tool_calls-False]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[max_observation_bytes-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[timeout_s-nan]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[timeout_s-inf]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[timeout_s-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_task_rejects_noninteger_claim_versions[revision-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_task_rejects_noninteger_claim_versions[plan_version-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_task_rejects_noninteger_claim_versions[revision-1.0]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_argument_format_is_checked_before_execution",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_mutating_original_schema_cannot_expand_authorized_arguments",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_return_alias_and_observation_copies_cannot_rewrite_history",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_existing_alarm_is_preserved_without_starting_provider",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_declaration_rejects_external_schema_references[$ref-https://schemas.example.invalid/args.json]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_declaration_rejects_external_schema_references[$ref-file:///etc/passwd]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_declaration_rejects_external_schema_references[$dynamicRef-http://schemas.example.invalid/args.json]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_declaration_rejects_external_schema_references[$ref-../outside-schema.json]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_local_schema_fragment_reference_is_validated_without_external_resources",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_total_deadline_interrupts_schema_validation",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_mismatched_or_uncommitted_reservation_never_sends_http[call_id-27c78b75-3f5d-45d8-9c2e-4221a9dd45b8]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_mismatched_or_uncommitted_reservation_never_sends_http[logical_call_id-b93d8b80-63c7-47e7-858b-7315c516ae64]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_mismatched_or_uncommitted_reservation_never_sends_http[task_id-078e7bd8-1eb6-4f30-ae53-7abea835cc0c]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_mismatched_or_uncommitted_reservation_never_sends_http[run_id-65801dab-c5c1-40e9-aad1-db7acbfddaee]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_mismatched_or_uncommitted_reservation_never_sends_http[plan_version-2]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_mismatched_or_uncommitted_reservation_never_sends_http[committed-False]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_mismatched_or_uncommitted_reservation_never_sends_http[estimate_bound-value6]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_mismatched_or_uncommitted_reservation_never_sends_http[max_tokens-1]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_mismatched_or_uncommitted_reservation_never_sends_http[plan_version-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_mismatched_or_uncommitted_reservation_never_sends_http[plan_version-1.0]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_mismatched_or_uncommitted_reservation_never_sends_http[max_tokens-128.0]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_mismatched_or_uncommitted_reservation_never_sends_http[model-deepseek-reasoner]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_mismatched_or_uncommitted_reservation_never_sends_http[model_config_version-other.v1]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_mismatched_or_uncommitted_reservation_never_sends_http[price_version-other.v1]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_slow_response_bytes_cannot_extend_absolute_provider_deadline[headers]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_slow_response_bytes_cannot_extend_absolute_provider_deadline[body]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_outer_sdk_deadline_records_unknown_and_retains_reservation",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_case_allowlist_uses_exact_identity_before_reserve_or_http",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_credential_is_absent_from_configuration_repr",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_expired_admission_receipt_never_starts_http",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_valid_usage_is_preserved_when_the_model_decision_is_invalid",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_provider_boundaries/test_boundary_http_fixture_is_a_valid_success_response",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_structured_mock_keeps_toolcall_and_final_protocol",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_unauthorized_gates_send_zero_requests[changes0]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_unauthorized_gates_send_zero_requests[changes1]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_unauthorized_gates_send_zero_requests[changes2]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_unauthorized_gates_send_zero_requests[changes3]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_unauthorized_gates_send_zero_requests[changes4]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_unauthorized_gates_send_zero_requests[changes5]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_unauthorized_gates_send_zero_requests[changes6]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_missing_ledger_denies_even_with_paid_flags",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_known_not_processed_retries_with_distinct_physical_ids[429]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_known_not_processed_retries_with_distinct_physical_ids[503]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_ambiguous_sent_request_is_unknown_without_replay[response0]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_ambiguous_sent_request_is_unknown_without_replay[response1]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_ambiguous_sent_request_is_unknown_without_replay[disconnect]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_ambiguous_sent_request_is_unknown_without_replay[timeout]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_retries_are_bounded_by_attempt_count_and_ledger_budget",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_malformed_response_rejected_and_usage_not_invented[{\"choices\":]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_malformed_response_rejected_and_usage_not_invented[{\"choices\":[],\"choices\":[]}]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_malformed_response_rejected_and_usage_not_invented[{\"id\": \"stub-response\", \"object\": \"chat.completion\", \"model\": \"deepseek-chat\", \"choices\": [{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": \"{\\\"type\\\":\\\"final\\\",\\\"output\\\":{\\\"n\\\":NaN}}\"}, \"finish_reason\": \"stop\"}]}]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_malformed_response_rejected_and_usage_not_invented[{\"id\": \"stub-response\", \"object\": \"chat.completion\", \"model\": \"deepseek-chat\", \"choices\": [{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": \"{\\\"type\\\":\\\"final\\\",\\\"output\\\":null}\"}, \"finish_reason\": \"stop\"}]}]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_malformed_response_rejected_and_usage_not_invented[{\"id\": \"stub-response\", \"object\": \"chat.completion\", \"model\": \"deepseek-chat\", \"choices\": [{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": \"{\\\"type\\\":\\\"final\\\",\\\"output\\\":{\\\"answer\\\":7}}\"}, \"finish_reason\": \"stop\"}], \"usage\": {\"prompt_tokens\": true, \"completion_tokens\": 2}}]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_missing_usage_remains_unknown_even_for_success",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_response_limit_redirect_and_secret_redaction",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_native_toolcall_is_parsed_but_registry_denies_bad_arguments",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_from_env_is_default_off_and_does_not_expose_credential",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_response_model_and_choice_index_follow_frozen_config[change0]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_response_model_and_choice_index_follow_frozen_config[change1]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_providers/test_response_model_and_choice_index_follow_frozen_config[change2]",
+      "passed": true
+    }
+  ],
+  "scope": "P3-01 local bounded CAS and fenced publication; append-only migration 002; no P3-02 context authorization yet."
+}

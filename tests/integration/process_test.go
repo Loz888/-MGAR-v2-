@@ -5,6 +5,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/Loz888/-MGAR-v2-/internal/artifact"
 	"github.com/Loz888/-MGAR-v2-/internal/store"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"io"
@@ -49,6 +50,25 @@ func TestProcessHelper(t *testing.T) {
 	run := os.Getenv("MGAR_TEST_RUN")
 	ctx := context.Background()
 	switch kind {
+	case "artifact":
+		c, e := s.ClaimTask(ctx, run, store.WorkerIdentity{Owner: "publisher-" + os.Getenv("MGAR_TEST_ACTOR"), Role: "research"}, time.Minute)
+		if e != nil {
+			t.Fatal(e)
+		}
+		c, e = s.StartTask(ctx, c)
+		if e != nil {
+			t.Fatal(e)
+		}
+		cas, e := artifact.New(os.Getenv("MGAR_TEST_CAS_ROOT"))
+		if e != nil {
+			t.Fatal(e)
+		}
+		defer cas.Close()
+		a, e := s.PublishArtifact(ctx, c, cas, "finding", "text/plain", "fixture.v1", []byte("same cross-process bytes"))
+		if e != nil {
+			t.Fatal(e)
+		}
+		fmt.Println("RESULT published", a.ID, a.Hash)
 	case "claim":
 		_, e := s.ClaimTask(ctx, run, store.WorkerIdentity{Owner: "worker-" + os.Getenv("MGAR_TEST_ACTOR"), Role: "research"}, time.Minute)
 		if e == nil {

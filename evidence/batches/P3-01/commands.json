@@ -1,0 +1,113 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/artifact/...",
+      "./tests/integration/...",
+      "-run",
+      "Artifact|CAS"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P3-01/card-red.log",
+    "timestamp_utc": "2026-10-23T06:13:11.199593+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/artifact/...",
+      "./tests/integration/...",
+      "-run",
+      "Artifact|CAS"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-01/card-first-green.log",
+    "timestamp_utc": "2026-10-23T06:15:43.772546+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/artifact/...",
+      "./tests/integration/...",
+      "-run",
+      "Artifact|CAS"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-01/card-process-green.log",
+    "timestamp_utc": "2026-10-23T06:16:21.378617+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "run",
+      "./cmd/mgarmigrate"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-01/migrate-upgrade.log",
+    "timestamp_utc": "2026-10-23T06:17:35.094952+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-01/full-offline.log",
+    "timestamp_utc": "2026-10-23T06:18:01.334017+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/artifact/...",
+      "./tests/integration/...",
+      "-run",
+      "Artifact|CAS"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-01/card-final.log",
+    "timestamp_utc": "2026-10-23T06:19:03.672879+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "run",
+      "./cmd/mgarmigrate"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-01/migrate-final.log",
+    "timestamp_utc": "2026-10-23T06:19:04.063963+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-01/full-offline-final.log",
+    "timestamp_utc": "2026-10-23T06:19:30.384979+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-01/final-audit.log",
+    "timestamp_utc": "2026-10-23T06:20:49.489862+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/accept.sh",
+      "P3-01"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-01/export-offline.log",
+    "timestamp_utc": "2026-10-23T06:20:49.555525+00:00"
+  }
+]

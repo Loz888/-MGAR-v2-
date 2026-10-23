@@ -18,5 +18,5 @@ func main() {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
-	fmt.Println("migration 001 applied/verified")
+	fmt.Println("all registered migrations applied/verified")
 }

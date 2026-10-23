@@ -6,3 +6,6 @@ import _ "embed"
 //
 //go:embed 001_control.sql
 var ControlSQL string
+
+//go:embed 002_artifact_cas.sql
+var ArtifactSQL string

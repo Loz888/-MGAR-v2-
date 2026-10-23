@@ -35,3 +35,9 @@ Implementation: DESIGN_ONLY
 P0-01 的五项表格保持设计冻结快照。P2-01 新增 [agent_result.schema.json](agent_result.schema.json)，
 用于 SDK 未验证结果和有界循环事件的实际出口校验；它不能授予数据库状态或独立验证权限。
 Python SDK 的边界与运行说明见 [agent-sdk.md](../docs/agent-sdk.md)。
+
+## P3 运行时补充
+
+P3-01 的 CAS 发布在兼容 artifact.v1 的基础上绑定 producer_run_id、content_type 和
+tool_schema_version；Producer/计划/Claim 与不可变元数据由 Go 控制面校验。
+协议见 [Artifact 实现](../docs/artifact-context.md) 与 [ADR-0003](../docs/adr/ADR-0003.md)。
