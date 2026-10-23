@@ -5,15 +5,15 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"encoding/json"
-	"errors"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/Loz888/-MGAR-v2-/internal/artifact"
 	inputcontext "github.com/Loz888/-MGAR-v2-/internal/context"
+	"github.com/Loz888/-MGAR-v2-/internal/policy"
 	"github.com/Loz888/-MGAR-v2-/internal/testdb"
 	"github.com/Loz888/-MGAR-v2-/internal/verifier"
 	"github.com/jackc/pgx/v5"
@@ -196,55 +196,6 @@ func TestReexecSQLIndependentOracle(t *testing.T) {
 	}
 }
 
-// This implementation is restricted to the human-authored incident fixture.
-// P5-04 replaces the exercised runner with the Docker SandboxRunner.
-type trustedFixtureRunner struct {
-	t             *testing.T
-	allowedDigest string
-}
-
-func (r trustedFixtureRunner) Run(ctx context.Context, input verifier.TestInput) (verifier.TestExecution, error) {
-	r.t.Helper()
-	if input.Digest != r.allowedDigest {
-		return verifier.TestExecution{}, errors.New("not a frozen trusted fixture")
-	}
-	copyDir := r.t.TempDir()
-	for _, name := range []string{"go.mod", "aggregate.go", "aggregate_test.go"} {
-		body, e := os.ReadFile(filepath.Join(input.Directory, name))
-		if e != nil {
-			return verifier.TestExecution{}, e
-		}
-		if e = os.WriteFile(filepath.Join(copyDir, name), body, 0600); e != nil {
-			return verifier.TestExecution{}, e
-		}
-	}
-	digest, e := verifier.SourceDigest(copyDir)
-	if e != nil || digest != input.Digest {
-		return verifier.TestExecution{}, verifier.ErrUnverifiable
-	}
-	goExe, e := exec.LookPath("go")
-	if e != nil {
-		return verifier.TestExecution{}, e
-	}
-	version, e := exec.CommandContext(ctx, goExe, "version").Output()
-	if e != nil {
-		return verifier.TestExecution{}, e
-	}
-	cmd := exec.CommandContext(ctx, goExe, "test", "-count=1", "-json", "./...")
-	cmd.Dir = copyDir
-	cmd.Env = []string{"PATH=" + filepath.Dir(goExe) + ":/usr/bin:/bin", "HOME=" + copyDir, "GOCACHE=" + os.Getenv("GOCACHE"), "GOTOOLCHAIN=local", "GOPROXY=off", "GOSUMDB=off", "CGO_ENABLED=0", "GOMAXPROCS=2"}
-	output, e := cmd.CombinedOutput()
-	exit := 0
-	if e != nil {
-		var err *exec.ExitError
-		if !errors.As(e, &err) {
-			return verifier.TestExecution{}, e
-		}
-		exit = err.ExitCode()
-	}
-	r.t.Logf("actual trusted Go Test exit=%d output_sha256=%s", exit, artifact.Digest(output))
-	return verifier.TestExecution{Output: output, ExitCode: exit, Toolchain: strings.TrimSpace(string(version))}, nil
-}
 func fixedTestInput(t *testing.T, fixed bool) verifier.TestInput {
 	t.Helper()
 	dir := t.TempDir()
@@ -280,7 +231,7 @@ func TestReexecGoTestIndependentOracle(t *testing.T) {
 			zero, one := 0, 1
 			expected := verifier.Observation{ExitCode: &zero, Tests: &one}
 			recipe := verifier.Recipe{Method: "go_test", Command: "incident-tests.v1", InputDigest: input.Digest}
-			replay := verifier.Reexecutor{Tests: map[string]verifier.TestInput{recipe.Command: input}, Runner: trustedFixtureRunner{t, input.Digest}}
+			replay := verifier.Reexecutor{Tests: map[string]verifier.TestInput{recipe.Command: input}, Runner: oracleSandbox(t)}
 			raw, p, r := proofForObservation(t, "test_run", recipe, expected, expected)
 			v := (verifier.Engine{Replayer: replay}).Check(context.Background(), raw, p, r)
 			if v.Status != want {
@@ -304,4 +255,13 @@ func TestReexecGoTestIndependentOracle(t *testing.T) {
 			}
 		})
 	}
+}
+
+func oracleSandbox(t *testing.T) policy.Sandbox {
+	t.Helper()
+	raw, e := os.ReadFile("../../.local/sandbox-image.id")
+	if e != nil {
+		t.Fatal("NOT_RUN: isolated Docker image required")
+	}
+	return policy.Sandbox{Image: strings.TrimSpace(string(raw)), Timeout: 30 * time.Second, MaxOutput: 1024 * 1024}
 }

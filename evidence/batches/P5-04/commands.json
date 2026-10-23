@@ -1,0 +1,152 @@
+[
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--security-sandbox"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P5-04/card-red.log",
+    "timestamp_utc": "2026-10-23T18:00:01.690643+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/build-sandbox.sh"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P5-04/image-build.log",
+    "timestamp_utc": "2026-10-23T18:01:04.474180+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/policy/..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-04/compile.log",
+    "timestamp_utc": "2026-10-23T18:02:21.404787+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/build-sandbox.sh"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-04/image-build-local-state.log",
+    "timestamp_utc": "2026-10-23T18:02:52.015612+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--security-sandbox"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P5-04/sandbox-first.log",
+    "timestamp_utc": "2026-10-23T18:04:07.241822+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-sandbox-diagnose.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-04/docker-diagnosis.log",
+    "timestamp_utc": "2026-10-23T18:04:40.551612+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./tests/security",
+      "-run",
+      "^TestSandboxIsolation$"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P5-04/isolation-diagnosis.log",
+    "timestamp_utc": "2026-10-23T18:05:09.803211+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/build-sandbox.sh"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-04/image-entrypoint-permissions.log",
+    "timestamp_utc": "2026-10-23T18:05:32.326064+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--security-sandbox"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-04/sandbox-second.log",
+    "timestamp_utc": "2026-10-23T18:05:53.886708+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--security-sandbox"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P5-04/sandbox-final.log",
+    "timestamp_utc": "2026-10-23T18:07:27.171870+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--security-sandbox"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-04/sandbox-startup-budget.log",
+    "timestamp_utc": "2026-10-23T18:09:15.490769+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-04/full-offline.log",
+    "timestamp_utc": "2026-10-23T18:10:22.650643+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-04/go-test.log",
+    "timestamp_utc": "2026-10-23T18:11:51.382871+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-04/go-build.log",
+    "timestamp_utc": "2026-10-23T18:11:52.300820+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-04/final-check.log",
+    "timestamp_utc": "2026-10-23T18:11:52.398191+00:00"
+  }
+]

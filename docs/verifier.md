@@ -39,3 +39,7 @@ SandboxRunner 返回由执行边界收集的真实退出码与 Go JSON events；
 run/pass、包完成、无 skip。单有 exit=0 不够。P5-02 仅在宿主上执行明确冻结的人工作例，
 没有对任意不可信代码提供宿主执行适配器。P5-04 必须接入无凭据 Docker 并重跑本卡用例。
 任意随机/时间依赖测试不保证 bitwise 重放；没有固定输入即不可验证。
+
+P5-04 replaces the P5-02 test-only host runner with `policy.Sandbox` in the
+independent Go Test oracle tests. Build and isolation details are in
+[the sandbox contract](security/sandbox.md). No untrusted test has a host fallback.

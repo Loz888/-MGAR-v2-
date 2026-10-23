@@ -1,0 +1,3 @@
+{
+  "stdout": "ERROR: mkdir /home/agent/.docker/buildx: read-only file system\n"
+}

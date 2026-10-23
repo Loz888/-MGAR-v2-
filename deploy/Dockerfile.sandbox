@@ -1,0 +1,11 @@
+# Reproducible inputs are the locally pinned Go toolchain and static entrypoint.
+# Build with scripts/build-sandbox.sh; no network or credentials enter the image.
+FROM scratch
+COPY go /usr/local/go
+COPY entrypoint /mgar-sandbox
+COPY tmp /tmp
+ENV PATH=/usr/local/go/bin GOROOT=/usr/local/go GOCACHE=/opt/gocache GOTOOLCHAIN=local GOPROXY=off GOSUMDB=off CGO_ENABLED=0 GOMAXPROCS=2
+RUN ["/usr/local/go/bin/go", "build", "testing", "net", "encoding/json", "os/exec"]
+USER 65532:65532
+WORKDIR /tmp
+ENTRYPOINT ["/mgar-sandbox"]

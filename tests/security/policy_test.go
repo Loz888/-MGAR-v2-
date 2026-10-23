@@ -21,6 +21,9 @@ import (
 )
 
 func gatewayFixture(t *testing.T) (*store.Store, store.TaskClaim, *artifact.CAS) {
+	return gatewayRoleFixture(t, "research")
+}
+func gatewayRoleFixture(t *testing.T, role string) (*store.Store, store.TaskClaim, *artifact.CAS) {
 	t.Helper()
 	s := testdb.New(t)
 	ctx := context.Background()
@@ -35,14 +38,14 @@ func gatewayFixture(t *testing.T) (*store.Store, store.TaskClaim, *artifact.CAS)
 		t.Fatal(e)
 	}
 	oc := store.OrchestratorClaim{Owner: "controller", Epoch: 1}
-	p := planner.Proposal{SchemaVersion: "plan.v1", Rationale: "synthetic", Nodes: []planner.Node{{Key: "A", Role: "research", Goal: "inspect", RequiredInputs: []string{}, OutputKind: "finding"}}, Edges: []planner.Edge{}}
+	p := planner.Proposal{SchemaVersion: "plan.v1", Rationale: "synthetic", Nodes: []planner.Node{{Key: "A", Role: role, Goal: "inspect", RequiredInputs: []string{}, OutputKind: "finding"}}, Edges: []planner.Edge{}}
 	if _, e := s.ProposeAndCommit(ctx, run, oc, p); e != nil {
 		t.Fatal(e)
 	}
 	if _, e := s.RefreshReady(ctx, run, oc); e != nil {
 		t.Fatal(e)
 	}
-	c, e := s.ClaimTask(ctx, run, store.WorkerIdentity{Owner: "worker", Role: "research"}, 5*time.Minute)
+	c, e := s.ClaimTask(ctx, run, store.WorkerIdentity{Owner: "worker", Role: role}, 5*time.Minute)
 	if e != nil {
 		t.Fatal(e)
 	}
@@ -51,7 +54,7 @@ func gatewayFixture(t *testing.T) (*store.Store, store.TaskClaim, *artifact.CAS)
 		t.Fatal(e)
 	}
 	t.Cleanup(func() { _ = cas.Close() })
-	if _, e = s.BuildSnapshot(ctx, c, "mock.v1", "research.v1", cas); e != nil {
+	if _, e = s.BuildSnapshot(ctx, c, "mock.v1", role+".v1", cas); e != nil {
 		t.Fatal(e)
 	}
 	c, e = s.StartTask(ctx, c)

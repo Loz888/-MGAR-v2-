@@ -2,7 +2,11 @@
 set -euo pipefail
 cd -- "$(dirname -- "$0")/.."
 source scripts/dev-env.sh
-[[ "${1:-}" == --offline ]] || { echo 'only --offline supported' >&2; exit 2; }
+if [[ "${1:-}" == --security-sandbox ]]; then
+  go test -count=1 -v ./internal/policy/... ./tests/security/... ./tests/e2e/... -run 'Sandbox|ReexecGoTest'
+  exit 0
+fi
+[[ "${1:-}" == --offline ]] || { echo 'use --offline or --security-sandbox' >&2; exit 2; }
 bash scripts/preflight.sh
 mkdir -p .local
 rm -f .local/offline-current
