@@ -1,0 +1,3 @@
+{
+  "stdout": "Resolved 23 packages in 454ms\n   Building mgar-agents @ file:///workspace/-MGAR-v2-\nDownloading psycopg-binary (4.2MiB)\n Downloaded psycopg-binary\n      Built mgar-agents @ file:///workspace/-MGAR-v2-\nPrepared 4 packages in 583ms\nUninstalled 1 package in 0.33ms\nInstalled 4 packages in 1ms\n ~ mgar-agents==0.0.1 (from file:///workspace/-MGAR-v2-)\n + psycopg==3.2.10\n + psycopg-binary==3.2.10\n + sqlglot==27.14.0\n"
+}

@@ -1,0 +1,12 @@
+{
+  "scope": "P2-04 DataAgent, bounded AST SQL policy and real independent PostgreSQL reader fixtures only.",
+  "known_limitations": [
+    "Only the guarded loopback synthetic database and independently generated per-fixture schemas/Reader LOGIN roles were used; no production database access or paid model calls.",
+    "Recorded SQL, bound parameters, PostgreSQL snapshot, exact typed cells and fixture hashes establish observation provenance, not the semantic truth of a model summary. Findings remain verified=false.",
+    "Candidate artifact:// references are producer-specific and persisted=false. Artifact CAS, independent Verifier and durable role handoff remain later tasks.",
+    "Reader ACL and read-only transactions were independently tested, including direct ACL probes with session read-only disabled. The local trusted adapter is not the future authenticated Gateway/Sandbox.",
+    "Actual parser-bypass and expired-before-connect failures are retained together with their passing regressions. Direct query deadlines use connection/statement limits; SDK adds the Linux main-thread outer deadline.",
+    "Evidence captured before local commit; delivery SHA is in Git history. Coding commits have not been pushed."
+  ],
+  "unverified": []
+}

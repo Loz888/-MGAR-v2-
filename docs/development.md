@@ -105,3 +105,12 @@ python -m pytest -q tests/e2e/research_test.py tests/security/test_research_scop
 ```
 
 这些检查实际读取合成文档，Mock 只替代模型决策；没有联网检索或模型效果实验。
+
+DataAgent 专项检查需要已启动的合成 PostgreSQL：
+
+```bash
+source scripts/dev-env.sh
+python -m pytest -q tests/e2e/data_test.py tests/security/test_sql_policy.py
+```
+
+测试只创建和清理自己拥有的随机 schema 与 Reader role，不删除其他数据库或业务数据。

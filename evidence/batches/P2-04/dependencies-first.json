@@ -1,0 +1,5 @@
+{
+  "observed_stdout": "error: unexpected argument '--exact' found\n  tip: a similar argument exists: '--active'\nUsage: uv add --active <PACKAGES|--requirements <REQUIREMENTS>>\nFor more information, try '--help'.\n",
+  "exit_code": 2,
+  "note": "Observed initial exec_command result; exact version specifiers were already present, so unsupported flag removed for successful retry."
+}

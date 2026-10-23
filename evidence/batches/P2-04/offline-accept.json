@@ -1,0 +1,86 @@
+{
+  "card_id": "P2-04",
+  "status": "PASS",
+  "git_commit": null,
+  "base_git_commit": "2a80056f36aad3da6d9b1be21de66d604c6901ed",
+  "scope": "offline enabled suites only; task-specific assertions must also pass",
+  "environment": {
+    "os": "linux",
+    "go": "go version go1.27.3 linux/amd64",
+    "python": "3.12.14"
+  },
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 115,
+      "passed": 115,
+      "failed_events": 0,
+      "skipped": 0
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 222,
+      "passed": 222,
+      "failed": 0,
+      "skipped_or_xfailed": 0
+    },
+    "status": "PASS"
+  },
+  "positive_assertions": [
+    {
+      "name": "all_enabled_tests_completed",
+      "passed": true
+    }
+  ],
+  "negative_assertions": [],
+  "known_limitations": [
+    "No paid model or production operations; this report does not replace task-specific acceptance."
+  ],
+  "unverified": [],
+  "commands": [
+    {
+      "command": "bash scripts/test.sh --offline",
+      "exit_code": 0,
+      "log_path": "evidence/batches/P2-04/offline-report.json.json"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "evidence/batches/P2-04/offline-pytest.log.json",
+      "sha256": "ea246ea02cf6e67966956c65e5f1a707a7a85d92b13337e9e508d62a9d771bb4"
+    },
+    {
+      "path": "evidence/batches/P2-04/offline-fingerprint.json",
+      "sha256": "f786c812c5ef810f9185b20520add88c8e080de4367c21217db55822b1042659"
+    },
+    {
+      "path": "evidence/batches/P2-04/offline-mypy.log.json",
+      "sha256": "b23f9d051fd76877dcb09d060aa95baac02bd4be6206e53eff372480f3aa95cc"
+    },
+    {
+      "path": "evidence/batches/P2-04/offline-ruff.log.json",
+      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+    },
+    {
+      "path": "evidence/batches/P2-04/offline-pytest.xml.json",
+      "sha256": "ecf184b4c0e2f52d2974ec6e9c1caea63779acda0d92fb99e9f440bf99a62cd7"
+    },
+    {
+      "path": "evidence/batches/P2-04/offline-report.json.json",
+      "sha256": "7688e0a9081a8454c66734d9db5777dcd6db52873e0de52313f78d551cd50771"
+    },
+    {
+      "path": "evidence/batches/P2-04/offline-docs.json.json",
+      "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+    },
+    {
+      "path": "evidence/batches/P2-04/offline-vet.log.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P2-04/offline-go.json.json",
+      "sha256": "50453fa33abf2bdc5b72b22d89d55692f0e009becd210e023747111286acbb2f"
+    }
+  ],
+  "timestamp_utc": "2026-10-23T01:28:20.068672+00:00"
+}

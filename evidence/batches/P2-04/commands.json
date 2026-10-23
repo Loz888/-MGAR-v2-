@@ -1,0 +1,315 @@
+[
+  {
+    "command": "source scripts/dev-env.sh && uv add --exact 'psycopg[binary]==3.2.10' 'sqlglot==27.14.0'",
+    "exit_code": 2,
+    "log_path": "evidence/batches/P2-04/dependencies-first.json",
+    "origin": "Initial root exec_command output retained without rerunning known-invalid option",
+    "timestamp_utc": "2026-10-23T01:14:44.674226+00:00"
+  },
+  {
+    "command": [
+      "uv",
+      "add",
+      "psycopg[binary]==3.2.10",
+      "sqlglot==27.14.0"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/dependencies.log",
+    "timestamp_utc": "2026-10-23T01:14:02.082054+00:00"
+  },
+  {
+    "command": [
+      "uv",
+      "sync",
+      "--frozen"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/dependencies-frozen.log",
+    "timestamp_utc": "2026-10-23T01:27:40.437729+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/e2e/data_test.py",
+      "tests/security/test_sql_policy.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/card-test.log",
+    "timestamp_utc": "2026-10-23T01:27:41.330961+00:00"
+  },
+  {
+    "label": "red",
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/e2e/data_test.py",
+      "tests/security/test_sql_policy.py"
+    ],
+    "environment_initialization": "source scripts/dev-env.sh",
+    "exit_code": 4,
+    "log_path": "evidence/batches/P2-04/delegated-p2_data-0.json",
+    "executor": "/root/p2_data",
+    "timestamp_utc": "2026-10-23T01:17:26.249574+00:00",
+    "origin": "Imported actual delegated run, not a second root execution"
+  },
+  {
+    "label": "first-green",
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/e2e/data_test.py",
+      "tests/security/test_sql_policy.py"
+    ],
+    "environment_initialization": "source scripts/dev-env.sh",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/delegated-p2_data-1.json",
+    "executor": "/root/p2_data",
+    "timestamp_utc": "2026-10-23T01:20:11.561860+00:00",
+    "origin": "Imported actual delegated run, not a second root execution"
+  },
+  {
+    "label": "ruff-first",
+    "command": [
+      "ruff",
+      "check",
+      "agentkit/mgar_agents/data",
+      "tests/conftest.py",
+      "tests/e2e/data_test.py",
+      "tests/security/test_sql_policy.py"
+    ],
+    "environment_initialization": "source scripts/dev-env.sh",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P2-04/delegated-p2_data-2.json",
+    "executor": "/root/p2_data",
+    "timestamp_utc": "2026-10-23T01:20:18.330003+00:00",
+    "origin": "Imported actual delegated run, not a second root execution"
+  },
+  {
+    "label": "mypy-first",
+    "command": [
+      "mypy"
+    ],
+    "environment_initialization": "source scripts/dev-env.sh",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P2-04/delegated-p2_data-3.json",
+    "executor": "/root/p2_data",
+    "timestamp_utc": "2026-10-23T01:20:20.439528+00:00",
+    "origin": "Imported actual delegated run, not a second root execution"
+  },
+  {
+    "label": "green",
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/e2e/data_test.py",
+      "tests/security/test_sql_policy.py"
+    ],
+    "environment_initialization": "source scripts/dev-env.sh",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/delegated-p2_data-4.json",
+    "executor": "/root/p2_data",
+    "timestamp_utc": "2026-10-23T01:21:26.847242+00:00",
+    "origin": "Imported actual delegated run, not a second root execution"
+  },
+  {
+    "label": "mypy-green",
+    "command": [
+      "mypy"
+    ],
+    "environment_initialization": "source scripts/dev-env.sh",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/delegated-p2_data-5.json",
+    "executor": "/root/p2_data",
+    "timestamp_utc": "2026-10-23T01:21:27.474905+00:00",
+    "origin": "Imported actual delegated run, not a second root execution"
+  },
+  {
+    "label": "ruff-review-failure",
+    "command": [
+      "ruff",
+      "check",
+      "agentkit/mgar_agents/data",
+      "tests/conftest.py",
+      "tests/e2e/data_test.py",
+      "tests/security/test_sql_policy.py",
+      "tests/security/test_data_boundaries.py"
+    ],
+    "environment_initialization": "source scripts/dev-env.sh",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P2-04/delegated-p2_data-6.json",
+    "executor": "/root/p2_data",
+    "timestamp_utc": "2026-10-23T01:23:41.853145+00:00",
+    "origin": "Imported actual delegated run, not a second root execution"
+  },
+  {
+    "label": "reviewed-green",
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/e2e/data_test.py",
+      "tests/security/test_sql_policy.py",
+      "tests/security/test_data_boundaries.py"
+    ],
+    "environment_initialization": "source scripts/dev-env.sh",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/delegated-p2_data-7.json",
+    "executor": "/root/p2_data",
+    "timestamp_utc": "2026-10-23T01:22:35.788284+00:00",
+    "origin": "Imported actual delegated run, not a second root execution"
+  },
+  {
+    "label": "final-tests",
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/e2e/data_test.py",
+      "tests/security/test_sql_policy.py",
+      "tests/security/test_data_boundaries.py"
+    ],
+    "environment_initialization": "source scripts/dev-env.sh",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/delegated-p2_data-8.json",
+    "executor": "/root/p2_data",
+    "timestamp_utc": "2026-10-23T01:24:45.361865+00:00",
+    "origin": "Imported actual delegated run, not a second root execution"
+  },
+  {
+    "label": "final-ruff",
+    "command": [
+      "ruff",
+      "check",
+      "agentkit/mgar_agents/data",
+      "tests/conftest.py",
+      "tests/e2e/data_test.py",
+      "tests/security/test_sql_policy.py",
+      "tests/security/test_data_boundaries.py"
+    ],
+    "environment_initialization": "source scripts/dev-env.sh",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/delegated-p2_data-9.json",
+    "executor": "/root/p2_data",
+    "timestamp_utc": "2026-10-23T01:25:44.778473+00:00",
+    "origin": "Imported actual delegated run, not a second root execution"
+  },
+  {
+    "label": "final-mypy",
+    "command": [
+      "mypy"
+    ],
+    "environment_initialization": "source scripts/dev-env.sh",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/delegated-p2_data-10.json",
+    "executor": "/root/p2_data",
+    "timestamp_utc": "2026-10-23T01:25:45.226148+00:00",
+    "origin": "Imported actual delegated run, not a second root execution"
+  },
+  {
+    "label": "diff",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/delegated-p2_data-11.json",
+    "executor": "/root/p2_data",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:26:52.455095+00:00"
+  },
+  {
+    "phase": "first_boundary",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/security/test_data_boundaries.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/delegated-p2_provider_review-first_boundary.json",
+    "executor": "/root/p2_provider_review",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:21:07.126902+00:00"
+  },
+  {
+    "phase": "parser_red",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/security/test_data_boundaries.py",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P2-04/delegated-p2_provider_review-parser_red.json",
+    "executor": "/root/p2_provider_review",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:22:15.563994+00:00"
+  },
+  {
+    "phase": "deadline_red",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/security/test_data_boundaries.py",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P2-04/delegated-p2_provider_review-deadline_red.json",
+    "executor": "/root/p2_provider_review",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:23:59.337361+00:00"
+  },
+  {
+    "phase": "final_boundary",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/security/test_data_boundaries.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/delegated-p2_provider_review-final_boundary.json",
+    "executor": "/root/p2_provider_review",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:25:07.626099+00:00"
+  },
+  {
+    "phase": "ruff",
+    "command": "source scripts/dev-env.sh && ruff check tests/security/test_data_boundaries.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/delegated-p2_provider_review-ruff.json",
+    "executor": "/root/p2_provider_review",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:24:19.177577+00:00"
+  },
+  {
+    "phase": "diff",
+    "command": "git diff --check",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/delegated-p2_provider_review-diff.json",
+    "executor": "/root/p2_provider_review",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:25:27.714308+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/full-offline.log",
+    "timestamp_utc": "2026-10-23T01:28:03.176329+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/final-audit.log",
+    "timestamp_utc": "2026-10-23T01:28:20.008830+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/accept.sh",
+      "P2-04"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-04/export-offline.log",
+    "timestamp_utc": "2026-10-23T01:28:20.073091+00:00"
+  }
+]

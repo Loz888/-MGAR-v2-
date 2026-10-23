@@ -2,7 +2,11 @@
 name = "mgar-agents"
 version = "0.0.1"
 requires-python = ">=3.12,<3.13"
-dependencies = ["jsonschema==4.25.1"]
+dependencies = [
+    "jsonschema==4.25.1",
+    "psycopg[binary]==3.2.10",
+    "sqlglot==27.14.0",
+]
 
 [build-system]
 requires = ["setuptools==80.9.0"]

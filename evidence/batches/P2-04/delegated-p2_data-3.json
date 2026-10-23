@@ -1,0 +1,3 @@
+{
+  "raw_text": "agentkit/mgar_agents/data/reader.py:103: error: \"Expression\" has no attribute \"limit\"  [attr-defined]\nFound 1 error in 1 file (checked 17 source files)\n"
+}
