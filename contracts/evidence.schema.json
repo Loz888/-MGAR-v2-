@@ -2,18 +2,181 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.invalid/mgar/v2/evidence.schema.json",
   "title": "MGAR Evidence Claim V1",
-  "type": "object", "additionalProperties": false,
-  "required": ["schema_version", "claim", "kind", "artifact_id", "content_sha256", "input_snapshot_id", "tool_version", "execution_status"],
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "claim",
+    "kind",
+    "artifact_id",
+    "content_sha256",
+    "input_snapshot_id",
+    "tool_version",
+    "execution_status",
+    "producer_run_id",
+    "producer_task_id",
+    "source_plan_version",
+    "replay_recipe",
+    "observed",
+    "expected_observation"
+  ],
   "properties": {
-    "schema_version": {"const": "evidence.v1"},
-    "claim": {"type": "string", "minLength": 1, "maxLength": 4096},
-    "kind": {"type": "string", "enum": ["test_run", "sql_result", "file_hash", "log_excerpt", "quote", "metric"]},
-    "artifact_id": {"type": "string", "format": "uuid"},
-    "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-    "input_snapshot_id": {"type": "string", "minLength": 1},
-    "tool_version": {"type": "string", "minLength": 1},
-    "execution_status": {"type": "string", "enum": ["succeeded", "failed", "unknown"]},
-    "replay_recipe": {"type": "object"},
-    "observed": {"type": "object"}
+    "schema_version": {
+      "const": "evidence.v1"
+    },
+    "claim": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "test_run",
+        "sql_result",
+        "file_hash",
+        "log_excerpt",
+        "quote",
+        "metric"
+      ]
+    },
+    "artifact_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "content_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "input_snapshot_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "tool_version": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._:-]{1,128}$"
+    },
+    "execution_status": {
+      "type": "string",
+      "enum": [
+        "succeeded",
+        "failed",
+        "unknown"
+      ]
+    },
+    "replay_recipe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method"
+      ],
+      "properties": {
+        "method": {
+          "enum": [
+            "cas_hash",
+            "quote",
+            "go_test",
+            "readonly_sql"
+          ]
+        },
+        "source_artifact_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "source_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_plan_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "input_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "dataset_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._:-]{1,128}$"
+        },
+        "command_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._:-]{1,128}$"
+        }
+      }
+    },
+    "observed": {
+      "$ref": "#/$defs/observation"
+    },
+    "producer_run_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "producer_task_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "source_plan_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "expected_observation": {
+      "$ref": "#/$defs/observation"
+    }
+  },
+  "$defs": {
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "quote": {
+          "type": "string",
+          "maxLength": 4096
+        },
+        "exit_code": {
+          "type": "integer",
+          "minimum": -256,
+          "maximum": 255
+        },
+        "tests": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "row_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "rows": {
+          "type": "array",
+          "maxItems": 256,
+          "items": {
+            "type": "array",
+            "maxItems": 32,
+            "items": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    }
   }
 }

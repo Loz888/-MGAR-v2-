@@ -26,7 +26,7 @@
 | [P4-03](tasks/P4-03.md) | P4 | Fan-in Merge 与冲突/失败传播 | P4-02 | PASS | `evidence/batches/P4-03/accept.json` |
 | [P4-04](tasks/P4-04.md) | P4 | 跨 Agent 故障注入与恢复扫描 | P4-03 | PASS | `evidence/batches/P4-04/accept.json` |
 | [P4-05](tasks/P4-05.md) | P4 | 未知模型副作用与验证后收尾恢复 | P4-04 | PASS | `evidence/batches/P4-05/accept.json` |
-| [P5-01](tasks/P5-01.md) | P5 | 证据契约与独立 Verifier | P4-05 | TODO | `evidence/batches/P5-01/accept.json` |
+| [P5-01](tasks/P5-01.md) | P5 | 证据契约与独立 Verifier | P4-05 | PASS | `evidence/batches/P5-01/accept.json` |
 | [P5-02](tasks/P5-02.md) | P5 | 证据重执行与独立 Oracle | P5-01 | TODO | `evidence/batches/P5-02/accept.json` |
 | [P5-03](tasks/P5-03.md) | P5 | Tool Gateway 与 Capability Policy | P5-02 | TODO | `evidence/batches/P5-03/accept.json` |
 | [P5-04](tasks/P5-04.md) | P5 | 真正隔离的 Sandbox Executor | P5-03 | TODO | `evidence/batches/P5-04/accept.json` |
@@ -64,3 +64,5 @@ P0-01 的原始未提交快照与失败记录保留于 `evidence/batches/P0-01/a
 复查与缺陷映射见 [P0～P3 工程复查](docs/audits/P0-P3.md)，不进入 P4。
 
 **P4 授权：** 用户要求完成 P4，按 P4-01～P4-05 顺序逐卡验收；不进入 P5，不启用付费模型。
+
+**P5 授权：** 用户继续 P5，按 P5-01～P5-05 依赖顺序逐卡实施和验收；不进入 P6，不启用付费模型。

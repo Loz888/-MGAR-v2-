@@ -22,7 +22,7 @@ Implementation: DESIGN_ONLY
 | [plan.schema.json](plan.schema.json) | plan.v1 | schema_version, base_version, nodes, edges, rationale | P1-02（未实现） |
 | [artifact.schema.json](artifact.schema.json) | artifact.v1 | schema_version, artifact_id, kind, content_sha256, byte_length, producer_task_id, source_plan_version, storage_uri | P3-01（未实现） |
 | [context_snapshot.schema.json](context_snapshot.schema.json) | context.v1 | schema_version, task_id, plan_version, model_config_version, tool_policy_version, artifacts | P3-02（未实现） |
-| [evidence.schema.json](evidence.schema.json) | evidence.v1 | schema_version, claim, kind, artifact_id, content_sha256, input_snapshot_id, tool_version, execution_status | P5-01（未实现） |
+| [evidence.schema.json](evidence.schema.json) | evidence.v1 | schema_version, claim, kind, artifact_id, content_sha256, input_snapshot_id, tool_version, execution_status, producer_run_id, producer_task_id, source_plan_version, replay_recipe, observed, expected_observation | P5-01（实际校验已实现） |
 | [verdict.schema.json](verdict.schema.json) | verdict.v1 | schema_version, artifact_id, status, checks, verifier_version | P5-01（未实现） |
 
 实体和术语见 [架构](../docs/architecture.md)，CLI/内部接口与状态转移见 [协议目录](../docs/protocols.md)，
@@ -41,3 +41,9 @@ Python SDK 的边界与运行说明见 [agent-sdk.md](../docs/agent-sdk.md)。
 P3-01 的 CAS 发布在兼容 artifact.v1 的基础上绑定 producer_run_id、content_type 和
 tool_schema_version；Producer/计划/Claim 与不可变元数据由 Go 控制面校验。
 协议见 [Artifact 实现](../docs/artifact-context.md) 与 [ADR-0003](../docs/adr/ADR-0003.md)。
+
+## P5 运行时补充
+
+P5-01 按 07.F 补全 evidence.v1 的生产者、重放条件与预期观察字段，并实现严格类型和来源校验。
+这补全此前未投入运行的设计样本；历史 P0 快照保存在 Git，细节见 ADR-0006。
+Verdict 的 checks 不接受 Agent/Reviewer 自行宣告通过。

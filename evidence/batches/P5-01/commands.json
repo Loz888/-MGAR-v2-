@@ -1,0 +1,107 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/verifier/...",
+      "./tests/integration/...",
+      "-run",
+      "Verifier|Evidence"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P5-01/card-red.log",
+    "timestamp_utc": "2026-10-23T16:25:05.579185+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/verifier/...",
+      "./tests/integration/...",
+      "-run",
+      "Verifier|Evidence"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-01/card-first.log",
+    "timestamp_utc": "2026-10-23T16:29:57.990400+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./tests/integration/...",
+      "-run",
+      "^TestVerifierWorkerCredentialCannotWriteVerdict$"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-01/credential-test.log",
+    "timestamp_utc": "2026-10-23T16:31:40.178576+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P5-01/full-offline.log",
+    "timestamp_utc": "2026-10-23T16:32:33.901941+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_plan_docs.py",
+      "tests/unit/test_evidence_contract.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-01/docs-schema-green.log",
+    "timestamp_utc": "2026-10-23T16:33:40.004628+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-01/full-offline-final.log",
+    "timestamp_utc": "2026-10-23T16:34:32.465942+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-01/go-test.log",
+    "timestamp_utc": "2026-10-23T16:35:08.298019+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-01/go-build.log",
+    "timestamp_utc": "2026-10-23T16:35:09.058026+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-01/final-check.log",
+    "timestamp_utc": "2026-10-23T16:35:09.137334+00:00"
+  }
+]

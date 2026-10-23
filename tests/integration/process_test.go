@@ -10,6 +10,7 @@ import (
 	inputcontext "github.com/Loz888/-MGAR-v2-/internal/context"
 	"github.com/Loz888/-MGAR-v2-/internal/planner"
 	"github.com/Loz888/-MGAR-v2-/internal/store"
+	"github.com/Loz888/-MGAR-v2-/internal/verifier"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"io"
 	"os"
@@ -53,6 +54,25 @@ func TestProcessHelper(t *testing.T) {
 	run := os.Getenv("MGAR_TEST_RUN")
 	ctx := context.Background()
 	switch kind {
+	case "verifier":
+		var evidence verifier.Evidence
+		var requirement verifier.Requirement
+		if e := json.Unmarshal([]byte(os.Getenv("MGAR_TEST_EVIDENCE")), &evidence); e != nil {
+			t.Fatal(e)
+		}
+		if e := json.Unmarshal([]byte(os.Getenv("MGAR_TEST_REQUIREMENT")), &requirement); e != nil {
+			t.Fatal(e)
+		}
+		cas, e := artifact.New(os.Getenv("MGAR_TEST_CAS_ROOT"))
+		if e != nil {
+			t.Fatal(e)
+		}
+		defer cas.Close()
+		v, e := s.VerifyArtifact(ctx, run, store.OrchestratorClaim{Owner: "orchestrator", Epoch: 1, Revision: 0}, evidence.ArtifactID, []byte(os.Getenv("MGAR_TEST_EVIDENCE")), requirement, cas, verifier.Engine{})
+		if e != nil {
+			t.Fatal(e)
+		}
+		fmt.Println("RESULT", v.Status)
 	case "merge":
 		var claim store.TaskClaim
 		if e := json.Unmarshal([]byte(os.Getenv("MGAR_TEST_CLAIM")), &claim); e != nil {

@@ -202,7 +202,7 @@ def validate(root):
                 len(matches) == 1 and len(matches[0]) == 4
                 and matches[0][1] == version
                 and matches[0][2].split(", ") == required
-                and "未实现" in matches[0][3]
+                and re.fullmatch(r"P[0-8]-[0-9]{2}（(?:未实现|实际校验已实现)）", matches[0][3]) is not None
                 and schema["$schema"] == "https://json-schema.org/draft/2020-12/schema"
                 and schema["type"] == "object" and schema["additionalProperties"] is False
                 and "schema_version" in required

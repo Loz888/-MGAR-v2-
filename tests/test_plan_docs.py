@@ -155,6 +155,10 @@ class PlanDocsTests(unittest.TestCase):
         self.replace("contracts/README.md", "input_snapshot_id, tool_version", "tool_version")
         self.run_validator("schema:evidence")
 
+    def test_schema_index_rejects_unknown_implementation_status(self):
+        self.replace("contracts/README.md", "P5-01（实际校验已实现）", "P5-01（assume-pass）")
+        self.run_validator("schema:evidence")
+
     def test_broken_local_link_is_rejected(self):
         self.replace("docs/architecture.md", "../01_PROJECT_CHARTER.md", "../missing-charter.md")
         self.run_validator("local-links")
