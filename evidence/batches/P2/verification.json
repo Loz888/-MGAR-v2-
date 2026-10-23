@@ -1,0 +1,18 @@
+{
+  "command": "source scripts/dev-env.sh && python /tmp/mgar-p2-stage.py",
+  "exit_code": 0,
+  "status": "PASS",
+  "verified_delivery_commit": "9ad3f8ab176dec69d6b3f10604a895cfff51507c",
+  "historical_artifact_hashes_verified": 228,
+  "source_fingerprint_matches_final_test_run": true,
+  "all_P2_cards_pass": true,
+  "all_P3_cards_todo": true,
+  "test_summary": {
+    "go_passed": 115,
+    "python_passed": 267,
+    "failed": 0,
+    "skipped_or_xfailed": 0
+  },
+  "method": "Read each accept.json at its exact delivery commit and verify its artifact hashes with git show; compare the current source fingerprint with P2-05's actual offline test fingerprint; check queue statuses and the three real Action Go exits; scan Git candidates for the actual local database credential without printing it.",
+  "metadata_note": "Stage summary and this verification are evidence-only additions after the code commit; they do not change tested source inputs."
+}

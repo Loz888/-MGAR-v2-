@@ -1,0 +1,289 @@
+{
+  "stage": "P2",
+  "status": "PASS",
+  "scope": "Authorized P2-01 through P2-05 only; no P3 implementation.",
+  "code_commit": "9ad3f8ab176dec69d6b3f10604a895cfff51507c",
+  "source_fingerprint": "7dd78017789ad54c115edf76afe0f2d243df616c394afb4da42a649e6bb63de8",
+  "cards": [
+    {
+      "card_id": "P2-01",
+      "status": "PASS",
+      "delivery_commit": "71c771595bb18a4b17dcb1a9e31fba6428de0afb",
+      "acceptance": "evidence/batches/P2-01/accept.json",
+      "test_summary_at_card_delivery": {
+        "go": {
+          "status": "PASS",
+          "tests": 115,
+          "passed": 115,
+          "failed_events": 0,
+          "skipped": 0
+        },
+        "python": {
+          "status": "PASS",
+          "tests": 78,
+          "passed": 78,
+          "failed": 0,
+          "skipped_or_xfailed": 0
+        },
+        "status": "PASS"
+      },
+      "note": "Historical evidence verified at its delivery commit; final regression is P2-05."
+    },
+    {
+      "card_id": "P2-02",
+      "status": "PASS",
+      "delivery_commit": "e1f438ed22d88b5d54ac09af291598e57ef04ac8",
+      "acceptance": "evidence/batches/P2-02/accept.json",
+      "test_summary_at_card_delivery": {
+        "go": {
+          "status": "PASS",
+          "tests": 115,
+          "passed": 115,
+          "failed_events": 0,
+          "skipped": 0
+        },
+        "python": {
+          "status": "PASS",
+          "tests": 128,
+          "passed": 128,
+          "failed": 0,
+          "skipped_or_xfailed": 0
+        },
+        "status": "PASS"
+      },
+      "note": "Historical evidence verified at its delivery commit; final regression is P2-05."
+    },
+    {
+      "card_id": "P2-03",
+      "status": "PASS",
+      "delivery_commit": "2a80056f36aad3da6d9b1be21de66d604c6901ed",
+      "acceptance": "evidence/batches/P2-03/accept.json",
+      "test_summary_at_card_delivery": {
+        "go": {
+          "status": "PASS",
+          "tests": 115,
+          "passed": 115,
+          "failed_events": 0,
+          "skipped": 0
+        },
+        "python": {
+          "status": "PASS",
+          "tests": 158,
+          "passed": 158,
+          "failed": 0,
+          "skipped_or_xfailed": 0
+        },
+        "status": "PASS"
+      },
+      "note": "Historical evidence verified at its delivery commit; final regression is P2-05."
+    },
+    {
+      "card_id": "P2-04",
+      "status": "PASS",
+      "delivery_commit": "0d1462b2bbcc6acec178e7f427bde15f28574dc7",
+      "acceptance": "evidence/batches/P2-04/accept.json",
+      "test_summary_at_card_delivery": {
+        "go": {
+          "status": "PASS",
+          "tests": 115,
+          "passed": 115,
+          "failed_events": 0,
+          "skipped": 0
+        },
+        "python": {
+          "status": "PASS",
+          "tests": 222,
+          "passed": 222,
+          "failed": 0,
+          "skipped_or_xfailed": 0
+        },
+        "status": "PASS"
+      },
+      "note": "Historical evidence verified at its delivery commit; final regression is P2-05."
+    },
+    {
+      "card_id": "P2-05",
+      "status": "PASS",
+      "delivery_commit": "9ad3f8ab176dec69d6b3f10604a895cfff51507c",
+      "acceptance": "evidence/batches/P2-05/accept.json",
+      "test_summary_at_card_delivery": {
+        "go": {
+          "status": "PASS",
+          "tests": 115,
+          "passed": 115,
+          "failed_events": 0,
+          "skipped": 0
+        },
+        "python": {
+          "status": "PASS",
+          "tests": 267,
+          "passed": 267,
+          "failed": 0,
+          "skipped_or_xfailed": 0
+        },
+        "status": "PASS"
+      },
+      "note": "Historical evidence verified at its delivery commit; final regression is P2-05."
+    }
+  ],
+  "final_regression": {
+    "go": {
+      "status": "PASS",
+      "tests": 115,
+      "passed": 115,
+      "failed_events": 0,
+      "skipped": 0
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 267,
+      "passed": 267,
+      "failed": 0,
+      "skipped_or_xfailed": 0
+    },
+    "status": "PASS"
+  },
+  "validation": {
+    "historical_artifact_hashes_verified": 228,
+    "tested_source_fingerprint_matches": true,
+    "all_P2_queue_rows_pass": true,
+    "all_P3_queue_rows_todo": true,
+    "code_delivery_tree_clean": true,
+    "go_race_vet_pytest_ruff_mypy_contracts_exit_code": 0,
+    "setup_build_health_exit_code": 0,
+    "local_credential_absent_from_git_candidates": true
+  },
+  "coverage": {
+    "A01": [
+      "test_two_turns_observe_real_tool_before_final"
+    ],
+    "A02": [
+      "test_invalid_decisions_never_execute",
+      "test_repeat_call_stops_before_second_execution",
+      "test_turn_and_tool_budgets_are_not_model_controlled",
+      "test_timeout_interrupts_tool_and_restores_signal_handler"
+    ],
+    "A03": [
+      "test_research_search_read_and_cite_real_versioned_content",
+      "test_data_real_sql_observations_drive_next_turn_and_numeric_finding",
+      "test_action_observes_failed_patch_then_selects_real_fix"
+    ],
+    "A04": [
+      "test_sql_policy_ast_rejects_dangerous_shapes",
+      "test_sql_parameter_binding_does_not_interpret_injection_text",
+      "test_reader_credentials_are_independent_acl_even_with_readonly_disabled",
+      "test_readonly_transaction_is_a_separate_database_guard"
+    ]
+  },
+  "action_go_executions": [
+    {
+      "patch_id": "baseline",
+      "command": [
+        "/workspace/.mgar-tools/go/bin/go",
+        "test",
+        "-count=1",
+        "-json",
+        "./..."
+      ],
+      "exit_code": 1,
+      "workspace_sha256": "57808c9ca206c24e41ffb9219e66be2ac01fc94f2ccd332794172f29446ebc12",
+      "output_sha256": "653f9b9f31f34604e007f8d4467d4e972f6e552ba83ed5e06b14034dd5c10735",
+      "log_path": "evidence/batches/P2-05/actual-go-baseline.json",
+      "tests_run": [
+        "TestPaidDeduplicatedTotal"
+      ],
+      "passed": false,
+      "ground_truth_line": "got=320",
+      "timestamp_utc": "2026-10-23T06:01:49.530846+00:00",
+      "origin": "Imported actual local Action executor run from the full regression; not a second go test execution."
+    },
+    {
+      "patch_id": "deduplicate-only",
+      "command": [
+        "/workspace/.mgar-tools/go/bin/go",
+        "test",
+        "-count=1",
+        "-json",
+        "./..."
+      ],
+      "exit_code": 1,
+      "workspace_sha256": "59dd02835292d2a2811638d10288ec2c8243470b62e6280eeef426f13dd34ff8",
+      "output_sha256": "45ebd131d73a75e79fe9641c9970f6e587365f4811c9fb3ddf05244166f11fd1",
+      "log_path": "evidence/batches/P2-05/actual-go-deduplicate-only.json",
+      "tests_run": [
+        "TestPaidDeduplicatedTotal"
+      ],
+      "passed": false,
+      "ground_truth_line": "got=220",
+      "timestamp_utc": "2026-10-23T06:01:49.697076+00:00",
+      "origin": "Imported actual local Action executor run from the full regression; not a second go test execution."
+    },
+    {
+      "patch_id": "deduplicate-paid",
+      "command": [
+        "/workspace/.mgar-tools/go/bin/go",
+        "test",
+        "-count=1",
+        "-json",
+        "./..."
+      ],
+      "exit_code": 0,
+      "workspace_sha256": "d373b68e0769aaced0bd69e2271b9f838e2a9253bb9b4e0f13baf8ab6461dc7a",
+      "output_sha256": "ca588d6182630741855e0e7c7a14fbde376f259f303e554e9e6545af313e91fe",
+      "log_path": "evidence/batches/P2-05/actual-go-deduplicate-paid.json",
+      "tests_run": [
+        "TestPaidDeduplicatedTotal"
+      ],
+      "passed": true,
+      "ground_truth_line": "got=150",
+      "timestamp_utc": "2026-10-23T06:01:49.854398+00:00",
+      "origin": "Imported actual local Action executor run from the full regression; not a second go test execution."
+    }
+  ],
+  "action_go_count_note": "Three additional real invocations of one fixed fixture test at different source hashes; not included in the 115 root-module Go test/subtest events. Expected failure exits are retained.",
+  "limitations_document": "docs/limitations.md",
+  "sdk_document": "docs/agent-sdk.md",
+  "known_limitations": [
+    "Only three fixed trusted Go files and two reviewed finite patches are accepted. Model-supplied arbitrary source, shell commands and changes to user checkouts are forbidden. An owned temporary copy is used; no new Git worktree is created.",
+    "Temporary files, fixed argv, minimized environment and owned process-group cleanup are local trusted-adapter controls, not an untrusted-code sandbox. P5 Gateway/Sandbox integration is still required.",
+    "The structural Go test oracle runs one fixed synthetic test at every source version. Baseline and incomplete patch genuinely exit 1 with totals 320 and 220; the paid-deduplicated patch genuinely exits 0 with total 150. These expected negative executions are preserved, not hidden as passing Go runs.",
+    "Action proposals retain diff, hashes and execution evidence but remain persisted=false and verified=false. P3 CAS, P5 independent Verifier, Go Worker dispatch/lease/result integration and durable role handoff are not implemented.",
+    "Upstream context is explicitly a trusted synthetic handoff fixture. No automatic Artifact retrieval or full multi-agent production workflow is claimed.",
+    "The Action owner stopped before writing files because of its usage limit; root implemented and verified P2-05. No independent Action review is claimed.",
+    "No paid model calls or production database operations. DeepSeek was tested only through local HTTP stubs; real durable call-ledger integration remains absent.",
+    "Cloud startup draft saved with requires_publish=true; environment settings still require review/save/publish. Fresh-task restoration of local-only commits has not been verified.",
+    "Evidence captured before local commit; delivery SHA is in Git history. Coding commits have not been pushed.",
+    "Mock decisions do not establish live LLM quality. Research citations and Data typed-cell provenance do not independently establish semantic truth.",
+    "Linux main-thread signal behavior and single-host synthetic PostgreSQL only; no cross-host reliability or hostile Python credential isolation claimed."
+  ],
+  "not_run": [
+    {
+      "scope": "live paid model experiments",
+      "reason": "Not authorized; no external model requests sent."
+    },
+    {
+      "scope": "P3 Artifact CAS and authorized context retrieval",
+      "reason": "Outside P2 authorization."
+    },
+    {
+      "scope": "P5 independent Verifier, Gateway and hostile-code Sandbox",
+      "reason": "Outside P2 authorization."
+    },
+    {
+      "scope": "Go-to-Python automatic Worker dispatch/lease/result closure",
+      "reason": "Not integrated by these P2 cards."
+    },
+    {
+      "scope": "fresh-task restoration of local-only commits",
+      "reason": "Not independently verified; cloud draft saved but not published."
+    }
+  ],
+  "github_push": "NOT_RUN for coding commits; local commits retained.",
+  "cloud_environment": {
+    "draft_status": "saved",
+    "requires_publish": true,
+    "published": false
+  },
+  "next_card": "P3-01 (suggested only; not executed)",
+  "timestamp_utc": "2026-10-23T06:05:00.816424+00:00"
+}
