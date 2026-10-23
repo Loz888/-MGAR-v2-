@@ -29,6 +29,14 @@ func (s *Store) RefreshReady(ctx context.Context, run string, c OrchestratorClai
 		return nil, err
 	}
 	defer tx.Rollback(ctx)
+	ready, err := s.refreshReadyTx(ctx, tx, run, c)
+	if err != nil {
+		return nil, err
+	}
+	return ready, commitControl(ctx, tx, run, c)
+}
+
+func (s *Store) refreshReadyTx(ctx context.Context, tx pgx.Tx, run string, c OrchestratorClaim) ([]Task, error) {
 	state, version, _, err := lockWorkflow(ctx, tx, run)
 	if err != nil {
 		return nil, err
@@ -195,5 +203,5 @@ func (s *Store) RefreshReady(ctx context.Context, run string, c OrchestratorClai
 			ready = append(ready, nodes[key].Task)
 		}
 	}
-	return ready, commitControl(ctx, tx, run, c)
+	return ready, nil
 }

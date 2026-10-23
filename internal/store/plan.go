@@ -28,7 +28,9 @@ func emit(ctx context.Context, tx pgx.Tx, run, entityType, entity string, revisi
 	if err = tx.QueryRow(ctx, "INSERT INTO workflow_events(run_id,entity_type,entity_id,entity_revision,kind,payload,trace_id) VALUES($1,$2,$3,$4,$5,$6,$1) RETURNING event_id", run, entityType, entity, revision, kind, body).Scan(&event); err != nil {
 		return err
 	}
-	_, err = tx.Exec(ctx, "INSERT INTO outbox_events(event_id,aggregate_type,aggregate_id,event_kind,payload) VALUES($1,$2,$3,$4,$5)", event, entityType, entity, kind, body)
+	_, err = tx.Exec(ctx, `INSERT INTO outbox_events(event_id,aggregate_type,aggregate_id,event_kind,payload)
+ SELECT $1,$2,$3,$4,jsonb_build_object('schema_version','handoff.v1','run_id',run_id,'plan_version',active_plan_version,'entity_revision',$6::bigint,'data',$5::jsonb)
+ FROM workflow_runs WHERE run_id=$7`, event, entityType, entity, kind, body, revision, run)
 	return err
 }
 func lockWorkflow(ctx context.Context, tx pgx.Tx, run string) (state string, version int, revision int64, err error) {

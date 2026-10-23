@@ -1,0 +1,93 @@
+[
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-01/baseline.log",
+    "timestamp_utc": "2026-10-23T11:16:54.052152+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/handoff/...",
+      "./tests/integration/...",
+      "-run",
+      "Outbox|Inbox"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P4-01/card-red.log",
+    "timestamp_utc": "2026-10-23T11:18:11.348336+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/handoff/...",
+      "./tests/integration/...",
+      "-run",
+      "Outbox|Inbox",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-01/card-first.log",
+    "timestamp_utc": "2026-10-23T11:19:05.092033+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/handoff/...",
+      "./tests/integration/...",
+      "-run",
+      "Outbox|Inbox",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-01/card-final.log",
+    "timestamp_utc": "2026-10-23T11:20:03.845678+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-01/full-offline.log",
+    "timestamp_utc": "2026-10-23T11:21:06.448068+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-01/go-test.log",
+    "timestamp_utc": "2026-10-23T11:21:46.093459+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-01/go-build.log",
+    "timestamp_utc": "2026-10-23T11:21:46.781331+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-01/final-check.log",
+    "timestamp_utc": "2026-10-23T11:22:28.591032+00:00"
+  }
+]

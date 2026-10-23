@@ -21,7 +21,7 @@
 | [P3-02](tasks/P3-02.md) | P3 | Context Snapshot 与依赖授权 | P3-01 | PASS | `evidence/batches/P3-02/accept.json` |
 | [P3-03](tasks/P3-03.md) | P3 | Context Selector 与 Token/字节预算 | P3-02 | PASS | `evidence/batches/P3-03/accept.json` |
 | [P3-04](tasks/P3-04.md) | P3 | 依赖追踪、过期输入与增量复用 | P3-03 | PASS | `evidence/batches/P3-04/accept.json` |
-| [P4-01](tasks/P4-01.md) | P4 | Transactional Outbox + Inbox | P3-04 | TODO | `evidence/batches/P4-01/accept.json` |
+| [P4-01](tasks/P4-01.md) | P4 | Transactional Outbox + Inbox | P3-04 | ACTIVE | `evidence/batches/P4-01/accept.json` |
 | [P4-02](tasks/P4-02.md) | P4 | Dynamic Replanner 的有限计划增量修改 | P4-01 | TODO | `evidence/batches/P4-02/accept.json` |
 | [P4-03](tasks/P4-03.md) | P4 | Fan-in Merge 与冲突/失败传播 | P4-02 | TODO | `evidence/batches/P4-03/accept.json` |
 | [P4-04](tasks/P4-04.md) | P4 | 跨 Agent 故障注入与恢复扫描 | P4-03 | TODO | `evidence/batches/P4-04/accept.json` |
@@ -62,3 +62,5 @@ P0-01 的原始未提交快照与失败记录保留于 `evidence/batches/P0-01/a
 **P0～P3 复查授权：** 用户要求检查已完成工程并修复不符合任务书或可能导致漏洞的代码。
 本轮状态 PASS；范围 P0-01～P3-04，历史逐卡记录不覆盖，补充证据为 `evidence/batches/P0-P3-AUDIT/accept.json`。
 复查与缺陷映射见 [P0～P3 工程复查](docs/audits/P0-P3.md)，不进入 P4。
+
+**P4 授权：** 用户要求完成 P4，按 P4-01～P4-05 顺序逐卡验收；不进入 P5，不启用付费模型。

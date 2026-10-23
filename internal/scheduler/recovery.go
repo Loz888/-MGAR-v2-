@@ -3,6 +3,7 @@ package scheduler
 import (
 	"context"
 	"errors"
+	"github.com/Loz888/-MGAR-v2-/internal/handoff"
 	"github.com/Loz888/-MGAR-v2-/internal/store"
 	"time"
 )
@@ -54,6 +55,14 @@ func (s Scheduler) RecoverRun(ctx context.Context, run, owner string) (store.Wor
 		return w, err
 	}
 	if w.State == "running" {
+		dispatcher := handoff.Dispatcher{Outbox: s.Store, Consumer: handoff.SchedulerConsumer,
+			Deliver: func(ctx context.Context, event handoff.Event) error {
+				_, e := s.Store.ConsumeHandoff(ctx, run, c, handoff.SchedulerConsumer, event.ID)
+				return e
+			}}
+		if _, err = dispatcher.Dispatch(ctx, run, 128); err != nil {
+			return w, err
+		}
 		if _, err = s.GetReady(ctx, run, c); err != nil {
 			return w, err
 		}
