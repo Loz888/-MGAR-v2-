@@ -54,6 +54,20 @@ func TestProcessHelper(t *testing.T) {
 	run := os.Getenv("MGAR_TEST_RUN")
 	ctx := context.Background()
 	switch kind {
+	case "tool":
+		var c store.TaskClaim
+		if e := json.Unmarshal([]byte(os.Getenv("MGAR_TEST_CLAIM")), &c); e != nil {
+			t.Fatal(e)
+		}
+		_, e := s.BeginTool(ctx, c, store.ToolRequest{ID: "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa", Capability: "doc", Version: "tool.v1", Resource: "incident.docs", Hash: artifact.Digest([]byte("fixed")), Effect: "readonly"})
+		if e == nil {
+			fmt.Println("RESULT winner")
+		} else if errors.Is(e, store.ErrUnsafeReplay) {
+			fmt.Println("RESULT denied")
+		} else {
+			t.Fatal(e)
+		}
+
 	case "verifier":
 		var evidence verifier.Evidence
 		var requirement verifier.Requirement

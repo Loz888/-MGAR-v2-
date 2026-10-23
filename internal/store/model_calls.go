@@ -139,7 +139,7 @@ func commitModelTask(ctx context.Context, tx pgx.Tx, c TaskClaim) error {
 // and settlement. An uncertain model result cannot become task output.
 func requireSettledModels(ctx context.Context, tx pgx.Tx, c TaskClaim) error {
 	var unsafe bool
-	if e := tx.QueryRow(ctx, "SELECT EXISTS(SELECT 1 FROM model_calls WHERE run_id=$1 AND task_id=$2 AND status IN ('reserved','unknown'))", c.RunID, c.TaskID).Scan(&unsafe); e != nil {
+	if e := tx.QueryRow(ctx, "SELECT EXISTS(SELECT 1 FROM model_calls WHERE run_id=$1 AND task_id=$2 AND status IN ('reserved','unknown')) OR EXISTS(SELECT 1 FROM tool_invocations WHERE task_id=$2 AND status IN ('reserved','unknown'))", c.RunID, c.TaskID).Scan(&unsafe); e != nil {
 		return e
 	}
 	if unsafe {

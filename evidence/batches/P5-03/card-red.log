@@ -1,0 +1,3 @@
+{
+  "stdout": "go: warning: \"./internal/policy/...\" matched no packages\n# github.com/Loz888/-MGAR-v2-/tests/security\ntests/security/policy_test.go:18:2: no required module provides package github.com/Loz888/-MGAR-v2-/internal/policy; to add it:\n\tgo get github.com/Loz888/-MGAR-v2-/internal/policy\nFAIL\tgithub.com/Loz888/-MGAR-v2-/tests/security [setup failed]\nFAIL\n"
+}

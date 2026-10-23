@@ -1,0 +1,109 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/policy/...",
+      "./tests/security/...",
+      "-run",
+      "Gateway|Capability"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P5-03/card-red.log",
+    "timestamp_utc": "2026-10-23T17:54:19.433070+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./internal/policy/...",
+      "./tests/security/...",
+      "-run",
+      "Gateway|Capability"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-03/card-first.log",
+    "timestamp_utc": "2026-10-23T17:55:35.118852+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/policy/...",
+      "./tests/security/...",
+      "./tests/integration/...",
+      "-run",
+      "Gateway|Capability"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-03/card-expanded.log",
+    "timestamp_utc": "2026-10-23T17:56:58.734709+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/security/test_gateway_client.py"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P5-03/python-client.log",
+    "timestamp_utc": "2026-10-23T17:57:25.801598+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/security/test_gateway_client.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-03/python-client-fixed.log",
+    "timestamp_utc": "2026-10-23T17:57:43.168613+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-03/full-offline.log",
+    "timestamp_utc": "2026-10-23T17:58:39.945564+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-03/go-test.log",
+    "timestamp_utc": "2026-10-23T17:59:32.785796+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-03/go-build.log",
+    "timestamp_utc": "2026-10-23T17:59:33.545619+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-03/final-check.log",
+    "timestamp_utc": "2026-10-23T17:59:33.642628+00:00"
+  }
+]
