@@ -1,0 +1,14 @@
+{
+  "card_id": "P0-P3-AUDIT",
+  "status": "PASS",
+  "implementation_commit": "176d37d3bcd8fa5efca70b3a0b02682b95af501a",
+  "base_commit": "bf54639e25475b61452c847a6352d274119951ba",
+  "source_fingerprint": "649b472afe6d5e7d347403032fce2cb231c2453175dbaa7d5edda8c9efae6245",
+  "accept_sha256": "c3e2e3428b54142d4ebaa374dcd8d0c666d01794a8b03e20416d70670134dab9",
+  "verification_sha256": "3aec3de5f8d8229b7a9770c029ae2277c9bba5efea18a980d5a7e9e9ed5db830",
+  "committed_artifact_hashes_verified": 66,
+  "working_tree_clean_before_delivery_metadata": true,
+  "pushed": false,
+  "future_stages_started": false,
+  "timestamp_utc": "2026-10-23T11:01:32.677091+00:00"
+}
