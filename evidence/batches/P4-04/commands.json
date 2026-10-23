@@ -1,0 +1,74 @@
+[
+  {
+    "command": [
+      "bash",
+      "scripts/kill_matrix.sh",
+      "--set",
+      "core"
+    ],
+    "exit_code": 127,
+    "log_path": "evidence/batches/P4-04/card-red.log",
+    "timestamp_utc": "2026-10-23T11:37:53.240846+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/kill_matrix.sh",
+      "--set",
+      "core"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-04/kill-matrix-first.log",
+    "timestamp_utc": "2026-10-23T11:38:41.804377+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./tests/chaos/..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-04/chaos-tests.log",
+    "timestamp_utc": "2026-10-23T11:39:00.307951+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-04/full-offline.log",
+    "timestamp_utc": "2026-10-23T11:39:49.399927+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-04/go-test.log",
+    "timestamp_utc": "2026-10-23T16:01:37.916330+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-04/go-build.log",
+    "timestamp_utc": "2026-10-23T16:01:38.677634+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P4-04/final-check.log",
+    "timestamp_utc": "2026-10-23T16:01:38.758239+00:00"
+  }
+]
