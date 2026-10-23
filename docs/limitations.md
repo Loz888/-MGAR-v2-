@@ -1,6 +1,6 @@
-# P1/P2 阶段能力与限制
+# P1/P2/P3 阶段能力与限制
 
-Version: limitations.v2
+Version: limitations.v3
 
 P1 实现的是单机持久化控制面：真实 PostgreSQL 约束与事务、版本化 DAG、
 编排器和 Task 租约、预算预留、生命周期与恢复扫描。
@@ -56,14 +56,21 @@ Action 工具只允许固定合成模块、有限白名单补丁和固定 Go 命
 角色产出的 Artifact 引用均为未持久化、未验证的候选，不能作为 durable CAS 或独立 verdict。
 具体接口和授权边界见 [agent-sdk.md](agent-sdk.md)。
 
-以下能力尚未交付：
+P3 已交付受信 Go CAS 发布、固定输入快照、授权读取、上下文筛选与受审来源的增量复用。
+原始内容与派生摘要实际落盘并有不可变数据库来源记录；同内容去重保留独立 Producer。
+磁盘与数据库不共用原子事务，失败可能留下孤立内容和临时文件；盘点不自动删除，
+不承诺宿主断电或磁盘损坏恢复。具体协议见 [artifact-context.md](artifact-context.md)。
+P2 的纯 Python 角色结果不会因此自动发布或获得 verified：只有显式经过受信 Go 发布入口
+才有 durable CAS/lineage。上下文字节通过实际 Mock Provider 接收记录核对，Token 仅为估算。
+增量计划能复用静止且来源有效的分支；仍有活动执行时保守拒绝，P4 自动重规划尚未实现。
+
+以下整体能力尚未交付：
 
 - Go 控制面与 Python Agent 之间的实际 Worker 执行闭环。
-- P3 的 Artifact 内容寻址存储（CAS）、真实内容写入及其故障恢复。
 - P5 的独立 Verifier、完整 Tool Gateway、不可信代码 Sandbox 与完整信任边界验收。
 - 真实模型与付费 Provider 调用、真实外部工具副作用和生产数据库接入。
 
 默认只允许 mock Provider；DeepSeek 传输适配器仅使用本机 HTTP stub 验收。
 真实付费路径尚无持久 Go 调用账本接入，保持拒绝；离线验收不使用模型密钥、不授权付费调用。
 阶段证据仅对应实际执行的命令和覆盖窗口，见 [`P1-05`](../evidence/batches/P1-05/)
-和 [`P2-05`](../evidence/batches/P2-05/)。
+和 [`P2-05`](../evidence/batches/P2-05/)、[`P3-04`](../evidence/batches/P3-04/)。

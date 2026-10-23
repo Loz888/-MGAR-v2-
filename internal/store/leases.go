@@ -159,9 +159,9 @@ func (s *Store) guardTask(ctx context.Context, c TaskClaim, budget bool) (pgx.Tx
 // dependencies. The caller already holds workflow, optional budget, and task locks.
 func validateTaskInputs(ctx context.Context, tx pgx.Tx, run string, version int, task, nodeKey string) error {
 	type dependency struct {
-		Node, Task, State, Artifact, Kind string
+		Node, Task, State, Artifact, Kind, Reuse string
 	}
-	rows, err := tx.Query(ctx, `SELECT n.node_key,p.task_id,p.state,COALESCE(p.result_artifact_id::text,''),n.requirements->>'required_output_kind'
+	rows, err := tx.Query(ctx, `SELECT n.node_key,p.task_id,p.state,COALESCE(p.result_artifact_id::text,''),n.requirements->>'required_output_kind',COALESCE(n.reuse_artifact_id::text,'')
 	 FROM plan_edges e JOIN plan_nodes n ON n.run_id=e.run_id AND n.plan_version=e.plan_version AND n.node_key=e.from_key
 	 JOIN task_instances p ON p.run_id=n.run_id AND p.task_id=n.task_instance_id
 	 WHERE e.run_id=$1 AND e.plan_version=$2 AND e.to_key=$3 ORDER BY p.result_artifact_id,p.task_id`, run, version, nodeKey)
@@ -171,7 +171,7 @@ func validateTaskInputs(ctx context.Context, tx pgx.Tx, run string, version int,
 	parents := []dependency{}
 	for rows.Next() {
 		var p dependency
-		if err = rows.Scan(&p.Node, &p.Task, &p.State, &p.Artifact, &p.Kind); err != nil {
+		if err = rows.Scan(&p.Node, &p.Task, &p.State, &p.Artifact, &p.Kind, &p.Reuse); err != nil {
 			rows.Close()
 			return err
 		}
@@ -212,7 +212,7 @@ func validateTaskInputs(ctx context.Context, tx pgx.Tx, run string, version int,
 		if err != nil {
 			return err
 		}
-		if !verified || producer != p.Task || ref.Version != version || kind != p.Kind {
+		if !verified || producer != p.Task || (ref.Version != version && !(p.Reuse == ref.ID && ref.Version < version)) || kind != p.Kind {
 			return ErrStaleInput
 		}
 		if _, duplicate := expected[ref.ID]; duplicate {

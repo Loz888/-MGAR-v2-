@@ -150,3 +150,10 @@ python eval/context_selection/report.py
 ```
 
 此评测目录已纳入全量 pytest；报告只测实际上下文字节与 Token 估算，不测真实模型效果。
+
+增量复用专项（包含真实 PG 和跨进程争用的集成检查）：
+
+```bash
+go test ./internal/context/... ./internal/planner/... -run 'Invalidate|Reuse'
+go test ./tests/integration/... -run 'Invalidate|Reuse'
+```

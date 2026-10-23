@@ -53,6 +53,14 @@ func (s *Store) PublishArtifact(ctx context.Context, c TaskClaim, cas *artifact.
 	if e != nil {
 		return a, e
 	}
+	var requiredTool string
+	e = s.Pool.QueryRow(ctx, "SELECT cfg.output_tool_version FROM plan_node_configs cfg JOIN plan_nodes n USING(run_id,plan_version,node_key) WHERE cfg.run_id=$1 AND cfg.plan_version=$2 AND n.task_instance_id=$3", c.RunID, c.PlanVersion, c.TaskID).Scan(&requiredTool)
+	if e == nil && requiredTool != toolVersion {
+		return a, ErrPolicy
+	}
+	if e != nil && !errors.Is(e, pgx.ErrNoRows) {
+		return a, e
+	}
 	hash, e := cas.Put(body)
 	if e != nil {
 		return a, e

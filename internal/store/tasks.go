@@ -14,7 +14,7 @@ type Task struct {
 }
 type readyNode struct {
 	Task
-	Result, OutputKind string
+	Result, OutputKind, Reuse string
 }
 type inputRef struct {
 	ID, Hash, Producer string
@@ -43,7 +43,7 @@ func (s *Store) RefreshReady(ctx context.Context, run string, c OrchestratorClai
 	if err = tx.QueryRow(ctx, "SELECT used_delegations<max_delegations AND running_count<max_concurrency FROM run_budgets WHERE run_id=$1 FOR UPDATE", run).Scan(&budgetOK); err != nil {
 		return nil, err
 	}
-	rows, err := tx.Query(ctx, "SELECT t.task_id,n.node_key,t.role,t.state,t.revision,COALESCE(t.result_artifact_id::text,''),n.requirements->>'required_output_kind' FROM plan_nodes n JOIN task_instances t ON t.task_id=n.task_instance_id WHERE n.run_id=$1 AND n.plan_version=$2 ORDER BY t.task_id FOR UPDATE OF t", run, version)
+	rows, err := tx.Query(ctx, "SELECT t.task_id,n.node_key,t.role,t.state,t.revision,COALESCE(t.result_artifact_id::text,''),n.requirements->>'required_output_kind',COALESCE(n.reuse_artifact_id::text,'') FROM plan_nodes n JOIN task_instances t ON t.task_id=n.task_instance_id WHERE n.run_id=$1 AND n.plan_version=$2 ORDER BY t.task_id FOR UPDATE OF t", run, version)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func (s *Store) RefreshReady(ctx context.Context, run string, c OrchestratorClai
 	keys := []string{}
 	for rows.Next() {
 		n := &readyNode{}
-		if err = rows.Scan(&n.ID, &n.NodeKey, &n.Role, &n.State, &n.Revision, &n.Result, &n.OutputKind); err != nil {
+		if err = rows.Scan(&n.ID, &n.NodeKey, &n.Role, &n.State, &n.Revision, &n.Result, &n.OutputKind, &n.Reuse); err != nil {
 			rows.Close()
 			return nil, err
 		}
@@ -114,7 +114,7 @@ func (s *Store) RefreshReady(ctx context.Context, run string, c OrchestratorClai
 			if err != nil && !errors.Is(err, pgx.ErrNoRows) {
 				return nil, err
 			}
-			if err != nil || !verified || ref.Version != version || kind != p.OutputKind {
+			if err != nil || !verified || (ref.Version != version && !(p.Reuse == ref.ID && ref.Version < version)) || kind != p.OutputKind {
 				bad = true
 				continue
 			}

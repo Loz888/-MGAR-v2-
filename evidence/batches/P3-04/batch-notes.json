@@ -1,0 +1,15 @@
+{
+  "scope": "P3-04 provenance-checked incremental plan submission and safe reuse, with P3 stage documentation and startup instructions.",
+  "known_limitations": [
+    "Real CAS/PostgreSQL tests changed A in A/B->C: only A and C received new Tasks, B retained its original Task/Artifact. Old Task JSON and old Artifact bytes were preserved; successful recomputation retained B's actual source_plan_version=1 in the version-2 snapshot.",
+    "Node requirements, dependency identities/hashes/Producer/versions, model/policy/output tool versions, fresh verdicts and actual CAS bytes are all checked before adoption. Reuse does not reset/refund delegation budget. Four migrations apply append-only.",
+    "Actual independent processes verified one winning Plan CAS and one conflict; injected Outbox failure rolled back the new plan/mappings/configs. A later verdict revocation invalidates current-plan success without rewriting a historical succeeded Task.",
+    "The deterministic trusted API refuses Runs with active claimed/executing/output_ready/verifying instances. Autonomous dynamic replanning and active-execution handoff remain P4; no such behavior is claimed here.",
+    "Actual audit failures reproduced forged Claim NodeKey bypasses of model/tool configuration checks. Both were fixed by resolving the node from its database Task association; red/green logs are retained.",
+    "An initial integration assertion expected a one-step Workflow finalization; it was corrected to assert the already-frozen running->verifying->succeeded protocol. No production transition was changed for that test.",
+    "Synthetic trusted Verdict fixtures support protocol tests; no independent P5 Verifier, hostile-code Sandbox or complete Capability Gateway is claimed. Autonomous Go/Python Worker dispatch/renewal/result integration remains absent.",
+    "No paid model requests or production database operations. Cloud startup draft saved but requires review/save/publish in environment settings; fresh-task local-only commit restoration remains unverified.",
+    "Evidence captured before local commit; delivery SHA follows in Git history. Coding commits have not been pushed."
+  ],
+  "unverified": []
+}

@@ -12,3 +12,6 @@ var ArtifactSQL string
 
 //go:embed 003_context_snapshots.sql
 var ContextSQL string
+
+//go:embed 004_plan_node_configs.sql
+var PlanConfigSQL string

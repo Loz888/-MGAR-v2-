@@ -1,0 +1,235 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/context/...",
+      "./internal/planner/...",
+      "-run",
+      "Invalidate|Reuse"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P3-04/card-red.log",
+    "timestamp_utc": "2026-10-23T06:42:29.405131+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/context/...",
+      "./internal/planner/...",
+      "-run",
+      "Invalidate|Reuse"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/invalidator-green.log",
+    "timestamp_utc": "2026-10-23T06:43:15.814995+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/context/...",
+      "./internal/planner/...",
+      "./tests/integration/..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/baseline-integration.log",
+    "timestamp_utc": "2026-10-23T06:45:30.110643+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./tests/integration/...",
+      "-run",
+      "Invalidate|Reuse"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P3-04/integration-first.log",
+    "timestamp_utc": "2026-10-23T06:47:00.292072+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/context/...",
+      "./internal/planner/...",
+      "./tests/integration/...",
+      "-run",
+      "Invalidate|Reuse"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/integration-green.log",
+    "timestamp_utc": "2026-10-23T06:48:32.903119+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/context/...",
+      "./internal/planner/...",
+      "-run",
+      "Invalidate|Reuse"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/card-final.log",
+    "timestamp_utc": "2026-10-23T06:50:50.183013+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./tests/integration/...",
+      "-run",
+      "Invalidate|Reuse"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/integration-final.log",
+    "timestamp_utc": "2026-10-23T06:50:51.813733+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "run",
+      "./cmd/mgarmigrate"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/migrate-final.log",
+    "timestamp_utc": "2026-10-23T06:50:52.182771+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/full-offline.log",
+    "timestamp_utc": "2026-10-23T06:51:24.946935+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/setup.sh"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/environment-setup.log",
+    "timestamp_utc": "2026-10-23T06:52:36.746106+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/go-build.log",
+    "timestamp_utc": "2026-10-23T06:52:37.639557+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/full-offline-final.log",
+    "timestamp_utc": "2026-10-23T06:52:37.990163+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "scripts/smoke_health.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/health-smoke.log",
+    "timestamp_utc": "2026-10-23T06:52:38.271744+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./tests/integration/...",
+      "-run",
+      "^TestReuseExecutionConfigCannotBeBypassedByClaimNodeKey$"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P3-04/config-identity-red.log",
+    "timestamp_utc": "2026-10-23T06:53:54.498622+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./tests/integration/...",
+      "-run",
+      "^TestReuseExecutionConfigCannotBeBypassedByClaimNodeKey$"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/config-identity-green.log",
+    "timestamp_utc": "2026-10-23T06:54:22.792667+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/context/...",
+      "./internal/planner/...",
+      "./tests/integration/...",
+      "-run",
+      "Invalidate|Reuse"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/integration-reviewed.log",
+    "timestamp_utc": "2026-10-23T06:54:24.216798+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/full-offline-reviewed.log",
+    "timestamp_utc": "2026-10-23T06:54:57.190034+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/go-build-reviewed.log",
+    "timestamp_utc": "2026-10-23T06:55:43.133240+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "scripts/smoke_health.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/health-smoke-reviewed.log",
+    "timestamp_utc": "2026-10-23T06:55:43.787196+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/final-audit.log",
+    "timestamp_utc": "2026-10-23T06:55:43.861752+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/accept.sh",
+      "P3-04"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-04/export-offline.log",
+    "timestamp_utc": "2026-10-23T06:55:43.932654+00:00"
+  }
+]

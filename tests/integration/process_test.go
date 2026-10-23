@@ -7,6 +7,8 @@ import (
 	"errors"
 	"fmt"
 	"github.com/Loz888/-MGAR-v2-/internal/artifact"
+	inputcontext "github.com/Loz888/-MGAR-v2-/internal/context"
+	"github.com/Loz888/-MGAR-v2-/internal/planner"
 	"github.com/Loz888/-MGAR-v2-/internal/store"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"io"
@@ -51,6 +53,28 @@ func TestProcessHelper(t *testing.T) {
 	run := os.Getenv("MGAR_TEST_RUN")
 	ctx := context.Background()
 	switch kind {
+	case "incremental":
+		p, e := planner.Decode([]byte(os.Getenv("MGAR_TEST_PROPOSAL")))
+		if e != nil {
+			t.Fatal(e)
+		}
+		configs := map[string]inputcontext.ExecutionConfig{}
+		if e = json.Unmarshal([]byte(os.Getenv("MGAR_TEST_CONFIGS")), &configs); e != nil {
+			t.Fatal(e)
+		}
+		cas, e := artifact.New(os.Getenv("MGAR_TEST_CAS_ROOT"))
+		if e != nil {
+			t.Fatal(e)
+		}
+		defer cas.Close()
+		_, _, e = s.ProposeIncremental(ctx, run, store.OrchestratorClaim{Owner: "orchestrator", Epoch: 1, Revision: 0}, p, configs, cas)
+		if e == nil {
+			fmt.Println("RESULT winner")
+		} else if errors.Is(e, store.ErrPlanConflict) {
+			fmt.Println("RESULT conflict")
+		} else {
+			t.Fatal(e)
+		}
 	case "selection":
 		var c store.TaskClaim
 		if e := json.Unmarshal([]byte(os.Getenv("MGAR_TEST_CLAIM")), &c); e != nil {

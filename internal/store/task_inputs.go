@@ -26,6 +26,14 @@ func (s *Store) BuildSnapshot(ctx context.Context, c TaskClaim, modelVersion, to
 	if state != "claimed" && state != "executing" {
 		return snapshot, ErrBadState
 	}
+	var requiredModel, requiredTool string
+	e = tx.QueryRow(ctx, "SELECT cfg.model_config_version,cfg.tool_policy_version FROM plan_node_configs cfg JOIN plan_nodes n USING(run_id,plan_version,node_key) WHERE cfg.run_id=$1 AND cfg.plan_version=$2 AND n.task_instance_id=$3", c.RunID, c.PlanVersion, c.TaskID).Scan(&requiredModel, &requiredTool)
+	if e == nil && (requiredModel != modelVersion || requiredTool != toolVersion) {
+		return snapshot, ErrPolicy
+	}
+	if e != nil && !errors.Is(e, pgx.ErrNoRows) {
+		return snapshot, e
+	}
 	snapshot = inputcontext.Snapshot{SchemaVersion: "context.v1", RunID: c.RunID, TaskID: c.TaskID, Role: c.Role, PlanVersion: c.PlanVersion, ModelVersion: modelVersion, ToolVersion: toolVersion, Artifacts: []inputcontext.Ref{}}
 	rows, e := tx.Query(ctx, `SELECT a.artifact_id,a.content_sha256,i.producer_node,a.producer_task,a.source_plan_version,a.tool_schema_version,a.byte_length,a.kind,a.content_type
  FROM task_inputs i JOIN artifacts a ON a.run_id=i.run_id AND a.artifact_id=i.artifact_id WHERE i.run_id=$1 AND i.task_id=$2 ORDER BY a.artifact_id`, c.RunID, c.TaskID)

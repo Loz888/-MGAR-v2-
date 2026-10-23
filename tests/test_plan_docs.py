@@ -25,6 +25,7 @@ DOCUMENTS = (
     "docs/adr/ADR-0001.md",
     "docs/adr/ADR-0002.md",
     "docs/adr/ADR-0003.md",
+    "docs/adr/ADR-0004.md",
     "contracts/README.md",
 )
 

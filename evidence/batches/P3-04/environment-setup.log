@@ -1,0 +1,3 @@
+{
+  "stdout": "   Building mgar-agents @ file:///workspace/-MGAR-v2-\n      Built mgar-agents @ file:///workspace/-MGAR-v2-\nPrepared 1 package in 618ms\nUninstalled 1 package in 0.26ms\nInstalled 1 package in 0.38ms\n ~ mgar-agents==0.0.1 (from file:///workspace/-MGAR-v2-)\n"
+}

@@ -20,7 +20,7 @@
 | [P3-01](tasks/P3-01.md) | P3 | 内容寻址 Artifact Store 与身份 | P2-05 | PASS | `evidence/batches/P3-01/accept.json` |
 | [P3-02](tasks/P3-02.md) | P3 | Context Snapshot 与依赖授权 | P3-01 | PASS | `evidence/batches/P3-02/accept.json` |
 | [P3-03](tasks/P3-03.md) | P3 | Context Selector 与 Token/字节预算 | P3-02 | PASS | `evidence/batches/P3-03/accept.json` |
-| [P3-04](tasks/P3-04.md) | P3 | 依赖追踪、过期输入与增量复用 | P3-03 | TODO | `evidence/batches/P3-04/accept.json` |
+| [P3-04](tasks/P3-04.md) | P3 | 依赖追踪、过期输入与增量复用 | P3-03 | PASS | `evidence/batches/P3-04/accept.json` |
 | [P4-01](tasks/P4-01.md) | P4 | Transactional Outbox + Inbox | P3-04 | TODO | `evidence/batches/P4-01/accept.json` |
 | [P4-02](tasks/P4-02.md) | P4 | Dynamic Replanner 的有限计划增量修改 | P4-01 | TODO | `evidence/batches/P4-02/accept.json` |
 | [P4-03](tasks/P4-03.md) | P4 | Fan-in Merge 与冲突/失败传播 | P4-02 | TODO | `evidence/batches/P4-03/accept.json` |
