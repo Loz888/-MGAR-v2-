@@ -46,6 +46,9 @@ func NewGateway(s *store.Store, cas *artifact.CAS, defs []Definition, unauth fun
 		if _, ok := g.definitions[d.Name]; ok {
 			return nil, ErrDenied
 		}
+		if _, e = Risk(f); e != nil {
+			return nil, e
+		}
 		g.definitions[d.Name] = f
 	}
 	return g, nil
@@ -122,7 +125,7 @@ func (g *Gateway) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	d, found := g.definitions[call.Tool]
-	if !found || d.Role != p.claim.Role || d.Version != call.Version || d.Effect == "non_idempotent" || !slices.Contains(d.Resources, call.Resource) || !slices.Contains(p.resources, call.Resource) {
+	if !found || d.Role != p.claim.Role || d.Version != call.Version || !slices.Contains(d.Resources, call.Resource) || !slices.Contains(p.resources, call.Resource) {
 		deny("capability")
 		return
 	}
@@ -137,7 +140,10 @@ func (g *Gateway) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		Arguments               map[string]any
 	}{call.Tool, call.Version, call.Resource, args})
 	req := store.ToolRequest{ID: call.ID, Capability: d.Name, Version: d.Version, Resource: call.Resource, Hash: artifact.Digest(canonical), Effect: d.Effect}
-	cached, e := g.store.BeginTool(r.Context(), p.claim, req)
+	cached, handled, e := g.authorizeAction(w, r, p, req)
+	if handled {
+		return
+	}
 	if e != nil {
 		deny("reservation")
 		return

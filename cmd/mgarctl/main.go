@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"regexp"
 	"time"
 
 	"github.com/Loz888/-MGAR-v2-/internal/config"
@@ -26,7 +27,7 @@ func run(ctx context.Context, args []string, out, errs io.Writer, s *store.Store
 		return 1
 	}
 	usage := func() int {
-		fmt.Fprintln(errs, "usage: mgarctl health | submit [--fixture incident --provider mock --run-id UUID --max-delegations 24] | status/cancel/resume RUN_ID")
+		fmt.Fprintln(errs, "usage: mgarctl health | submit [--fixture incident --provider mock --run-id UUID --max-delegations 24] | status/cancel/resume RUN_ID | approve APPROVAL_ID --action-digest SHA256 [--deny]")
 		return 2
 	}
 	if len(args) == 0 {
@@ -40,6 +41,9 @@ func run(ctx context.Context, args []string, out, errs io.Writer, s *store.Store
 			return 1
 		}
 		return 0
+	}
+	if args[0] == "approve" {
+		return approve(ctx, args[1:], out, errs, s)
 	}
 	var id string
 	budget := 24
@@ -126,4 +130,39 @@ func incidentPlan() planner.Proposal {
 		},
 		Edges: []planner.Edge{{From: "A", To: "C"}, {From: "B", To: "C"}},
 	}
+}
+
+// approve is local-only: the configured control-plane DB session supplies the
+// approver identity. It returns a one-use token without executing the action.
+func approve(ctx context.Context, args []string, out, errs io.Writer, s *store.Store) int {
+	if len(args) < 3 {
+		fmt.Fprintln(errs, "usage: mgarctl approve APPROVAL_ID --action-digest SHA256 [--deny]")
+		return 2
+	}
+	id := args[0]
+	flags := flag.NewFlagSet("approve", flag.ContinueOnError)
+	flags.SetOutput(errs)
+	digest := flags.String("action-digest", "", "exact reviewed action digest")
+	deny := flags.Bool("deny", false, "deny this exact action")
+	if flags.Parse(args[1:]) != nil || flags.NArg() != 0 || !regexp.MustCompile(`^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$`).MatchString(id) || !regexp.MustCompile(`^[0-9a-f]{64}$`).MatchString(*digest) {
+		return 2
+	}
+	if s == nil {
+		var err error
+		s, err = store.Open(ctx, os.Getenv("MGAR_TEST_DATABASE_URL"))
+		if err != nil {
+			fmt.Fprintln(errs, "control database unavailable")
+			return 1
+		}
+		defer s.Pool.Close()
+	}
+	decision, err := s.DecideApproval(ctx, id, *digest, !*deny)
+	if err != nil {
+		fmt.Fprintln(errs, "approval rejected:", err)
+		return 1
+	}
+	if err = json.NewEncoder(out).Encode(decision); err != nil {
+		return 1
+	}
+	return 0
 }

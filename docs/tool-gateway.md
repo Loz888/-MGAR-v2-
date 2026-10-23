@@ -20,7 +20,7 @@ outbox atomically. A repeated request ID must match its canonical request hash
 and identity; it can return the same stored success. Reserved/unknown/failed
 requests cannot authorize another physical execution. There is a conservative
 64-call cap per task. Pending/unknown tools prevent task output publication.
-Non-idempotent tools are denied pending the P5-05 approval implementation.
+Non-idempotent tools require the [P5-05 one-use approval protocol](security/approval.md); an approval never expands role or resource permissions.
 
 Authenticated denials append digest-only DB audit events even after lease expiry;
 unauthenticated requests use the mandatory structured audit sink without trusting

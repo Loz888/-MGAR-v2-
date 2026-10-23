@@ -139,7 +139,7 @@ func commitModelTask(ctx context.Context, tx pgx.Tx, c TaskClaim) error {
 // and settlement. An uncertain model result cannot become task output.
 func requireSettledModels(ctx context.Context, tx pgx.Tx, c TaskClaim) error {
 	var unsafe bool
-	if e := tx.QueryRow(ctx, "SELECT EXISTS(SELECT 1 FROM model_calls WHERE run_id=$1 AND task_id=$2 AND status IN ('reserved','unknown')) OR EXISTS(SELECT 1 FROM tool_invocations WHERE task_id=$2 AND status IN ('reserved','unknown'))", c.RunID, c.TaskID).Scan(&unsafe); e != nil {
+	if e := tx.QueryRow(ctx, "SELECT EXISTS(SELECT 1 FROM model_calls WHERE run_id=$1 AND task_id=$2 AND status IN ('reserved','unknown')) OR EXISTS(SELECT 1 FROM tool_invocations WHERE task_id=$2 AND status IN ('reserved','unknown')) OR EXISTS(SELECT 1 FROM approval_requests WHERE task_id=$2 AND state IN ('pending','approved'))", c.RunID, c.TaskID).Scan(&unsafe); e != nil {
 		return e
 	}
 	if unsafe {
@@ -210,6 +210,9 @@ func (s *Store) ReconcileCalls(ctx context.Context, run, owner string, epoch, re
 		result.Unknown++
 	}
 	if e = tx.QueryRow(ctx, `SELECT EXISTS(SELECT 1 FROM tool_invocations v JOIN task_instances t ON t.task_id=v.task_id WHERE t.run_id=$1 AND v.effect_class='non_idempotent' AND v.status IN ('reserved','unknown','succeeded') AND t.state IN ('claimed','executing'))`, run).Scan(&result.UnsafeTool); e != nil {
+		return result, e
+	}
+	if e = expireApprovalsTx(ctx, tx, run); e != nil {
 		return result, e
 	}
 	if e = commitControl(ctx, tx, run, c); e != nil {

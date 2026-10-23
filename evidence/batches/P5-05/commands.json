@@ -1,0 +1,122 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/policy/...",
+      "./internal/verifier/...",
+      "./tests/security/...",
+      "-run",
+      "Approval|Review"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P5-05/card-red.log",
+    "timestamp_utc": "2026-10-23T18:13:19.817623+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/policy/...",
+      "./internal/verifier/...",
+      "./tests/security/...",
+      "-run",
+      "Approval|Review"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-05/card-first.log",
+    "timestamp_utc": "2026-10-23T18:15:04.728969+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/policy/...",
+      "./internal/verifier/...",
+      "./tests/security/...",
+      "./tests/integration/...",
+      "-run",
+      "Approval|Review"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-05/card-expanded.log",
+    "timestamp_utc": "2026-10-23T18:16:49.450725+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./cmd/mgarctl/...",
+      "./internal/policy/...",
+      "./internal/verifier/...",
+      "./tests/security/...",
+      "./tests/integration/...",
+      "-run",
+      "Approval|Review"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-05/card-concurrency-cli.log",
+    "timestamp_utc": "2026-10-23T18:18:34.082918+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./internal/policy/...",
+      "./internal/verifier/...",
+      "./tests/security/...",
+      "-run",
+      "Approval|Review"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-05/card-final.log",
+    "timestamp_utc": "2026-10-23T18:20:16.075145+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-05/full-offline.log",
+    "timestamp_utc": "2026-10-23T18:21:27.418694+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-05/go-test.log",
+    "timestamp_utc": "2026-10-23T18:22:31.508827+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-05/go-build.log",
+    "timestamp_utc": "2026-10-23T18:22:32.353091+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P5-05/final-check.log",
+    "timestamp_utc": "2026-10-23T18:22:32.443873+00:00"
+  }
+]

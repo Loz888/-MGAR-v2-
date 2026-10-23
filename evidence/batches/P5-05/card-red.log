@@ -1,0 +1,3 @@
+{
+  "stdout": "# github.com/Loz888/-MGAR-v2-/tests/security [github.com/Loz888/-MGAR-v2-/tests/security.test]\ntests/security/approval_test.go:57:18: undefined: store.Approval\ntests/security/approval_test.go:65:19: s.DecideApproval undefined (type *store.Store has no field or method DecideApproval)\ntests/security/approval_test.go:90:24: undefined: verifier.AttachReview\ntests/security/approval_test.go:95:22: undefined: verifier.AttachReview\nok  \tgithub.com/Loz888/-MGAR-v2-/internal/policy\t0.004s [no tests to run]\nok  \tgithub.com/Loz888/-MGAR-v2-/internal/verifier\t0.003s [no tests to run]\nFAIL\tgithub.com/Loz888/-MGAR-v2-/tests/security [build failed]\nFAIL\n"
+}

@@ -30,7 +30,7 @@
 | [P5-02](tasks/P5-02.md) | P5 | 证据重执行与独立 Oracle | P5-01 | PASS | `evidence/batches/P5-02/accept.json` |
 | [P5-03](tasks/P5-03.md) | P5 | Tool Gateway 与 Capability Policy | P5-02 | PASS | `evidence/batches/P5-03/accept.json` |
 | [P5-04](tasks/P5-04.md) | P5 | 真正隔离的 Sandbox Executor | P5-03 | PASS | `evidence/batches/P5-04/accept.json` |
-| [P5-05](tasks/P5-05.md) | P5 | 审批、风险分类与 Reviewer 辅助 | P5-04 | TODO | `evidence/batches/P5-05/accept.json` |
+| [P5-05](tasks/P5-05.md) | P5 | 审批、风险分类与 Reviewer 辅助 | P5-04 | PASS | `evidence/batches/P5-05/accept.json` |
 | [P6-01](tasks/P6-01.md) | P6 | 全局预算账本与原子预留 | P5-05 | TODO | `evidence/batches/P6-01/accept.json` |
 | [P6-02](tasks/P6-02.md) | P6 | 资源池与 Backpressure | P6-01 | TODO | `evidence/batches/P6-02/accept.json` |
 | [P6-03](tasks/P6-03.md) | P6 | 关键路径调度与成本感知模型路由 | P6-02 | TODO | `evidence/batches/P6-03/accept.json` |

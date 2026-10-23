@@ -40,7 +40,19 @@ func (s *Store) ValidateToolClaim(ctx context.Context, c TaskClaim) error {
 // returned only for the exact same request and fenced principal; uncertainty
 // never creates another execution authorization, including after a restart.
 func (s *Store) BeginTool(ctx context.Context, c TaskClaim, r ToolRequest) (bool, error) {
-	if !toolUUID.MatchString(r.ID) || !toolHash.MatchString(r.Hash) || r.Capability == "" || r.Version == "" || r.Resource == "" || (r.Effect != "readonly" && r.Effect != "idempotent_write") {
+	if r.Effect == "non_idempotent" {
+		return false, ErrPolicy
+	}
+	return s.beginTool(ctx, c, r, "", "")
+}
+func (s *Store) BeginApprovedTool(ctx context.Context, c TaskClaim, r ToolRequest, approvalID, token string) (bool, error) {
+	if c.Role != "action" || r.Effect != "non_idempotent" {
+		return false, ErrPolicy
+	}
+	return s.beginTool(ctx, c, r, approvalID, token)
+}
+func (s *Store) beginTool(ctx context.Context, c TaskClaim, r ToolRequest, approvalID, token string) (bool, error) {
+	if !toolUUID.MatchString(r.ID) || !toolHash.MatchString(r.Hash) || r.Capability == "" || r.Version == "" || r.Resource == "" || (r.Effect != "readonly" && r.Effect != "idempotent_write" && r.Effect != "non_idempotent") {
 		return false, ErrPolicy
 	}
 	tx, state, e := s.guardTask(ctx, c, true)
@@ -59,7 +71,7 @@ func (s *Store) BeginTool(ctx context.Context, c TaskClaim, r ToolRequest) (bool
 		if json.Unmarshal(raw, &scope) != nil || scope != scopeFor(c, r) || task != c.TaskID || hash != r.Hash || capability != r.Capability || effect != r.Effect {
 			return false, ErrPolicy
 		}
-		if status != "succeeded" {
+		if status != "succeeded" || r.Effect == "non_idempotent" {
 			return false, ErrUnsafeReplay
 		}
 		return true, commitModelTask(ctx, tx, c)
@@ -77,6 +89,16 @@ func (s *Store) BeginTool(ctx context.Context, c TaskClaim, r ToolRequest) (bool
 	}
 	if count >= 64 {
 		return false, ErrBudget
+	}
+	if r.Effect == "non_idempotent" {
+		if e = consumeApproval(ctx, tx, c, r, approvalID, token); e != nil {
+			if errors.Is(e, ErrApprovalExpired) {
+				if commitErr := commitModelTask(ctx, tx, c); commitErr != nil {
+					return false, commitErr
+				}
+			}
+			return false, e
+		}
 	}
 	raw, _ = json.Marshal(scopeFor(c, r))
 	if _, e = tx.Exec(ctx, "INSERT INTO tool_invocations(invocation_id,task_id,capability,scope,request_hash,effect_class,status) VALUES($1,$2,$3,$4,$5,$6,'reserved')", r.ID, c.TaskID, r.Capability, raw, r.Hash, r.Effect); e != nil {
