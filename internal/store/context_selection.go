@@ -31,6 +31,15 @@ func (s *Store) ReadSnapshot(ctx context.Context, c TaskClaim, id string) (input
 	if e = json.Unmarshal([]byte(body), &snap); e != nil || snap.Hash() != hash || snap.Role != c.Role || snap.Selection != nil {
 		return inputcontext.Snapshot{}, ErrStaleInput
 	}
+	// Reading the persisted body may wait behind a database lock. Authority
+	// checked by guardTask must still be live when releasing context to a caller.
+	var live bool
+	if e = tx.QueryRow(ctx, "SELECT lease_until>clock_timestamp() FROM task_instances WHERE task_id=$1", c.TaskID).Scan(&live); e != nil {
+		return inputcontext.Snapshot{}, e
+	}
+	if !live {
+		return inputcontext.Snapshot{}, ErrLeaseExpired
+	}
 	return snap, tx.Commit(ctx)
 }
 

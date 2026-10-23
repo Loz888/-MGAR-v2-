@@ -119,6 +119,9 @@ func Select(s Snapshot, goal, mode string, maxBytes, maxTokens int, content map[
 		candidates = append(candidates, scored{ref, score, critical})
 	}
 	sort.Slice(candidates, func(i, j int) bool {
+		if mode == "selected" && candidates[i].critical != candidates[j].critical {
+			return candidates[i].critical
+		}
 		if mode == "selected" && candidates[i].score != candidates[j].score {
 			return candidates[i].score > candidates[j].score
 		}

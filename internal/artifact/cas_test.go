@@ -99,3 +99,19 @@ func TestCASPathSymlinkHardlinkAndBounds(t *testing.T) {
 		t.Fatal("symlink root accepted")
 	}
 }
+
+func TestAuditCASRejectsSymlinkBeforeCreatingDirectories(t *testing.T) {
+	base, outside := t.TempDir(), t.TempDir()
+	alias := filepath.Join(base, "alias")
+	if err := os.Symlink(outside, alias); err != nil {
+		t.Fatal(err)
+	}
+	if c, err := New(filepath.Join(alias, "must-not-create", "cas")); err == nil {
+		c.Close()
+		t.Fatal("symlink ancestor accepted")
+	}
+	entries, err := os.ReadDir(outside)
+	if err != nil || len(entries) != 0 {
+		t.Fatalf("denied CAS initialization wrote outside its path: %v %v", entries, err)
+	}
+}

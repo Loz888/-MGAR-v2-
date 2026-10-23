@@ -1,0 +1,38 @@
+[
+  {
+    "path": "evidence/batches/P0-P3-AUDIT/failed-full-docs.json.json",
+    "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+  },
+  {
+    "path": "evidence/batches/P0-P3-AUDIT/failed-full-fingerprint.json",
+    "sha256": "9684db84c4bb37315c4d5cd704ee14b889a418992e0e332ea87e6ee72a550ca0"
+  },
+  {
+    "path": "evidence/batches/P0-P3-AUDIT/failed-full-go.json.json",
+    "sha256": "c9e7801078b1e74ae2361c9b44c6bf05f9cc42394b587f0fca58df6c8726aeb5"
+  },
+  {
+    "path": "evidence/batches/P0-P3-AUDIT/failed-full-mypy.log.json",
+    "sha256": "1ae3ea7bf8af27311c624bc172fc6cae5875fe3d5975ba54e6fe9ac981f6a84b"
+  },
+  {
+    "path": "evidence/batches/P0-P3-AUDIT/failed-full-pytest.log.json",
+    "sha256": "f1c60377875906852619b465cc4717db7012875ee1be9296fb167c0cae36e91d"
+  },
+  {
+    "path": "evidence/batches/P0-P3-AUDIT/failed-full-pytest.xml.json",
+    "sha256": "f8367d842b111d811186ede9157b0cd3434c80e8a3730b1bfd7912a1132c0115"
+  },
+  {
+    "path": "evidence/batches/P0-P3-AUDIT/failed-full-report.json.json",
+    "sha256": "4fc92888b18277c607bd38c05b8005e7ffbd856c4900a7f87aab4a31c75460dc"
+  },
+  {
+    "path": "evidence/batches/P0-P3-AUDIT/failed-full-ruff.log.json",
+    "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+  },
+  {
+    "path": "evidence/batches/P0-P3-AUDIT/failed-full-vet.log.json",
+    "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+  }
+]

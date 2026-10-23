@@ -72,3 +72,22 @@ func TestContextSummaryIsLossyAndKeepsOriginalProvenance(t *testing.T) {
 		}
 	}
 }
+
+func TestAuditContextCriticalEvidencePrecedesKeywordStuffedLog(t *testing.T) {
+	s, content := selectorFixture()
+	goal := "alpha bravo charlie delta echo foxtrot golf hotel india juliet kilo lima mike november oscar papa"
+	log := s.Artifacts[0].ID
+	content[log] = []byte(goal)
+	s.Artifacts[0].Hash = artifact.Digest(content[log])
+	s.Artifacts[0].ByteLength = int64(len(content[log]))
+	// Measure a budget that admits the critical original plus the fixed metadata,
+	// but cannot also admit the optional log, regardless of its keyword score.
+	critical := s
+	critical.Selection = &SelectionEnvelope{SourceSnapshotHash: s.Hash(), Mode: "selected", PolicyVersion: SelectorVersion, TokenEstimator: TokenEstimator,
+		Items: []SelectedItem{{ID: s.Artifacts[1].ID, Hash: s.Artifacts[1].Hash, Text: string(content[s.Artifacts[1].ID]), Original: true}}}
+	budget := len(critical.Bytes()) + 150
+	r, err := Select(s, goal, "selected", budget, 65536, content)
+	if err != nil || r.Blocked || len(r.Admitted) != 1 || r.Admitted[0].ID != s.Artifacts[1].ID || r.UsedBytes > budget {
+		t.Fatalf("optional log displaced critical evidence: %+v %v", r, err)
+	}
+}

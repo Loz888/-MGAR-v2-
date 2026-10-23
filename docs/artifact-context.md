@@ -1,11 +1,13 @@
 # Artifact 与 Context 实现
 
-Version: artifact-context.v1
+Version: artifact-context.v2
 
 P3-01 提供真实本地 CAS 与受控 `PublishArtifact`。相同字节只存一份，
 每个生产任务仍有独立 Artifact UUID、Run、Task、计划版本、内容类型和工具版本。
 外部引用为 `artifact://<uuid>`；磁盘位置仅由受信服务按哈希计算，不能用 URI 作为宿主路径。
 读取必须重校验 SHA-256、大小、文件类型和链接数。
+初始化根目录时逐级使用目录描述符及禁止软链接的打开方式，拒绝路径不能先在链接目标创建目录。
+发布工具版本与输入快照统一使用 `ValidVersion`，非法版本在落盘前拒绝。
 
 发布时把元数据、Task output_ready、运行槽释放与事件/Outbox 放入同一 PostgreSQL 事务，
 保持原有 Claim 守卫；不会把内容标成独立验证通过，也不会完成整个 Workflow。
@@ -26,6 +28,7 @@ P3-01 提供真实本地 CAS 与受控 `PublishArtifact`。相同字节只存一
 Go 与 Python SDK 的实际序列化/哈希互通经过子进程验证。
 
 `ReadInput` 同时检查当前 Claim、固定快照归属和直接依赖授权，再校验 CAS 内容；
+`ReadSnapshot` 在数据库读取之后也重新核对租约，等待锁不能延长旧 Owner 的读取授权。
 同内容哈希不能授予别的 Run 或私有产物访问权。内容在传给 Provider 之前仍是不可信数据。
 新的 CAS 发布必须已有固定快照，并在同一发布事务中写 artifact_contexts，建立输出到输入的来源链。
 执行入口须先构造快照再调用模型；尚无自动 Go→Python Worker 调度服务。
@@ -36,6 +39,7 @@ Go 与 Python SDK 的实际序列化/哈希互通经过子进程验证。
 `PrepareContext` 先经过固定快照授权和 CAS 重校验，再运行确定性选择器。
 full 保留授权集合的完整内容并按上限记录截断；summary 生成最多 256 UTF-8 字节的规则摘录；
 selected 按角色、证据种类和目标实体匹配评分，稳定按 ID 打破平分，并记录纳入/排除原因。
+selected 先为关键证据排序，再比较相关性分数；日志的关键词数量不能挤占关键证据预算。
 这里的“全部历史”以当前快照有权访问的集合为界，不能扩展到整个 Run 的私有资料。
 关键证据无法放入预算时阻止请求；低相关日志可以省略，固定输入来源清单不会被改写。
 

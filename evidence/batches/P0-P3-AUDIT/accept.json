@@ -1,0 +1,783 @@
+{
+  "card_id": "P0-P3-AUDIT",
+  "status": "PASS",
+  "git_commit": null,
+  "base_git_commit": "bf54639e25475b61452c847a6352d274119951ba",
+  "source_fingerprint": "649b472afe6d5e7d347403032fce2cb231c2453175dbaa7d5edda8c9efae6245",
+  "scope": "User-authorized review of all 17 completed P0-01 through P3-04 cards and six groups of reproduced fixes. No P4 implementation. Historical acceptance and frozen specifications unchanged.",
+  "environment": {
+    "platform": "linux/amd64",
+    "go": "1.27.3",
+    "python": "3.12.14",
+    "pytest": "9.0.2",
+    "postgres": "16.11 (Debian 16.11-1.pgdg12+1)",
+    "database": "local synthetic PostgreSQL only; each test cleans up its owned resources"
+  },
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 150,
+      "passed": 150,
+      "failed_events": 0,
+      "skipped": 0,
+      "complete": true
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 290,
+      "passed": 290,
+      "failed": 0,
+      "skipped_or_xfailed": 0,
+      "complete": true,
+      "passed_subtests": 15
+    },
+    "status": "PASS"
+  },
+  "commands": [
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-P3-AUDIT/baseline.log",
+      "timestamp_utc": "2026-10-23T09:49:45.883751+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_audit_pipeline.py"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P0-P3-AUDIT/red-pipeline.log",
+      "timestamp_utc": "2026-10-23T09:54:18.328796+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./internal/context",
+        "./tests/integration",
+        "-run",
+        "Audit",
+        "-v"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P0-P3-AUDIT/red-go.log",
+      "timestamp_utc": "2026-10-23T09:54:19.696520+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./internal/artifact",
+        "-run",
+        "Audit",
+        "-v"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P0-P3-AUDIT/red-cas.log",
+      "timestamp_utc": "2026-10-23T09:55:03.162782+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "./internal/artifact",
+        "./internal/context",
+        "./tests/integration",
+        "-run",
+        "Audit|CAS|Context|Ready|Fan|Dependency",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-P3-AUDIT/green-go.log",
+      "timestamp_utc": "2026-10-23T09:56:50.097100+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_pipeline.py",
+        "tests/test_audit_pipeline.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-P3-AUDIT/green-pipeline.log",
+      "timestamp_utc": "2026-10-23T09:57:07.327220+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P0-P3-AUDIT/full-offline.log",
+      "timestamp_utc": "2026-10-23T10:03:12.800182+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_audit_pipeline.py",
+        "-k",
+        "actual_pytest or actual_subtest"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P0-P3-AUDIT/red-pytest-events.log",
+      "timestamp_utc": "2026-10-23T10:04:54.958011+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_audit_pipeline.py",
+        "tests/test_pipeline.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-P3-AUDIT/green-pytest-events.log",
+      "timestamp_utc": "2026-10-23T10:05:55.028597+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-P3-AUDIT/full-offline-final.log",
+      "timestamp_utc": "2026-10-23T10:07:27.031203+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "build",
+        "./..."
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-P3-AUDIT/build.log",
+      "timestamp_utc": "2026-10-23T10:54:17.682158+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./..."
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-P3-AUDIT/go-test.log",
+      "timestamp_utc": "2026-10-23T10:55:04.550876+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/smoke_health.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-P3-AUDIT/health.log",
+      "timestamp_utc": "2026-10-23T10:55:13.565286+00:00"
+    },
+    {
+      "command": [
+        "ruff",
+        "check",
+        "--isolated",
+        "scripts/verify_results.py",
+        "scripts/pytest_evidence.py",
+        "tests/test_audit_pipeline.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-P3-AUDIT/extra-lint.log",
+      "timestamp_utc": "2026-10-23T10:55:40.761239+00:00"
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".local/db.env",
+        "-f",
+        "deploy/compose.yaml",
+        "config",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-P3-AUDIT/compose-config.log",
+      "timestamp_utc": "2026-10-23T10:55:41.031125+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-P3-AUDIT/final-audit.log",
+      "timestamp_utc": "2026-10-23T10:55:41.285286+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-P3-AUDIT/diff-check.log",
+      "timestamp_utc": "2026-10-23T10:55:41.492167+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "-c",
+        "go version && python --version && docker compose --env-file .local/db.env -f deploy/compose.yaml exec -T postgres postgres --version"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-P3-AUDIT/environment-versions.log",
+      "timestamp_utc": "2026-10-23T10:57:00.650312+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-export-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-P3-AUDIT/export-and-verify.log",
+      "timestamp_utc": "2026-10-23T10:59:52.833053+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P0-P3-AUDIT/exported-secret-format-check.log",
+      "timestamp_utc": "2026-10-23T11:00:41.632891+00:00"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "cards": [
+        "P0-03"
+      ],
+      "fix": "Reject truncated Go package reports and incomplete JUnit; verify actual pytest phases and subtests.",
+      "red_logs": [
+        "red-pipeline.log",
+        "red-pytest-events.log"
+      ],
+      "green_logs": [
+        "green-pytest-events.log",
+        "full-offline-final.log"
+      ]
+    },
+    {
+      "id": "F2",
+      "cards": [
+        "P1-03"
+      ],
+      "fix": "Serialize RefreshReady with pending verdicts and recheck Orchestrator lease before commit.",
+      "red_logs": [
+        "red-go.log"
+      ],
+      "green_logs": [
+        "green-go.log",
+        "full-offline-final.log"
+      ]
+    },
+    {
+      "id": "F3",
+      "cards": [
+        "P3-02",
+        "P3-03"
+      ],
+      "fix": "Reject ReadSnapshot if the Task lease expires while waiting on the body read.",
+      "red_logs": [
+        "red-go.log"
+      ],
+      "green_logs": [
+        "green-go.log",
+        "full-offline-final.log"
+      ]
+    },
+    {
+      "id": "F4",
+      "cards": [
+        "P3-03"
+      ],
+      "fix": "Select critical evidence before optional keyword-heavy logs within measured byte/token budgets.",
+      "red_logs": [
+        "red-go.log"
+      ],
+      "green_logs": [
+        "green-go.log",
+        "full-offline-final.log"
+      ]
+    },
+    {
+      "id": "F5",
+      "cards": [
+        "P3-01",
+        "P3-02"
+      ],
+      "fix": "Validate published tool versions with the same contract used by snapshot construction.",
+      "red_logs": [
+        "red-go.log"
+      ],
+      "green_logs": [
+        "green-go.log",
+        "full-offline-final.log"
+      ]
+    },
+    {
+      "id": "F6",
+      "cards": [
+        "P3-01"
+      ],
+      "fix": "Walk/create CAS directories through pinned directory descriptors with O_NOFOLLOW before any child creation.",
+      "red_logs": [
+        "red-cas.log"
+      ],
+      "green_logs": [
+        "green-go.log",
+        "full-offline-final.log"
+      ]
+    }
+  ],
+  "positive_assertions": [
+    {
+      "name": "all_enabled_tests_completed_without_skips_or_xfails",
+      "passed": true
+    },
+    {
+      "name": "source_fingerprint_matches_full_passing_run",
+      "passed": true
+    },
+    {
+      "name": "17_historical_cards_678_artifact_hashes_verified_at_delivery_commits",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/artifact/TestAuditCASRejectsSymlinkBeforeCreatingDirectories",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/context/TestAuditContextCriticalEvidencePrecedesKeywordStuffedLog",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestAuditArtifactRejectsUnconsumableToolVersion/with_space",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestAuditArtifactRejectsUnconsumableToolVersion/line_break",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestAuditArtifactRejectsUnconsumableToolVersion/工具.v1",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestAuditArtifactRejectsUnconsumableToolVersion",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestAuditProcessHelper",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestAuditReadySerializesWithPendingRevocationAcrossProcess",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestAuditContextReadFencesLeaseExpiredDuringDatabaseWait",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestAuditReadyReadFencesOrchestratorExpiredDuringWait",
+      "passed": true
+    },
+    {
+      "name": "tests.test_audit_pipeline/test_audit_go_report_requires_package_completion",
+      "passed": true
+    },
+    {
+      "name": "tests.test_audit_pipeline/test_audit_junit_report_rejects_missing_cases",
+      "passed": true
+    },
+    {
+      "name": "tests.test_audit_pipeline/test_audit_actual_pytest_subtests_and_missing_phase",
+      "passed": true
+    },
+    {
+      "name": "tests.test_audit_pipeline/test_audit_actual_subtest_failure_or_skip_is_rejected[pytest.skip(\"injected\")]",
+      "passed": true
+    },
+    {
+      "name": "tests.test_audit_pipeline/test_audit_actual_subtest_failure_or_skip_is_rejected[pytest.xfail(\"injected\")]",
+      "passed": true
+    },
+    {
+      "name": "tests.test_audit_pipeline/test_audit_actual_subtest_failure_or_skip_is_rejected[assert False]",
+      "passed": true
+    }
+  ],
+  "negative_assertions": [
+    {
+      "name": "truncated_go_and_missing_junit_evidence_rejected",
+      "passed": true
+    },
+    {
+      "name": "missing_pytest_phase_or_subtest_and_actual_skip_xfail_failure_rejected",
+      "passed": true
+    },
+    {
+      "name": "pending_revocation_serializes_ready_across_independent_processes",
+      "passed": true
+    },
+    {
+      "name": "lease_expiring_during_actual_database_wait_rejects_context_and_ready",
+      "passed": true
+    },
+    {
+      "name": "invalid_tool_versions_produce_no_artifact_or_task_budget_event_change",
+      "passed": true
+    },
+    {
+      "name": "symlink_path_rejected_without_creating_directories_at_external_target",
+      "passed": true
+    }
+  ],
+  "failure_history": [
+    {
+      "log_path": "evidence/batches/P0-P3-AUDIT/red-pipeline.log",
+      "exit_code": 1
+    },
+    {
+      "log_path": "evidence/batches/P0-P3-AUDIT/red-go.log",
+      "exit_code": 1
+    },
+    {
+      "log_path": "evidence/batches/P0-P3-AUDIT/red-cas.log",
+      "exit_code": 1
+    },
+    {
+      "log_path": "evidence/batches/P0-P3-AUDIT/full-offline.log",
+      "exit_code": 1
+    },
+    {
+      "log_path": "evidence/batches/P0-P3-AUDIT/red-pytest-events.log",
+      "exit_code": 1
+    }
+  ],
+  "failure_explanation": "Original red tests reproduced defects. The first full run rejected pytest 9 JUnit subtest counts despite passing test bodies; retained raw failed artifacts. The new actual pytest phase recorder initially had red tests and then passed; no bypass, skip or xfail was used to make the final run pass.",
+  "known_limitations": [
+    "Go-to-Python automatic Worker dispatch, lease maintenance and result return are not yet wired end to end; later integration needs explicit task ownership.",
+    "Independent Verifier, Gateway and real Sandbox belong to P5; complete synthetic workflow acceptance belongs to P7-02.",
+    "Current trusted offline adapters do not isolate arbitrary untrusted host code. Python candidate output is not automatically durable or verified.",
+    "Linux CAS implementation; pytest event recorder targets locked pytest 9.0.2 and must be reviewed on dependency upgrades.",
+    "Review and regression results do not certify absence of all security bugs and do not replace P8 release audit."
+  ],
+  "unverified": [
+    {
+      "name": "paid_real_model_calls",
+      "status": "NOT_RUN",
+      "reason": "not authorized; mock and local HTTP stub only"
+    },
+    {
+      "name": "production_database_operations",
+      "status": "NOT_RUN",
+      "reason": "outside authorized synthetic test scope"
+    },
+    {
+      "name": "cross_host_and_power_loss_experiments",
+      "status": "NOT_RUN",
+      "reason": "outside this single-host review"
+    },
+    {
+      "name": "P4_and_later_stage_acceptance",
+      "status": "NOT_RUN",
+      "reason": "not implemented in this audit"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "TASK_QUEUE.md",
+      "sha256": "4fc23d83ab07dcb39e0043e6e9027e1f75baeb1363c167defc6d5c2a2c04eecd"
+    },
+    {
+      "path": "docs/artifact-context.md",
+      "sha256": "454bbd64144191565084c6a9df4e3ca2e8635186f6e4492432c312b82c8ba23a"
+    },
+    {
+      "path": "docs/audits/P0-P3.md",
+      "sha256": "4b9172af4e060e00858307f6f5c22468ae743a170256176183181a5cef125c35"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/baseline-fingerprint.json",
+      "sha256": "d7d9e1e9e991e78654ed08130d3942bec81fc6afcd0c7b691130ce856d441d3d"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/baseline-go.json.json",
+      "sha256": "c5cba1173aae6b5645148d8a40bc4a77fbc989bcf6e78748fd38abff7e8f5d44"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/baseline-pytest.xml.json",
+      "sha256": "b7a64fbada63c683b9d23d6c63be55b86285f3e97ccb5f9cc77c58d0910a4271"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/baseline-report.json.json",
+      "sha256": "0ce493c303e2098abddae61deec351a38b1d28a62daf5a22286e0a91f0cb8dbf"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/baseline-results.json",
+      "sha256": "d57af6a6b11bff266b17167a68796721019821932c919c13cf363f4c7e60fccb"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/baseline.log",
+      "sha256": "63ff379906c44264682cca5602939cbc57afe1e07995180033c72e997bff77ca"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/build.log",
+      "sha256": "b4ba12673cbed1a6b5424f5da9e830d424b33e76a678147ecc696974b3350dd0"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/commands.json",
+      "sha256": "45dc5b6402d6f570c2e0197924a453a59a59c7890df0a383bb1d0711fd69485a"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/compose-config.log",
+      "sha256": "b4ba12673cbed1a6b5424f5da9e830d424b33e76a678147ecc696974b3350dd0"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/diff-check.log",
+      "sha256": "b4ba12673cbed1a6b5424f5da9e830d424b33e76a678147ecc696974b3350dd0"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/environment-versions.log",
+      "sha256": "76a0055bd98d51c16ce7cdd21e6bb9b29259c0c0d72a6193fea19d1664d6c46a"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/export-and-verify.log",
+      "sha256": "597e731a4f41f5d5f428233fc48c9fc94460b54be85173bd73ba3bee459999ed"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/exported-secret-format-check.log",
+      "sha256": "e1cce1ab06e5e434556b16ad64466112b9aef59202d845e0ae3ffbf80bbce19b"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/extra-lint.log",
+      "sha256": "9a703557e17ca66280bc5d5e57766b72749dd48d4dc62a6fc66be915df314fed"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/failed-full-artifacts.json",
+      "sha256": "2b4ea3e5405222f770546ce6a118ad6b886958d467402183f8382ea73e58ddbd"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/failed-full-docs.json.json",
+      "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/failed-full-fingerprint.json",
+      "sha256": "9684db84c4bb37315c4d5cd704ee14b889a418992e0e332ea87e6ee72a550ca0"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/failed-full-go.json.json",
+      "sha256": "c9e7801078b1e74ae2361c9b44c6bf05f9cc42394b587f0fca58df6c8726aeb5"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/failed-full-mypy.log.json",
+      "sha256": "1ae3ea7bf8af27311c624bc172fc6cae5875fe3d5975ba54e6fe9ac981f6a84b"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/failed-full-pytest.log.json",
+      "sha256": "f1c60377875906852619b465cc4717db7012875ee1be9296fb167c0cae36e91d"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/failed-full-pytest.xml.json",
+      "sha256": "f8367d842b111d811186ede9157b0cd3434c80e8a3730b1bfd7912a1132c0115"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/failed-full-report.json.json",
+      "sha256": "4fc92888b18277c607bd38c05b8005e7ffbd856c4900a7f87aab4a31c75460dc"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/failed-full-ruff.log.json",
+      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/failed-full-vet.log.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/final-audit.log",
+      "sha256": "7193eb677590a579ed81818aeddde8f3981e4ff8d4e33cf30823f887aeacc69a"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/final-docs.json.json",
+      "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/final-fingerprint.json",
+      "sha256": "f91e66597d786da1bb76f5dda44981922e8b51ecbf0f50f1586cc7c5f454c06a"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/final-go.json.json",
+      "sha256": "dc1a4531fe8ffa3c1e349fa8ceb049fd2f4b977e66d3f8237083c72aabf43f35"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/final-mypy.log.json",
+      "sha256": "1ae3ea7bf8af27311c624bc172fc6cae5875fe3d5975ba54e6fe9ac981f6a84b"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/final-pytest-events.json.json",
+      "sha256": "9a24bdb0fba464bdffeaf337fea1abcc76fef8421ba04bc69bc27ec725621820"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/final-pytest.log.json",
+      "sha256": "5ff4a92888871bfc2b186079b25f4d84a9554eb8c35dfb0ccd2d2bf0ecf91ab5"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/final-pytest.xml.json",
+      "sha256": "dfcc97f3d7163537cc5ef8b68b52c36d42fd27586c00765f0cc0bb685e72ba9f"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/final-report.json.json",
+      "sha256": "c6e1c3a57bce2b397e2e6bf8cbf69861db774d9b5749c009dfc006c98207de6a"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/final-ruff.log.json",
+      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/final-vet.log.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/full-offline-final.log",
+      "sha256": "9e73e12503a4b44bf13e4588267184bf03bf36a2b2dac85d02a3744218981e34"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/full-offline.log",
+      "sha256": "5dd86666c661880eee7c0db565155a5584cba8528f76aed5550ea7dc329cf782"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/go-test.log",
+      "sha256": "dc6f997cb8738bd76661f13d57665c1a5248ab0c95adad4c529e9dd0b675fcf7"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/green-go.log",
+      "sha256": "808c68feebc1f60578e04ff60646c87887abc005952e7ced4abe7b77d97e86d9"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/green-pipeline.log",
+      "sha256": "111ba9eb1540c33871b3e8d2fb864d900604b0b3af91f423eaaff30f27908094"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/green-pytest-events.log",
+      "sha256": "2c806f06b470681630bc1b1e4f32e50052dccf8e5472669655da60b5d8b7e86f"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/health.log",
+      "sha256": "2eb8e1f7516acacda48964d26aae4b3fa517b377b12eb2e3823b84ff6a693bf0"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/historical-artifact-verification.json",
+      "sha256": "5bb54665094755d90effab769e17cadd74cd94383feacfc5a6e80d204f194622"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/mgar-export-audit.py.json",
+      "sha256": "65111ef50474fe4e6f41c58731428072d7e1105646707e36dd73a88ed78bd2ee"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/mgar-final-audit.py.json",
+      "sha256": "51a160a9332453de3890a9d00b0758f9ad83d94ad74213973e7a8a3f5ed75a97"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/mgar-record.py.json",
+      "sha256": "64f4dda6779e79373df9825ac90778cc70f553571765406e9b340d545b150405"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/red-cas.log",
+      "sha256": "8ecf5dd2ef055c1072fee67727463c4fe5a22772375aab334ac4b86f24788296"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/red-go.log",
+      "sha256": "6f9658819d1386981a20d47c8e71b1c1d122369c4d03cc1065c61085f58a9292"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/red-pipeline.log",
+      "sha256": "094a80488263bd534cb65cca74bbaefbf35eeb96b21ca08e9b34ab128c527ad2"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/red-pytest-events.log",
+      "sha256": "90079f09c2412f3cb5a8de05822e6b0daa9eaf4832f24e3d5115372bd338a589"
+    },
+    {
+      "path": "internal/artifact/cas.go",
+      "sha256": "46c32d7d917657dc3689d07bf8899b66e47a697381d49289e0bafacce85935da"
+    },
+    {
+      "path": "internal/artifact/cas_test.go",
+      "sha256": "147d66b0dec1a3f0b4923bea059f6162b9eae07360418d4f92bf0c33b8083af2"
+    },
+    {
+      "path": "internal/context/selector.go",
+      "sha256": "207b6183966547aeb6cf61bfe696452721cf1b466adffb924b0fe32f4cbd909f"
+    },
+    {
+      "path": "internal/context/selector_test.go",
+      "sha256": "699fef729e03501be779f2fc2e6f4a7ae29ca7e7dbe41d668cade1b91d10124e"
+    },
+    {
+      "path": "internal/store/artifacts.go",
+      "sha256": "1d444f85f9d7170aaa6543c36b0e54b06bb712017db7a8f06c272b2289063dec"
+    },
+    {
+      "path": "internal/store/context_selection.go",
+      "sha256": "364e3d91735347cc594b6a18cb0bf47e00a55f7ed8b8e858d4afefd7a5f7ea11"
+    },
+    {
+      "path": "internal/store/tasks.go",
+      "sha256": "ecfa1396f581e5b81a8a2125c19d9ba70df4c5018a378eb3433a6f3cae01cf6d"
+    },
+    {
+      "path": "scripts/pytest_evidence.py",
+      "sha256": "6e45f91a4919e6a9061a901152e8020d12292177937a2f8c8875c24da747c5d7"
+    },
+    {
+      "path": "scripts/test.sh",
+      "sha256": "a61516f2e91dac129a0437a9f7eead7c7c216a37344df350fbaf65a0736795e8"
+    },
+    {
+      "path": "scripts/verify_results.py",
+      "sha256": "ddc4c4ab1a947db855b4e30e3724f63f791e3e71cd52337d8d628aa9ba27e3e3"
+    },
+    {
+      "path": "tests/integration/artifacts_test.go",
+      "sha256": "83d83d9ee31e8531dfe53cf96ed7150bff0e98fc786dd9e7150c6a12e87366e2"
+    },
+    {
+      "path": "tests/integration/audit_boundaries_test.go",
+      "sha256": "8dd9e583c5f8fc6bb874fe3968101db00cc769b07bac3716bc92f0dea336970d"
+    },
+    {
+      "path": "tests/test_audit_pipeline.py",
+      "sha256": "de3abf6e3f2dfb7a192bbeb5803d67269b7728570c36d6d4a4d0fef05ab02224"
+    }
+  ],
+  "timestamp_utc": "2026-10-23T11:00:41.892655+00:00"
+}

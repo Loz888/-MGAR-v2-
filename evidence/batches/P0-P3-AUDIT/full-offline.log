@@ -1,0 +1,3 @@
+{
+  "stdout": "go version go1.27.3 linux/amd64\nPython 3.12.14\nDocker Compose version v2.40.3\ncredential pattern scan passed: 710 source/evidence files; local credentials excluded\n"
+}

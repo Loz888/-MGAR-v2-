@@ -1,0 +1,3 @@
+{
+  "stdout": "=== RUN   TestAuditCASRejectsSymlinkBeforeCreatingDirectories\n    cas_test.go:109: denied CAS initialization wrote outside its path: [d must-not-create/] <nil>\n--- FAIL: TestAuditCASRejectsSymlinkBeforeCreatingDirectories (0.00s)\nFAIL\nFAIL\tgithub.com/Loz888/-MGAR-v2-/internal/artifact\t0.002s\nFAIL\n"
+}

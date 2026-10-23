@@ -5,9 +5,9 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"strings"
 
 	"github.com/Loz888/-MGAR-v2-/internal/artifact"
+	inputcontext "github.com/Loz888/-MGAR-v2-/internal/context"
 	"github.com/jackc/pgx/v5"
 )
 
@@ -16,7 +16,7 @@ import (
 // A failed/unknown DB commit can leave an orphan; no destructive GC is automatic.
 func (s *Store) PublishArtifact(ctx context.Context, c TaskClaim, cas *artifact.CAS, kind, contentType, toolVersion string, body []byte) (artifact.Metadata, error) {
 	var a artifact.Metadata
-	if cas == nil || len(body) > artifact.MaxBytes || len(toolVersion) == 0 || len(toolVersion) > 128 || strings.TrimSpace(toolVersion) != toolVersion {
+	if cas == nil || len(body) > artifact.MaxBytes || !inputcontext.ValidVersion(toolVersion) {
 		return a, ErrPolicy
 	}
 	body = bytes.Clone(body)

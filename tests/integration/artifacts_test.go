@@ -150,3 +150,34 @@ func TestArtifactRollbackLeavesInventoryOrphanAndLeaseRejects(t *testing.T) {
 		t.Fatal(e)
 	}
 }
+
+func TestAuditArtifactRejectsUnconsumableToolVersion(t *testing.T) {
+	for _, version := range []string{"with space", "line\nbreak", "工具.v1"} {
+		t.Run(version, func(t *testing.T) {
+			s, run, c := claimedFixture(t)
+			ctx := context.Background()
+			c, err := s.StartTask(ctx, c)
+			if err != nil {
+				t.Fatal(err)
+			}
+			cas, err := artifact.New(filepath.Join(t.TempDir(), "cas"))
+			if err != nil {
+				t.Fatal(err)
+			}
+			defer cas.Close()
+			if _, err = s.BuildSnapshot(ctx, c, "mock.v1", "research.v1", cas); err != nil {
+				t.Fatal(err)
+			}
+			before := snapshotAuthorization(t, s, run, c.TaskID)
+			if _, err = s.PublishArtifact(ctx, c, cas, "finding", "text/plain", version, []byte("evidence")); !errors.Is(err, store.ErrPolicy) {
+				t.Fatalf("published a tool version the downstream snapshot rejects: %v", err)
+			}
+			if after := snapshotAuthorization(t, s, run, c.TaskID); after != before {
+				t.Fatal("rejected publication changed task/budget/audit")
+			}
+			if objects, err := cas.Inventory(); err != nil || len(objects) != 0 {
+				t.Fatalf("denied publication wrote CAS: %v %v", objects, err)
+			}
+		})
+	}
+}

@@ -39,6 +39,11 @@ func (s *Store) RefreshReady(ctx context.Context, run string, c OrchestratorClai
 	if err = checkOrchestrator(ctx, tx, run, c); err != nil {
 		return nil, err
 	}
+	// Verdict inserts hold FK key-share locks. Serialize with them before a
+	// fresh verdict read, following workflow -> budget -> tasks -> artifacts.
+	if err = lockLifecycleResults(ctx, tx, run, version); err != nil {
+		return nil, err
+	}
 	var budgetOK bool
 	if err = tx.QueryRow(ctx, "SELECT used_delegations<max_delegations AND running_count<max_concurrency FROM run_budgets WHERE run_id=$1 FOR UPDATE", run).Scan(&budgetOK); err != nil {
 		return nil, err
@@ -190,5 +195,5 @@ func (s *Store) RefreshReady(ctx context.Context, run string, c OrchestratorClai
 			ready = append(ready, nodes[key].Task)
 		}
 	}
-	return ready, tx.Commit(ctx)
+	return ready, commitControl(ctx, tx, run, c)
 }

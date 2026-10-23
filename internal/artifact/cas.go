@@ -50,23 +50,45 @@ func New(path string) (*CAS, error) {
 	if e != nil {
 		return nil, e
 	}
-	if e = os.MkdirAll(absolute, 0700); e != nil {
-		return nil, e
-	}
-	actual, e := filepath.EvalSymlinks(absolute)
-	if e != nil || actual != absolute {
-		return nil, ErrIntegrity
-	}
-	info, e := os.Lstat(absolute)
+	// Open/create each component relative to a pinned directory descriptor.
+	// Checking symlinks after MkdirAll is too late: it can already have created
+	// directories in a symlink target outside the requested private root.
+	directory, e := os.OpenFile("/", os.O_RDONLY|syscall.O_DIRECTORY|syscall.O_NOFOLLOW, 0)
 	if e != nil {
 		return nil, e
 	}
-	if !info.IsDir() || info.Mode().Perm()&0077 != 0 {
+	defer func() { directory.Close() }()
+	for _, component := range strings.Split(strings.TrimPrefix(absolute, "/"), "/") {
+		if component == "" {
+			continue
+		}
+		flags := syscall.O_RDONLY | syscall.O_DIRECTORY | syscall.O_NOFOLLOW | syscall.O_CLOEXEC
+		fd, err := syscall.Openat(int(directory.Fd()), component, flags, 0)
+		if errors.Is(err, syscall.ENOENT) {
+			if err = syscall.Mkdirat(int(directory.Fd()), component, 0700); err != nil && !errors.Is(err, syscall.EEXIST) {
+				return nil, err
+			}
+			fd, err = syscall.Openat(int(directory.Fd()), component, flags, 0)
+		}
+		if err != nil {
+			return nil, ErrIntegrity
+		}
+		next := os.NewFile(uintptr(fd), component)
+		directory.Close()
+		directory = next
+	}
+	info, e := directory.Stat()
+	if e != nil || !info.IsDir() || info.Mode().Perm()&0077 != 0 {
 		return nil, ErrIntegrity
 	}
 	root, e := os.OpenRoot(absolute)
 	if e != nil {
 		return nil, e
+	}
+	opened, e := root.Stat(".")
+	if e != nil || !os.SameFile(info, opened) {
+		root.Close()
+		return nil, ErrIntegrity
 	}
 	lock, e := root.Open(".")
 	if e != nil {

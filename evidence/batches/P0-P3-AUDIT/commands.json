@@ -1,0 +1,235 @@
+[
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-P3-AUDIT/baseline.log",
+    "timestamp_utc": "2026-10-23T09:49:45.883751+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_audit_pipeline.py"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P0-P3-AUDIT/red-pipeline.log",
+    "timestamp_utc": "2026-10-23T09:54:18.328796+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./internal/context",
+      "./tests/integration",
+      "-run",
+      "Audit",
+      "-v"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P0-P3-AUDIT/red-go.log",
+    "timestamp_utc": "2026-10-23T09:54:19.696520+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./internal/artifact",
+      "-run",
+      "Audit",
+      "-v"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P0-P3-AUDIT/red-cas.log",
+    "timestamp_utc": "2026-10-23T09:55:03.162782+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./internal/artifact",
+      "./internal/context",
+      "./tests/integration",
+      "-run",
+      "Audit|CAS|Context|Ready|Fan|Dependency",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-P3-AUDIT/green-go.log",
+    "timestamp_utc": "2026-10-23T09:56:50.097100+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_pipeline.py",
+      "tests/test_audit_pipeline.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-P3-AUDIT/green-pipeline.log",
+    "timestamp_utc": "2026-10-23T09:57:07.327220+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P0-P3-AUDIT/full-offline.log",
+    "timestamp_utc": "2026-10-23T10:03:12.800182+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_audit_pipeline.py",
+      "-k",
+      "actual_pytest or actual_subtest"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P0-P3-AUDIT/red-pytest-events.log",
+    "timestamp_utc": "2026-10-23T10:04:54.958011+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_audit_pipeline.py",
+      "tests/test_pipeline.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-P3-AUDIT/green-pytest-events.log",
+    "timestamp_utc": "2026-10-23T10:05:55.028597+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-P3-AUDIT/full-offline-final.log",
+    "timestamp_utc": "2026-10-23T10:07:27.031203+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-P3-AUDIT/build.log",
+    "timestamp_utc": "2026-10-23T10:54:17.682158+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-P3-AUDIT/go-test.log",
+    "timestamp_utc": "2026-10-23T10:55:04.550876+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "scripts/smoke_health.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-P3-AUDIT/health.log",
+    "timestamp_utc": "2026-10-23T10:55:13.565286+00:00"
+  },
+  {
+    "command": [
+      "ruff",
+      "check",
+      "--isolated",
+      "scripts/verify_results.py",
+      "scripts/pytest_evidence.py",
+      "tests/test_audit_pipeline.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-P3-AUDIT/extra-lint.log",
+    "timestamp_utc": "2026-10-23T10:55:40.761239+00:00"
+  },
+  {
+    "command": [
+      "docker",
+      "compose",
+      "--env-file",
+      ".local/db.env",
+      "-f",
+      "deploy/compose.yaml",
+      "config",
+      "--quiet"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-P3-AUDIT/compose-config.log",
+    "timestamp_utc": "2026-10-23T10:55:41.031125+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-P3-AUDIT/final-audit.log",
+    "timestamp_utc": "2026-10-23T10:55:41.285286+00:00"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-P3-AUDIT/diff-check.log",
+    "timestamp_utc": "2026-10-23T10:55:41.492167+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "-c",
+      "go version && python --version && docker compose --env-file .local/db.env -f deploy/compose.yaml exec -T postgres postgres --version"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-P3-AUDIT/environment-versions.log",
+    "timestamp_utc": "2026-10-23T10:57:00.650312+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-export-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-P3-AUDIT/export-and-verify.log",
+    "timestamp_utc": "2026-10-23T10:59:52.833053+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P0-P3-AUDIT/exported-secret-format-check.log",
+    "timestamp_utc": "2026-10-23T11:00:41.632891+00:00"
+  }
+]

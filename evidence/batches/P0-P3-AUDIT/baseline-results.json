@@ -1,0 +1,39 @@
+{
+  "base_git_commit": "bf54639e25475b61452c847a6352d274119951ba",
+  "source_fingerprint": "572b2671c24080c4a3d96ffa4f0cffc37f60d6adcb088a36bc4ede9f57156bcb",
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 140,
+      "passed": 140,
+      "failed_events": 0,
+      "skipped": 0
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 284,
+      "passed": 284,
+      "failed": 0,
+      "skipped_or_xfailed": 0
+    },
+    "status": "PASS"
+  },
+  "artifacts": [
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/baseline-go.json.json",
+      "sha256": "c5cba1173aae6b5645148d8a40bc4a77fbc989bcf6e78748fd38abff7e8f5d44"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/baseline-pytest.xml.json",
+      "sha256": "b7a64fbada63c683b9d23d6c63be55b86285f3e97ccb5f9cc77c58d0910a4271"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/baseline-report.json.json",
+      "sha256": "0ce493c303e2098abddae61deec351a38b1d28a62daf5a22286e0a91f0cb8dbf"
+    },
+    {
+      "path": "evidence/batches/P0-P3-AUDIT/baseline-fingerprint.json",
+      "sha256": "d7d9e1e9e991e78654ed08130d3942bec81fc6afcd0c7b691130ce856d441d3d"
+    }
+  ]
+}
