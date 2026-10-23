@@ -12,7 +12,7 @@
 | [P1-03](tasks/P1-03.md) | P1 | 依赖就绪、Fan-out/Fan-in 和取消传播 | P1-02 | PASS | `evidence/batches/P1-03/accept.json` |
 | [P1-04](tasks/P1-04.md) | P1 | 最小任务 Claim / Lease / Epoch / Revision | P1-03 | PASS | `evidence/batches/P1-04/accept.json` |
 | [P1-05](tasks/P1-05.md) | P1 | Run 生命周期、恢复扫描与 CLI | P1-04 | PASS | `evidence/batches/P1-05/accept.json` |
-| [P2-01](tasks/P2-01.md) | P2 | Python Agent SDK 与受控 Loop | P1-05 | TODO | `evidence/batches/P2-01/accept.json` |
+| [P2-01](tasks/P2-01.md) | P2 | Python Agent SDK 与受控 Loop | P1-05 | PASS | `evidence/batches/P2-01/accept.json` |
 | [P2-02](tasks/P2-02.md) | P2 | 模型 Provider、解析与有限重试 | P2-01 | TODO | `evidence/batches/P2-02/accept.json` |
 | [P2-03](tasks/P2-03.md) | P2 | ResearchAgent：来源约束的多轮检索 | P2-02 | TODO | `evidence/batches/P2-03/accept.json` |
 | [P2-04](tasks/P2-04.md) | P2 | DataAgent：只读 SQL 与数值证据 | P2-03 | TODO | `evidence/batches/P2-04/accept.json` |
@@ -53,4 +53,6 @@
 **P0-01 验收说明：** 设计冻结与离线静态检查 PASS（37 项检查、24 个测试）；运行时能力当前未实现。
 本卡未运行 Go/数据库/沙箱/真实模型验收，未进行付费调用。异常状态未定义的转移默认拒绝，后续实现前须先受审 ADR。
 P0-01 的原始未提交快照与失败记录保留于 `evidence/batches/P0-01/accept.json`；之后已本地提交（`a1f06b1`）。
-用户本轮授权先补齐 P0-02、P0-03，再依次完成 P1；不会进入 P2。各行状态以对应批次证据为准。
+上一批用户授权先补齐 P0-02、P0-03，再依次完成 P1；该批未进入 P2。各行状态以对应批次证据为准。
+
+**P2 授权：** 用户要求开始 P2；逐卡完成 P2-01 至 P2-05 并记录证据，不进入 P3，不启用付费模型。

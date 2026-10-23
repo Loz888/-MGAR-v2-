@@ -1,0 +1,1602 @@
+{
+  "card_id": "P2-01",
+  "status": "PASS",
+  "git_commit": null,
+  "base_git_commit": "1712a1a87531055fc26319b349ccb81db2919fd7",
+  "environment": {
+    "platform": "linux",
+    "python": "3.12.14",
+    "go": "1.27.3",
+    "postgres": "16.11"
+  },
+  "commands": [
+    {
+      "command": [
+        "uv",
+        "sync",
+        "--frozen"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P2-01/dependencies.log",
+      "timestamp_utc": "2026-10-22T14:19:54.255535+00:00"
+    },
+    {
+      "command": [
+        "uv",
+        "sync",
+        "--frozen"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P2-01/dependencies-final.log",
+      "timestamp_utc": "2026-10-22T14:20:05.704770+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_agent_loop.py"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P2-01/card.log",
+      "timestamp_utc": "2026-10-22T14:28:14.947169+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_agent_loop.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P2-01/card-final.log",
+      "timestamp_utc": "2026-10-23T00:53:04.275585+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P2-01/offline.log",
+      "timestamp_utc": "2026-10-23T00:53:24.174646+00:00"
+    },
+    {
+      "command": "python -m pytest -q tests/unit/test_agent_loop.py",
+      "exit_code": 2,
+      "log_path": "evidence/batches/P2-01/delegated-loop-red.json",
+      "executor": "/root/p2_loop",
+      "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+      "timestamp_utc": "2026-10-22T14:20:31.708356+00:00"
+    },
+    {
+      "command": "python -m pytest -q tests/unit/test_agent_loop.py tests/unit/test_agent_loop_boundaries.py",
+      "exit_code": 0,
+      "log_path": "evidence/batches/P2-01/delegated-loop-delivery.json",
+      "executor": "/root/p2_loop",
+      "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+      "timestamp_utc": "2026-10-22T14:28:26.433540+00:00"
+    },
+    {
+      "command": "python -m pytest -q tests/unit/test_agent_loop_boundaries.py",
+      "exit_code": 1,
+      "log_path": "evidence/batches/P2-01/delegated-boundary-fixture-first.json",
+      "executor": "/root/p2_contract_review",
+      "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+      "timestamp_utc": "2026-10-22T14:22:56.849522+00:00"
+    },
+    {
+      "command": "python -m pytest -q tests/unit/test_agent_loop_boundaries.py",
+      "exit_code": 1,
+      "log_path": "evidence/batches/P2-01/delegated-boundary-red.json",
+      "executor": "/root/p2_contract_review",
+      "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+      "timestamp_utc": "2026-10-22T14:23:18.762800+00:00"
+    },
+    {
+      "command": "python -m pytest -q tests/unit/test_agent_loop_boundaries.py",
+      "exit_code": 0,
+      "log_path": "evidence/batches/P2-01/delegated-boundary-final.json",
+      "executor": "/root/p2_contract_review",
+      "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+      "timestamp_utc": "2026-10-22T14:28:21.449440+00:00"
+    },
+    {
+      "command": "python -m pytest -q tests/unit/test_agent_loop_boundaries.py",
+      "exit_code": 1,
+      "log_path": "evidence/batches/P2-01/delegated-schema-ref-red.json",
+      "executor": "/root/p2_contract_review",
+      "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+      "timestamp_utc": "2026-10-22T14:25:03.503756+00:00"
+    },
+    {
+      "command": "python -m pytest -q tests/unit/test_agent_loop_boundaries.py",
+      "exit_code": 0,
+      "log_path": "evidence/batches/P2-01/delegated-schema-ref-green.json",
+      "executor": "/root/p2_contract_review",
+      "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+      "timestamp_utc": "2026-10-22T14:26:17.826318+00:00"
+    },
+    {
+      "command": "python -m pytest -q tests/unit/test_agent_loop_boundaries.py",
+      "exit_code": 1,
+      "log_path": "evidence/batches/P2-01/delegated-schema-timeout-red.json",
+      "executor": "/root/p2_contract_review",
+      "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+      "timestamp_utc": "2026-10-22T14:27:18.760003+00:00"
+    },
+    {
+      "command": "python -m pytest -q tests/unit/test_agent_loop.py",
+      "exit_code": 1,
+      "log_path": "evidence/batches/P2-01/delegated-uuid-red.json",
+      "executor": "/root/p2_loop",
+      "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+      "timestamp_utc": "2026-10-22T14:28:13.089261+00:00"
+    },
+    {
+      "command": null,
+      "exit_code": 0,
+      "log_path": "evidence/batches/P2-01/delegated-ruff-final.json",
+      "executor": "/root/p2_loop",
+      "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+      "timestamp_utc": "2026-10-22T14:28:26.469674+00:00"
+    },
+    {
+      "command": "mypy",
+      "exit_code": 0,
+      "log_path": "evidence/batches/P2-01/delegated-mypy-final.json",
+      "executor": "/root/p2_loop",
+      "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+      "timestamp_utc": "2026-10-22T14:28:26.752546+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/accept.sh",
+        "P2-01"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P2-01/accept.log",
+      "timestamp_utc": "2026-10-23T00:53:46.531374+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P2-01/diff.log",
+      "timestamp_utc": "2026-10-23T00:53:46.559811+00:00"
+    }
+  ],
+  "positive_assertions": [
+    {
+      "name": "card-final",
+      "passed": true
+    },
+    {
+      "name": "offline",
+      "passed": true
+    },
+    {
+      "name": "accept",
+      "passed": true
+    },
+    {
+      "name": "dependencies-final",
+      "passed": true
+    },
+    {
+      "name": "diff",
+      "passed": true
+    }
+  ],
+  "negative_assertions": [
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestRealProviderDeniedWithoutCredential",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestProductionDatabaseDenied",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/cmd/mgarctl/TestCLIWorkflowAndTerminalGuards",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/cmd/mgarctl/TestCLIHealthAndInvalidCommandsDoNotOpenDatabase",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/control/TestHealthRejectsUnavailableDatabase",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/null_input_item",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/mixed_null_input_item",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/top-level_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/schema_version_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/node_role_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/node_extra_case-fold_field",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/edge_from_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/edge_extra_case-fold_field",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/nodes",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/depth",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/fanout",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleCancelFinishCrossProcessSingleTerminal",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleTerminalIDResubmitDoesNotOverwrite",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleRollbackNoPartialResultOrCancellation",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestFenceRevisionLeaseRoleAndOutputCommit",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestOrchestratorFenceAndRenew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/apply_without_verdict",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/finalize_pending",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/budget_available",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanInvalidDependencyLeavesDBUnchanged",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanRollbackOnOutboxFailure",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsRevokedReadyArtifact",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/start",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/renew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/save",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/start",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/renew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/save",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/takeover",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/missing",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/hash",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/producer",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/source_plan",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/extra",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaCatalogTerminalAndReader",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/invalid_FK",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/invalid_role",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/negative_budget",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestMigrationRollbackAndChecksum",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/empty_owner",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/blank_owner",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/zero_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/negative_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/oversized_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/empty_goal",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/zero_delegations",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/oversized_delegations",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim",
+      "passed": true
+    },
+    {
+      "name": "tests.test_claim.ClaimTests/test_bad_epoch_and_role_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_claim.ClaimTests/test_claim_is_immutable_and_fenced_identity_checked",
+      "passed": true
+    },
+    {
+      "name": "tests.test_fingerprint.FingerprintTests/test_contract_document_and_compose_changes_invalidate_evidence",
+      "passed": true
+    },
+    {
+      "name": "tests.test_pipeline.PipelineTests/test_go_fail_and_skip_are_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_pipeline.PipelineTests/test_incomplete_go_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_pipeline.PipelineTests/test_pytest_failure_skip_xfail_are_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_broken_local_link_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_changed_invariant_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_dag_limit_drift_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_implemented_claim_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_lock_order_drift_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_document_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_entity_field_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_fencing_guard_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_interface_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_schema_file_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_state_edge_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_term_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_trust_boundary_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_version_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_prohibited_claims_are_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_terminal_reopening_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_provider.ProviderTests/test_real_provider_denied",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{broken-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\":\"final\",\"type\":\"final\",\"output\":{}}-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\":\"final\",\"output\":{\"x\":NaN}}-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"Type\":\"final\",\"output\":{}}-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\": \"tool_call\", \"call_id\": \"call-1\", \"name\": \"shell\", \"arguments\": {}}-policy_denied]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\": \"tool_call\", \"call_id\": \"call-1\", \"name\": \"read_fixture\", \"arguments\": {\"execute\": \"rm fake\"}}-policy_denied]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\":\"final\",\"output\":{},\"verified\":true}-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_role_and_effect_denials_are_terminal",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_timeout_interrupts_tool_and_restores_signal_handler",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[max_turns-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[max_turns-1.0]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[max_tool_calls-False]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[max_observation_bytes-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[timeout_s-nan]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[timeout_s-inf]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[timeout_s-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_task_rejects_noninteger_claim_versions[revision-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_task_rejects_noninteger_claim_versions[plan_version-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_task_rejects_noninteger_claim_versions[revision-1.0]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_declaration_rejects_external_schema_references[$ref-https://schemas.example.invalid/args.json]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_declaration_rejects_external_schema_references[$ref-file:///etc/passwd]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_declaration_rejects_external_schema_references[$dynamicRef-http://schemas.example.invalid/args.json]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_declaration_rejects_external_schema_references[$ref-../outside-schema.json]",
+      "passed": true
+    }
+  ],
+  "known_limitations": [
+    "SDK completed result remains unverified; Go fencing/TaskResultCommit and independent Verifier remain authoritative.",
+    "Local turn/tool/deadline budgets are not a durable global model-cost ledger. No paid model requests.",
+    "Trusted synchronous adapters only, Linux/WSL2 main thread with SIGALRM; refuses existing alarms/unsupported threads. Child cleanup belongs to adapters, not a hostile-code sandbox.",
+    "SDK events are local execution evidence, not durable control-plane audit. No Worker scheduling, Artifact CAS or P5 gateway/security claim.",
+    "Contract files currently loaded from this editable repository checkout; standalone wheel deployment is not validated.",
+    "Evidence captured before local batch commit; delivery SHA is in Git history. Coding commits have not been pushed."
+  ],
+  "unverified": [],
+  "artifacts": [
+    {
+      "path": "TASK_QUEUE.md",
+      "sha256": "f45d91df15a2c8dfd8a3e82b95c2c4bd6d6c1643879fc3d91f02b25bd86dc252"
+    },
+    {
+      "path": "contracts/README.md",
+      "sha256": "e95700d9f8a1a4ef2471f3586d17d7f706978188e3f20dc86e7c54e3e966f2f2"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "3caf2cb96562c3ffaee4b6b013a3264a116dac345a28bcbca0bbd4c6c4bf18d4"
+    },
+    {
+      "path": "tests/test_plan_docs.py",
+      "sha256": "f9d625e43d9c022170c23051c5b451e36c0ba2d82492e1db27e2e41391b42df2"
+    },
+    {
+      "path": "uv.lock",
+      "sha256": "555a77828903063d238096236dfea68213f7aaff5127557e522bc6721e5c329b"
+    },
+    {
+      "path": "agentkit/mgar_agents/core/agent.py",
+      "sha256": "ac0627ac55cbb1992b6ef1010c38f0dda73e132a09c6bfcc9a75fc89975c9e70"
+    },
+    {
+      "path": "agentkit/mgar_agents/core/provider.py",
+      "sha256": "697782e271f214dfae403742007527dc8c5891b5caf29a587d633ee962b67d6f"
+    },
+    {
+      "path": "agentkit/mgar_agents/core/schemas.py",
+      "sha256": "5e15c5f2c4ba9a000f0cbcb3c1ced321b0239301d3018e1a2f49facc167eed43"
+    },
+    {
+      "path": "agentkit/mgar_agents/core/tools.py",
+      "sha256": "800fe435f84881b7eab4212211d714540b3cb8d3ab5e7c25de6606ebac6d52df"
+    },
+    {
+      "path": "contracts/agent_result.schema.json",
+      "sha256": "cb6b6505b62917c50c775408a278365a8648eca7a83bb0af02051ea96cced035"
+    },
+    {
+      "path": "docs/agent-sdk.md",
+      "sha256": "52226e0ba3133319ef9228d1de7861130a32a6cb221c6ab726052deebf126b71"
+    },
+    {
+      "path": "evidence/batches/P2-01/accept.log",
+      "sha256": "3c83ca3b21ed709e9b7f1b0114d0630521c73ad7a9b3cf121a0488fae83e587f"
+    },
+    {
+      "path": "evidence/batches/P2-01/batch-notes.json",
+      "sha256": "3e1961f95d114ae3d84865fd1a8f7d860e16079ef217fd828776bd40398a7f91"
+    },
+    {
+      "path": "evidence/batches/P2-01/card-final.log",
+      "sha256": "0720d0f69ef3dbee6d8f8e4b38d26fd627d2241f729cbffef7a6dfdd0a1ca4ea"
+    },
+    {
+      "path": "evidence/batches/P2-01/card.log",
+      "sha256": "0af8a9debf5dcb62188835300d43720d3e9f2d75e1aa4a7217929b735ffe1cc1"
+    },
+    {
+      "path": "evidence/batches/P2-01/commands.json",
+      "sha256": "7d9f13ee658098527cf60dee126460ae5aecb9d9a66c81fb0a7760b3b35f0b17"
+    },
+    {
+      "path": "evidence/batches/P2-01/delegated-boundary-final.json",
+      "sha256": "6697880d8359a1332a31a0a6e40eb48f1cf915d61edd7faca321cb4a27f398ba"
+    },
+    {
+      "path": "evidence/batches/P2-01/delegated-boundary-fixture-first.json",
+      "sha256": "c45b71f3cef07efeb6d60163cdb4cbea7ea43e0eb47e972a81c5d29fbf9ee441"
+    },
+    {
+      "path": "evidence/batches/P2-01/delegated-boundary-red.json",
+      "sha256": "24751a1ee2ab4549c32df31d4059eed66753637849ce4f424fcc0250a4c39800"
+    },
+    {
+      "path": "evidence/batches/P2-01/delegated-loop-delivery.json",
+      "sha256": "22594a2b27e2f65187137eeb26d17510d516a2e0456bcb5e91fadf0013ce64da"
+    },
+    {
+      "path": "evidence/batches/P2-01/delegated-loop-red.json",
+      "sha256": "178845039adc86bee29b622582ea1df2fdebb4412cd89d6796b6a677fa98bee1"
+    },
+    {
+      "path": "evidence/batches/P2-01/delegated-mypy-final.json",
+      "sha256": "1c78defb2ef3f15006458b698a09f8b5df718a2daa3a71b93f97101aad5dfc0c"
+    },
+    {
+      "path": "evidence/batches/P2-01/delegated-ruff-final.json",
+      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+    },
+    {
+      "path": "evidence/batches/P2-01/delegated-schema-ref-green.json",
+      "sha256": "3cce4ac0353fb01ec3c76ba0b17223bcc30bf7c795a80733301b5fb58db34e14"
+    },
+    {
+      "path": "evidence/batches/P2-01/delegated-schema-ref-red.json",
+      "sha256": "eed3b45fb515353b9d2955bac00abcf8925af1753e4801bc42bdae5eee68df01"
+    },
+    {
+      "path": "evidence/batches/P2-01/delegated-schema-timeout-red.json",
+      "sha256": "a1e1753e77222185bef71bb28626ad82f57e6e0484e28e1e8f290ed9793eb76a"
+    },
+    {
+      "path": "evidence/batches/P2-01/delegated-uuid-red.json",
+      "sha256": "07dfbaaf1ac21912fe1d307bd8c69ce34945f12cf89d6712d39690dda4c5aab0"
+    },
+    {
+      "path": "evidence/batches/P2-01/dependencies-final.log",
+      "sha256": "c179f2633cebf4dbdc60290425899e2720aa71d0b53ecdd904b25cb4d8543bc2"
+    },
+    {
+      "path": "evidence/batches/P2-01/dependencies.log",
+      "sha256": "641e8570bf29531656a7dcbabd61bc145b1d8ef1de333036315b840aec25d021"
+    },
+    {
+      "path": "evidence/batches/P2-01/diff.log",
+      "sha256": "b4ba12673cbed1a6b5424f5da9e830d424b33e76a678147ecc696974b3350dd0"
+    },
+    {
+      "path": "evidence/batches/P2-01/offline-accept.json",
+      "sha256": "2bb5fbff751e0f025cd188b5b8993c7c96731f0f4f668f37cc37723908396841"
+    },
+    {
+      "path": "evidence/batches/P2-01/offline-docs.json.json",
+      "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+    },
+    {
+      "path": "evidence/batches/P2-01/offline-fingerprint.json",
+      "sha256": "22a64ffb0c36073e84c37218becfd9ab613389e9461ddae24b3e2cdcf5c4d181"
+    },
+    {
+      "path": "evidence/batches/P2-01/offline-go.json.json",
+      "sha256": "b29976f84c41bae11997ae409b79e84d8f48bb6a234ca64997b8633f8f7e440b"
+    },
+    {
+      "path": "evidence/batches/P2-01/offline-mypy.log.json",
+      "sha256": "1c78defb2ef3f15006458b698a09f8b5df718a2daa3a71b93f97101aad5dfc0c"
+    },
+    {
+      "path": "evidence/batches/P2-01/offline-pytest.log.json",
+      "sha256": "8c878ff1076096386b85e832ea327ee54a181564d6634a31aa1a7d8c31f37f05"
+    },
+    {
+      "path": "evidence/batches/P2-01/offline-pytest.xml.json",
+      "sha256": "df2e2f36ea22a9e0688fea83b29c72b2eedceed8f446e482415898743d573a1c"
+    },
+    {
+      "path": "evidence/batches/P2-01/offline-report.json.json",
+      "sha256": "c105a65201c92048dc37a63f2e614dd43819255a523b30832a397a99b1af69b1"
+    },
+    {
+      "path": "evidence/batches/P2-01/offline-ruff.log.json",
+      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+    },
+    {
+      "path": "evidence/batches/P2-01/offline-vet.log.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P2-01/offline.log",
+      "sha256": "2ce1727d2afc146ea96a4a3aa25ddf0626141e2102be1a070bdbe328a745eaec"
+    },
+    {
+      "path": "tests/unit/test_agent_loop.py",
+      "sha256": "266bf2493ebd4644ef9dd9f4183128241d73ae92043df9b712b8c4ad75fbcd06"
+    },
+    {
+      "path": "tests/unit/test_agent_loop_boundaries.py",
+      "sha256": "b37532064cee494d35d890bbf6caba5311f7b3bbeb76a8fcabea88e23ee16e37"
+    }
+  ],
+  "timestamp_utc": "2026-10-23T00:53:46.592793+00:00",
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 115,
+      "passed": 115,
+      "failed_events": 0,
+      "skipped": 0
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 78,
+      "passed": 78,
+      "failed": 0,
+      "skipped_or_xfailed": 0
+    },
+    "status": "PASS"
+  },
+  "test_assertions": [
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestOfflineDefaults",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestRealProviderDeniedWithoutCredential",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestProductionDatabaseDenied",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/config/TestDSNQueryCannotOverrideSyntheticTarget",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/cmd/mgarctl/TestCLIWorkflowAndTerminalGuards",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/cmd/mgarctl/TestCLIHealthAndInvalidCommandsDoNotOpenDatabase",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/control/TestFunctionalHealth",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/control/TestHealthRejectsUnavailableDatabase",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/null_input_item",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/mixed_null_input_item",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/top-level_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/schema_version_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/node_role_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/node_extra_case-fold_field",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/edge_from_case-fold_alias",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems/edge_extra_case-fold_field",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONRejectsAliasesAndNullArrayItems",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_node_node_key",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_node_role",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_node_goal",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_node_required_inputs",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_node_required_output_kind",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_edge_from",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/missing_edge_to",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/input_item_array",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/input_item_null",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/input_item_boolean",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/input_item_number",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes/input_item_object",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONNestedRequiredAndTypes",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanStrictJSONPreservesPermittedStringsAndEmptyArrays",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestTypedPlanEdgeLimit",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestPlanSchemaStrict",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/nodes",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/depth",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds/fanout",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/planner/TestDAGInvalidAndBounds",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/internal/scheduler/TestClaimPolicyBeforeDatabaseAccess",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleProcessHelper",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleSIGKILLRecoveryRebuildsReady",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleExpiredAttemptLimitFailsWithoutRetry",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimCrossProcessGlobalBudget/1",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleCancelFinishCrossProcessSingleTerminal",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleTerminalIDResubmitDoesNotOverwrite",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimCrossProcessGlobalBudget/8",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimCrossProcessGlobalBudget",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestLifecycleRollbackNoPartialResultOrCancellation",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestFenceRevisionLeaseRoleAndOutputCommit",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeSafeBlockedAndInterrupted/blocked/planned=false",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimUnknownSideEffectNotReplayed",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeSafeBlockedAndInterrupted/blocked/planned=true",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestOrchestratorFenceAndRenew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeSafeBlockedAndInterrupted/interrupted/planned=false",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyInputSnapshotCannotBeInjected",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeSafeBlockedAndInterrupted/interrupted/planned=true",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeSafeBlockedAndInterrupted",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeUnknownOrReservedModelCallFailsClosed/unknown",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeUnknownOrReservedModelCallFailsClosed/reserved",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeUnknownOrReservedModelCallFailsClosed",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeExhaustedBudgetStaysBlockedWithoutAttempts",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/e2e/TestResumeVerdictAndFinalizePersistSeparateCheckpoints",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestReadyFanInDuplicateAndCrossProcess",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyFailureAndStaleArtifactBlocked/failed",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyFailureAndStaleArtifactBlocked/cancelled",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyFailureAndStaleArtifactBlocked/unverified",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyFailureAndStaleArtifactBlocked/stale",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestDependencyFailureAndStaleArtifactBlocked",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestApplyVerdictsWaitsForConcurrentRevocation",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestFinalizeWaitsForConcurrentRevocation",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestRecoveryRollsBackWhenLeaseExpiresDuringLockWait",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/apply_without_verdict",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/finalize_pending",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait/budget_available",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestLifecycleReadOnlyPathsFenceLeaseExpiredDuringWait",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanCrossProcessCAS",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanInvalidDependencyLeavesDBUnchanged",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanConcurrentCASAndHistory",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestPlanRollbackOnOutboxFailure",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestProcessHelper",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsRevokedReadyArtifact",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/start",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/renew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration/save",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsForgedPlanGeneration",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/start",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/renew",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/save",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput/takeover",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestTaskGuardRejectsRevokedFixedInput",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/missing",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/hash",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/producer",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/source_plan",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot/extra",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRejectsInvalidFixedSnapshot",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestClaimRechecksVerdictCommittedDuringArtifactLockWait",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestRecoveryReleasesOldPlanReservation",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaCatalogTerminalAndReader",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/invalid_FK",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/invalid_role",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints/negative_budget",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSchemaMigrationAndConstraints",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestMigrationRollbackAndChecksum",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionInitialOwnerCannotBeStolenBeforePlan",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/empty_owner",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/blank_owner",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/zero_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/negative_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/oversized_ttl",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/empty_goal",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/zero_delegations",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim/oversized_delegations",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionRejectsInvalidInitialClaim",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionClaimOutboxFailureRollsBackEverything",
+      "passed": true
+    },
+    {
+      "name": "github.com/Loz888/-MGAR-v2-/tests/integration/TestSubmissionDuplicateIDPreservesInitialClaim",
+      "passed": true
+    }
+  ],
+  "python_test_assertions": [
+    {
+      "name": "tests.test_claim.ClaimTests/test_bad_epoch_and_role_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_claim.ClaimTests/test_claim_is_immutable_and_fenced_identity_checked",
+      "passed": true
+    },
+    {
+      "name": "tests.test_fingerprint.FingerprintTests/test_contract_document_and_compose_changes_invalidate_evidence",
+      "passed": true
+    },
+    {
+      "name": "tests.test_fingerprint.FingerprintTests/test_evidence_and_queue_status_do_not_change_the_fingerprint",
+      "passed": true
+    },
+    {
+      "name": "tests.test_fingerprint.FingerprintTests/test_ignored_local_outputs_do_not_change_the_fingerprint",
+      "passed": true
+    },
+    {
+      "name": "tests.test_fingerprint.FingerprintTests/test_repeated_evaluation_and_git_metadata_are_stable",
+      "passed": true
+    },
+    {
+      "name": "tests.test_fingerprint.FingerprintTests/test_untracked_candidate_inputs_are_included",
+      "passed": true
+    },
+    {
+      "name": "tests.test_pipeline.PipelineTests/test_empty_go_is_not_pass",
+      "passed": true
+    },
+    {
+      "name": "tests.test_pipeline.PipelineTests/test_go_fail_and_skip_are_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_pipeline.PipelineTests/test_incomplete_go_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_pipeline.PipelineTests/test_pytest_failure_skip_xfail_are_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_pipeline.PipelineTests/test_zero_pytest_is_not_pass",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_broken_local_link_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_changed_invariant_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_dag_limit_drift_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_default_root_does_not_depend_on_cwd",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_disclaimers_are_not_prohibited_claims",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_exceptional_states_cannot_be_silently_enabled",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_implemented_claim_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_local_adapter_decision_is_required",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_lock_order_drift_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_document_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_entity_field_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_fencing_guard_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_interface_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_schema_file_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_state_edge_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_term_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_trust_boundary_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_missing_version_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_prohibited_claims_are_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_recovery_must_advance_epoch",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_schema_index_required_fields_must_match",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_schema_index_version_must_match",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_terminal_reopening_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "tests.test_plan_docs.PlanDocsTests/test_valid_documents",
+      "passed": true
+    },
+    {
+      "name": "tests.test_provider.ProviderTests/test_default_offline",
+      "passed": true
+    },
+    {
+      "name": "tests.test_provider.ProviderTests/test_mock_without_keys",
+      "passed": true
+    },
+    {
+      "name": "tests.test_provider.ProviderTests/test_real_provider_denied",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_two_turns_observe_real_tool_before_final",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{broken-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\":\"final\",\"type\":\"final\",\"output\":{}}-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\":\"final\",\"output\":{\"x\":NaN}}-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"Type\":\"final\",\"output\":{}}-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\": \"tool_call\", \"call_id\": \"call-1\", \"name\": \"shell\", \"arguments\": {}}-policy_denied]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\": \"tool_call\", \"call_id\": \"call-1\", \"name\": \"read_fixture\", \"arguments\": {\"execute\": \"rm fake\"}}-policy_denied]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_invalid_decisions_never_execute[{\"type\":\"final\",\"output\":{},\"verified\":true}-invalid_response]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_repeat_call_stops_before_second_execution",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_role_and_effect_denials_are_terminal",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_turn_and_tool_budgets_are_not_model_controlled",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_timeout_interrupts_tool_and_restores_signal_handler",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_provider_deadline_is_enforced_not_just_passed_as_argument",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_tool_permission_exception_stops_without_leaking_secret",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_result_schema_and_snapshot_identity_guards",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_task_uuid_matches_result_schema_spelling[123456781234123412341234567890ab]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop/test_task_uuid_matches_result_schema_spelling[{12345678-1234-1234-1234-1234567890ab}]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_deep_json_returns_locatable_failure_without_executing[final]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_deep_json_returns_locatable_failure_without_executing[tool_call]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[max_turns-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[max_turns-1.0]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[max_tool_calls-False]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[max_observation_bytes-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[timeout_s-nan]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[timeout_s-inf]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_budget_rejects_boolean_counters_and_nonfinite_deadlines[timeout_s-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_task_rejects_noninteger_claim_versions[revision-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_task_rejects_noninteger_claim_versions[plan_version-True]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_task_rejects_noninteger_claim_versions[revision-1.0]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_argument_format_is_checked_before_execution",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_mutating_original_schema_cannot_expand_authorized_arguments",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_return_alias_and_observation_copies_cannot_rewrite_history",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_existing_alarm_is_preserved_without_starting_provider",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_declaration_rejects_external_schema_references[$ref-https://schemas.example.invalid/args.json]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_declaration_rejects_external_schema_references[$ref-file:///etc/passwd]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_declaration_rejects_external_schema_references[$dynamicRef-http://schemas.example.invalid/args.json]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_tool_declaration_rejects_external_schema_references[$ref-../outside-schema.json]",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_local_schema_fragment_reference_is_validated_without_external_resources",
+      "passed": true
+    },
+    {
+      "name": "tests.unit.test_agent_loop_boundaries/test_total_deadline_interrupts_schema_validation",
+      "passed": true
+    }
+  ],
+  "scope": "P2-01 Agent SDK/loop only; P2-02 not implemented in this batch."
+}

@@ -19,6 +19,7 @@ DOCUMENTS = (
     "docs/architecture.md",
     "docs/protocols.md",
     "docs/development.md",
+    "docs/agent-sdk.md",
     "docs/limitations.md",
     "docs/adr/ADR-0001.md",
     "docs/adr/ADR-0002.md",

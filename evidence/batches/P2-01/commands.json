@@ -1,0 +1,164 @@
+[
+  {
+    "command": [
+      "uv",
+      "sync",
+      "--frozen"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P2-01/dependencies.log",
+    "timestamp_utc": "2026-10-22T14:19:54.255535+00:00"
+  },
+  {
+    "command": [
+      "uv",
+      "sync",
+      "--frozen"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-01/dependencies-final.log",
+    "timestamp_utc": "2026-10-22T14:20:05.704770+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_agent_loop.py"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P2-01/card.log",
+    "timestamp_utc": "2026-10-22T14:28:14.947169+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_agent_loop.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-01/card-final.log",
+    "timestamp_utc": "2026-10-23T00:53:04.275585+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-01/offline.log",
+    "timestamp_utc": "2026-10-23T00:53:24.174646+00:00"
+  },
+  {
+    "command": "python -m pytest -q tests/unit/test_agent_loop.py",
+    "exit_code": 2,
+    "log_path": "evidence/batches/P2-01/delegated-loop-red.json",
+    "executor": "/root/p2_loop",
+    "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+    "timestamp_utc": "2026-10-22T14:20:31.708356+00:00"
+  },
+  {
+    "command": "python -m pytest -q tests/unit/test_agent_loop.py tests/unit/test_agent_loop_boundaries.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-01/delegated-loop-delivery.json",
+    "executor": "/root/p2_loop",
+    "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+    "timestamp_utc": "2026-10-22T14:28:26.433540+00:00"
+  },
+  {
+    "command": "python -m pytest -q tests/unit/test_agent_loop_boundaries.py",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P2-01/delegated-boundary-fixture-first.json",
+    "executor": "/root/p2_contract_review",
+    "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+    "timestamp_utc": "2026-10-22T14:22:56.849522+00:00"
+  },
+  {
+    "command": "python -m pytest -q tests/unit/test_agent_loop_boundaries.py",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P2-01/delegated-boundary-red.json",
+    "executor": "/root/p2_contract_review",
+    "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+    "timestamp_utc": "2026-10-22T14:23:18.762800+00:00"
+  },
+  {
+    "command": "python -m pytest -q tests/unit/test_agent_loop_boundaries.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-01/delegated-boundary-final.json",
+    "executor": "/root/p2_contract_review",
+    "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+    "timestamp_utc": "2026-10-22T14:28:21.449440+00:00"
+  },
+  {
+    "command": "python -m pytest -q tests/unit/test_agent_loop_boundaries.py",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P2-01/delegated-schema-ref-red.json",
+    "executor": "/root/p2_contract_review",
+    "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+    "timestamp_utc": "2026-10-22T14:25:03.503756+00:00"
+  },
+  {
+    "command": "python -m pytest -q tests/unit/test_agent_loop_boundaries.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-01/delegated-schema-ref-green.json",
+    "executor": "/root/p2_contract_review",
+    "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+    "timestamp_utc": "2026-10-22T14:26:17.826318+00:00"
+  },
+  {
+    "command": "python -m pytest -q tests/unit/test_agent_loop_boundaries.py",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P2-01/delegated-schema-timeout-red.json",
+    "executor": "/root/p2_contract_review",
+    "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+    "timestamp_utc": "2026-10-22T14:27:18.760003+00:00"
+  },
+  {
+    "command": "python -m pytest -q tests/unit/test_agent_loop.py",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P2-01/delegated-uuid-red.json",
+    "executor": "/root/p2_loop",
+    "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+    "timestamp_utc": "2026-10-22T14:28:13.089261+00:00"
+  },
+  {
+    "command": null,
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-01/delegated-ruff-final.json",
+    "executor": "/root/p2_loop",
+    "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+    "timestamp_utc": "2026-10-22T14:28:26.469674+00:00"
+  },
+  {
+    "command": "mypy",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-01/delegated-mypy-final.json",
+    "executor": "/root/p2_loop",
+    "origin": "Imported actual delegated execution; exact command flags unspecified when null. Initial boundary fixture failure distinct from corrected-fixture regression red.",
+    "timestamp_utc": "2026-10-22T14:28:26.752546+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/accept.sh",
+      "P2-01"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-01/accept.log",
+    "timestamp_utc": "2026-10-23T00:53:46.531374+00:00"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-01/diff.log",
+    "timestamp_utc": "2026-10-23T00:53:46.559811+00:00"
+  }
+]

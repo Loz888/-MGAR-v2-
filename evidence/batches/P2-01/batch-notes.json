@@ -1,0 +1,12 @@
+{
+  "scope": "P2-01 Agent SDK/loop only; P2-02 not implemented in this batch.",
+  "known_limitations": [
+    "SDK completed result remains unverified; Go fencing/TaskResultCommit and independent Verifier remain authoritative.",
+    "Local turn/tool/deadline budgets are not a durable global model-cost ledger. No paid model requests.",
+    "Trusted synchronous adapters only, Linux/WSL2 main thread with SIGALRM; refuses existing alarms/unsupported threads. Child cleanup belongs to adapters, not a hostile-code sandbox.",
+    "SDK events are local execution evidence, not durable control-plane audit. No Worker scheduling, Artifact CAS or P5 gateway/security claim.",
+    "Contract files currently loaded from this editable repository checkout; standalone wheel deployment is not validated.",
+    "Evidence captured before local batch commit; delivery SHA is in Git history. Coding commits have not been pushed."
+  ],
+  "unverified": []
+}

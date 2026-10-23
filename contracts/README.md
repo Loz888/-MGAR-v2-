@@ -29,3 +29,9 @@ Implementation: DESIGN_ONLY
 适配器和锁顺序见 [ADR-0001](../docs/adr/ADR-0001.md)。
 这些 Schema 没有穷举运行时契约；例如 evidence 样本的结构合法本身不能证明来源、重执行和预期观察满足 07.F。
 后续任务必须补足相应语义校验和测试，不可把静态索引检查当作运行时验证通过。
+
+## P2 运行时补充
+
+P0-01 的五项表格保持设计冻结快照。P2-01 新增 [agent_result.schema.json](agent_result.schema.json)，
+用于 SDK 未验证结果和有界循环事件的实际出口校验；它不能授予数据库状态或独立验证权限。
+Python SDK 的边界与运行说明见 [agent-sdk.md](../docs/agent-sdk.md)。
