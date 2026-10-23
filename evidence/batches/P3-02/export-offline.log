@@ -1,0 +1,3 @@
+{
+  "stdout": "{\"card_id\": \"P3-02\", \"status\": \"PASS\", \"test_summary\": {\"go\": {\"status\": \"PASS\", \"tests\": 124, \"passed\": 124, \"failed_events\": 0, \"skipped\": 0}, \"python\": {\"status\": \"PASS\", \"tests\": 269, \"passed\": 269, \"failed\": 0, \"skipped_or_xfailed\": 0}, \"status\": \"PASS\"}}\n"
+}

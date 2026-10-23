@@ -31,7 +31,10 @@ func Migrate(ctx context.Context, pool *pgxpool.Pool) error {
 	if err := ApplyMigration(ctx, pool, "001_control", migrations.ControlSQL); err != nil {
 		return err
 	}
-	return ApplyMigration(ctx, pool, "002_artifact_cas", migrations.ArtifactSQL)
+	if err := ApplyMigration(ctx, pool, "002_artifact_cas", migrations.ArtifactSQL); err != nil {
+		return err
+	}
+	return ApplyMigration(ctx, pool, "003_context_snapshots", migrations.ContextSQL)
 }
 func ApplyMigration(ctx context.Context, pool *pgxpool.Pool, version, sql string) error {
 	tx, err := pool.Begin(ctx)

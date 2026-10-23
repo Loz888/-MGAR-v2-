@@ -40,7 +40,9 @@ class Agent:
             return AgentResult(task, "failed", turns, calls, None, kind, turns, tool_name, tuple(observations), tuple(events))
         emit("run_started")
         snap = snapshot.to_dict()
-        if snap["task_id"] != task.claim.task_id or snap["plan_version"] != task.claim.plan_version:
+        if (snap["task_id"] != task.claim.task_id or snap["plan_version"] != task.claim.plan_version
+                or snap.get("run_id", task.claim.run_id) != task.claim.run_id
+                or snap.get("role", task.claim.role) != task.claim.role):
             return failed("policy_denied")
         seen_calls: set[str] = set()
         seen_requests: set[str] = set()

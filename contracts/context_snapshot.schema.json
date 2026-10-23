@@ -5,6 +5,9 @@
   "type": "object", "additionalProperties": false,
   "required": ["schema_version", "task_id", "plan_version", "model_config_version", "tool_policy_version", "artifacts"],
   "properties": {
+    "snapshot_id": {"type": "string", "format": "uuid"},
+    "run_id": {"type": "string", "format": "uuid"},
+    "role": {"enum": ["research", "data", "action", "verify", "aggregate"]},
     "schema_version": {"const": "context.v1"},
     "task_id": {"type": "string", "format": "uuid"},
     "plan_version": {"type": "integer", "minimum": 1},
@@ -13,6 +16,13 @@
     "artifacts": {"type": "array", "maxItems": 64, "items": {
       "type": "object", "additionalProperties": false, "required": ["artifact_id", "content_sha256", "purpose"],
       "properties": {
+        "producer_node": {"type": "string", "minLength": 1},
+        "producer_task_id": {"type": "string", "format": "uuid"},
+        "source_plan_version": {"type": "integer", "minimum": 1},
+        "tool_schema_version": {"type": "string", "minLength": 1},
+        "byte_length": {"type": "integer", "minimum": 0, "maximum": 1048576},
+        "kind": {"type": "string", "minLength": 1},
+        "content_type": {"enum": ["application/json", "text/plain", "application/octet-stream"]},
         "artifact_id": {"type": "string", "format": "uuid"},
         "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
         "purpose": {"type": "string", "maxLength": 512}

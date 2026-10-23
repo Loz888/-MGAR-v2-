@@ -1,0 +1,117 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/context/...",
+      "./tests/integration/...",
+      "-run",
+      "Context|ACL"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P3-02/card-red.log",
+    "timestamp_utc": "2026-10-23T06:21:27.760092+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/context/...",
+      "./tests/integration/...",
+      "-run",
+      "Context|ACL"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P3-02/card-first-green.log",
+    "timestamp_utc": "2026-10-23T06:22:43.973186+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/context/...",
+      "./tests/integration/...",
+      "-run",
+      "Context|ACL|Artifact|CAS"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-02/card-lineage-green.log",
+    "timestamp_utc": "2026-10-23T06:23:32.720686+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_context_wire.py"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P3-02/sdk-identity-red.log",
+    "timestamp_utc": "2026-10-23T06:24:41.769531+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_context_wire.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-02/sdk-identity-green.log",
+    "timestamp_utc": "2026-10-23T06:26:11.081832+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/context/...",
+      "./tests/integration/...",
+      "-run",
+      "Context|ACL"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-02/card-final.log",
+    "timestamp_utc": "2026-10-23T06:26:12.059064+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "run",
+      "./cmd/mgarmigrate"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-02/migrate-final.log",
+    "timestamp_utc": "2026-10-23T06:26:12.439791+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-02/full-offline.log",
+    "timestamp_utc": "2026-10-23T06:26:42.333065+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-02/final-audit.log",
+    "timestamp_utc": "2026-10-23T06:27:25.071553+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/accept.sh",
+      "P3-02"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P3-02/export-offline.log",
+    "timestamp_utc": "2026-10-23T06:27:25.139868+00:00"
+  }
+]

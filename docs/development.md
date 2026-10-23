@@ -134,3 +134,9 @@ go test ./internal/artifact/... ./tests/integration/... -run 'Artifact|CAS'
 ```
 
 协议与边界见 [artifact-context.md](artifact-context.md)。测试使用自己的随机 PG schema 与私有临时目录。
+
+Context Snapshot/ACL 专项：
+
+```bash
+go test ./internal/context/... ./tests/integration/... -run 'Context|ACL'
+```

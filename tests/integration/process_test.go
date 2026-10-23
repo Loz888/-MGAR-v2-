@@ -3,6 +3,7 @@ package integration
 import (
 	"bufio"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/Loz888/-MGAR-v2-/internal/artifact"
@@ -50,6 +51,21 @@ func TestProcessHelper(t *testing.T) {
 	run := os.Getenv("MGAR_TEST_RUN")
 	ctx := context.Background()
 	switch kind {
+	case "context":
+		var c store.TaskClaim
+		if e := json.Unmarshal([]byte(os.Getenv("MGAR_TEST_CLAIM")), &c); e != nil {
+			t.Fatal(e)
+		}
+		cas, e := artifact.New(os.Getenv("MGAR_TEST_CAS_ROOT"))
+		if e != nil {
+			t.Fatal(e)
+		}
+		defer cas.Close()
+		snapshot, e := s.BuildSnapshot(ctx, c, "mock.v1", "action.v1", cas)
+		if e != nil {
+			t.Fatal(e)
+		}
+		fmt.Println("RESULT snapshot", snapshot.ID, snapshot.Hash())
 	case "artifact":
 		c, e := s.ClaimTask(ctx, run, store.WorkerIdentity{Owner: "publisher-" + os.Getenv("MGAR_TEST_ACTOR"), Role: "research"}, time.Minute)
 		if e != nil {
@@ -64,6 +80,9 @@ func TestProcessHelper(t *testing.T) {
 			t.Fatal(e)
 		}
 		defer cas.Close()
+		if _, e = s.BuildSnapshot(ctx, c, "mock.v1", "research.v1", cas); e != nil {
+			t.Fatal(e)
+		}
 		a, e := s.PublishArtifact(ctx, c, cas, "finding", "text/plain", "fixture.v1", []byte("same cross-process bytes"))
 		if e != nil {
 			t.Fatal(e)

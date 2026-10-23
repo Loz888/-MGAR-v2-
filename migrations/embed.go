@@ -9,3 +9,6 @@ var ControlSQL string
 
 //go:embed 002_artifact_cas.sql
 var ArtifactSQL string
+
+//go:embed 003_context_snapshots.sql
+var ContextSQL string

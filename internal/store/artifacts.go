@@ -36,12 +36,22 @@ func (s *Store) PublishArtifact(ctx context.Context, c TaskClaim, cas *artifact.
 	}
 	var preKind string
 	e = pre.QueryRow(ctx, "SELECT requirements->>'required_output_kind' FROM plan_nodes WHERE run_id=$1 AND plan_version=$2 AND task_instance_id=$3", c.RunID, c.PlanVersion, c.TaskID).Scan(&preKind)
-	pre.Rollback(ctx)
 	if e != nil {
+		pre.Rollback(ctx)
 		return a, e
 	}
 	if kind != preKind {
+		pre.Rollback(ctx)
 		return a, ErrPolicy
+	}
+	var snapshotID string
+	e = pre.QueryRow(ctx, "SELECT snapshot_id FROM context_snapshots WHERE run_id=$1 AND task_id=$2 AND plan_version=$3", c.RunID, c.TaskID, c.PlanVersion).Scan(&snapshotID)
+	pre.Rollback(ctx)
+	if errors.Is(e, pgx.ErrNoRows) {
+		return a, ErrStaleInput
+	}
+	if e != nil {
+		return a, e
 	}
 	hash, e := cas.Put(body)
 	if e != nil {
@@ -70,6 +80,9 @@ func (s *Store) PublishArtifact(ctx context.Context, c TaskClaim, cas *artifact.
 		return artifact.Metadata{}, ErrLeaseExpired
 	}
 	if e != nil {
+		return artifact.Metadata{}, e
+	}
+	if _, e = tx.Exec(ctx, "INSERT INTO artifact_contexts(artifact_id,run_id,snapshot_id) VALUES($1,$2,$3)", a.ID, c.RunID, snapshotID); e != nil {
 		return artifact.Metadata{}, e
 	}
 	tag, e := tx.Exec(ctx, "UPDATE task_instances SET state='output_ready',result_artifact_id=$2,revision=revision+1 WHERE task_id=$1 AND revision=$3 AND lease_until>clock_timestamp()", c.TaskID, a.ID, c.Revision)

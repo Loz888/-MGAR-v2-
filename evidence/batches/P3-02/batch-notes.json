@@ -1,0 +1,12 @@
+{
+  "scope": "P3-02 immutable authorized context snapshots, CAS-backed input reads, output lineage and compatible SDK Run/Role guards.",
+  "known_limitations": [
+    "Snapshot references derive only from current verified direct dependencies. Two independent processes replayed identical persisted snapshot ID/hash; actual Go snapshot JSON was accepted by a Python SDK subprocess with the same hash.",
+    "Real CAS publications now require a frozen context and atomically link output Artifact to it. Historical P1 low-level protocol fixtures remain explicitly synthetic and are not content/Verifier evidence.",
+    "Cross-Run, forged Role, same-Run existing private artifact, unlisted input, configuration substitution and revoked-source access were tested. Two newly reproduced SDK identity failures were fixed and retained.",
+    "Trusted fixture Verdict rows enable dependency tests; no independent P5 Verifier execution or hostile Worker authentication boundary is claimed.",
+    "Go-to-Python autonomous Worker dispatch, automatic renewal and full role handoff remain unimplemented; no paid model calls or production database writes.",
+    "Evidence captured before local commit; delivery SHA is in Git history; coding commits have not been pushed."
+  ],
+  "unverified": []
+}

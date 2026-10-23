@@ -78,6 +78,9 @@ func TestArtifactPublicationDedupProvenanceAndFencing(t *testing.T) {
 		if e != nil {
 			t.Fatal(e)
 		}
+		if _, e = s.BuildSnapshot(ctx, c, "mock.v1", "research.v1", cas); e != nil {
+			t.Fatal(e)
+		}
 		wrong := c
 		wrong.Role = "action"
 		if _, e = s.PublishArtifact(ctx, wrong, cas, "finding", "application/json", "research.v1", output); !errors.Is(e, store.ErrPolicy) {
@@ -123,6 +126,9 @@ func TestArtifactRollbackLeavesInventoryOrphanAndLeaseRejects(t *testing.T) {
 		t.Fatal(e)
 	}
 	defer cas.Close()
+	if _, e = s.BuildSnapshot(ctx, c, "mock.v1", "research.v1", cas); e != nil {
+		t.Fatal(e)
+	}
 	if _, e = s.Pool.Exec(ctx, `CREATE FUNCTION fail_cas_outbox() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN RAISE EXCEPTION 'injected'; END $$; CREATE TRIGGER injected_cas BEFORE INSERT ON outbox_events FOR EACH ROW EXECUTE FUNCTION fail_cas_outbox()`); e != nil {
 		t.Fatal(e)
 	}
