@@ -84,3 +84,16 @@ bash scripts/accept.sh P1-05
 修改实际受测输入后应重新测试；`evidence/` 与 `TASK_QUEUE.md` 的验收状态不参与输入指纹。
 完整阶段边界与故障实验解释见 [limitations.md](limitations.md)，真实运行结果见
 [`evidence/batches/P1-05/`](../evidence/batches/P1-05/)。
+
+## Python SDK 专项检查
+
+P2 SDK、Provider 的边界与接口说明见 [agent-sdk.md](agent-sdk.md)。
+模型决策 Mock 之外的受信工具实际执行，结果仍须独立验证。
+
+```bash
+source scripts/dev-env.sh
+python -m pytest -q tests/unit/test_agent_loop.py tests/unit/test_agent_loop_boundaries.py
+python -m pytest -q tests/unit/test_providers.py
+```
+
+Provider 本轮只测试本机 HTTP stub，真实付费请求仍关闭。

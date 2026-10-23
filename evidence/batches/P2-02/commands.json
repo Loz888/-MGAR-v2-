@@ -1,0 +1,186 @@
+[
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_providers.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-02/card.log",
+    "timestamp_utc": "2026-10-23T01:04:17.764502+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-02/offline.log",
+    "timestamp_utc": "2026-10-23T01:04:38.252012+00:00"
+  },
+  {
+    "phase": "initial_missing_feature",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/unit/test_providers.py",
+    "exit_code": 2,
+    "log_path": "evidence/batches/P2-02/delegated-p2_provider-initial_missing_feature.json",
+    "executor": "/root/p2_provider",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T00:57:41.033620+00:00"
+  },
+  {
+    "phase": "first_implementation",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/unit/test_providers.py",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P2-02/delegated-p2_provider-first_implementation.json",
+    "executor": "/root/p2_provider",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T00:59:31.554970+00:00"
+  },
+  {
+    "phase": "initial_green",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/unit/test_providers.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-02/delegated-p2_provider-initial_green.json",
+    "executor": "/root/p2_provider",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:00:44.465543+00:00"
+  },
+  {
+    "phase": "wire_types_red",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/unit/test_providers.py -k response_model",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P2-02/delegated-p2_provider-wire_types_red.json",
+    "executor": "/root/p2_provider",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:02:52.036815+00:00"
+  },
+  {
+    "phase": "full_provider_regression_before_review_positive_control",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/unit/test_providers.py tests/unit/test_provider_boundaries.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-02/delegated-p2_provider-full_provider_regression_before_review_positive_control.json",
+    "executor": "/root/p2_provider",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:03:14.197264+00:00"
+  },
+  {
+    "phase": "ruff_final",
+    "command": "source scripts/dev-env.sh && ruff check agentkit/mgar_agents/provider agentkit/mgar_agents/core/errors.py agentkit/mgar_agents/core/agent.py tests/unit/test_providers.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-02/delegated-p2_provider-ruff_final.json",
+    "executor": "/root/p2_provider",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:03:47.785913+00:00"
+  },
+  {
+    "phase": "mypy_final",
+    "command": "source scripts/dev-env.sh && mypy",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-02/delegated-p2_provider-mypy_final.json",
+    "executor": "/root/p2_provider",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:03:48.074630+00:00"
+  },
+  {
+    "phase": "diff_final",
+    "command": "source scripts/dev-env.sh && git diff --check",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-02/delegated-p2_provider-diff_final.json",
+    "executor": "/root/p2_provider",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:03:48.074630+00:00"
+  },
+  {
+    "phase": "first_boundary",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/unit/test_provider_boundaries.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-02/delegated-p2_provider_review-first_boundary.json",
+    "note": "",
+    "executor": "/root/p2_provider_review",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T00:59:57.927956+00:00"
+  },
+  {
+    "phase": "deadline_red",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/unit/test_provider_boundaries.py",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P2-02/delegated-p2_provider_review-deadline_red.json",
+    "note": "",
+    "executor": "/root/p2_provider_review",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:01:54.515491+00:00"
+  },
+  {
+    "phase": "usage_red",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/unit/test_provider_boundaries.py",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P2-02/delegated-p2_provider_review-usage_red.json",
+    "note": "",
+    "executor": "/root/p2_provider_review",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:02:18.696083+00:00"
+  },
+  {
+    "phase": "fixture_alignment_failure",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/unit/test_provider_boundaries.py -k 'boundary_http_fixture'",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P2-02/delegated-p2_provider_review-fixture_alignment_failure.json",
+    "note": "Fixture was aligned with newly added required response.model validation; not reported as another production defect.",
+    "executor": "/root/p2_provider_review",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:03:22.945429+00:00"
+  },
+  {
+    "phase": "final_boundary",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/unit/test_provider_boundaries.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-02/delegated-p2_provider_review-final_boundary.json",
+    "note": "",
+    "executor": "/root/p2_provider_review",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:03:58.774114+00:00"
+  },
+  {
+    "phase": "ruff",
+    "command": "source scripts/dev-env.sh && ruff check tests/unit/test_provider_boundaries.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-02/delegated-p2_provider_review-ruff.json",
+    "note": "",
+    "executor": "/root/p2_provider_review",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:04:08.662270+00:00"
+  },
+  {
+    "phase": "diff",
+    "command": "git diff --check",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-02/delegated-p2_provider_review-diff.json",
+    "note": "",
+    "executor": "/root/p2_provider_review",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:04:08.668336+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/accept.sh",
+      "P2-02"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-02/accept.log",
+    "timestamp_utc": "2026-10-23T01:05:17.136939+00:00"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-02/diff.log",
+    "timestamp_utc": "2026-10-23T01:05:17.163468+00:00"
+  }
+]

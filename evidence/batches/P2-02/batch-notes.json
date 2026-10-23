@@ -1,0 +1,12 @@
+{
+  "scope": "P2-02 Provider adapter/strict parsing/bounded retry only; actual HTTP tests used a loopback stub.",
+  "known_limitations": [
+    "No external model call or paid usage; live compatibility and model accuracy are NOT_RUN.",
+    "Default factory remains Mock-only. Official endpoint additionally requires exact case/paid flags/credential/finite cap and a trusted durable CallLedger; no concrete P6 Go model ledger exists yet.",
+    "In-memory test ledgers are synthetic stubs, not production/global cost guarantees. Usage returned by the HTTP stub is test data; bounds/price version are estimates, not verified invoices.",
+    "Deadline enforcement is supported on the Linux/WSL2 main thread and preserves the outer SDK deadline. Trusted ledger callbacks must implement bounded durable admission/settlement.",
+    "SDK outputs remain unverified; no authority to mark Task/Workflow succeeded. P3 Artifact CAS and P5 independent verification/security remain pending.",
+    "Evidence captured before local batch commit; delivery SHA is in Git history. No coding commits pushed."
+  ],
+  "unverified": []
+}

@@ -8,6 +8,7 @@ from uuid import uuid4
 
 from jsonschema.exceptions import ValidationError
 
+from .errors import ProviderFailure
 from .provider import ModelRequest, Provider
 from .schemas import AgentResult, Budget, ContextSnapshot, Event, Observation, Task, canonical_json, strict_json, validate
 from .tools import ToolExecutionError, ToolRegistry, run_bounded
@@ -84,6 +85,8 @@ class Agent:
                 observations.append(Observation(turns, call_id, tool_name, "ok", output, output_hash))
                 emit("tool_observed", call_id=call_id, observation_hash=output_hash)
             return failed("budget_exhausted")
+        except ProviderFailure as error:
+            return failed(error.kind)
         except TimeoutError:
             return failed("timeout")
         except PermissionError:

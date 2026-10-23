@@ -13,7 +13,7 @@
 | [P1-04](tasks/P1-04.md) | P1 | 最小任务 Claim / Lease / Epoch / Revision | P1-03 | PASS | `evidence/batches/P1-04/accept.json` |
 | [P1-05](tasks/P1-05.md) | P1 | Run 生命周期、恢复扫描与 CLI | P1-04 | PASS | `evidence/batches/P1-05/accept.json` |
 | [P2-01](tasks/P2-01.md) | P2 | Python Agent SDK 与受控 Loop | P1-05 | PASS | `evidence/batches/P2-01/accept.json` |
-| [P2-02](tasks/P2-02.md) | P2 | 模型 Provider、解析与有限重试 | P2-01 | TODO | `evidence/batches/P2-02/accept.json` |
+| [P2-02](tasks/P2-02.md) | P2 | 模型 Provider、解析与有限重试 | P2-01 | PASS | `evidence/batches/P2-02/accept.json` |
 | [P2-03](tasks/P2-03.md) | P2 | ResearchAgent：来源约束的多轮检索 | P2-02 | TODO | `evidence/batches/P2-03/accept.json` |
 | [P2-04](tasks/P2-04.md) | P2 | DataAgent：只读 SQL 与数值证据 | P2-03 | TODO | `evidence/batches/P2-04/accept.json` |
 | [P2-05](tasks/P2-05.md) | P2 | ActionAgent：测试环境内受控操作 | P2-04 | TODO | `evidence/batches/P2-05/accept.json` |
