@@ -97,3 +97,11 @@ python -m pytest -q tests/unit/test_providers.py
 ```
 
 Provider 本轮只测试本机 HTTP stub，真实付费请求仍关闭。
+
+ResearchAgent 专项检查：
+
+```bash
+python -m pytest -q tests/e2e/research_test.py tests/security/test_research_scope.py
+```
+
+这些检查实际读取合成文档，Mock 只替代模型决策；没有联网检索或模型效果实验。

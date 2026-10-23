@@ -1,0 +1,6 @@
+synthetic log version incident-log.v1
+2026-10-20T10:00:00Z event_id=e1 order_id=101 amount=100 status=paid
+2026-10-20T10:00:01Z event_id=e1-retry order_id=101 amount=100 status=paid
+2026-10-20T10:00:02Z event_id=e2 order_id=102 amount=50 status=paid
+2026-10-20T10:00:03Z event_id=e3 order_id=103 amount=70 status=pending
+2026-10-20T10:00:04Z aggregation raw_total=320 deduplicated_paid_total=150

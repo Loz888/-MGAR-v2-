@@ -1,0 +1,7 @@
+// Synthetic repository excerpt, source version incident-source.v1.
+// Aggregate currently sums every order_events join row without deduplication or pending-order filtering.
+func Aggregate(events []Event) int {
+    total := 0
+    for _, event := range events { total += event.Amount }
+    return total
+}

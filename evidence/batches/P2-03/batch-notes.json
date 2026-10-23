@@ -1,0 +1,12 @@
+{
+  "scope": "P2-03 ResearchAgent and synthetic-source tools only.",
+  "known_limitations": [
+    "Only fixed local human-authored synthetic docs/repo/log sources; no external retrieval or paid model calls.",
+    "Source hashes and exact quotes prove what was read, not the semantic truth of a model statement. All findings including reference-quality sources remain unverified.",
+    "artifact:// references are immutable producer-specific candidates, persisted=false; Artifact CAS and independent Verifier are P3/P5, not implemented.",
+    "Local trusted source adapter and synthetic SDK Claim fixtures are not an authenticated remote Tool Gateway or automatic Go Worker integration. SDK result cannot mark Task/Workflow succeeded.",
+    "Role events are local execution evidence; durable control-plane audit and handoff require the relevant later cards.",
+    "Evidence captured before local commit; delivery SHA in Git history. Coding commits have not been pushed."
+  ],
+  "unverified": []
+}

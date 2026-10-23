@@ -1,0 +1,182 @@
+[
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/e2e/research_test.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-03/card.log",
+    "timestamp_utc": "2026-10-23T01:12:54.177239+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-03/offline.log",
+    "timestamp_utc": "2026-10-23T01:13:15.068607+00:00"
+  },
+  {
+    "phase": "red",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/e2e/research_test.py",
+    "exit_code": 2,
+    "log_path": "evidence/batches/P2-03/delegated-p2_research-red.json",
+    "executor": "/root/p2_research",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:07:21.944899+00:00"
+  },
+  {
+    "phase": "first_green",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/e2e/research_test.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-03/delegated-p2_research-first_green.json",
+    "executor": "/root/p2_research",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:09:41.030240+00:00"
+  },
+  {
+    "phase": "first_ruff",
+    "command": "source scripts/dev-env.sh && ruff check agentkit/mgar_agents/research tests/e2e/research_test.py",
+    "exit_code": 1,
+    "log_path": "evidence/batches/P2-03/delegated-p2_research-first_ruff.json",
+    "executor": "/root/p2_research",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:10:13.998511+00:00"
+  },
+  {
+    "phase": "first_mypy",
+    "command": "source scripts/dev-env.sh && mypy agentkit/mgar_agents/research",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-03/delegated-p2_research-first_mypy.json",
+    "executor": "/root/p2_research",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:10:14.276045+00:00"
+  },
+  {
+    "phase": "fixture_and_audit_green",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/e2e/research_test.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-03/delegated-p2_research-fixture_and_audit_green.json",
+    "executor": "/root/p2_research",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:10:14.574515+00:00"
+  },
+  {
+    "phase": "ruff",
+    "command": "source scripts/dev-env.sh && ruff check agentkit/mgar_agents/research tests/e2e/research_test.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-03/delegated-p2_research-ruff.json",
+    "executor": "/root/p2_research",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:10:37.538693+00:00"
+  },
+  {
+    "phase": "mypy",
+    "command": "source scripts/dev-env.sh && mypy agentkit/mgar_agents/research",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-03/delegated-p2_research-mypy.json",
+    "executor": "/root/p2_research",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:10:37.800411+00:00"
+  },
+  {
+    "phase": "targeted",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/e2e/research_test.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-03/delegated-p2_research-targeted.json",
+    "executor": "/root/p2_research",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:10:38.090698+00:00"
+  },
+  {
+    "phase": "delivery",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/e2e/research_test.py tests/security/test_research_scope.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-03/delegated-p2_research-delivery.json",
+    "executor": "/root/p2_research",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:11:50.103249+00:00"
+  },
+  {
+    "phase": "delivery_ruff",
+    "command": "source scripts/dev-env.sh && ruff check agentkit/mgar_agents/research tests/e2e/research_test.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-03/delegated-p2_research-delivery_ruff.json",
+    "executor": "/root/p2_research",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:11:50.135249+00:00"
+  },
+  {
+    "phase": "delivery_mypy",
+    "command": "source scripts/dev-env.sh && mypy agentkit/mgar_agents/research",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-03/delegated-p2_research-delivery_mypy.json",
+    "executor": "/root/p2_research",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:11:50.238852+00:00"
+  },
+  {
+    "phase": "delivery_diff",
+    "command": "source scripts/dev-env.sh && git diff --check",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-03/delegated-p2_research-delivery_diff.json",
+    "executor": "/root/p2_research",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:11:50.239250+00:00"
+  },
+  {
+    "phase": "security_first",
+    "command": "source scripts/dev-env.sh && python -m pytest -q tests/security/test_research_scope.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-03/delegated-p2_provider_review-security_first.json",
+    "note": "Independent tests passed on first run; no false red claim.",
+    "executor": "/root/p2_provider_review",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:10:00.386399+00:00"
+  },
+  {
+    "phase": "ruff",
+    "command": "source scripts/dev-env.sh && ruff check tests/security/test_research_scope.py",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-03/delegated-p2_provider_review-ruff.json",
+    "note": "Independent tests passed on first run; no false red claim.",
+    "executor": "/root/p2_provider_review",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:11:31.023113+00:00"
+  },
+  {
+    "phase": "diff",
+    "command": "git diff --check",
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-03/delegated-p2_provider_review-diff.json",
+    "note": "Independent tests passed on first run; no false red claim.",
+    "executor": "/root/p2_provider_review",
+    "origin": "Imported actual delegated run, not a second root execution",
+    "timestamp_utc": "2026-10-23T01:11:49.111241+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/accept.sh",
+      "P2-03"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-03/accept.log",
+    "timestamp_utc": "2026-10-23T01:13:46.278399+00:00"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P2-03/diff.log",
+    "timestamp_utc": "2026-10-23T01:13:46.305362+00:00"
+  }
+]

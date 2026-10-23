@@ -1,0 +1,46 @@
+{
+  "schema_version": "research_index.v1",
+  "version": "incident-research.v1",
+  "sources": [
+    {
+      "source_id": "release-note",
+      "relative_path": "release-note.md",
+      "kind": "doc",
+      "quality": "reference",
+      "content_sha256": "6bda963a6192342750b77ff2b15acb41ac256e59f9dc078623874562bd34b4a8",
+      "title": "Release duplicate aggregation change"
+    },
+    {
+      "source_id": "orders-log",
+      "relative_path": "orders.log",
+      "kind": "log",
+      "quality": "reference",
+      "content_sha256": "617db68e04f161aa6a3915824a0781d2387ffa93df341b3039f284d8f9bcd5fb",
+      "title": "Synthetic duplicate event log"
+    },
+    {
+      "source_id": "aggregate-source",
+      "relative_path": "aggregate.go.txt",
+      "kind": "repo",
+      "quality": "reference",
+      "content_sha256": "fc667dbb2bd94d13ae299e402cc37452885edd060ba776917989dbce2e622936",
+      "title": "Synthetic aggregation source excerpt"
+    },
+    {
+      "source_id": "rumor",
+      "relative_path": "rumor.md",
+      "kind": "doc",
+      "quality": "unverified",
+      "content_sha256": "8832ba0a69cac216c1de2cf5b92b3799656a6fcd77b53dfd1968f8fe496de297",
+      "title": "Unverified cache rumor"
+    },
+    {
+      "source_id": "injection",
+      "relative_path": "injection.md",
+      "kind": "doc",
+      "quality": "unverified",
+      "content_sha256": "7de41972ca63bbb6eee929cfd6e4b6e9b7f8c206e076753b701b96f383388a09",
+      "title": "Untrusted prompt injection sample"
+    }
+  ]
+}
