@@ -36,7 +36,7 @@
 | [P6-03](tasks/P6-03.md) | P6 | 关键路径调度与成本感知模型路由 | P6-02 | PASS | `evidence/batches/P6-03/accept.json` |
 | [P6-04](tasks/P6-04.md) | P6 | 端到端 Trace 与事件一致性 | P6-03 | PASS | `evidence/batches/P6-04/accept.json` |
 | [P6-05](tasks/P6-05.md) | P6 | 运维命令与负载诊断 | P6-04 | PASS | `evidence/batches/P6-05/accept.json` |
-| [P7-01](tasks/P7-01.md) | P7 | 合成任务集、独立 Oracle 与冻结清单 | P6-05 | TODO | `evidence/batches/P7-01/accept.json` |
+| [P7-01](tasks/P7-01.md) | P7 | 合成任务集、独立 Oracle 与冻结清单 | P6-05 | PASS | `evidence/batches/P7-01/accept.json` |
 | [P7-02](tasks/P7-02.md) | P7 | 端到端演示与合成业务完整闭环 | P7-01 | TODO | `evidence/batches/P7-02/accept.json` |
 | [P7-03](tasks/P7-03.md) | P7 | 公平单 Agent / 固定 / 动态基线 | P7-02 | TODO | `evidence/batches/P7-03/accept.json` |
 | [P7-04](tasks/P7-04.md) | P7 | 消融与统计分析报告 | P7-03 | TODO | `evidence/batches/P7-04/accept.json` |
@@ -68,3 +68,5 @@ P0-01 的原始未提交快照与失败记录保留于 `evidence/batches/P0-01/a
 **P5 授权：** 用户继续 P5，按 P5-01～P5-05 依赖顺序逐卡实施和验收；不进入 P6，不启用付费模型。
 
 **P6 授权：** 用户开启 P6；按 P6-01～P6-05 顺序逐卡实施和验收，不进入 P7，不启用付费模型。
+
+**P7 授权：** 用户要求继续 P7；按 P7-01～P7-05 顺序逐卡实施离线工程与实验，准备 P7-06 门禁但无显式付费授权不发请求；不进入 P8。

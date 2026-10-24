@@ -27,4 +27,4 @@ files = ["agentkit"]
 strict = true
 
 [tool.ruff]
-include = ["agentkit/**/*.py", "tests/test_provider.py", "tests/test_claim.py", "tests/test_pipeline.py", "tests/unit/**/*.py", "tests/security/**/*.py", "tests/e2e/*.py", "eval/context_selection/**/*.py", "eval/scheduling/**/*.py"]
+include = ["agentkit/**/*.py", "tests/test_provider.py", "tests/test_claim.py", "tests/test_pipeline.py", "tests/unit/**/*.py", "tests/security/**/*.py", "tests/e2e/*.py", "eval/context_selection/**/*.py", "eval/scheduling/**/*.py", "eval/oracle/**/*.py"]

@@ -1,0 +1,850 @@
+{
+  "offline-001": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 51,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-002": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 200,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-003": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 412,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-004": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 480,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-005": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 187,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-006": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 404,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-007": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 493,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-008": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 370,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-009": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 323,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-010": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 417,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-011": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 383,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-012": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 451,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-013": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 77,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-014": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 239,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-015": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 464,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-016": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 532,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-017": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 213,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-018": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 443,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-019": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 354,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-020": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 422,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-021": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 349,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-022": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 265,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-023": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 435,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-024": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 312,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-025": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 103,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "offline-026": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 278,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "offline-027": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 516,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "offline-028": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 393,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "offline-029": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 239,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "offline-030": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 291,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "offline-031": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 406,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "offline-032": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 474,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "offline-033": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 184,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "offline-034": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 304,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "offline-035": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 296,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "offline-036": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 364,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "offline-037": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 129,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-038": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 317,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-039": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 568,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-040": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 445,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-041": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 265,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-042": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 330,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-043": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 458,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-044": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 526,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-045": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 210,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-046": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 152,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-047": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 348,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-048": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 416,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "offline-049": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "insufficient_evidence",
+    "input_version": 1
+  },
+  "offline-050": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "insufficient_evidence",
+    "input_version": 1
+  },
+  "offline-051": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "insufficient_evidence",
+    "input_version": 1
+  },
+  "offline-052": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "insufficient_evidence",
+    "input_version": 1
+  },
+  "offline-053": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "insufficient_evidence",
+    "input_version": 1
+  },
+  "offline-054": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "insufficient_evidence",
+    "input_version": 1
+  },
+  "offline-055": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "policy_denied",
+    "input_version": 1
+  },
+  "offline-056": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "policy_denied",
+    "input_version": 1
+  },
+  "offline-057": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "policy_denied",
+    "input_version": 1
+  },
+  "offline-058": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "policy_denied",
+    "input_version": 1
+  },
+  "offline-059": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "policy_denied",
+    "input_version": 1
+  },
+  "offline-060": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "policy_denied",
+    "input_version": 1
+  },
+  "live-001": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 69,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "live-002": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 227,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "live-003": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 448,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "live-004": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 516,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "live-005": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 205,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "live-006": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 431,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "live-007": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "insufficient_evidence",
+    "input_version": 1
+  },
+  "live-008": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "policy_denied",
+    "input_version": 1
+  },
+  "live-009": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 341,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "live-010": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 253,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "live-011": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 419,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "live-012": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 296,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "live-013": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 95,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "live-014": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 266,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "live-015": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "insufficient_evidence",
+    "input_version": 1
+  },
+  "live-016": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "policy_denied",
+    "input_version": 1
+  },
+  "live-017": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 231,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "live-018": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 279,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "live-019": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 390,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "live-020": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 458,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "live-021": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 367,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "live-022": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 292,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "live-023": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "insufficient_evidence",
+    "input_version": 1
+  },
+  "live-024": {
+    "decision": "refuse",
+    "metrics": null,
+    "reason": "policy_denied",
+    "input_version": 1
+  },
+  "development-001": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 89,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "development-002": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 257,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "development-003": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 488,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "development-004": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 556,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "development-005": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 225,
+      "paid_orders": 2,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "development-006": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 270,
+      "paid_orders": 3,
+      "duplicate_paid_events": 1
+    },
+    "reason": null,
+    "input_version": 2
+  },
+  "development-007": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 378,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  },
+  "development-008": {
+    "decision": "answer",
+    "metrics": {
+      "paid_total": 446,
+      "paid_orders": 4,
+      "duplicate_paid_events": 2
+    },
+    "reason": null,
+    "input_version": 1
+  }
+}

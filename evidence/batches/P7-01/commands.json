@@ -1,0 +1,122 @@
+[
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/e2e/fixtures_test.py"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-01/card-red.log",
+    "timestamp_utc": "2026-10-24T12:03:27.657890+00:00"
+  },
+  {
+    "command": [
+      "ruff",
+      "check",
+      "eval/oracle",
+      "tests/e2e/fixtures_test.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-01/oracle-lint.log",
+    "timestamp_utc": "2026-10-24T12:06:09.293249+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/e2e/fixtures_test.py",
+      "-k",
+      "independent_oracle_math"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-01/oracle-before-freeze.log",
+    "timestamp_utc": "2026-10-24T12:07:22.502926+00:00"
+  },
+  {
+    "command": [
+      "ruff",
+      "check",
+      "eval/oracle",
+      "tests/e2e/fixtures_test.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-01/oracle-lint-final.log",
+    "timestamp_utc": "2026-10-24T12:07:22.547477+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/oracle/freeze.py",
+      "--version",
+      "mgar-dataset.v1"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-01/freeze.log",
+    "timestamp_utc": "2026-10-24T12:07:22.613379+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/e2e/fixtures_test.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-01/frozen-fixtures.log",
+    "timestamp_utc": "2026-10-24T12:07:24.839387+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/oracle/validate_manifest.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-01/manifest.log",
+    "timestamp_utc": "2026-10-24T12:07:24.897810+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-01/full-offline.log",
+    "timestamp_utc": "2026-10-24T12:10:11.753754+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-01/final-go.log",
+    "timestamp_utc": "2026-10-24T12:11:33.824017+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-01/final-build.log",
+    "timestamp_utc": "2026-10-24T12:11:34.788395+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-01/final-audit.log",
+    "timestamp_utc": "2026-10-24T12:11:34.886236+00:00"
+  }
+]
