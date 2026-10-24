@@ -1,0 +1,3 @@
+{
+  "stdout": "go version go1.27.3 linux/amd64\nPython 3.12.14\nDocker Compose version v2.40.3\ncredential pattern scan passed: 1116 source/evidence files; local credentials excluded\n{\n  \"go\": {\n    \"status\": \"PASS\",\n    \"tests\": 350,\n    \"passed\": 350,\n    \"failed_events\": 0,\n    \"skipped\": 0,\n    \"complete\": true\n  },\n  \"python\": {\n    \"status\": \"PASS\",\n    \"tests\": 321,\n    \"passed\": 321,\n    \"failed\": 0,\n    \"skipped_or_xfailed\": 0,\n    \"complete\": true,\n    \"passed_subtests\": 15\n  },\n  \"status\": \"PASS\"\n}\n"
+}

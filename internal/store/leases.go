@@ -35,6 +35,9 @@ func ValidateWorker(id WorkerIdentity, ttl time.Duration) error {
 	return nil
 }
 func (s *Store) ClaimTask(ctx context.Context, run string, id WorkerIdentity, ttl time.Duration) (TaskClaim, error) {
+	return s.claimTask(ctx, run, id, ttl, 0, "", "lease_or_ready")
+}
+func (s *Store) claimTask(ctx context.Context, run string, id WorkerIdentity, ttl time.Duration, expected int, selected, policy string) (TaskClaim, error) {
 	var c TaskClaim
 	if err := ValidateWorker(id, ttl); err != nil {
 		return c, err
@@ -47,6 +50,9 @@ func (s *Store) ClaimTask(ctx context.Context, run string, id WorkerIdentity, tt
 	state, version, _, err := lockWorkflow(ctx, tx, run)
 	if err != nil {
 		return c, err
+	}
+	if expected > 0 && version != expected {
+		return c, ErrFenced
 	}
 	if state != "running" {
 		return c, ErrBadState
@@ -61,7 +67,7 @@ func (s *Store) ClaimTask(ctx context.Context, run string, id WorkerIdentity, tt
 	c.Owner = id.Owner
 	c.Role = id.Role
 	c.PlanVersion = version
-	err = tx.QueryRow(ctx, "SELECT t.task_id,n.node_key,t.state,t.epoch,t.revision,t.attempts,t.max_attempts FROM task_instances t JOIN plan_nodes n ON n.task_instance_id=t.task_id AND n.run_id=t.run_id WHERE n.run_id=$1 AND n.plan_version=$2 AND t.role=$3 AND n.role=t.role AND t.attempts<t.max_attempts AND (t.state='ready' OR (t.state IN ('claimed','executing') AND t.lease_until<=clock_timestamp())) ORDER BY t.task_id LIMIT 1 FOR UPDATE OF t SKIP LOCKED", run, version, id.Role).Scan(&c.TaskID, &c.NodeKey, &taskState, &c.Epoch, &c.Revision, &attempts, &maxAttempts)
+	err = tx.QueryRow(ctx, "SELECT t.task_id,n.node_key,t.state,t.epoch,t.revision,t.attempts,t.max_attempts FROM task_instances t JOIN plan_nodes n ON n.task_instance_id=t.task_id AND n.run_id=t.run_id WHERE n.run_id=$1 AND n.plan_version=$2 AND t.role=$3 AND n.role=t.role AND t.attempts<t.max_attempts AND ($4::text='' OR (t.task_id::text=$4 AND t.state='ready')) AND (t.state='ready' OR (t.state IN ('claimed','executing') AND t.lease_until<=clock_timestamp())) ORDER BY t.task_id LIMIT 1 FOR UPDATE OF t SKIP LOCKED", run, version, id.Role, selected).Scan(&c.TaskID, &c.NodeKey, &taskState, &c.Epoch, &c.Revision, &attempts, &maxAttempts)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return c, ErrNoReady
 	}
@@ -94,7 +100,7 @@ func (s *Store) ClaimTask(ctx context.Context, run string, id WorkerIdentity, tt
 	if err != nil {
 		return c, err
 	}
-	if err = emit(ctx, tx, run, "task", c.TaskID, c.Revision, "task_claimed", map[string]any{"owner": id.Owner, "epoch": c.Epoch, "plan_version": version}); err != nil {
+	if err = emit(ctx, tx, run, "task", c.TaskID, c.Revision, "task_claimed", map[string]any{"owner": id.Owner, "epoch": c.Epoch, "plan_version": version, "scheduling_policy": policy}); err != nil {
 		return c, err
 	}
 	return c, tx.Commit(ctx)

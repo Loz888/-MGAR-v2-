@@ -1,0 +1,2503 @@
+{
+  "concurrency": 2,
+  "host": {
+    "arch": "amd64",
+    "cpu_count": 5,
+    "go": "go1.27.3",
+    "gomaxprocs": 4,
+    "os": "linux"
+  },
+  "samples_per_policy": 10,
+  "schema_version": "scheduling_experiment.v1",
+  "trials": [
+    {
+      "policy": "fifo",
+      "samples": [
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.173249,
+          "End": 15.43378,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 0.197545,
+          "End": 15.447691,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 15.479619,
+          "End": 30.674162,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 15.498116,
+          "End": 30.710257,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 30.699049,
+          "End": 45.896196,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 30.72564,
+          "End": 45.865279,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 45.909475,
+          "End": 61.112711,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 45.919811,
+          "End": 61.131679,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 61.128184,
+          "End": 81.330882,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 81.330882,
+          "Start": 81.367016,
+          "End": 101.554342,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "C02",
+          "Ready": 101.554342,
+          "Start": 101.574753,
+          "End": 121.787927,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "C03",
+          "Ready": 121.787927,
+          "Start": 121.813525,
+          "End": 141.992668,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 141.992668,
+          "Start": 142.017916,
+          "End": 162.208206,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 162.208206,
+      "Throughput": 80.14391084505306,
+      "P50": 61.112711,
+      "P95": 162.208206,
+      "MaxWait": 61.128184,
+      "Jain": 0.7860468792534605
+    },
+    {
+      "policy": "critical_path",
+      "samples": [
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 0.045338,
+          "End": 20.419118,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.056765,
+          "End": 15.227562,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 15.267061,
+          "End": 30.657127,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 20.419118,
+          "Start": 20.44076,
+          "End": 40.832487,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 30.690837,
+          "End": 46.028149,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C02",
+          "Ready": 40.832487,
+          "Start": 40.877334,
+          "End": 61.198239,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 46.048159,
+          "End": 61.21929,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 61.216376,
+          "End": 76.397334,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 61.231399,
+          "End": 76.374765,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 76.404309,
+          "End": 91.599062,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 76.436908,
+          "End": 91.62487,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C03",
+          "Ready": 61.198239,
+          "Start": 91.616949,
+          "End": 111.786728,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 111.786728,
+          "Start": 111.806758,
+          "End": 131.968716,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 131.968716,
+      "Throughput": 98.50819492704619,
+      "P50": 61.21929,
+      "P95": 131.968716,
+      "MaxWait": 76.436908,
+      "Jain": 0.6974938761712552
+    },
+    {
+      "policy": "critical_path",
+      "samples": [
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 0.04706,
+          "End": 20.402602,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.056734,
+          "End": 15.218998,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 15.241342,
+          "End": 30.594041,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 20.402602,
+          "Start": 20.436263,
+          "End": 40.777393,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 30.621763,
+          "End": 45.985494,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C02",
+          "Ready": 40.777393,
+          "Start": 40.802291,
+          "End": 61.190587,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 46.066054,
+          "End": 61.221183,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 61.214923,
+          "End": 76.389315,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 61.234403,
+          "End": 76.419156,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 76.420242,
+          "End": 91.597078,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 76.430747,
+          "End": 91.632857,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C03",
+          "Ready": 61.190587,
+          "Start": 91.621124,
+          "End": 111.798145,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 111.798145,
+          "Start": 111.81479,
+          "End": 131.99235,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 131.99235,
+      "Throughput": 98.49055646027972,
+      "P50": 61.221183,
+      "P95": 131.99235,
+      "MaxWait": 76.430747,
+      "Jain": 0.6975346952824878
+    },
+    {
+      "policy": "fifo",
+      "samples": [
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.030325,
+          "End": 15.22632,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 0.037526,
+          "End": 15.265018,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 15.267962,
+          "End": 30.45305,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 15.276495,
+          "End": 30.477767,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 30.474172,
+          "End": 45.711949,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 30.494672,
+          "End": 45.661809,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 45.733957,
+          "End": 60.93522,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 45.744863,
+          "End": 60.958325,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 60.953758,
+          "End": 81.206776,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 81.206776,
+          "Start": 81.249851,
+          "End": 101.455744,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "C02",
+          "Ready": 101.455744,
+          "Start": 101.482654,
+          "End": 121.664541,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "C03",
+          "Ready": 121.664541,
+          "Start": 121.712473,
+          "End": 141.90754,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 141.90754,
+          "Start": 141.931346,
+          "End": 162.108846,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 162.108846,
+      "Throughput": 80.19303277256073,
+      "P50": 60.93522,
+      "P95": 162.108846,
+      "MaxWait": 60.953758,
+      "Jain": 0.7864714148863245
+    },
+    {
+      "policy": "fifo",
+      "samples": [
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.049014,
+          "End": 15.225209,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 0.057136,
+          "End": 15.26229,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 15.255996,
+          "End": 30.457268,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 15.285325,
+          "End": 30.420213,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 30.439541,
+          "End": 45.600473,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 30.473132,
+          "End": 45.632587,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 45.618891,
+          "End": 60.813679,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 45.651906,
+          "End": 60.782147,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 60.798211,
+          "End": 80.982022,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 80.982022,
+          "Start": 81.008782,
+          "End": 101.179081,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "C02",
+          "Ready": 101.179081,
+          "Start": 101.229807,
+          "End": 121.412576,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "C03",
+          "Ready": 121.412576,
+          "Start": 121.439837,
+          "End": 141.617888,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 141.617888,
+          "Start": 141.647653,
+          "End": 161.826015,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 161.826015,
+      "Throughput": 80.33318993858929,
+      "P50": 60.782147,
+      "P95": 161.826015,
+      "MaxWait": 60.798211,
+      "Jain": 0.7867829924525074
+    },
+    {
+      "policy": "critical_path",
+      "samples": [
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 0.02674,
+          "End": 20.38387,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.032118,
+          "End": 15.200021,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 15.227542,
+          "End": 30.628393,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 20.38387,
+          "Start": 20.407665,
+          "End": 40.810303,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 30.650716,
+          "End": 46.003,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C02",
+          "Ready": 40.810303,
+          "Start": 40.840008,
+          "End": 61.186591,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 46.033696,
+          "End": 61.217889,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 61.204558,
+          "End": 76.372421,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 61.229907,
+          "End": 76.424864,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 76.394934,
+          "End": 91.555236,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 76.451164,
+          "End": 91.588476,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C03",
+          "Ready": 61.186591,
+          "Start": 91.570379,
+          "End": 111.731935,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 111.731935,
+          "Start": 111.764033,
+          "End": 131.935255,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 131.935255,
+      "Throughput": 98.53317826232268,
+      "P50": 61.217889,
+      "P95": 131.935255,
+      "MaxWait": 76.451164,
+      "Jain": 0.6974804821020358
+    },
+    {
+      "policy": "critical_path",
+      "samples": [
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 0.042053,
+          "End": 20.38682,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.049525,
+          "End": 15.204117,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 15.232009,
+          "End": 30.600247,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 20.38682,
+          "Start": 20.404276,
+          "End": 40.790485,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 30.633276,
+          "End": 45.977698,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C02",
+          "Ready": 40.790485,
+          "Start": 40.816123,
+          "End": 61.160658,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 45.993652,
+          "End": 61.20511,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 61.17484,
+          "End": 76.363613,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 61.229076,
+          "End": 76.397008,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 76.391735,
+          "End": 91.592602,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 76.417138,
+          "End": 91.5543,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C03",
+          "Ready": 61.160658,
+          "Start": 91.578526,
+          "End": 111.758531,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 111.758531,
+          "Start": 111.794255,
+          "End": 132.025906,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 132.025906,
+      "Throughput": 98.46552387983614,
+      "P50": 61.20511,
+      "P95": 132.025906,
+      "MaxWait": 76.417138,
+      "Jain": 0.6975864464443948
+    },
+    {
+      "policy": "fifo",
+      "samples": [
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.028002,
+          "End": 15.193342,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 0.028773,
+          "End": 15.21885,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 15.216056,
+          "End": 30.446161,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 15.246591,
+          "End": 30.417318,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 30.443067,
+          "End": 45.63139,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 30.452411,
+          "End": 45.614394,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 45.628756,
+          "End": 60.909612,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 45.642336,
+          "End": 60.845972,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 60.90493,
+          "End": 81.086508,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 81.086508,
+          "Start": 81.117935,
+          "End": 101.2985,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "C02",
+          "Ready": 101.2985,
+          "Start": 101.324759,
+          "End": 121.497392,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "C03",
+          "Ready": 121.497392,
+          "Start": 121.523201,
+          "End": 141.761854,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 141.761854,
+          "Start": 141.787432,
+          "End": 162.036971,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 162.036971,
+      "Throughput": 80.22860412516599,
+      "P50": 60.845972,
+      "P95": 162.036971,
+      "MaxWait": 60.90493,
+      "Jain": 0.7866646299939679
+    },
+    {
+      "policy": "fifo",
+      "samples": [
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.032859,
+          "End": 15.37702,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 0.040511,
+          "End": 15.326941,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 15.363375,
+          "End": 30.553611,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 15.456239,
+          "End": 30.586315,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 30.587321,
+          "End": 45.751458,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 30.603636,
+          "End": 45.788979,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 45.779631,
+          "End": 60.93559,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 45.839835,
+          "End": 60.904128,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 60.939071,
+          "End": 81.178314,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 81.178314,
+          "Start": 81.262009,
+          "End": 101.446721,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "C02",
+          "Ready": 101.446721,
+          "Start": 101.489425,
+          "End": 121.660195,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "C03",
+          "Ready": 121.660195,
+          "Start": 121.693295,
+          "End": 141.86658,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 141.86658,
+          "Start": 141.882373,
+          "End": 162.054456,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 162.054456,
+      "Throughput": 80.21994779335165,
+      "P50": 60.904128,
+      "P95": 162.054456,
+      "MaxWait": 60.939071,
+      "Jain": 0.7859706654213219
+    },
+    {
+      "policy": "critical_path",
+      "samples": [
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 0.047421,
+          "End": 20.405278,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.055353,
+          "End": 15.218409,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 15.25208,
+          "End": 30.645535,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 20.405278,
+          "Start": 20.440561,
+          "End": 40.93108,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 30.664824,
+          "End": 46.171923,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C02",
+          "Ready": 40.93108,
+          "Start": 40.955206,
+          "End": 61.426476,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 46.201307,
+          "End": 61.393657,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 61.415059,
+          "End": 76.592275,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 61.446285,
+          "End": 76.616737,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 76.62243,
+          "End": 91.852016,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 76.630943,
+          "End": 91.893407,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C03",
+          "Ready": 61.426476,
+          "Start": 91.880668,
+          "End": 112.066271,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 112.066271,
+          "Start": 112.119571,
+          "End": 132.302551,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 132.302551,
+      "Throughput": 98.25963219711463,
+      "P50": 61.426476,
+      "P95": 132.302551,
+      "MaxWait": 76.630943,
+      "Jain": 0.6972209394761951
+    },
+    {
+      "policy": "critical_path",
+      "samples": [
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 0.033089,
+          "End": 20.455786,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.040971,
+          "End": 15.241102,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 15.285368,
+          "End": 30.637015,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 20.455786,
+          "Start": 20.496698,
+          "End": 40.818334,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 30.672929,
+          "End": 46.014491,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C02",
+          "Ready": 40.818334,
+          "Start": 40.846587,
+          "End": 61.255844,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 46.037676,
+          "End": 61.278968,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 61.277666,
+          "End": 76.467562,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 61.29333,
+          "End": 76.504578,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 76.519299,
+          "End": 91.721463,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 76.534382,
+          "End": 91.741513,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C03",
+          "Ready": 61.255844,
+          "Start": 91.741363,
+          "End": 111.943881,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 111.943881,
+          "Start": 111.968859,
+          "End": 132.1736,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 132.1736,
+      "Throughput": 98.35549610512236,
+      "P50": 61.278968,
+      "P95": 132.1736,
+      "MaxWait": 76.534382,
+      "Jain": 0.6972722013737475
+    },
+    {
+      "policy": "fifo",
+      "samples": [
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.062574,
+          "End": 15.241274,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 0.069995,
+          "End": 15.266041,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 15.270558,
+          "End": 30.495706,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 15.283027,
+          "End": 30.536868,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 30.522065,
+          "End": 45.714445,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 30.565711,
+          "End": 45.740178,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 45.753693,
+          "End": 60.963709,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 45.774544,
+          "End": 61.015256,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 60.989668,
+          "End": 81.210132,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 81.210132,
+          "Start": 81.239346,
+          "End": 101.440894,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "C02",
+          "Ready": 101.440894,
+          "Start": 101.4648,
+          "End": 121.687288,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "C03",
+          "Ready": 121.687288,
+          "Start": 121.720357,
+          "End": 141.911348,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 141.911348,
+          "Start": 141.936526,
+          "End": 162.127777,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 162.127777,
+      "Throughput": 80.1836689588361,
+      "P50": 60.963709,
+      "P95": 162.127777,
+      "MaxWait": 60.989668,
+      "Jain": 0.7864350955382808
+    },
+    {
+      "policy": "fifo",
+      "samples": [
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.029845,
+          "End": 15.248603,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 0.061181,
+          "End": 15.270406,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 15.291257,
+          "End": 30.51936,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 15.304357,
+          "End": 30.548404,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 30.545059,
+          "End": 45.742175,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 30.554774,
+          "End": 45.722746,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 45.748435,
+          "End": 60.943969,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 45.764609,
+          "End": 60.976707,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 60.97171,
+          "End": 81.158875,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 81.158875,
+          "Start": 81.17559,
+          "End": 101.34493,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "C02",
+          "Ready": 101.34493,
+          "Start": 101.367003,
+          "End": 121.541148,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "C03",
+          "Ready": 121.541148,
+          "Start": 121.592996,
+          "End": 141.77929,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 141.77929,
+          "Start": 141.805058,
+          "End": 161.991652,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 161.991652,
+      "Throughput": 80.25104898615393,
+      "P50": 60.943969,
+      "P95": 161.991652,
+      "MaxWait": 60.97171,
+      "Jain": 0.7862878653703125
+    },
+    {
+      "policy": "critical_path",
+      "samples": [
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 0.07344,
+          "End": 20.468937,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.081211,
+          "End": 15.260331,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 15.297156,
+          "End": 30.644026,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 20.468937,
+          "Start": 20.503929,
+          "End": 40.908029,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 30.665899,
+          "End": 46.157987,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C02",
+          "Ready": 40.908029,
+          "Start": 40.936512,
+          "End": 61.349074,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 46.172398,
+          "End": 61.378729,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 61.404357,
+          "End": 76.791843,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 61.415123,
+          "End": 76.834172,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 76.854367,
+          "End": 92.072811,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 76.868648,
+          "End": 92.111759,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C03",
+          "Ready": 61.349074,
+          "Start": 92.115825,
+          "End": 112.313195,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 112.313195,
+          "Start": 112.355388,
+          "End": 132.525539,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 132.525539,
+      "Throughput": 98.09430014844158,
+      "P50": 61.378729,
+      "P95": 132.525539,
+      "MaxWait": 76.868648,
+      "Jain": 0.6969644399334759
+    },
+    {
+      "policy": "critical_path",
+      "samples": [
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 0.04703,
+          "End": 20.445732,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.055583,
+          "End": 15.208363,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 15.237847,
+          "End": 30.649945,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 20.445732,
+          "Start": 20.47135,
+          "End": 40.850553,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 30.67988,
+          "End": 46.024827,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C02",
+          "Ready": 40.850553,
+          "Start": 40.888199,
+          "End": 61.254342,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 46.068793,
+          "End": 61.289655,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 61.277697,
+          "End": 76.476256,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 61.30653,
+          "End": 76.456016,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 76.489135,
+          "End": 91.697638,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 76.515845,
+          "End": 91.724609,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C03",
+          "Ready": 61.254342,
+          "Start": 91.721093,
+          "End": 111.930362,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 111.930362,
+          "Start": 111.9627,
+          "End": 132.163436,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 132.163436,
+      "Throughput": 98.36306011293472,
+      "P50": 61.289655,
+      "P95": 132.163436,
+      "MaxWait": 76.515845,
+      "Jain": 0.6974166566276119
+    },
+    {
+      "policy": "fifo",
+      "samples": [
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.042554,
+          "End": 15.224487,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 0.049814,
+          "End": 15.249454,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 15.24636,
+          "End": 30.453731,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 15.28643,
+          "End": 30.433311,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 30.460282,
+          "End": 45.653362,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 30.485269,
+          "End": 45.687263,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 45.67888,
+          "End": 60.83796,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 45.701574,
+          "End": 60.86502,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 60.867163,
+          "End": 81.062922,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 81.062922,
+          "Start": 81.092566,
+          "End": 101.283897,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "C02",
+          "Ready": 101.283897,
+          "Start": 101.333862,
+          "End": 121.524823,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "C03",
+          "Ready": 121.524823,
+          "Start": 121.5694,
+          "End": 141.745288,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 141.745288,
+          "Start": 141.787231,
+          "End": 161.958543,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 161.958543,
+      "Throughput": 80.267454616457,
+      "P50": 60.83796,
+      "P95": 161.958543,
+      "MaxWait": 60.867163,
+      "Jain": 0.7867078479256508
+    },
+    {
+      "policy": "fifo",
+      "samples": [
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.0407,
+          "End": 15.212709,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 0.048051,
+          "End": 15.243445,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 15.232459,
+          "End": 30.389825,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 15.267901,
+          "End": 30.429524,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 30.423235,
+          "End": 45.609856,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 30.462994,
+          "End": 45.652229,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 45.631859,
+          "End": 60.849326,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 45.673681,
+          "End": 60.796968,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 60.81167,
+          "End": 80.983432,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 80.983432,
+          "Start": 81.00203,
+          "End": 101.181734,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "C02",
+          "Ready": 101.181734,
+          "Start": 101.21227,
+          "End": 121.412204,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "C03",
+          "Ready": 121.412204,
+          "Start": 121.432745,
+          "End": 141.622954,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 141.622954,
+          "Start": 141.639049,
+          "End": 161.830821,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 161.830821,
+      "Throughput": 80.33080422918945,
+      "P50": 60.796968,
+      "P95": 161.830821,
+      "MaxWait": 60.81167,
+      "Jain": 0.7866839367916272
+    },
+    {
+      "policy": "critical_path",
+      "samples": [
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 0.039089,
+          "End": 20.444582,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.04675,
+          "End": 15.227163,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 15.250628,
+          "End": 30.634363,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 20.444582,
+          "Start": 20.457421,
+          "End": 40.83438,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 30.673762,
+          "End": 46.031118,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C02",
+          "Ready": 40.83438,
+          "Start": 40.863674,
+          "End": 61.242115,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 46.061513,
+          "End": 61.215395,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 61.239491,
+          "End": 76.497058,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 61.268114,
+          "End": 76.454134,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 76.503948,
+          "End": 91.701215,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 76.51833,
+          "End": 91.72485,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C03",
+          "Ready": 61.242115,
+          "Start": 91.721064,
+          "End": 111.913728,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 111.913728,
+          "Start": 111.931574,
+          "End": 132.13127,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 132.13127,
+      "Throughput": 98.38700558921443,
+      "P50": 61.242115,
+      "P95": 132.13127,
+      "MaxWait": 76.51833,
+      "Jain": 0.6972855234853769
+    },
+    {
+      "policy": "critical_path",
+      "samples": [
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 0.031077,
+          "End": 20.486999,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.042193,
+          "End": 15.227822,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 15.266871,
+          "End": 30.68664,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 20.486999,
+          "Start": 20.539007,
+          "End": 40.883492,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 30.714622,
+          "End": 46.066114,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C02",
+          "Ready": 40.883492,
+          "Start": 40.925736,
+          "End": 61.249495,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 46.089129,
+          "End": 61.288824,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 61.277086,
+          "End": 76.501018,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 61.313321,
+          "End": 76.464137,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 76.501593,
+          "End": 91.675185,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 76.511418,
+          "End": 91.708535,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C03",
+          "Ready": 61.249495,
+          "Start": 91.701604,
+          "End": 111.884703,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 111.884703,
+          "Start": 111.918393,
+          "End": 132.097837,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 132.097837,
+      "Throughput": 98.41190662342186,
+      "P50": 61.288824,
+      "P95": 132.097837,
+      "MaxWait": 76.511418,
+      "Jain": 0.6973460875615097
+    },
+    {
+      "policy": "fifo",
+      "samples": [
+        {
+          "key": "A00",
+          "Ready": 0,
+          "Start": 0.039309,
+          "End": 15.236125,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A01",
+          "Ready": 0,
+          "Start": 0.04647,
+          "End": 15.263776,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A02",
+          "Ready": 0,
+          "Start": 15.260551,
+          "End": 30.498039,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A03",
+          "Ready": 0,
+          "Start": 15.28615,
+          "End": 30.438074,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A04",
+          "Ready": 0,
+          "Start": 30.505244,
+          "End": 45.722155,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A05",
+          "Ready": 0,
+          "Start": 30.516672,
+          "End": 45.683713,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A06",
+          "Ready": 0,
+          "Start": 45.699677,
+          "End": 60.893458,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "A07",
+          "Ready": 0,
+          "Start": 45.75865,
+          "End": 60.934264,
+          "Service": 15,
+          "parents": null
+        },
+        {
+          "key": "C00",
+          "Ready": 0,
+          "Start": 60.92841,
+          "End": 81.116929,
+          "Service": 20,
+          "parents": null
+        },
+        {
+          "key": "C01",
+          "Ready": 81.116929,
+          "Start": 81.139883,
+          "End": 101.329041,
+          "Service": 20,
+          "parents": [
+            "C00"
+          ]
+        },
+        {
+          "key": "C02",
+          "Ready": 101.329041,
+          "Start": 101.366287,
+          "End": 121.54568,
+          "Service": 20,
+          "parents": [
+            "C01"
+          ]
+        },
+        {
+          "key": "C03",
+          "Ready": 121.54568,
+          "Start": 121.582866,
+          "End": 141.764242,
+          "Service": 20,
+          "parents": [
+            "C02"
+          ]
+        },
+        {
+          "key": "C04",
+          "Ready": 141.764242,
+          "Start": 141.786836,
+          "End": 161.971127,
+          "Service": 20,
+          "parents": [
+            "C03"
+          ]
+        }
+      ],
+      "Makespan": 161.971127,
+      "Throughput": 80.26121840838954,
+      "P50": 60.893458,
+      "P95": 161.971127,
+      "MaxWait": 60.92841,
+      "Jain": 0.7864507770275103
+    }
+  ],
+  "units": {
+    "fairness": "Jain_of_service_over_service_plus_ready_wait",
+    "throughput": "tasks_per_second",
+    "time": "milliseconds"
+  },
+  "warmup_median_ns": {
+    "chain": 20183890,
+    "leaf": 15187383
+  },
+  "workload": "fixed_timer_dag_8_leaf_5_chain.v1",
+  "workload_kind": "actual_local_timers_not_LLM",
+  "observed_medians": {
+    "fifo": {
+      "P50": 60.898793,
+      "P95": 162.0143115,
+      "Makespan": 162.0143115,
+      "Throughput": 80.23982655565996,
+      "MaxWait": 60.9337405,
+      "Jain": 0.7864610959569174
+    },
+    "critical_path": {
+      "P50": 61.2605415,
+      "P95": 132.1145535,
+      "Makespan": 132.1145535,
+      "Throughput": 98.39945610631814,
+      "MaxWait": 76.5136315,
+      "Jain": 0.6973813720945607
+    }
+  }
+}

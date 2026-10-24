@@ -11,18 +11,22 @@ var logicalID = regexp.MustCompile(`^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f
 var modelName = regexp.MustCompile(`^[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}$`)
 
 type ModelRequest struct {
-	Pricing      *Pricing `json:"pricing,omitempty"`
-	InputTokens  int64    `json:"input_tokens,omitempty"`
-	OutputTokens int64    `json:"output_tokens,omitempty"`
-	InputDigest  string   `json:"input_digest,omitempty"`
-	LogicalID    string   `json:"logical_call_id"`
-	Provider     string   `json:"provider"`
-	Model        string   `json:"model"`
-	Tokens       int64    `json:"tokens"`
-	CostMicros   int64    `json:"cost_micros"`
+	Routing      *RouteDecision `json:"routing,omitempty"`
+	Pricing      *Pricing       `json:"pricing,omitempty"`
+	InputTokens  int64          `json:"input_tokens,omitempty"`
+	OutputTokens int64          `json:"output_tokens,omitempty"`
+	InputDigest  string         `json:"input_digest,omitempty"`
+	LogicalID    string         `json:"logical_call_id"`
+	Provider     string         `json:"provider"`
+	Model        string         `json:"model"`
+	Tokens       int64          `json:"tokens"`
+	CostMicros   int64          `json:"cost_micros"`
 }
 
 func (r ModelRequest) Valid() bool {
+	if r.Routing != nil && (r.Pricing == nil || !r.Routing.valid(r.Model)) {
+		return false
+	}
 	if !logicalID.MatchString(r.LogicalID) || r.Provider != "mock" || !modelName.MatchString(r.Model) || r.Tokens <= 0 || r.Tokens > 10_000_000 || r.CostMicros < 0 || r.CostMicros > 1_000_000_000 || (r.InputDigest != "" && !digest.MatchString(r.InputDigest)) {
 		return false
 	}

@@ -62,3 +62,21 @@ func (r *Resources) Model(ctx context.Context, c store.TaskClaim, req budget.Mod
 	})
 	return call, err
 }
+
+// RoutedModel fixes the role from the authenticated claim; routing never changes
+// a Worker identity or tool scope. The selected quote is audited at reservation.
+func (r *Resources) RoutedModel(ctx context.Context, c store.TaskClaim, router budget.Router, in budget.RouteInput, transport func(context.Context, budget.ModelRequest) (budget.ModelUsage, bool, error)) (budget.ModelCall, error) {
+	if transport == nil {
+		return budget.ModelCall{}, store.ErrPolicy
+	}
+	report, e := r.Store.BudgetReport(ctx, c.RunID)
+	if e != nil {
+		return budget.ModelCall{}, e
+	}
+	in.Role = c.Role
+	req, e := router.Route(in, report)
+	if e != nil {
+		return budget.ModelCall{}, e
+	}
+	return r.Model(ctx, c, req, func(ctx context.Context) (budget.ModelUsage, bool, error) { return transport(ctx, req) })
+}
