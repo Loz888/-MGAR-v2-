@@ -54,6 +54,34 @@ func TestProcessHelper(t *testing.T) {
 	run := os.Getenv("MGAR_TEST_RUN")
 	ctx := context.Background()
 	switch kind {
+	case "resource":
+		var claims []store.TaskClaim
+		var tickets []store.ResourceTicket
+		if e := json.Unmarshal([]byte(os.Getenv("MGAR_TEST_RESOURCE_CLAIMS")), &claims); e != nil {
+			t.Fatal(e)
+		}
+		if e := json.Unmarshal([]byte(os.Getenv("MGAR_TEST_RESOURCE_TICKETS")), &tickets); e != nil {
+			t.Fatal(e)
+		}
+		i, e := strconv.Atoi(os.Getenv("MGAR_TEST_ACTOR"))
+		if e != nil || i >= len(claims) || i >= len(tickets) {
+			t.Fatal("actor")
+		}
+		var tokens []string
+		if e := json.Unmarshal([]byte(os.Getenv("MGAR_TEST_RESOURCE_TOKENS")), &tokens); e != nil || len(tokens) != len(tickets) {
+			t.Fatal("private test tokens")
+		}
+		tickets[i].Token = tokens[i]
+		ok, e := s.AcquireResource(ctx, claims[i], tickets[i])
+		if e != nil {
+			t.Fatal(e)
+		}
+		if ok {
+			fmt.Println("RESULT winner")
+		} else {
+			fmt.Println("RESULT denied")
+		}
+
 	case "budget":
 		var claims []store.TaskClaim
 		if e := json.Unmarshal([]byte(os.Getenv("MGAR_TEST_BUDGET_CLAIMS")), &claims); e != nil {

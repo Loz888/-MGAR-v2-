@@ -130,3 +130,30 @@ func TestSandboxActionThroughGateway(t *testing.T) {
 		t.Fatal(n, e)
 	}
 }
+
+func TestSandboxResourceTimeoutReleasesConfirmedContainer(t *testing.T) {
+	s, c, cas := gatewayRoleFixture(t, "action")
+	input := sandboxInput(t, `package sandbox;import("testing";"fmt");func TestSandboxProbe(t *testing.T){fmt.Println("RESOURCE_PAYLOAD_STARTED");for{}}`)
+	sandbox := sandboxFixture(t)
+	sandbox.Timeout = 25 * time.Second
+	gateway, e := policy.NewGateway(s, cas, []policy.Definition{policy.SandboxTool(sandbox, map[string]verifier.TestInput{"incident.timeout": input})}, func(policy.Denial) {})
+	if e != nil {
+		t.Fatal(e)
+	}
+	token, e := gateway.Issue(context.Background(), c, []string{"incident.timeout"}, time.Minute)
+	if e != nil {
+		t.Fatal(e)
+	}
+	server := httptest.NewServer(gateway)
+	defer server.Close()
+	start := time.Now()
+	code, _ := toolRequest(t, server.URL, token, `{"schema":"tool-call.v1","request_id":"cccccccc-cccc-4ccc-8ccc-cccccccccccc","tool":"sandbox_test","version":"sandbox.v1","resource":"incident.timeout","arguments":{}}`)
+	if code != 409 || time.Since(start) < 20*time.Second || time.Since(start) > 40*time.Second {
+		t.Fatal("expected bounded actual sandbox timeout", code, time.Since(start))
+	}
+	var active, released int
+	if e = s.Pool.QueryRow(context.Background(), "SELECT count(*) FILTER(WHERE state IN ('held','unknown')),count(*) FILTER(WHERE state='released') FROM resource_requests WHERE class='cpu'").Scan(&active, &released); e != nil || active != 0 || released != 1 {
+		t.Fatal("CPU permit leaked after confirmed removal", active, released, e)
+	}
+	t.Log("actual container timeout: host confirmed removal and CPU permit released")
+}

@@ -300,10 +300,17 @@ func SandboxTool(s Sandbox, inputs map[string]verifier.TestInput) Definition {
 		if !ok {
 			return nil, ErrDenied
 		}
-		result, e := s.Run(ctx, input)
+		result, e := s.Execute(ctx, input)
 		if e != nil || result.Reason != "" {
-			return nil, ErrSandboxUnavailable
+			return nil, sandboxStopError{result.Removed}
 		}
 		return json.Marshal(map[string]any{"exit_code": result.ExitCode, "output_sha256": artifact.Digest(result.Output), "toolchain": result.Toolchain, "input_digest": input.Digest})
 	}}
 }
+
+// The resource scheduler may release only after the host confirmed removal.
+type sandboxStopError struct{ stopped bool }
+
+func (e sandboxStopError) Error() string          { return ErrSandboxUnavailable.Error() }
+func (e sandboxStopError) Unwrap() error          { return ErrSandboxUnavailable }
+func (e sandboxStopError) ExecutionStopped() bool { return e.stopped }

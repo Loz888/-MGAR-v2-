@@ -166,7 +166,7 @@ func TestGatewayCapabilityFailureAuditAndFencing(t *testing.T) {
 		t.Run(mode, func(t *testing.T) {
 			s, c, cas := gatewayFixture(t)
 			var calls atomic.Int32
-			d := policy.Definition{Name: "read", Version: "tool.v1", Role: "research", Effect: "readonly", Resources: []string{"incident.docs"}, Parameters: map[string]policy.Parameter{}, Timeout: 20 * time.Millisecond, MaxOutput: 64, Execute: func(ctx context.Context, _ string, _ map[string]any) ([]byte, error) {
+			d := policy.Definition{Name: "read", Version: "tool.v1", Role: "research", Effect: "readonly", Resources: []string{"incident.docs"}, Parameters: map[string]policy.Parameter{}, Timeout: time.Second, MaxOutput: 64, Execute: func(ctx context.Context, _ string, _ map[string]any) ([]byte, error) {
 				calls.Add(1)
 				if mode == "timeout" {
 					<-ctx.Done()

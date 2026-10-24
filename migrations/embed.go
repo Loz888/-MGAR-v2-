@@ -18,3 +18,6 @@ var PlanConfigSQL string
 
 //go:embed 005_global_budgets.sql
 var BudgetSQL string
+
+//go:embed 006_resource_admission.sql
+var ResourceSQL string

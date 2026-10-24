@@ -40,7 +40,10 @@ func Migrate(ctx context.Context, pool *pgxpool.Pool) error {
 	if err := ApplyMigration(ctx, pool, "004_plan_node_configs", migrations.PlanConfigSQL); err != nil {
 		return err
 	}
-	return ApplyMigration(ctx, pool, "005_global_budgets", migrations.BudgetSQL)
+	if err := ApplyMigration(ctx, pool, "005_global_budgets", migrations.BudgetSQL); err != nil {
+		return err
+	}
+	return ApplyMigration(ctx, pool, "006_resource_admission", migrations.ResourceSQL)
 }
 func ApplyMigration(ctx context.Context, pool *pgxpool.Pool, version, sql string) error {
 	tx, err := pool.Begin(ctx)

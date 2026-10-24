@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"github.com/Loz888/-MGAR-v2-/internal/artifact"
+	"github.com/Loz888/-MGAR-v2-/internal/scheduler"
 	"github.com/Loz888/-MGAR-v2-/internal/store"
 	"github.com/Loz888/-MGAR-v2-/internal/verifier"
 )
@@ -25,6 +26,7 @@ type grant struct {
 	expiry    time.Time
 }
 type Gateway struct {
+	resources   *scheduler.Resources
 	store       *store.Store
 	cas         *artifact.CAS
 	definitions map[string]Definition
@@ -37,7 +39,13 @@ func NewGateway(s *store.Store, cas *artifact.CAS, defs []Definition, unauth fun
 	if s == nil || cas == nil || unauth == nil || len(defs) == 0 || len(defs) > 128 {
 		return nil, ErrDenied
 	}
-	g := &Gateway{store: s, cas: cas, definitions: map[string]Definition{}, grants: map[[32]byte]grant{}, unauth: unauth}
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancel()
+	resources, e := scheduler.NewResources(ctx, s)
+	if e != nil {
+		return nil, e
+	}
+	g := &Gateway{resources: resources, store: s, cas: cas, definitions: map[string]Definition{}, grants: map[[32]byte]grant{}, unauth: unauth}
 	for _, d := range defs {
 		f, e := freezeDefinition(d)
 		if e != nil {
@@ -150,12 +158,33 @@ func (g *Gateway) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	if !cached {
 		ctx, cancel := context.WithTimeout(r.Context(), d.Timeout)
-		body, err := d.Execute(ctx, call.Resource, args)
+		var body []byte
+		executed := false
+		class := "db"
+		if d.Role == "action" || d.Role == "verify" {
+			class = "cpu"
+		}
+		err := g.resources.Run(ctx, p.claim, class, 0, func(ctx context.Context) (bool, error) {
+			executed = true
+			var callErr error
+			body, callErr = d.Execute(ctx, call.Resource, args)
+			stopped := true
+			if class == "cpu" && callErr != nil {
+				stopped = false
+				if outcome, ok := callErr.(interface{ ExecutionStopped() bool }); ok {
+					stopped = outcome.ExecutionStopped()
+				}
+			}
+			return stopped, callErr
+		})
 		expired := ctx.Err() != nil
 		cancel()
 		status := "succeeded"
 		if err != nil || expired || len(body) > d.MaxOutput || !json.Valid(body) {
 			status = "unknown"
+			if !executed {
+				status = "failed"
+			}
 			body = nil
 		}
 		settle, stop := context.WithTimeout(context.WithoutCancel(r.Context()), 2*time.Second)
