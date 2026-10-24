@@ -115,3 +115,36 @@ func TestAuditCASRejectsSymlinkBeforeCreatingDirectories(t *testing.T) {
 		t.Fatalf("denied CAS initialization wrote outside its path: %v %v", entries, err)
 	}
 }
+
+func TestCASReadOnlyNeverCreatesOrWrites(t *testing.T) {
+	missing := filepath.Join(t.TempDir(), "missing")
+	if _, e := OpenReadOnly(missing); e == nil {
+		t.Fatal("created root")
+	}
+	if _, e := os.Stat(missing); !os.IsNotExist(e) {
+		t.Fatal(e)
+	}
+	root := filepath.Join(t.TempDir(), "cas")
+	writer, e := New(root)
+	if e != nil {
+		t.Fatal(e)
+	}
+	body := []byte("existing")
+	hash, e := writer.Put(body)
+	if e != nil {
+		t.Fatal(e)
+	}
+	writer.Close()
+	reader, e := OpenReadOnly(root)
+	if e != nil {
+		t.Fatal(e)
+	}
+	defer reader.Close()
+	if _, e = reader.Put([]byte("new")); e == nil {
+		t.Fatal("readonly Put")
+	}
+	actual, e := reader.Read(hash, int64(len(body)))
+	if e != nil || string(actual) != string(body) {
+		t.Fatal(e)
+	}
+}

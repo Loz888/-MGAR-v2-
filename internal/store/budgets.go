@@ -3,6 +3,7 @@ package store
 import (
 	"context"
 	"github.com/Loz888/-MGAR-v2-/internal/budget"
+	"github.com/jackc/pgx/v5"
 )
 
 func (s *Store) ConfigureBudget(ctx context.Context, run string, c OrchestratorClaim, l budget.Limits) error {
@@ -38,15 +39,22 @@ func (s *Store) ConfigureBudget(ctx context.Context, run string, c OrchestratorC
 // BudgetReport uses one repeatable-read snapshot. Reads never repair drift.
 // Aggregate equality is checked against independently summed ledger entries.
 func (s *Store) BudgetReport(ctx context.Context, run string) (budget.Report, error) {
-	r := budget.Report{RunID: run}
-	tx, e := s.Pool.Begin(ctx)
+	tx, e := s.Pool.BeginTx(ctx, pgx.TxOptions{IsoLevel: pgx.RepeatableRead, AccessMode: pgx.ReadOnly})
+	if e != nil {
+		return budget.Report{}, e
+	}
+	defer tx.Rollback(ctx)
+	r, e := BudgetReportTx(ctx, tx, run)
 	if e != nil {
 		return r, e
 	}
-	defer tx.Rollback(ctx)
-	if _, e = tx.Exec(ctx, "SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY"); e != nil {
-		return r, e
-	}
+	return r, tx.Commit(ctx)
+}
+
+// BudgetReportTx reuses the caller's consistent read-only snapshot; never repairs.
+func BudgetReportTx(ctx context.Context, tx pgx.Tx, run string) (budget.Report, error) {
+	r := budget.Report{RunID: run}
+	var e error
 	e = tx.QueryRow(ctx, `SELECT max_model_calls,max_tool_calls,max_tokens_est,(max_cost_usd*1000000)::bigint,max_call_concurrency,max_concurrency,max_delegations,
  reserved_model_calls,settled_model_calls,reserved_tool_calls,settled_tool_calls,reserved_tokens,settled_tokens,(reserved_cost*1000000)::bigint,(settled_cost*1000000)::bigint,running_count,used_delegations FROM run_budgets WHERE run_id=$1`, run).Scan(&r.Limits.ModelCalls, &r.Limits.ToolCalls, &r.Limits.Tokens, &r.Limits.CostMicros, &r.Limits.ConcurrentCalls, &r.Limits.TaskConcurrency, &r.Limits.Delegations, &r.ReservedModels, &r.SettledModels, &r.ReservedTools, &r.SettledTools, &r.ReservedTokens, &r.SettledTokens, &r.ReservedCostMicros, &r.SettledCostMicros, &r.RunningTasks, &r.Delegations)
 	if e != nil {
@@ -73,5 +81,5 @@ func (s *Store) BudgetReport(ctx context.Context, run string) (budget.Report, er
 		return r, e
 	}
 	r.Conserved = activeTasks == r.RunningTasks && delegated == r.Delegations && !malformed && r.ReservedModels == r.PendingModels+r.UnknownModels && r.SettledModels == models && r.ReservedTools == r.PendingTools+r.UnknownTools && r.SettledTools == tools && r.ReservedTokens == tokens && r.ReservedCostMicros == cost && r.SettledTokens == settledTokens && r.SettledCostMicros == settledCost
-	return r, tx.Commit(ctx)
+	return r, nil
 }

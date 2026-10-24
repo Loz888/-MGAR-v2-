@@ -37,15 +37,20 @@ type Metadata struct {
 	Verified          bool   `json:"-"`
 }
 type CAS struct {
-	root *os.Root
-	lock *os.File
-	mu   sync.Mutex
+	readOnly bool
+	root     *os.Root
+	lock     *os.File
+	mu       sync.Mutex
 	// Nil in production. The package crash test installs a deterministic
 	// barrier after temp fsync and before rename; it grants no public hook.
 	afterStage func()
 }
 
-func New(path string) (*CAS, error) {
+func New(path string) (*CAS, error) { return openCAS(path, false) }
+
+// OpenReadOnly never creates a directory or permits Put.
+func OpenReadOnly(path string) (*CAS, error) { return openCAS(path, true) }
+func openCAS(path string, readOnly bool) (*CAS, error) {
 	absolute, e := filepath.Abs(path)
 	if e != nil {
 		return nil, e
@@ -64,7 +69,7 @@ func New(path string) (*CAS, error) {
 		}
 		flags := syscall.O_RDONLY | syscall.O_DIRECTORY | syscall.O_NOFOLLOW | syscall.O_CLOEXEC
 		fd, err := syscall.Openat(int(directory.Fd()), component, flags, 0)
-		if errors.Is(err, syscall.ENOENT) {
+		if errors.Is(err, syscall.ENOENT) && !readOnly {
 			if err = syscall.Mkdirat(int(directory.Fd()), component, 0700); err != nil && !errors.Is(err, syscall.EEXIST) {
 				return nil, err
 			}
@@ -95,7 +100,7 @@ func New(path string) (*CAS, error) {
 		root.Close()
 		return nil, e
 	}
-	return &CAS{root: root, lock: lock}, nil
+	return &CAS{root: root, lock: lock, readOnly: readOnly}, nil
 }
 func (c *CAS) Close() error     { e := c.root.Close(); e2 := c.lock.Close(); return errors.Join(e, e2) }
 func Digest(body []byte) string { h := sha256.Sum256(body); return hex.EncodeToString(h[:]) }
@@ -124,6 +129,9 @@ func (c *CAS) Read(hash string, size int64) ([]byte, error) {
 	return body, nil
 }
 func (c *CAS) Put(body []byte) (string, error) {
+	if c.readOnly {
+		return "", ErrIntegrity
+	}
 	if len(body) > MaxBytes {
 		return "", ErrIntegrity
 	}

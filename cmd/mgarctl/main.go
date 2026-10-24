@@ -21,13 +21,21 @@ func main() { os.Exit(run(context.Background(), os.Args[1:], os.Stdout, os.Stder
 // The injected Store lets command tests exercise the real PostgreSQL protocol
 // inside a disposable schema; the executable always opens its configured DB.
 func run(ctx context.Context, args []string, out, errs io.Writer, s *store.Store) int {
+	ctx, cancel := context.WithTimeout(ctx, 15*time.Second)
+	defer cancel()
+	if len(args) > 0 {
+		switch args[0] {
+		case "status", "trace", "budget-report", "inspect-artifact", "doctor":
+			return diagnostic(ctx, args, out, errs, s)
+		}
+	}
 	cfg, err := config.Load(os.Getenv)
 	if err != nil {
-		fmt.Fprintln(errs, err)
+		fmt.Fprintln(errs, safeCommandError(err))
 		return 1
 	}
 	usage := func() int {
-		fmt.Fprintln(errs, "usage: mgarctl health | submit [--fixture incident --provider mock --run-id UUID --max-delegations 24] | status/cancel/resume RUN_ID | approve APPROVAL_ID --action-digest SHA256 [--deny]")
+		fmt.Fprintln(errs, "usage: mgarctl health | submit [--fixture incident --provider mock --run-id UUID --max-delegations 24] | status/trace/budget-report RUN_ID [--format json] | cancel/resume RUN_ID | inspect-artifact ARTIFACT_ID [--run RUN_ID] | doctor | approve APPROVAL_ID --action-digest SHA256 [--deny]")
 		return 2
 	}
 	if len(args) == 0 {
@@ -58,18 +66,21 @@ func run(ctx context.Context, args []string, out, errs io.Writer, s *store.Store
 		if flags.Parse(args[1:]) != nil || flags.NArg() != 0 || *fixture != "incident" || *provider != "mock" || budget < 1 || budget > 1024 {
 			return usage()
 		}
-	case "status", "cancel", "resume":
+	case "cancel", "resume":
 		if len(args) != 2 {
 			return usage()
 		}
 		id = args[1]
+		if !cliUUID.MatchString(id) {
+			return usage()
+		}
 	default:
 		return usage()
 	}
 	if s == nil {
 		s, err = store.Open(ctx, os.Getenv("MGAR_TEST_DATABASE_URL"))
 		if err != nil {
-			fmt.Fprintln(errs, err)
+			fmt.Fprintln(errs, safeCommandError(err))
 			return 1
 		}
 		defer s.Pool.Close()
@@ -110,11 +121,11 @@ func run(ctx context.Context, args []string, out, errs io.Writer, s *store.Store
 		}
 	}
 	if err != nil {
-		fmt.Fprintln(errs, err)
+		fmt.Fprintln(errs, safeCommandError(err))
 		return 1
 	}
 	if err = json.NewEncoder(out).Encode(w); err != nil {
-		fmt.Fprintln(errs, err)
+		fmt.Fprintln(errs, safeCommandError(err))
 		return 1
 	}
 	return 0
@@ -158,7 +169,7 @@ func approve(ctx context.Context, args []string, out, errs io.Writer, s *store.S
 	}
 	decision, err := s.DecideApproval(ctx, id, *digest, !*deny)
 	if err != nil {
-		fmt.Fprintln(errs, "approval rejected:", err)
+		fmt.Fprintln(errs, "approval rejected:", safeCommandError(err))
 		return 1
 	}
 	if err = json.NewEncoder(out).Encode(decision); err != nil {

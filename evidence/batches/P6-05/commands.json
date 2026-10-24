@@ -1,0 +1,132 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./cmd/...",
+      "./tests/e2e/...",
+      "-run",
+      "CLI|Doctor"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P6-05/card-red.log",
+    "timestamp_utc": "2026-10-24T10:06:17.527047+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./cmd/...",
+      "./tests/e2e/...",
+      "-run",
+      "CLI|Doctor"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-05/diagnostic-first.log",
+    "timestamp_utc": "2026-10-24T10:08:54.659277+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./cmd/mgarctl",
+      "./internal/artifact",
+      "-run",
+      "CLI|Doctor|ReadOnly"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-05/cli-boundaries.log",
+    "timestamp_utc": "2026-10-24T10:10:13.386523+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./cmd/...",
+      "./tests/e2e/...",
+      "-run",
+      "CLI|Doctor"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-05/executable-e2e.log",
+    "timestamp_utc": "2026-10-24T10:11:33.769764+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./cmd/...",
+      "./tests/e2e/...",
+      "./internal/artifact/...",
+      "./tests/integration/...",
+      "-run",
+      "CLI|Doctor|ReadOnly|Trace|Budget"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-05/diagnostic-final.log",
+    "timestamp_utc": "2026-10-24T10:13:14.119370+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./cmd/mgarctl",
+      "-run",
+      "Doctor"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-05/schema-doctor.log",
+    "timestamp_utc": "2026-10-24T10:14:10.254825+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-05/full-offline.log",
+    "timestamp_utc": "2026-10-24T10:15:48.363133+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-05/final-go.log",
+    "timestamp_utc": "2026-10-24T10:17:10.589204+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-05/final-build.log",
+    "timestamp_utc": "2026-10-24T10:17:11.566228+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-05/final-audit.log",
+    "timestamp_utc": "2026-10-24T10:17:11.665967+00:00"
+  }
+]

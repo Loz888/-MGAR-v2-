@@ -25,6 +25,8 @@ type AuditEvent struct {
 	PlanVersion                    int
 	At                             *time.Time
 	TraceMatches                   bool
+	ActorDigest                    string
+	Epoch                          int64
 }
 type AuditModel struct {
 	ID, TaskID, Status, ModelDigest, Provider string
@@ -54,15 +56,25 @@ type Audit struct {
 
 // ReadAudit never selects raw payloads, authentication material or business text.
 func ReadAudit(ctx context.Context, s *store.Store, run string) (Audit, error) {
-	a := Audit{Schema: "audit_trace.v1", RunID: run, TraceID: strings.ReplaceAll(run, "-", ""), SpanState: "missing_or_not_collected", Tasks: []AuditTask{}, Events: []AuditEvent{}, Models: []AuditModel{}, Handoffs: []AuditHandoff{}}
-	if !uuid.MatchString(run) {
-		return Audit{}, ErrTrace
-	}
 	tx, e := s.Pool.BeginTx(ctx, pgx.TxOptions{IsoLevel: pgx.RepeatableRead, AccessMode: pgx.ReadOnly})
 	if e != nil {
 		return Audit{}, e
 	}
 	defer tx.Rollback(ctx)
+	a, e := ReadAuditTx(ctx, tx, run)
+	if e != nil {
+		return Audit{}, e
+	}
+	return a, tx.Commit(ctx)
+}
+
+// ReadAuditTx only reads. The trusted caller owns the repeatable-read snapshot.
+func ReadAuditTx(ctx context.Context, tx pgx.Tx, run string) (Audit, error) {
+	a := Audit{Schema: "audit_trace.v1", RunID: run, TraceID: strings.ReplaceAll(run, "-", ""), SpanState: "missing_or_not_collected", Tasks: []AuditTask{}, Events: []AuditEvent{}, Models: []AuditModel{}, Handoffs: []AuditHandoff{}}
+	if !uuid.MatchString(run) {
+		return Audit{}, ErrTrace
+	}
+	var e error
 	if e = tx.QueryRow(ctx, "SELECT created_at,statement_timestamp() FROM workflow_runs WHERE run_id=$1", run).Scan(&a.CreatedAt, &a.SnapshotAt); e != nil {
 		return Audit{}, e
 	}
@@ -82,7 +94,7 @@ func ReadAudit(ctx context.Context, s *store.Store, run string) (Audit, error) {
 	if e = rows.Err(); e != nil {
 		return Audit{}, e
 	}
-	rows, e = tx.Query(ctx, `SELECT e.event_id,e.entity_type,e.entity_id,e.kind,COALESCE(t.task_id::text,''),e.entity_revision,COALESCE((o.payload->>'plan_version')::int,0),o.created_at,e.trace_id=e.run_id
+	rows, e = tx.Query(ctx, `SELECT e.event_id,e.entity_type,e.entity_id,e.kind,COALESCE(t.task_id::text,''),e.entity_revision,COALESCE((o.payload->>'plan_version')::int,0),o.created_at,e.trace_id=e.run_id,COALESCE(e.payload->>'owner',''),COALESCE((e.payload->>'epoch')::bigint,0)
  FROM workflow_events e LEFT JOIN outbox_events o USING(event_id)
  LEFT JOIN model_calls m ON e.entity_type='model_call' AND m.call_id=e.entity_id AND m.run_id=e.run_id
  LEFT JOIN tool_invocations v ON e.entity_type='tool_invocation' AND v.invocation_id=e.entity_id
@@ -96,9 +108,14 @@ func ReadAudit(ctx context.Context, s *store.Store, run string) (Audit, error) {
 	}
 	for rows.Next() {
 		var event AuditEvent
-		if e = rows.Scan(&event.ID, &event.Entity, &event.EntityID, &event.Kind, &event.TaskID, &event.Revision, &event.PlanVersion, &event.At, &event.TraceMatches); e != nil {
+		var actor string
+		if e = rows.Scan(&event.ID, &event.Entity, &event.EntityID, &event.Kind, &event.TaskID, &event.Revision, &event.PlanVersion, &event.At, &event.TraceMatches, &actor, &event.Epoch); e != nil {
 			rows.Close()
 			return Audit{}, e
+		}
+		if actor != "" {
+			sum := sha256.Sum256([]byte(actor))
+			event.ActorDigest = hex.EncodeToString(sum[:])
 		}
 		event.Entity = safeEntity(event.Entity)
 		event.Kind = safeKind(event.Kind)
@@ -162,9 +179,6 @@ func ReadAudit(ctx context.Context, s *store.Store, run string) (Audit, error) {
 		a.SpanState = "missing_empty_audit"
 	}
 	a.Truncated = len(a.Tasks) > 4096 || len(a.Events) > 4096 || len(a.Models) > 4096 || len(a.Handoffs) > 4096
-	if e = tx.Commit(ctx); e != nil {
-		return Audit{}, e
-	}
 	return a, nil
 }
 func safeEntity(s string) string {

@@ -1,0 +1,3 @@
+{
+  "stdout": "=== RUN   TestCLIArtifactDoctorReadOnlyAndIdentity\n--- PASS: TestCLIArtifactDoctorReadOnlyAndIdentity (0.22s)\n=== RUN   TestCLIDoctorSchemaDriftDoesNotRepair\n--- PASS: TestCLIDoctorSchemaDriftDoesNotRepair (0.11s)\nPASS\nok  \tgithub.com/Loz888/-MGAR-v2-/cmd/mgarctl\t0.337s\n"
+}

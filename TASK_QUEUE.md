@@ -35,7 +35,7 @@
 | [P6-02](tasks/P6-02.md) | P6 | 资源池与 Backpressure | P6-01 | PASS | `evidence/batches/P6-02/accept.json` |
 | [P6-03](tasks/P6-03.md) | P6 | 关键路径调度与成本感知模型路由 | P6-02 | PASS | `evidence/batches/P6-03/accept.json` |
 | [P6-04](tasks/P6-04.md) | P6 | 端到端 Trace 与事件一致性 | P6-03 | PASS | `evidence/batches/P6-04/accept.json` |
-| [P6-05](tasks/P6-05.md) | P6 | 运维命令与负载诊断 | P6-04 | TODO | `evidence/batches/P6-05/accept.json` |
+| [P6-05](tasks/P6-05.md) | P6 | 运维命令与负载诊断 | P6-04 | PASS | `evidence/batches/P6-05/accept.json` |
 | [P7-01](tasks/P7-01.md) | P7 | 合成任务集、独立 Oracle 与冻结清单 | P6-05 | TODO | `evidence/batches/P7-01/accept.json` |
 | [P7-02](tasks/P7-02.md) | P7 | 端到端演示与合成业务完整闭环 | P7-01 | TODO | `evidence/batches/P7-02/accept.json` |
 | [P7-03](tasks/P7-03.md) | P7 | 公平单 Agent / 固定 / 动态基线 | P7-02 | TODO | `evidence/batches/P7-03/accept.json` |
