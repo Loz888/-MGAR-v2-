@@ -1,0 +1,139 @@
+{
+  "card_id": "P7-03",
+  "status": "BLOCKED",
+  "git_commit": null,
+  "base_git_commit": "dc3411d19bdf665641bfbd7d6b9a87cb447e55a5",
+  "scope": "Real PostgreSQL/CAS reproduction and reviewable change request only; comparison runner not implemented",
+  "environment": {
+    "go": "1.27.3",
+    "python": "3.12.14",
+    "postgres": "16.11",
+    "platform": "linux/amd64"
+  },
+  "commands": [
+    {
+      "command": [
+        "python",
+        "eval/runner.py",
+        "--provider",
+        "mock",
+        "--arms",
+        "B0,B1,B2,B3,B4"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-03/card-red.log",
+      "timestamp_utc": "2026-10-24T16:31:43.233639+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./tests/integration",
+        "-run",
+        "^TestEvalNoVerifierCannotUseStrictDependencyPath$"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03/conflict-reproduction.log",
+      "timestamp_utc": "2026-10-24T16:31:46.285897+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_plan_docs.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03/docs-check.log",
+      "timestamp_utc": "2026-10-24T16:33:01.170324+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03/final-audit.log",
+      "timestamp_utc": "2026-10-24T16:33:01.275139+00:00"
+    }
+  ],
+  "source_fingerprint": "d08ed2c531a7a05449474a4d7cdc78ae80a1843b024e16587b5af22b9bb21f97",
+  "positive_assertions": [
+    {
+      "name": "source stays output_ready with zero verdicts; sink pending and NO_READY_TASK; workflow stays running",
+      "passed": true
+    },
+    {
+      "name": "static contract checks 37/37",
+      "passed": true
+    }
+  ],
+  "negative_assertions": [
+    {
+      "name": "no bypass or fabricated passed verdict introduced",
+      "passed": true
+    }
+  ],
+  "known_limitations": [
+    "P7-03 acceptance runner is absent and returned exit 2. Guard reproduction PASS is not baseline implementation PASS.",
+    "No full-suite rerun for this documentation and isolated regression-test batch; latest complete full suite is P7-02 at dc3411d: Go 385 and Python 337 plus 15 subtests.",
+    "No approved semantics for unverified baseline handoff; see CHANGE_REQUEST.md and docs/adr/ADR-0014.md."
+  ],
+  "unverified": [
+    {
+      "name": "B0 B1 B2 B3 B4 A1 A2 fair runner",
+      "status": "NOT_RUN",
+      "reason": "blocked on explicit verification semantics decision"
+    },
+    {
+      "name": "P7-04 statistics and P7-05 load/kill matrix",
+      "status": "NOT_RUN",
+      "reason": "P7-03 dependency incomplete"
+    },
+    {
+      "name": "paid models and production writes",
+      "status": "NOT_RUN",
+      "reason": "not authorized"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "CHANGE_REQUEST.md",
+      "sha256": "a3faf0b6addee4a56c005b5e3a38338a8ca7d0c6ba7edcddf3f9a995a6e66b7c"
+    },
+    {
+      "path": "TASK_QUEUE.md",
+      "sha256": "2c360029bd59bb6f75fbe3edb7098861073e2bef95bfba0782c696f56dfabacd"
+    },
+    {
+      "path": "docs/adr/ADR-0014.md",
+      "sha256": "a4323853b76c1381dc28a3786f26cb75bf2de716b90286cd5f6355a67aaec65e"
+    },
+    {
+      "path": "evidence/batches/P7-03/card-red.log",
+      "sha256": "0b5279f3255085bec9e8e9bf5de65f349d5000711716fdbd5a5ea4a81019cd17"
+    },
+    {
+      "path": "evidence/batches/P7-03/commands.json",
+      "sha256": "7edfd112cf5681dc4e898a055287b9445de86bae80e1d618a1d4642e23ff072b"
+    },
+    {
+      "path": "evidence/batches/P7-03/conflict-reproduction.log",
+      "sha256": "0e34d491eddf779f248f902fa13dcafaa533c7cb79cb3bf00af9e34d253eba2b"
+    },
+    {
+      "path": "evidence/batches/P7-03/docs-check.log",
+      "sha256": "22224502b99caaa076eb71c1492c264560bde22f7810cbef2e401856dd9ce19a"
+    },
+    {
+      "path": "evidence/batches/P7-03/final-audit.log",
+      "sha256": "1b964ea208fde746be4dd932937ded9bf58d5266b61d43ace740f5dcb272d20d"
+    },
+    {
+      "path": "tests/integration/eval_boundary_test.go",
+      "sha256": "d750abc9eb331ae4683f82edbc1057239bde42dafbb5e16303a00374d47a6001"
+    }
+  ],
+  "timestamp_utc": "2026-10-24T16:33:32.236356+00:00"
+}
