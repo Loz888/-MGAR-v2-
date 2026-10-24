@@ -1,0 +1,23 @@
+# Run an otelcol-contrib 0.137.0 binary locally with --config this file.
+# No external export; only P6-04's sanitized projection is expected.
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: 127.0.0.1:4318
+processors:
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 128
+  batch:
+    timeout: 1s
+    send_batch_size: 512
+exporters:
+  debug:
+    verbosity: basic
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [debug]

@@ -1,0 +1,160 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/observability/...",
+      "./tests/integration/...",
+      "-run",
+      "Trace"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P6-04/card-red.log",
+    "timestamp_utc": "2026-10-24T04:42:00.372883+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "get",
+      "go.opentelemetry.io/otel/sdk@v1.38.0",
+      "go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp@v1.38.0"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-04/dependencies.log",
+    "timestamp_utc": "2026-10-24T04:42:06.345737+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/observability/...",
+      "-run",
+      "Trace"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P6-04/context-first.log",
+    "timestamp_utc": "2026-10-24T04:44:26.539393+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "mod",
+      "tidy"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-04/dependencies-tidy.log",
+    "timestamp_utc": "2026-10-24T04:44:53.750347+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/observability/...",
+      "./tests/integration/...",
+      "-run",
+      "Trace"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P6-04/trace-integration-first.log",
+    "timestamp_utc": "2026-10-24T04:46:13.155330+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/observability/...",
+      "./tests/integration/...",
+      "-run",
+      "Trace"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P6-04/trace-integration-fixed.log",
+    "timestamp_utc": "2026-10-24T04:47:20.495447+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/observability/...",
+      "./tests/integration/...",
+      "-run",
+      "Trace"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-04/trace-final-filter.log",
+    "timestamp_utc": "2026-10-24T09:59:03.681704+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_telemetry.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-04/python-propagation.log",
+    "timestamp_utc": "2026-10-24T09:59:04.101678+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/observability/...",
+      "./tests/integration/...",
+      "-run",
+      "Trace"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-04/process-export.log",
+    "timestamp_utc": "2026-10-24T10:00:24.618462+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-04/full-offline.log",
+    "timestamp_utc": "2026-10-24T10:02:15.579626+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-04/final-go.log",
+    "timestamp_utc": "2026-10-24T10:04:35.281281+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-04/final-build.log",
+    "timestamp_utc": "2026-10-24T10:04:36.156076+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-04/final-audit.log",
+    "timestamp_utc": "2026-10-24T10:04:36.251337+00:00"
+  }
+]

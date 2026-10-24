@@ -1,0 +1,3 @@
+{
+  "stdout": "# github.com/Loz888/-MGAR-v2-/internal/observability\n../.mgar-tools/gopath/pkg/mod/github.com/jackc/pgx/v5@v5.7.6/pgconn/auth_scram.go:26:2: missing go.sum entry for module providing package golang.org/x/crypto/pbkdf2 (imported by github.com/jackc/pgx/v5/pgconn); to add:\n\tgo get github.com/jackc/pgx/v5/pgconn@v5.7.6\nFAIL\tgithub.com/Loz888/-MGAR-v2-/internal/observability [setup failed]\nFAIL\n"
+}
