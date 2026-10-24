@@ -1,0 +1,100 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/budget/...",
+      "./tests/integration/...",
+      "-run",
+      "Budget|Ledger"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P6-01/card-red.log",
+    "timestamp_utc": "2026-10-23T18:48:28.455295+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/budget/...",
+      "./tests/integration/...",
+      "-run",
+      "Budget|Ledger"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-01/card-first.log",
+    "timestamp_utc": "2026-10-24T04:10:43.082889+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/budget/...",
+      "./tests/integration/...",
+      "-run",
+      "Budget|Ledger"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-01/concurrency.log",
+    "timestamp_utc": "2026-10-24T04:11:56.182421+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/budget/...",
+      "./tests/integration/...",
+      "-run",
+      "Budget|Ledger"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-01/migration-pricing.log",
+    "timestamp_utc": "2026-10-24T04:13:00.404434+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-01/full-offline.log",
+    "timestamp_utc": "2026-10-24T04:15:33.088757+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-01/go-test.log",
+    "timestamp_utc": "2026-10-24T04:18:01.594121+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-01/go-build.log",
+    "timestamp_utc": "2026-10-24T04:18:02.407885+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P6-01/final-check.log",
+    "timestamp_utc": "2026-10-24T04:18:02.503499+00:00"
+  }
+]

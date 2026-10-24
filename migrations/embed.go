@@ -15,3 +15,6 @@ var ContextSQL string
 
 //go:embed 004_plan_node_configs.sql
 var PlanConfigSQL string
+
+//go:embed 005_global_budgets.sql
+var BudgetSQL string

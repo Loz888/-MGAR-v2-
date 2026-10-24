@@ -12,6 +12,10 @@ import (
 // Callers must not send on error, including an ambiguous commit error.
 func (s *Store) ReserveModelCall(ctx context.Context, c TaskClaim, r budget.ModelRequest) (budget.ModelCall, error) {
 	out := budget.ModelCall{}
+	if r.Pricing != nil {
+		price := *r.Pricing
+		r.Pricing = &price
+	}
 	if !r.Valid() {
 		return out, ErrPolicy
 	}
@@ -35,14 +39,17 @@ func (s *Store) ReserveModelCall(ctx context.Context, c TaskClaim, r budget.Mode
 		return out, ErrUnsafeReplay
 	}
 	tag, e := tx.Exec(ctx, `UPDATE run_budgets SET reserved_model_calls=reserved_model_calls+1,reserved_tokens=reserved_tokens+$2,reserved_cost=reserved_cost+$3::numeric
- WHERE run_id=$1 AND reserved_model_calls+settled_model_calls<max_model_calls AND $2<=max_tokens_est-reserved_tokens-settled_tokens AND $3::numeric<=max_cost_usd-reserved_cost-settled_cost`, c.RunID, r.Tokens, budget.Decimal(r.CostMicros))
+ WHERE run_id=$1 AND reserved_model_calls+reserved_tool_calls<max_call_concurrency AND reserved_model_calls+settled_model_calls<max_model_calls AND $2<=max_tokens_est-reserved_tokens-settled_tokens AND $3::numeric<=max_cost_usd-reserved_cost-settled_cost`, c.RunID, r.Tokens, budget.Decimal(r.CostMicros))
 	if e != nil {
 		return out, e
 	}
 	if tag.RowsAffected() != 1 {
 		return out, ErrBudget
 	}
-	out.Reservation = budget.ModelReservation{Schema: "model_reservation.v1", Owner: c.Owner, Epoch: c.Epoch, Tokens: r.Tokens, CostMicros: r.CostMicros}
+	out.Reservation = budget.ModelReservation{Schema: "model_reservation.v1", Owner: c.Owner, Epoch: c.Epoch, Tokens: r.Tokens, CostMicros: r.CostMicros, Pricing: r.Pricing, PricingVersion: "legacy_bound.v1", InputTokens: r.InputTokens, OutputTokens: r.OutputTokens, InputDigest: r.InputDigest}
+	if r.Pricing != nil {
+		out.Reservation.PricingVersion = r.Pricing.Version
+	}
 	body, e := json.Marshal(out.Reservation)
 	if e != nil {
 		return out, e
@@ -95,6 +102,12 @@ func (s *Store) FinishModelCall(ctx context.Context, c TaskClaim, id string, u b
 		return ErrFenced
 	}
 	if u.Known {
+		if r.Pricing != nil {
+			cost, err := r.Pricing.Cost(u.InputTokens, u.OutputTokens)
+			if err != nil || u.PricingVersion != r.Pricing.Version || u.InputTokens > r.InputTokens || u.OutputTokens > r.OutputTokens || u.Tokens != u.InputTokens+u.OutputTokens || u.CostMicros != cost {
+				return ErrBudget
+			}
+		}
 		if u.Tokens > r.Tokens || u.CostMicros > r.CostMicros {
 			return ErrBudget
 		}

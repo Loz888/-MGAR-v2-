@@ -31,7 +31,7 @@
 | [P5-03](tasks/P5-03.md) | P5 | Tool Gateway 与 Capability Policy | P5-02 | PASS | `evidence/batches/P5-03/accept.json` |
 | [P5-04](tasks/P5-04.md) | P5 | 真正隔离的 Sandbox Executor | P5-03 | PASS | `evidence/batches/P5-04/accept.json` |
 | [P5-05](tasks/P5-05.md) | P5 | 审批、风险分类与 Reviewer 辅助 | P5-04 | PASS | `evidence/batches/P5-05/accept.json` |
-| [P6-01](tasks/P6-01.md) | P6 | 全局预算账本与原子预留 | P5-05 | TODO | `evidence/batches/P6-01/accept.json` |
+| [P6-01](tasks/P6-01.md) | P6 | 全局预算账本与原子预留 | P5-05 | PASS | `evidence/batches/P6-01/accept.json` |
 | [P6-02](tasks/P6-02.md) | P6 | 资源池与 Backpressure | P6-01 | TODO | `evidence/batches/P6-02/accept.json` |
 | [P6-03](tasks/P6-03.md) | P6 | 关键路径调度与成本感知模型路由 | P6-02 | TODO | `evidence/batches/P6-03/accept.json` |
 | [P6-04](tasks/P6-04.md) | P6 | 端到端 Trace 与事件一致性 | P6-03 | TODO | `evidence/batches/P6-04/accept.json` |
@@ -66,3 +66,5 @@ P0-01 的原始未提交快照与失败记录保留于 `evidence/batches/P0-01/a
 **P4 授权：** 用户要求完成 P4，按 P4-01～P4-05 顺序逐卡验收；不进入 P5，不启用付费模型。
 
 **P5 授权：** 用户继续 P5，按 P5-01～P5-05 依赖顺序逐卡实施和验收；不进入 P6，不启用付费模型。
+
+**P6 授权：** 用户开启 P6；按 P6-01～P6-05 顺序逐卡实施和验收，不进入 P7，不启用付费模型。

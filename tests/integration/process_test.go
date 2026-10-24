@@ -54,6 +54,30 @@ func TestProcessHelper(t *testing.T) {
 	run := os.Getenv("MGAR_TEST_RUN")
 	ctx := context.Background()
 	switch kind {
+	case "budget":
+		var claims []store.TaskClaim
+		if e := json.Unmarshal([]byte(os.Getenv("MGAR_TEST_BUDGET_CLAIMS")), &claims); e != nil {
+			t.Fatal(e)
+		}
+		i, e := strconv.Atoi(os.Getenv("MGAR_TEST_ACTOR"))
+		if e != nil || i >= len(claims) {
+			t.Fatal("actor")
+		}
+		c := claims[i]
+		mode := os.Getenv("MGAR_TEST_BUDGET_MODE")
+		if mode == "toolquota" || (mode == "mixed_concurrency" && i%2 == 0) {
+			_, e = s.BeginTool(ctx, c, store.ToolRequest{ID: budgetRequest(i).LogicalID, Capability: "read", Version: "tool.v1", Resource: "fixture", Hash: artifact.Digest([]byte("same input")), Effect: "readonly"})
+		} else {
+			_, e = s.ReserveModelCall(ctx, c, budgetRequest(i))
+		}
+		if e == nil {
+			fmt.Println("RESULT winner")
+		} else if errors.Is(e, store.ErrBudget) {
+			fmt.Println("RESULT denied")
+		} else {
+			t.Fatal(e)
+		}
+
 	case "approval":
 		var c store.TaskClaim
 		var r store.ToolRequest

@@ -90,9 +90,19 @@ func (s *Store) beginTool(ctx context.Context, c TaskClaim, r ToolRequest, appro
 	if count >= 64 {
 		return false, ErrBudget
 	}
+	tag, e := tx.Exec(ctx, "UPDATE run_budgets SET reserved_tool_calls=reserved_tool_calls+1 WHERE run_id=$1 AND reserved_tool_calls+settled_tool_calls<max_tool_calls AND reserved_tool_calls+reserved_model_calls<max_call_concurrency", c.RunID)
+	if e != nil {
+		return false, e
+	}
+	if tag.RowsAffected() != 1 {
+		return false, ErrBudget
+	}
 	if r.Effect == "non_idempotent" {
 		if e = consumeApproval(ctx, tx, c, r, approvalID, token); e != nil {
 			if errors.Is(e, ErrApprovalExpired) {
+				if _, refundErr := tx.Exec(ctx, "UPDATE run_budgets SET reserved_tool_calls=reserved_tool_calls-1 WHERE run_id=$1", c.RunID); refundErr != nil {
+					return false, refundErr
+				}
 				if commitErr := commitModelTask(ctx, tx, c); commitErr != nil {
 					return false, commitErr
 				}
@@ -157,6 +167,15 @@ func (s *Store) FinishTool(ctx context.Context, c TaskClaim, r ToolRequest, cas 
 		}
 		if _, e = tx.Exec(ctx, "INSERT INTO artifact_contexts(artifact_id,run_id,snapshot_id) SELECT $1,run_id,snapshot_id FROM context_snapshots WHERE run_id=$2 AND task_id=$3 AND plan_version=$4", id, c.RunID, c.TaskID, c.PlanVersion); e != nil {
 			return e
+		}
+	}
+	if status != "unknown" {
+		tag, err := tx.Exec(ctx, "UPDATE run_budgets SET reserved_tool_calls=reserved_tool_calls-1,settled_tool_calls=settled_tool_calls+1 WHERE run_id=$1 AND reserved_tool_calls>=1", c.RunID)
+		if err != nil {
+			return err
+		}
+		if tag.RowsAffected() != 1 {
+			return ErrBudget
 		}
 	}
 	if _, e = tx.Exec(ctx, "UPDATE tool_invocations SET status=$2,result_artifact_id=NULLIF($3,'')::uuid WHERE invocation_id=$1", r.ID, status, id); e != nil {

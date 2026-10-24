@@ -46,7 +46,7 @@ func TestSchemaMigrationAndConstraints(t *testing.T) {
 		t.Fatal("duplicate event accepted")
 	}
 	var n int
-	if err = s.Pool.QueryRow(ctx, "SELECT count(*) FROM schema_migrations").Scan(&n); err != nil || n != 4 {
+	if err = s.Pool.QueryRow(ctx, "SELECT count(*) FROM schema_migrations").Scan(&n); err != nil || n != 5 {
 		t.Fatalf("migration repeated: %d %v", n, err)
 	}
 }
