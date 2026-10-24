@@ -1,0 +1,3 @@
+{
+  "stdout": "agentkit/mgar_agents/runtime_worker.py:25: error: Argument 1 to \"HTTPConnection\" has incompatible type \"str | None\"; expected \"str\"  [arg-type]\nFound 1 error in 1 file (checked 24 source files)\n"
+}

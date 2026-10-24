@@ -1,0 +1,206 @@
+[
+  {
+    "command": [
+      "bash",
+      "scripts/demo.sh",
+      "--provider",
+      "mock"
+    ],
+    "exit_code": 127,
+    "log_path": "evidence/batches/P7-02/card-red.log",
+    "timestamp_utc": "2026-10-24T16:09:57.599603+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/demo",
+      "./cmd/mgardemo"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-02/compile.log",
+    "timestamp_utc": "2026-10-24T16:15:48.013849+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/demo.sh",
+      "--provider",
+      "mock",
+      "--case",
+      "offline-002"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-02/demo-first.log",
+    "timestamp_utc": "2026-10-24T16:16:03.616218+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/e2e/incident_test.py",
+      "tests/e2e/analysis_test.py"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-02/e2e-first.log",
+    "timestamp_utc": "2026-10-24T16:16:21.795799+00:00"
+  },
+  {
+    "command": [
+      "ruff",
+      "check",
+      "agentkit/mgar_agents/runtime_worker.py",
+      "tests/e2e/incident_test.py",
+      "tests/e2e/analysis_test.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-02/static-first.log",
+    "timestamp_utc": "2026-10-24T16:17:23.149090+00:00"
+  },
+  {
+    "command": [
+      "mypy",
+      "agentkit"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-02/types-first.log",
+    "timestamp_utc": "2026-10-24T16:17:23.467376+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/e2e/incident_test.py",
+      "tests/e2e/analysis_test.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-02/e2e-second.log",
+    "timestamp_utc": "2026-10-24T16:17:33.404100+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./internal/demo"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-02/runtime-race.log",
+    "timestamp_utc": "2026-10-24T16:19:26.730099+00:00"
+  },
+  {
+    "command": [
+      "mypy",
+      "agentkit"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-02/types-final.log",
+    "timestamp_utc": "2026-10-24T16:19:27.040666+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/e2e/incident_test.py",
+      "tests/e2e/analysis_test.py"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-02/incident-final.log",
+    "timestamp_utc": "2026-10-24T16:20:13.565661+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./internal/demo"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-02/verifier-admission-race.log",
+    "timestamp_utc": "2026-10-24T16:23:13.966484+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/e2e/incident_test.py",
+      "tests/e2e/analysis_test.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-02/e2e-admission.log",
+    "timestamp_utc": "2026-10-24T16:24:12.773856+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./internal/demo"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-02/boundary-race.log",
+    "timestamp_utc": "2026-10-24T16:25:33.493729+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/demo.sh",
+      "--provider",
+      "mock"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-02/card-demo.log",
+    "timestamp_utc": "2026-10-24T16:25:50.795281+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-02/full-offline.log",
+    "timestamp_utc": "2026-10-24T16:28:48.577101+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-02/final-go.log",
+    "timestamp_utc": "2026-10-24T16:30:10.967109+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-02/final-build.log",
+    "timestamp_utc": "2026-10-24T16:30:12.175795+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-02/final-audit.log",
+    "timestamp_utc": "2026-10-24T16:30:12.294728+00:00"
+  }
+]
