@@ -83,13 +83,32 @@ func (b *limitedBuffer) Write(p []byte) (int, error) {
 	}
 	return b.Buffer.Write(p)
 }
+
+type workerAdapter struct {
+	mode        string
+	definitions []policy.Definition
+	decide      func(string, mockRequest, *planner.Proposal, string) ([]byte, error)
+}
+
 func (f *fixture) worker(ctx context.Context, o Options, c store.TaskClaim, snap inputcontext.Snapshot, state *taskTools, proposal *planner.Proposal, counts *processCounts) (out WorkerResult, err error) {
+	return f.workerWith(ctx, o, c, snap, state, proposal, counts, nil)
+}
+func (f *fixture) workerWith(ctx context.Context, o Options, c store.TaskClaim, snap inputcontext.Snapshot, state *taskTools, proposal *planner.Proposal, counts *processCounts, adapter *workerAdapter) (out WorkerResult, err error) {
 	out = WorkerResult{Role: c.NodeKey}
-	selected, e := f.s.PrepareContext(ctx, c, f.cas, snap.ID, f.input.Goal, "selected", 60000, 15000)
+	mode := "selected"
+	decide := mockDecision
+	if adapter != nil {
+		mode = adapter.mode
+		decide = adapter.decide
+	}
+	selected, e := f.s.PrepareContext(ctx, c, f.cas, snap.ID, f.input.Goal, mode, 60000, 15000)
 	if e != nil || selected.Blocked {
 		return out, errors.New("context_selection_blocked")
 	}
 	defs := f.definitions(c, snap, state)
+	if adapter != nil {
+		defs = adapter.definitions
+	}
 	gateway, e := policy.NewGateway(f.s, f.cas, defs, func(policy.Denial) {})
 	if e != nil {
 		return out, e
@@ -129,7 +148,7 @@ func (f *fixture) worker(ctx context.Context, o Options, c store.TaskClaim, snap
 		}
 		var decision []byte
 		_, err = resources.Model(r.Context(), c, req, func(context.Context) (budget.ModelUsage, bool, error) {
-			decision, err = mockDecision(c.NodeKey, request, proposal, o.Fault)
+			decision, err = decide(c.NodeKey, request, proposal, o.Fault)
 			if err != nil {
 				return budget.ModelUsage{}, true, err
 			}

@@ -1,6 +1,6 @@
 # CHANGE_REQUEST · P7-03 基线验证语义
 
-状态：**等待用户批准；P7-03 BLOCKED**。
+状态：**用户已批准方案 A（2026-10-25）：拆分 P7-03 并增加隔离基线执行层。P7-03A 实施中。**
 
 P7-01 已完成（`15f214b`），P7-02 已完成（`dc3411d`）。
 P7-03 的无内部 Verifier 组无法直接复用现有严格依赖链：真实 PostgreSQL 复现中，
@@ -10,7 +10,7 @@ P7-03 的无内部 Verifier 组无法直接复用现有严格依赖链：真实 
 复现：[边界测试](tests/integration/eval_boundary_test.go)，
 [真实日志](evidence/batches/P7-03/conflict-reproduction.log)。
 
-## 请求批准的具体范围（推荐方案 A）
+## 已批准的具体范围（方案 A）
 
 将 P7-03 拆成两个依赖顺序执行的子批：
 
@@ -26,6 +26,6 @@ P7-03 的无内部 Verifier 组无法直接复用现有严格依赖链：真实 
 替代方案 B 是修改核心验证等级与 Ready/Context/Merge 契约，影响更大；若选 B，
 先另行冻结变更设计与迁移范围，不直接改代码。
 
-本次仅提交复现、提议和阻塞证据；未实现 runner，不宣称 P7 全部完成。
+历史阻塞记录保留。批准后按 P7-03A → P7-03B 顺序实施验收；runner 完成前不宣称 P7-03 或 P7 全部完成。
 暂停依据：`03_CODEX_WORK_PROTOCOL.md` 的“需求与协议冲突：先写 ... ADR ... 卡状态
 BLOCKED，等待用户批准”，以及用户要求出现规格冲突时提交 ADR/CHANGE_REQUEST 并暂停。

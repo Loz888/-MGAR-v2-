@@ -1,0 +1,114 @@
+[
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/e2e/baseline_test.py"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-03A/card-red.log",
+    "timestamp_utc": "2026-10-25T02:32:46.286857+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/evalbaseline",
+      "./internal/demo",
+      "-run",
+      "^TestModelHTTP"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03A/compile.log",
+    "timestamp_utc": "2026-10-25T02:33:42.747715+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/e2e/baseline_test.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03A/e2e-first.log",
+    "timestamp_utc": "2026-10-25T02:35:40.586392+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./internal/evalbaseline",
+      "./internal/demo",
+      "./tests/integration",
+      "-run",
+      "Baseline|Candidate|EvalNoVerifier"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03A/boundary-race.log",
+    "timestamp_utc": "2026-10-25T02:37:11.620194+00:00"
+  },
+  {
+    "command": [
+      "ruff",
+      "check",
+      "."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03A/static.log",
+    "timestamp_utc": "2026-10-25T02:37:30.519869+00:00"
+  },
+  {
+    "command": [
+      "mypy",
+      "agentkit"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03A/types.log",
+    "timestamp_utc": "2026-10-25T02:37:30.671658+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03A/full-offline.log",
+    "timestamp_utc": "2026-10-25T02:41:22.517520+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03A/final-go.log",
+    "timestamp_utc": "2026-10-25T02:42:47.065816+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03A/final-build.log",
+    "timestamp_utc": "2026-10-25T02:42:48.598362+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03A/final-audit.log",
+    "timestamp_utc": "2026-10-25T02:42:48.709966+00:00"
+  }
+]

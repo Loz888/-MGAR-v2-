@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgar.invalid/candidate_evidence.v1",
+  "title": "Explicitly unverified experimental candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_id",
+    "producer_run_id",
+    "producer_task_id",
+    "producer_role",
+    "producer_node",
+    "source_plan_version",
+    "kind",
+    "tool_version",
+    "content_sha256",
+    "byte_length",
+    "content",
+    "semantic_status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "candidate_evidence.v1"
+    },
+    "artifact_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "producer_run_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "producer_task_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "producer_role": {
+      "enum": [
+        "research",
+        "data",
+        "action",
+        "aggregate"
+      ]
+    },
+    "producer_node": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$"
+    },
+    "source_plan_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "kind": {
+      "enum": [
+        "finding",
+        "sql_evidence",
+        "patch",
+        "report"
+      ]
+    },
+    "tool_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "content_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "byte_length": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 16000
+    },
+    "content": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 16000
+    },
+    "semantic_status": {
+      "const": "unverified"
+    }
+  }
+}
