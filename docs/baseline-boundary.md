@@ -35,7 +35,8 @@ execution_status=completed/failed/blocked，semantic_status=unverified；不包�
 
 每次输出保留 case、真实 Workflow 状态、预算账本、进程/工具记录、候选、错误、
 实际审计投影和独立 CAS/schema namespace。失败仍有结构化记录；技术异常也不能删样本。
-报告经调用者落盘后可清理本次拥有的合成资源；不宣称此临时实验支持崩溃恢复。
+控制器在清理本次拥有的合成资源前收集报告，调用者随后落盘。进程崩溃或输出丢失时，
+runner 保留预先分配的样本并记录技术失败，不推断丢失结果；不宣称此临时实验支持崩溃恢复。
 
 ## 本卡边界
 

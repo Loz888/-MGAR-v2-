@@ -115,3 +115,44 @@ func baselineDecision(version int) func(string, mockRequest, *planner.Proposal, 
 		return nil, errors.New("unsupported_baseline_role")
 	}
 }
+
+// B0 has one worker and one accumulated observation context, with the same
+// bounded business tools. It does not manufacture intermediate agent outputs.
+func singleDecision(version int, business string) func(string, mockRequest, *planner.Proposal, string) ([]byte, error) {
+	return func(_ string, r mockRequest, _ *planner.Proposal, _ string) ([]byte, error) {
+		tool := func(name string, args map[string]any) []byte {
+			return inputcontext.Canonical(map[string]any{"type": "tool_call", "call_id": "single_" + string(rune('0'+r.Turn)), "name": name, "arguments": args})
+		}
+		if len(r.Observations) == 0 {
+			return tool("research.read", map[string]any{}), nil
+		}
+		if len(r.Observations) == 1 {
+			return tool("data.query", map[string]any{"query": "paid-metrics"}), nil
+		}
+		claims, e := handoff.DecodeClaims([]byte(r.Observations[0].Output))
+		if e != nil {
+			return nil, e
+		}
+		rule := false
+		for _, c := range claims {
+			if c.Key == "research.rule" && strings.Contains(string(c.Value), "paid order once") {
+				rule = true
+			}
+		}
+		var observed verifier.Observation
+		var rows [][]int64
+		if !rule || verifier.StrictJSON([]byte(r.Observations[1].Output), &observed) != nil || json.Unmarshal(observed.Rows, &rows) != nil || len(rows) != 1 || len(rows[0]) != 3 {
+			return nil, errors.New("single_missing_evidence")
+		}
+		if business == "incident" {
+			if len(r.Observations) == 2 {
+				return tool("action.patch", map[string]any{"patch": "deduplicate-paid"}), nil
+			}
+			if len(r.Observations) == 3 {
+				return tool("action.test", map[string]any{}), nil
+			}
+		}
+		answer := map[string]any{"decision": "answer", "metrics": map[string]any{"paid_total": rows[0][0], "paid_orders": rows[0][1], "duplicate_paid_events": rows[0][2]}, "reason": nil, "input_version": version}
+		return inputcontext.Canonical(map[string]any{"type": "final", "output": map[string]any{"answer": answer, "semantic_status": "unverified"}}), nil
+	}
+}

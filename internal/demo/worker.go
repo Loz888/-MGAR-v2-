@@ -101,7 +101,11 @@ func (f *fixture) workerWith(ctx context.Context, o Options, c store.TaskClaim, 
 		mode = adapter.mode
 		decide = adapter.decide
 	}
-	selected, e := f.s.PrepareContext(ctx, c, f.cas, snap.ID, f.input.Goal, mode, 60000, 15000)
+	maxBytes, maxTokens := 60000, 15000
+	if adapter != nil {
+		maxBytes, maxTokens = 48000, 12000
+	}
+	selected, e := f.s.PrepareContext(ctx, c, f.cas, snap.ID, f.input.Goal, mode, maxBytes, maxTokens)
 	if e != nil || selected.Blocked {
 		return out, errors.New("context_selection_blocked")
 	}

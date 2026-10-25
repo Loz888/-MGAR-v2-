@@ -1,0 +1,3 @@
+{
+  "stdout": "{\n  \"assignments\": 420,\n  \"negative_refusals\": 84,\n  \"budget_denials\": 42,\n  \"retained_tool_failures\": 42,\n  \"duplicate_delivery_cases\": 42,\n  \"accepted_partial_replans\": 12,\n  \"no_replan_failures\": 12,\n  \"unverified_baseline_runs\": 300,\n  \"external_sandbox_checks\": 168,\n  \"source_fingerprint\": \"eacce68619b7089a891f52b42cb0cf3de1c93eb99bb970ed480cd3c913c063ae\",\n  \"status\": \"PASS\"\n}\n"
+}

@@ -1,28 +1,75 @@
 {
   "card_id": "P7-03",
-  "status": "BLOCKED",
+  "status": "PASS",
   "git_commit": null,
-  "base_git_commit": "dc3411d19bdf665641bfbd7d6b9a87cb447e55a5",
-  "scope": "Real PostgreSQL/CAS reproduction and reviewable change request only; comparison runner not implemented",
+  "base_git_commit": "6cfb0bf8c9330f8e5e8a6b2ea3333f7d9f027b57",
+  "scope": "Approved split completed: P7-03A isolated candidate boundary plus P7-03B seven-arm fair runner",
   "environment": {
+    "platform": "linux/amd64",
     "go": "1.27.3",
     "python": "3.12.14",
-    "postgres": "16.11",
-    "platform": "linux/amd64"
+    "postgres": "16.11"
+  },
+  "source_fingerprint": "6b8c3a739c21308e90f40e2f4b105e188d6cc025bd6b80a33ea72e5e1d22485b",
+  "full_suite_source_fingerprint": "eacce68619b7089a891f52b42cb0cf3de1c93eb99bb970ed480cd3c913c063ae",
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 456,
+      "passed": 456,
+      "failed_events": 0,
+      "skipped": 0,
+      "complete": true
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 348,
+      "passed": 348,
+      "failed": 0,
+      "skipped_or_xfailed": 0,
+      "complete": true,
+      "passed_subtests": 15
+    },
+    "status": "PASS"
   },
   "commands": [
     {
       "command": [
         "python",
-        "eval/runner.py",
-        "--provider",
-        "mock",
-        "--arms",
-        "B0,B1,B2,B3,B4"
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_eval_runner.py"
       ],
       "exit_code": 2,
-      "log_path": "evidence/batches/P7-03/card-red.log",
-      "timestamp_utc": "2026-10-24T16:31:43.233639+00:00"
+      "log_path": "evidence/batches/P7-03B/card-red.log",
+      "timestamp_utc": "2026-10-25T02:48:10.713444+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "./internal/demo",
+        "-run",
+        "^TestExperimentSevenArmsRealAnalysis$"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-03B/compile-red.log",
+      "timestamp_utc": "2026-10-25T02:51:17.170334+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./internal/demo",
+        "-run",
+        "^TestExperiment",
+        "-v"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-03B/representative-first.log",
+      "timestamp_utc": "2026-10-25T02:51:39.137653+00:00"
     },
     {
       "command": [
@@ -30,23 +77,175 @@
         "test",
         "-race",
         "-count=1",
-        "-v",
-        "./tests/integration",
+        "./internal/demo",
         "-run",
-        "^TestEvalNoVerifierCannotUseStrictDependencyPath$"
+        "^TestExperiment",
+        "-v"
       ],
       "exit_code": 0,
-      "log_path": "evidence/batches/P7-03/conflict-reproduction.log",
-      "timestamp_utc": "2026-10-24T16:31:46.285897+00:00"
+      "log_path": "evidence/batches/P7-03B/representative-fixed.log",
+      "timestamp_utc": "2026-10-25T02:53:23.114801+00:00"
     },
     {
       "command": [
         "python",
-        "scripts/validate_plan_docs.py"
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_eval_runner.py"
       ],
       "exit_code": 0,
-      "log_path": "evidence/batches/P7-03/docs-check.log",
-      "timestamp_utc": "2026-10-24T16:33:01.170324+00:00"
+      "log_path": "evidence/batches/P7-03B/runner-unit.log",
+      "timestamp_utc": "2026-10-25T02:53:23.519312+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "eval/runner.py",
+        "--provider",
+        "mock",
+        "--arms",
+        "B0,B1,B2,B3,B4,A1,A2",
+        "--cases",
+        "offline-001,offline-002,offline-026,offline-044,offline-050,offline-056",
+        "--output",
+        ".local/eval-runs/p703b-diagnostic"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/runner-diagnostic.log",
+      "timestamp_utc": "2026-10-25T02:55:54.847139+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "./internal/demo",
+        "-run",
+        "TestExperiment(InputChange|Seed|Invalid)",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/replan-seed.log",
+      "timestamp_utc": "2026-10-25T02:56:25.912748+00:00"
+    },
+    {
+      "command": [
+        "ruff",
+        "check",
+        "--isolated",
+        "eval/runner.py",
+        "tests/unit/test_eval_runner.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/runner-static.log",
+      "timestamp_utc": "2026-10-25T02:57:14.818005+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_eval_runner.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/runner-unit-final.log",
+      "timestamp_utc": "2026-10-25T02:57:15.221718+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "eval/runner.py",
+        "--provider",
+        "mock",
+        "--arms",
+        "B0,B1,B2,B3,B4,A1,A2",
+        "--cases",
+        "offline-002,offline-026,offline-044",
+        "--output",
+        ".local/eval-runs/p703b-final-diagnostic"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/final-diagnostic.log",
+      "timestamp_utc": "2026-10-25T02:58:03.552688+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_eval_runner.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/initialization-failure.log",
+      "timestamp_utc": "2026-10-25T03:00:00.005797+00:00"
+    },
+    {
+      "command": [
+        "ruff",
+        "check",
+        "--isolated",
+        "eval/runner.py",
+        "tests/unit/test_eval_runner.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/final-runner-static.log",
+      "timestamp_utc": "2026-10-25T03:00:00.041100+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/full-offline.log",
+      "timestamp_utc": "2026-10-25T03:01:17.997384+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./..."
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/final-go.log",
+      "timestamp_utc": "2026-10-25T03:02:51.460881+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/full-offline-final.log",
+      "timestamp_utc": "2026-10-25T06:27:09.499874+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./..."
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/final-go-complete.log",
+      "timestamp_utc": "2026-10-25T06:28:41.511015+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "build",
+        "./..."
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/final-build.log",
+      "timestamp_utc": "2026-10-25T06:28:43.480114+00:00"
     },
     {
       "command": [
@@ -54,86 +253,204 @@
         "/tmp/mgar-final-audit.py"
       ],
       "exit_code": 0,
-      "log_path": "evidence/batches/P7-03/final-audit.log",
-      "timestamp_utc": "2026-10-24T16:33:01.275139+00:00"
-    }
-  ],
-  "source_fingerprint": "d08ed2c531a7a05449474a4d7cdc78ae80a1843b024e16587b5af22b9bb21f97",
-  "positive_assertions": [
-    {
-      "name": "source stays output_ready with zero verdicts; sink pending and NO_READY_TASK; workflow stays running",
-      "passed": true
+      "log_path": "evidence/batches/P7-03B/final-audit.log",
+      "timestamp_utc": "2026-10-25T06:28:43.612839+00:00"
     },
     {
-      "name": "static contract checks 37/37",
-      "passed": true
+      "command": [
+        "python",
+        "/tmp/mgar-experiment-environment.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/environment.log",
+      "timestamp_utc": "2026-10-25T06:44:17.574784+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "eval/runner.py",
+        "--provider",
+        "mock",
+        "--arms",
+        "B0,B1,B2,B3,B4",
+        "--output",
+        "evidence/experiments/p703b-main"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/formal-main.log",
+      "timestamp_utc": "2026-10-25T06:59:06.612255+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "eval/runner.py",
+        "--provider",
+        "mock",
+        "--arms",
+        "A1,A2",
+        "--output",
+        "evidence/experiments/p703b-ablations"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/formal-ablations.log",
+      "timestamp_utc": "2026-10-25T07:11:28.759845+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "eval/runner.py",
+        "--verify",
+        "evidence/experiments/p703b-main"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/formal-main-readback.log",
+      "timestamp_utc": "2026-10-25T07:12:14.843396+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "eval/runner.py",
+        "--verify",
+        "evidence/experiments/p703b-ablations"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/formal-ablations-readback.log",
+      "timestamp_utc": "2026-10-25T07:12:15.072210+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "evidence/batches/P7-03B/verify_experiments.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/cross-arm-proof.log",
+      "timestamp_utc": "2026-10-25T07:12:16.068523+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/evidence-audit.log",
+      "timestamp_utc": "2026-10-25T07:12:16.194822+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "scripts/validate_plan_docs.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/final-status-docs.log",
+      "timestamp_utc": "2026-10-25T07:12:41.045843+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-03B/final-status-audit.log",
+      "timestamp_utc": "2026-10-25T07:12:41.171293+00:00"
+    }
+  ],
+  "positive_assertions": [
+    {
+      "name": "assignments",
+      "passed": true,
+      "observed": 420
+    },
+    {
+      "name": "negative_refusals",
+      "passed": true,
+      "observed": 84
+    },
+    {
+      "name": "budget_denials",
+      "passed": true,
+      "observed": 42
+    },
+    {
+      "name": "retained_tool_failures",
+      "passed": true,
+      "observed": 42
+    },
+    {
+      "name": "duplicate_delivery_cases",
+      "passed": true,
+      "observed": 42
+    },
+    {
+      "name": "accepted_partial_replans",
+      "passed": true,
+      "observed": 12
+    },
+    {
+      "name": "no_replan_failures",
+      "passed": true,
+      "observed": 12
+    },
+    {
+      "name": "unverified_baseline_runs",
+      "passed": true,
+      "observed": 300
+    },
+    {
+      "name": "external_sandbox_checks",
+      "passed": true,
+      "observed": 168
     }
   ],
   "negative_assertions": [
     {
-      "name": "no bypass or fabricated passed verdict introduced",
+      "name": "enabled_suite_has_no_failures_skips_or_xfails",
       "passed": true
     }
   ],
   "known_limitations": [
-    "P7-03 acceptance runner is absent and returned exit 2. Guard reproduction PASS is not baseline implementation PASS.",
-    "No full-suite rerun for this documentation and isolated regression-test batch; latest complete full suite is P7-02 at dc3411d: Go 385 and Python 337 plus 15 subtests.",
-    "No approved semantics for unverified baseline handoff; see CHANGE_REQUEST.md and docs/adr/ADR-0014.md."
+    "Offline deterministic Mock engineering evidence only; no paid provider accuracy or general arbitrary plan/code generation claim",
+    "B3 and A2 are intentionally identical treatments with independent namespaces; current critical evidence can yield no context savings",
+    "Baseline completion is unverified and strict Workflow success is N/A; experiment grants are process-local without crash recovery",
+    "Context selection uses 48000 bytes/12000 estimated tokens; all model requests share a 65536-byte transport bound and charge the same frozen per-case token budget",
+    "External Oracle sandbox time is measured separately and included in recorded experiment latency; audit-projection spans are not physical duration measurements",
+    "P7-04 statistics, P7-05 load/chaos aggregation, real-provider evaluation and P8 are not claimed complete by this card"
   ],
   "unverified": [
     {
-      "name": "B0 B1 B2 B3 B4 A1 A2 fair runner",
+      "name": "paid_provider_and_production_operations",
       "status": "NOT_RUN",
-      "reason": "blocked on explicit verification semantics decision"
-    },
-    {
-      "name": "P7-04 statistics and P7-05 load/kill matrix",
-      "status": "NOT_RUN",
-      "reason": "P7-03 dependency incomplete"
-    },
-    {
-      "name": "paid models and production writes",
-      "status": "NOT_RUN",
-      "reason": "not authorized"
+      "reason": "not authorized; only synthetic local tests"
     }
   ],
-  "artifacts": [
+  "subcards": [
     {
-      "path": "CHANGE_REQUEST.md",
-      "sha256": "a3faf0b6addee4a56c005b5e3a38338a8ca7d0c6ba7edcddf3f9a995a6e66b7c"
+      "card_id": "P7-03A",
+      "status": "PASS",
+      "commit": "6cfb0bf8c9330f8e5e8a6b2ea3333f7d9f027b57",
+      "path": "evidence/batches/P7-03A/accept.json",
+      "sha256": "06c83b61437be237dd41040c2ff4fb74a2c19e294fa616d70ba337715a2a4838"
     },
     {
-      "path": "TASK_QUEUE.md",
-      "sha256": "2c360029bd59bb6f75fbe3edb7098861073e2bef95bfba0782c696f56dfabacd"
-    },
-    {
-      "path": "docs/adr/ADR-0014.md",
-      "sha256": "a4323853b76c1381dc28a3786f26cb75bf2de716b90286cd5f6355a67aaec65e"
-    },
-    {
-      "path": "evidence/batches/P7-03/card-red.log",
-      "sha256": "0b5279f3255085bec9e8e9bf5de65f349d5000711716fdbd5a5ea4a81019cd17"
-    },
-    {
-      "path": "evidence/batches/P7-03/commands.json",
-      "sha256": "7edfd112cf5681dc4e898a055287b9445de86bae80e1d618a1d4642e23ff072b"
-    },
-    {
-      "path": "evidence/batches/P7-03/conflict-reproduction.log",
-      "sha256": "0e34d491eddf779f248f902fa13dcafaa533c7cb79cb3bf00af9e34d253eba2b"
-    },
-    {
-      "path": "evidence/batches/P7-03/docs-check.log",
-      "sha256": "22224502b99caaa076eb71c1492c264560bde22f7810cbef2e401856dd9ce19a"
-    },
-    {
-      "path": "evidence/batches/P7-03/final-audit.log",
-      "sha256": "1b964ea208fde746be4dd932937ded9bf58d5266b61d43ace740f5dcb272d20d"
-    },
-    {
-      "path": "tests/integration/eval_boundary_test.go",
-      "sha256": "d750abc9eb331ae4683f82edbc1057239bde42dafbb5e16303a00374d47a6001"
+      "card_id": "P7-03B",
+      "status": "PASS",
+      "git_commit": null,
+      "path": "evidence/batches/P7-03B/accept.json",
+      "sha256": "4680f973a51820dfc3fc43b08c2fe29bed8ac69befbc4e55b7a5bc4463f86159"
     }
   ],
-  "timestamp_utc": "2026-10-24T16:33:32.236356+00:00"
+  "historical_blocked_acceptance": "evidence/batches/P7-03/accept.blocked-20261024.json",
+  "experiment_verification": {
+    "assignments": 420,
+    "negative_refusals": 84,
+    "budget_denials": 42,
+    "retained_tool_failures": 42,
+    "duplicate_delivery_cases": 42,
+    "accepted_partial_replans": 12,
+    "no_replan_failures": 12,
+    "unverified_baseline_runs": 300,
+    "external_sandbox_checks": 168,
+    "source_fingerprint": "eacce68619b7089a891f52b42cb0cf3de1c93eb99bb970ed480cd3c913c063ae",
+    "status": "PASS"
+  },
+  "timestamp_utc": "2026-10-25T07:13:28.388241+00:00"
 }

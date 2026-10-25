@@ -1,0 +1,3 @@
+{
+  "stdout": "{\n  \"platform\": \"Linux-6.18.55-x86_64-with-glibc2.41\",\n  \"python\": \"3.12.14\",\n  \"go\": \"go version go1.27.3 linux/amd64\",\n  \"postgres\": \"16.11 (Debian 16.11-1.pgdg12+1)\",\n  \"logical_cpus\": 5,\n  \"sandbox_image\": \"sha256:2d401350e1a24da8d868216b748285ee1e76aeddf074c9ea004b294d742164ac\",\n  \"runner_concurrency\": 1,\n  \"per_run_task_concurrency\": 4,\n  \"provider\": \"mock\",\n  \"paid_calls_authorized\": false,\n  \"cpu.max\": \"400000 100000\",\n  \"memory.max\": \"34359738368\",\n  \"memory.high\": \"max\"\n}\n"
+}

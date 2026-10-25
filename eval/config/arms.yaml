@@ -1,0 +1,26 @@
+{
+  "schema_version": "experiment-arms.v1",
+  "shared": {
+    "provider": "mock",
+    "model": "demo-mock.v1",
+    "temperature": 0,
+    "tool_version": "demo.v1",
+    "pricing_version": "demo-free.v1",
+    "max_context_bytes": 48000,
+    "max_context_tokens": 12000,
+    "limits_source": "frozen_case",
+    "max_delegations": 32,
+    "core_tools": ["research.read", "data.query", "action.patch", "action.test"],
+    "oracle": "dataset-oracle.v1+experiment-execution-oracle.v1",
+    "manifest_sha256": "0b48a86008574d0a8bdbde1d88d37e718d45e75fe33363075fdcd48f0eb2d511"
+  },
+  "arms": {
+    "B0": {"multi_role": false, "dynamic_plan": false, "context": "full", "internal_verifier": false, "replan": false},
+    "B1": {"multi_role": true, "dynamic_plan": false, "context": "full", "internal_verifier": false, "replan": false},
+    "B2": {"multi_role": true, "dynamic_plan": true, "context": "full", "internal_verifier": false, "replan": true},
+    "B3": {"multi_role": true, "dynamic_plan": true, "context": "selected", "internal_verifier": false, "replan": true},
+    "B4": {"multi_role": true, "dynamic_plan": true, "context": "selected", "internal_verifier": true, "replan": true},
+    "A1": {"multi_role": true, "dynamic_plan": true, "context": "selected", "internal_verifier": true, "replan": false},
+    "A2": {"multi_role": true, "dynamic_plan": true, "context": "selected", "internal_verifier": false, "replan": true}
+  }
+}

@@ -1,0 +1,3 @@
+{
+  "stdout": "# github.com/Loz888/-MGAR-v2-/internal/demo [github.com/Loz888/-MGAR-v2-/internal/demo.test]\ninternal/demo/experiment.go:146:156: cannot use x.c.Limits.Parallel (variable of type int) as int64 value in struct literal\nFAIL\tgithub.com/Loz888/-MGAR-v2-/internal/demo [build failed]\nFAIL\n"
+}

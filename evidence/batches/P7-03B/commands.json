@@ -1,0 +1,322 @@
+[
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_eval_runner.py"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-03B/card-red.log",
+    "timestamp_utc": "2026-10-25T02:48:10.713444+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/demo",
+      "-run",
+      "^TestExperimentSevenArmsRealAnalysis$"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-03B/compile-red.log",
+    "timestamp_utc": "2026-10-25T02:51:17.170334+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./internal/demo",
+      "-run",
+      "^TestExperiment",
+      "-v"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-03B/representative-first.log",
+    "timestamp_utc": "2026-10-25T02:51:39.137653+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./internal/demo",
+      "-run",
+      "^TestExperiment",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/representative-fixed.log",
+    "timestamp_utc": "2026-10-25T02:53:23.114801+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_eval_runner.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/runner-unit.log",
+    "timestamp_utc": "2026-10-25T02:53:23.519312+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/runner.py",
+      "--provider",
+      "mock",
+      "--arms",
+      "B0,B1,B2,B3,B4,A1,A2",
+      "--cases",
+      "offline-001,offline-002,offline-026,offline-044,offline-050,offline-056",
+      "--output",
+      ".local/eval-runs/p703b-diagnostic"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/runner-diagnostic.log",
+    "timestamp_utc": "2026-10-25T02:55:54.847139+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./internal/demo",
+      "-run",
+      "TestExperiment(InputChange|Seed|Invalid)",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/replan-seed.log",
+    "timestamp_utc": "2026-10-25T02:56:25.912748+00:00"
+  },
+  {
+    "command": [
+      "ruff",
+      "check",
+      "--isolated",
+      "eval/runner.py",
+      "tests/unit/test_eval_runner.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/runner-static.log",
+    "timestamp_utc": "2026-10-25T02:57:14.818005+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_eval_runner.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/runner-unit-final.log",
+    "timestamp_utc": "2026-10-25T02:57:15.221718+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/runner.py",
+      "--provider",
+      "mock",
+      "--arms",
+      "B0,B1,B2,B3,B4,A1,A2",
+      "--cases",
+      "offline-002,offline-026,offline-044",
+      "--output",
+      ".local/eval-runs/p703b-final-diagnostic"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/final-diagnostic.log",
+    "timestamp_utc": "2026-10-25T02:58:03.552688+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_eval_runner.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/initialization-failure.log",
+    "timestamp_utc": "2026-10-25T03:00:00.005797+00:00"
+  },
+  {
+    "command": [
+      "ruff",
+      "check",
+      "--isolated",
+      "eval/runner.py",
+      "tests/unit/test_eval_runner.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/final-runner-static.log",
+    "timestamp_utc": "2026-10-25T03:00:00.041100+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/full-offline.log",
+    "timestamp_utc": "2026-10-25T03:01:17.997384+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/final-go.log",
+    "timestamp_utc": "2026-10-25T03:02:51.460881+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/full-offline-final.log",
+    "timestamp_utc": "2026-10-25T06:27:09.499874+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/final-go-complete.log",
+    "timestamp_utc": "2026-10-25T06:28:41.511015+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/final-build.log",
+    "timestamp_utc": "2026-10-25T06:28:43.480114+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/final-audit.log",
+    "timestamp_utc": "2026-10-25T06:28:43.612839+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-experiment-environment.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/environment.log",
+    "timestamp_utc": "2026-10-25T06:44:17.574784+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/runner.py",
+      "--provider",
+      "mock",
+      "--arms",
+      "B0,B1,B2,B3,B4",
+      "--output",
+      "evidence/experiments/p703b-main"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/formal-main.log",
+    "timestamp_utc": "2026-10-25T06:59:06.612255+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/runner.py",
+      "--provider",
+      "mock",
+      "--arms",
+      "A1,A2",
+      "--output",
+      "evidence/experiments/p703b-ablations"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/formal-ablations.log",
+    "timestamp_utc": "2026-10-25T07:11:28.759845+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/runner.py",
+      "--verify",
+      "evidence/experiments/p703b-main"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/formal-main-readback.log",
+    "timestamp_utc": "2026-10-25T07:12:14.843396+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/runner.py",
+      "--verify",
+      "evidence/experiments/p703b-ablations"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/formal-ablations-readback.log",
+    "timestamp_utc": "2026-10-25T07:12:15.072210+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-03B/verify_experiments.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/cross-arm-proof.log",
+    "timestamp_utc": "2026-10-25T07:12:16.068523+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/evidence-audit.log",
+    "timestamp_utc": "2026-10-25T07:12:16.194822+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "scripts/validate_plan_docs.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/final-status-docs.log",
+    "timestamp_utc": "2026-10-25T07:12:41.045843+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-03B/final-status-audit.log",
+    "timestamp_utc": "2026-10-25T07:12:41.171293+00:00"
+  }
+]

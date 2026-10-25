@@ -63,6 +63,9 @@ func proposal(business string) planner.Proposal {
 	return planner.Proposal{SchemaVersion: "plan.v1", BaseVersion: 1, Nodes: nodes, Edges: edges, Rationale: "Choose a bounded business-specific DAG from the submitted goal; analysis needs no write capability"}
 }
 func Run(ctx context.Context, o Options) (report Report, err error) {
+	return runFull(ctx, o, nil)
+}
+func runFull(ctx context.Context, o Options, x *experiment) (report Report, err error) {
 	switch o.Fault {
 	case "none", "forge-planner", "forge-research", "forge-data", "forge-action", "forge-aggregate", "wrong-patch":
 	default:
@@ -73,6 +76,12 @@ func Run(ctx context.Context, o Options) (report Report, err error) {
 		return report, e
 	}
 	defer func() { err = errors.Join(err, f.close()) }()
+	if x != nil {
+		if e = x.prepare(ctx, f); e != nil {
+			return report, e
+		}
+		defer func() { err = errors.Join(err, x.finish(f, report.RunID)) }()
+	}
 	report = Report{Case: o.Case, RunID: uuid.NewString(), Provider: "mock", Workers: []WorkerResult{}, Artifacts: []ArtifactResult{}, Answer: map[string]any{}}
 	_, owner, e := f.s.CreateRunClaimed(ctx, report.RunID, f.input.Goal, 32, "demo-controller", 5*time.Minute)
 	if e != nil {
@@ -109,6 +118,9 @@ func Run(ctx context.Context, o Options) (report Report, err error) {
 		return report, e
 	}
 	limits := budget.Limits{ModelCalls: 64, ToolCalls: 64, Tokens: 65536, CostMicros: 1_000_000, ConcurrentCalls: 4, TaskConcurrency: 4, Delegations: 32}
+	if x != nil {
+		limits = x.limits()
+	}
 	if e = f.s.ConfigureBudget(ctx, report.RunID, owner, limits); e != nil {
 		return report, e
 	}
@@ -127,7 +139,7 @@ func Run(ctx context.Context, o Options) (report Report, err error) {
 		return report, e
 	}
 	p := proposal(f.input.Business)
-	if e = f.batch(ctx, o, &report, owner, []planner.Node{initial.Nodes[0]}, &p, counts); e != nil {
+	if e = f.batchWith(ctx, o, &report, owner, []planner.Node{initial.Nodes[0]}, &p, counts, x); e != nil {
 		return f.stop(ctx, report, owner, e)
 	}
 	candidate, e := planner.Decode(report.Workers[0].Output)
@@ -137,11 +149,27 @@ func Run(ctx context.Context, o Options) (report Report, err error) {
 	if _, e = f.s.ProposeAndCommit(ctx, report.RunID, owner, candidate); e != nil {
 		return report, e
 	}
+	if x != nil {
+		x.r.Plans = append(x.r.Plans, candidate)
+	}
 	if e = f.startVerification(ctx, report.RunID, owner); e != nil {
 		return report, e
 	}
-	if e = f.batch(ctx, o, &report, owner, p.Nodes[:2], nil, counts); e != nil {
-		return f.stop(ctx, report, owner, e)
+	if e = f.batchWith(ctx, o, &report, owner, p.Nodes[:2], nil, counts, x); e != nil {
+		if x == nil || !x.arm.Replan || !x.refreshed {
+			return f.stop(ctx, report, owner, e)
+		}
+		p, e = x.replanStrict(ctx, f, report.RunID, owner, p)
+		if e != nil {
+			return f.stop(ctx, report, owner, e)
+		}
+		report.Tools += f.verification.calls
+		if e = f.startVerification(ctx, report.RunID, owner); e != nil {
+			return report, e
+		}
+		if e = f.batchWith(ctx, o, &report, owner, p.Nodes[1:2], nil, counts, x); e != nil {
+			return f.stop(ctx, report, owner, e)
+		}
 	}
 	for _, n := range p.Nodes[2:] {
 		if n.Key == "verify-runtime" {
@@ -152,7 +180,7 @@ func Run(ctx context.Context, o Options) (report Report, err error) {
 				return f.stop(ctx, report, owner, e)
 			}
 		}
-		if e = f.batch(ctx, o, &report, owner, []planner.Node{n}, nil, counts); e != nil {
+		if e = f.batchWith(ctx, o, &report, owner, []planner.Node{n}, nil, counts, x); e != nil {
 			return f.stop(ctx, report, owner, e)
 		}
 	}
@@ -199,6 +227,12 @@ func (f *fixture) deliver(ctx context.Context, run string, c store.OrchestratorC
 	return errors.New("handoff_bound")
 }
 func (f *fixture) batch(ctx context.Context, o Options, r *Report, owner store.OrchestratorClaim, nodes []planner.Node, p *planner.Proposal, counts *processCounts) error {
+	return f.batchWith(ctx, o, r, owner, nodes, p, counts, nil)
+}
+func (f *fixture) batchWith(ctx context.Context, o Options, r *Report, owner store.OrchestratorClaim, nodes []planner.Node, p *planner.Proposal, counts *processCounts, x *experiment) error {
+	if e := x.duplicate(ctx, f, r.RunID, owner); e != nil {
+		return e
+	}
 	if e := f.deliver(ctx, r.RunID, owner); e != nil {
 		return e
 	}
@@ -241,10 +275,17 @@ func (f *fixture) batch(ctx context.Context, o Options, r *Report, owner store.O
 		wg.Add(1)
 		go func(j *work) {
 			defer wg.Done()
-			j.result, j.err = f.worker(ctx, o, j.claim, j.snap, j.state, p, counts)
+			var adapter *workerAdapter
+			if x != nil {
+				adapter = &workerAdapter{mode: x.arm.Context, definitions: x.definitions(f, j.claim, j.snap, j.state, false), decide: mockDecision}
+			}
+			j.result, j.err = f.workerWith(ctx, o, j.claim, j.snap, j.state, p, counts, adapter)
 		}(&jobs[i])
 	}
 	wg.Wait()
+	if e := x.afterMeasurements(ctx, f, nodes); e != nil {
+		return e
+	}
 	var failed error
 	for _, j := range jobs {
 		r.Workers = append(r.Workers, j.result)

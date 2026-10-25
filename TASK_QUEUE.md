@@ -38,9 +38,9 @@
 | [P6-05](tasks/P6-05.md) | P6 | 运维命令与负载诊断 | P6-04 | PASS | `evidence/batches/P6-05/accept.json` |
 | [P7-01](tasks/P7-01.md) | P7 | 合成任务集、独立 Oracle 与冻结清单 | P6-05 | PASS | `evidence/batches/P7-01/accept.json` |
 | [P7-02](tasks/P7-02.md) | P7 | 端到端演示与合成业务完整闭环 | P7-01 | PASS | `evidence/batches/P7-02/accept.json` |
-| [P7-03](tasks/P7-03.md) | P7 | 公平单 Agent / 固定 / 动态基线 | P7-02 | ACTIVE | `evidence/batches/P7-03/accept.json` |
+| [P7-03](tasks/P7-03.md) | P7 | 公平单 Agent / 固定 / 动态基线 | P7-02 | PASS | `evidence/batches/P7-03/accept.json` |
 | [P7-03A](tasks/P7-03A.md) | P7 | 隔离基线候选证据与执行层 | P7-02 | PASS | `evidence/batches/P7-03A/accept.json` |
-| [P7-03B](tasks/P7-03B.md) | P7 | 七组公平 runner 与失败保留 | P7-03A | TODO | `evidence/batches/P7-03B/accept.json` |
+| [P7-03B](tasks/P7-03B.md) | P7 | 七组公平 runner 与失败保留 | P7-03A | PASS | `evidence/batches/P7-03B/accept.json` |
 | [P7-04](tasks/P7-04.md) | P7 | 消融与统计分析报告 | P7-03 | TODO | `evidence/batches/P7-04/accept.json` |
 | [P7-05](tasks/P7-05.md) | P7 | 压力、并发和单机混沌实验总验收 | P7-04 | TODO | `evidence/batches/P7-05/accept.json` |
 | [P7-06](tasks/P7-06.md) | P7 | 真实模型有限预算评测与对账 | P7-05 以及用户显式实时模型授权；无授权则 BLOCKED/NOT_RUN | TODO | `evidence/batches/P7-06/accept.json` |
