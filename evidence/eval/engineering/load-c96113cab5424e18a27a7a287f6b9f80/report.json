@@ -1,0 +1,55 @@
+{
+  "command": [
+    "go",
+    "test",
+    "-count=1",
+    "-timeout=240s",
+    "-json",
+    "./tests/chaos/...",
+    "-run",
+    "^TestOfflineLoad$"
+  ],
+  "environment_after": {
+    "cpu.max": "400000 100000",
+    "cpu_visible": 5,
+    "memory.current": "14515003392",
+    "memory.max": "34359738368",
+    "memory.peak": "16853020672",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "python": "3.12.14"
+  },
+  "environment_before": {
+    "cpu.max": "400000 100000",
+    "cpu_visible": 5,
+    "memory.current": "14509850624",
+    "memory.max": "34359738368",
+    "memory.peak": "16853020672",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "python": "3.12.14"
+  },
+  "error": "Unterminated string starting at: line 1 column 979 (char 978)",
+  "evidence_level": "E0_MOCK_ENGINEERING",
+  "exit_code": 0,
+  "go": {
+    "complete": true,
+    "failed_events": 0,
+    "passed": 5,
+    "skipped": 0,
+    "status": "PASS",
+    "tests": 5
+  },
+  "limitations": [
+    "Single host only; no power loss, partition, real provider or production traffic.",
+    "Load uses trusted Go Worker processes, fixed SQL/CPU work and local model stub.",
+    "Queue/DB metrics sampled every 10 ms; short peaks may be missed.",
+    "DB resource metrics include other activity in this owned synthetic database."
+  ],
+  "mode": "load",
+  "paid_calls": 0,
+  "physical_host_failure": "NOT_RUN",
+  "raw_sha256": "fde0b653f24d9630c471703e128ce96e8d897834a2935ee3be7da11858f4bcdb",
+  "schema_version": "engineering-experiment.v1",
+  "source_fingerprint": "0add61ac4b3118894b86ca5310d619450158b05b86baaa9f6fb75b575616aa8c",
+  "started_utc": "2026-10-25T11:58:50.886458+00:00",
+  "status": "FAIL"
+}

@@ -1,0 +1,47 @@
+{
+  "command": [
+    "go",
+    "test",
+    "-count=1",
+    "-timeout=240s",
+    "-json",
+    "./tests/chaos/...",
+    "-run",
+    "^(TestKillMatrixCore|TestArtifactStageCrash|TestUnknownModelCrash|TestVerifiedRecoveryCrash)$"
+  ],
+  "environment_after": {
+    "cpu.max": "400000 100000",
+    "cpu_visible": 5,
+    "memory.current": "14503051264",
+    "memory.max": "34359738368",
+    "memory.peak": "16853020672",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "python": "3.12.14"
+  },
+  "environment_before": {
+    "cpu.max": "400000 100000",
+    "cpu_visible": 5,
+    "memory.current": "14496989184",
+    "memory.max": "34359738368",
+    "memory.peak": "16853020672",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "python": "3.12.14"
+  },
+  "error": "GO_HARNESS_FAILED",
+  "evidence_level": "E0_MOCK_ENGINEERING",
+  "exit_code": 1,
+  "limitations": [
+    "Single host only; no power loss, partition, real provider or production traffic.",
+    "Load uses trusted Go Worker processes, fixed SQL/CPU work and local model stub.",
+    "Queue/DB metrics sampled every 10 ms; short peaks may be missed.",
+    "DB resource metrics include other activity in this owned synthetic database."
+  ],
+  "mode": "kill",
+  "paid_calls": 0,
+  "physical_host_failure": "NOT_RUN",
+  "raw_sha256": "2ac77d656ce06cb59d673e43b343b9f1122fb1033e85bdf105aa11c85b65a48b",
+  "schema_version": "engineering-experiment.v1",
+  "source_fingerprint": "4caea2334d532daa23f35dabb96e94c44505459a5bc07d72de6d86d7b7256513",
+  "started_utc": "2026-10-25T11:59:33.790960+00:00",
+  "status": "FAIL"
+}

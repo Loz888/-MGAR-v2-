@@ -1,0 +1,48 @@
+{"Time":"2026-10-25T11:59:34.125232312Z","Action":"start","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos"}
+{"Time":"2026-10-25T11:59:34.128807086Z","Action":"run","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestArtifactStageCrash"}
+{"Time":"2026-10-25T11:59:34.128847957Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestArtifactStageCrash","Output":"=== RUN   TestArtifactStageCrash\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:34.424406404Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestArtifactStageCrash","Output":"    artifact_stage_test.go:105: ERROR: operator does not exist: uuid = text (SQLSTATE 42883)\n","OutputType":"error"}
+{"Time":"2026-10-25T11:59:34.44240288Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestArtifactStageCrash","Output":"--- FAIL: TestArtifactStageCrash (0.31s)\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:34.442427476Z","Action":"fail","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestArtifactStageCrash","Elapsed":0.31}
+{"Time":"2026-10-25T11:59:34.442490089Z","Action":"run","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore"}
+{"Time":"2026-10-25T11:59:34.442492262Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore","Output":"=== RUN   TestKillMatrixCore\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:34.44249729Z","Action":"run","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-A"}
+{"Time":"2026-10-25T11:59:34.442499473Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-A","Output":"=== RUN   TestKillMatrixCore/F-A\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:34.53387566Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-A","Output":"    killmatrix_test.go:351: ERROR: operator does not exist: uuid = text (SQLSTATE 42883)\n","OutputType":"error"}
+{"Time":"2026-10-25T11:59:34.552788462Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-A","Output":"--- FAIL: TestKillMatrixCore/F-A (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:34.552843244Z","Action":"fail","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-A","Elapsed":0.11}
+{"Time":"2026-10-25T11:59:34.552850935Z","Action":"run","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-B"}
+{"Time":"2026-10-25T11:59:34.552853088Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-B","Output":"=== RUN   TestKillMatrixCore/F-B\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:34.658649275Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-B","Output":"    killmatrix_test.go:351: ERROR: operator does not exist: uuid = text (SQLSTATE 42883)\n","OutputType":"error"}
+{"Time":"2026-10-25T11:59:34.676010302Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-B","Output":"--- FAIL: TestKillMatrixCore/F-B (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:34.676068829Z","Action":"fail","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-B","Elapsed":0.12}
+{"Time":"2026-10-25T11:59:34.676077431Z","Action":"run","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-C"}
+{"Time":"2026-10-25T11:59:34.676081507Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-C","Output":"=== RUN   TestKillMatrixCore/F-C\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:34.786992958Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-C","Output":"    killmatrix_test.go:383: ERROR: operator does not exist: uuid = text (SQLSTATE 42883)\n","OutputType":"error"}
+{"Time":"2026-10-25T11:59:34.803781618Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-C","Output":"--- FAIL: TestKillMatrixCore/F-C (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:34.803814026Z","Action":"fail","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-C","Elapsed":0.13}
+{"Time":"2026-10-25T11:59:34.803820135Z","Action":"run","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-E"}
+{"Time":"2026-10-25T11:59:34.803822518Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-E","Output":"=== RUN   TestKillMatrixCore/F-E\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:34.909875831Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-E","Output":"    killmatrix_test.go:433: ERROR: operator does not exist: uuid = text (SQLSTATE 42883)\n","OutputType":"error"}
+{"Time":"2026-10-25T11:59:34.928022971Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-E","Output":"--- FAIL: TestKillMatrixCore/F-E (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:34.928051423Z","Action":"fail","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-E","Elapsed":0.12}
+{"Time":"2026-10-25T11:59:34.928057421Z","Action":"run","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-H"}
+{"Time":"2026-10-25T11:59:34.928059855Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-H","Output":"=== RUN   TestKillMatrixCore/F-H\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:35.060085385Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-H","Output":"    killmatrix_test.go:483: ERROR: operator does not exist: uuid = text (SQLSTATE 42883)\n","OutputType":"error"}
+{"Time":"2026-10-25T11:59:35.079251873Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-H","Output":"--- FAIL: TestKillMatrixCore/F-H (0.15s)\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:35.079284842Z","Action":"fail","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore/F-H","Elapsed":0.15}
+{"Time":"2026-10-25T11:59:35.079291492Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore","Output":"--- FAIL: TestKillMatrixCore (0.64s)\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:35.079293745Z","Action":"fail","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestKillMatrixCore","Elapsed":0.64}
+{"Time":"2026-10-25T11:59:35.079303239Z","Action":"run","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestUnknownModelCrash"}
+{"Time":"2026-10-25T11:59:35.079305322Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestUnknownModelCrash","Output":"=== RUN   TestUnknownModelCrash\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:35.195782568Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestUnknownModelCrash","Output":"    model_unknown_test.go:368: ERROR: operator does not exist: uuid = text (SQLSTATE 42883)\n","OutputType":"error"}
+{"Time":"2026-10-25T11:59:35.214042389Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestUnknownModelCrash","Output":"--- FAIL: TestUnknownModelCrash (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:35.214089028Z","Action":"fail","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestUnknownModelCrash","Elapsed":0.13}
+{"Time":"2026-10-25T11:59:35.214095978Z","Action":"run","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestVerifiedRecoveryCrash"}
+{"Time":"2026-10-25T11:59:35.214098091Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestVerifiedRecoveryCrash","Output":"=== RUN   TestVerifiedRecoveryCrash\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:35.33115872Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestVerifiedRecoveryCrash","Output":"    model_unknown_test.go:429: ERROR: operator does not exist: uuid = text (SQLSTATE 42883)\n","OutputType":"error"}
+{"Time":"2026-10-25T11:59:35.349552685Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestVerifiedRecoveryCrash","Output":"--- FAIL: TestVerifiedRecoveryCrash (0.14s)\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:35.349580195Z","Action":"fail","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Test":"TestVerifiedRecoveryCrash","Elapsed":0.14}
+{"Time":"2026-10-25T11:59:35.349585894Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Output":"FAIL\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:35.351279645Z","Action":"output","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Output":"FAIL\tgithub.com/Loz888/-MGAR-v2-/tests/chaos\t1.226s\n","OutputType":"frame"}
+{"Time":"2026-10-25T11:59:35.351298523Z","Action":"fail","Package":"github.com/Loz888/-MGAR-v2-/tests/chaos","Elapsed":1.226}

@@ -157,11 +157,14 @@ func TestChaosProcess(t *testing.T) {
 }
 
 type chaosChild struct {
-	cmd  *exec.Cmd
-	in   io.WriteCloser
-	out  *bufio.Reader
-	pid  int
-	done bool
+	store *store.Store
+	run   string
+	mode  string
+	cmd   *exec.Cmd
+	in    io.WriteCloser
+	out   *bufio.Reader
+	pid   int
+	done  bool
 }
 
 func startChaos(t *testing.T, s *store.Store, run, mode string) *chaosChild {
@@ -183,7 +186,7 @@ func startChaos(t *testing.T, s *store.Store, run, mode string) *chaosChild {
 	if e = cmd.Start(); e != nil {
 		t.Fatal(e)
 	}
-	child := &chaosChild{cmd: cmd, in: in, out: bufio.NewReader(out)}
+	child := &chaosChild{store: s, run: run, mode: mode, cmd: cmd, in: in, out: bufio.NewReader(out)}
 	t.Cleanup(func() {
 		if !child.done {
 			_ = cmd.Process.Kill()
@@ -215,6 +218,7 @@ func (c *chaosChild) read(t *testing.T) barrier {
 }
 func (c *chaosChild) kill(t *testing.T) {
 	t.Helper()
+	before := faultSnapshot(t, c.store, c.run)
 	pgid, e := syscall.Getpgid(c.cmd.Process.Pid)
 	if e != nil || pgid != c.cmd.Process.Pid || pgid == syscall.Getpgrp() {
 		t.Fatal("refuse unsafe kill", pgid, e)
@@ -228,6 +232,14 @@ func (c *chaosChild) kill(t *testing.T) {
 	if !errors.As(e, &exit) || exit.Sys().(syscall.WaitStatus).Signal() != syscall.SIGKILL {
 		t.Fatal("not SIGKILL", e)
 	}
+	point := c.mode
+	if point == "model-unknown" {
+		point = "F-F"
+	}
+	if point == "model-verified" {
+		point = "F-G"
+	}
+	recordFaultDeath(t, point, c.cmd.Process.Pid, pgid, before, faultSnapshot(t, c.store, c.run))
 	t.Logf("SIGKILL owned_pid=%d process_group=%d postgres_backend=%d", c.cmd.Process.Pid, pgid, c.pid)
 }
 func (c *chaosChild) finish(t *testing.T) {
@@ -310,7 +322,7 @@ func traceChaos(t *testing.T, s *store.Store, run, point string, oldEpoch, newEp
 	if e != nil {
 		t.Fatal(e)
 	}
-	t.Log(string(body))
+	t.Log("CHAOS_RECOVERY " + string(body))
 }
 func TestKillMatrixCore(t *testing.T) {
 	for _, point := range []string{"F-A", "F-B", "F-C", "F-E", "F-H"} {

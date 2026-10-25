@@ -6,7 +6,9 @@ if [[ "${1:-}" == --security-sandbox ]]; then
   go test -count=1 -v ./internal/policy/... ./tests/security/... ./tests/e2e/... -run 'Sandbox|ReexecGoTest'
   exit 0
 fi
-[[ "${1:-}" == --offline ]] || { echo 'use --offline or --security-sandbox' >&2; exit 2; }
+[[ $# == 1 && ( "$1" == --offline || "$1" == --full ) ]] || { echo 'use --offline, --full (engineering only), or --security-sandbox' >&2; exit 2; }
+# --full means all enabled engineering checks; P7-06 live authorization remains separate.
+[[ "$1" != --full ]] || echo 'ENGINEERING_ONLY: complete offline suite with real PostgreSQL, Docker and process faults'
 bash scripts/preflight.sh
 mkdir -p .local
 rm -f .local/offline-current

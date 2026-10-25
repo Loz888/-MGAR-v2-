@@ -42,3 +42,37 @@ P7-04 产物：[`report.md`](../evidence/eval/reports/report.md)、
 [`metrics.json`](../evidence/eval/reports/metrics.json)、
 [`comparison.svg`](../evidence/eval/reports/comparison.svg)。
 输入索引、输出文件哈希以及每题/每类/配对 CSV 一并归档。图中 CI 使用上述冻结口径。
+
+## P7-05 单机工程总验收
+
+`bash scripts/test.sh --full` 执行全部启用的工程测试（真 PostgreSQL、独立进程、
+Docker 沙箱、race、pytest、静态检查），并检查无 FAILED/SKIPPED/XFAILED。
+此开关的范围是 ENGINEERING_ONLY，真实模型实验仍须单独授权。
+
+`bash scripts/kill_matrix.sh --set all` 覆盖 F-A～F-H。每个窗口记录实际子进程
+PID、SIGKILL 退出状态、死亡前后数据库快照（任务版本/epoch、产物、预算、事件），
+再匹配同 Run 的恢复证据。F-D 使用生产 CAS 内部测试钩子，准确停在 temp fsync
+之后、rename/元数据提交之前；崩溃后验证孤儿可识别、不可作为完成产物读取，接管后
+旧 owner 写入被拒。其他窗口复用既有真 PG 跨进程故障测试，不把终止 goroutine 算作 SIGKILL。
+
+`bash scripts/eval.sh --offline-load` 固定依次测试 1/4/8/16 个独立 **Go 测试 Worker**。
+每进程执行四个任务，共 116 个任务、29 个 Workflow；同一档位共享真实 PG Schema
+及 llm/db/cpu 资源池，容量最多为 min(GOMAXPROCS,4)。每个子进程只有一个数据库连接、
+GOMAXPROCS=1。运行前至少保留 2 GiB cgroup 内存余量；子进程最长 90 秒，每档 120 秒，
+Go harness 240 秒。不存在无限压测或外部模型请求。
+
+负载是持久 Claim→Snapshot→本地 Model Stub 预算预留/结算→固定只读 SQL→CPU 哈希
+计算→Artifact 输出，父控制器用独立算术真值验证，再通过权威 API 完成 Workflow。
+不使用 sleep 模拟工作量；重复提交被拒、产物数/调用数/终态事件数准确、预算守恒、资源
+全部释放均是硬断言。此负载度量控制面，Python Agent / Docker 修复 / 真实 LLM 的完整
+闭环另见 P7-03 和后续 P7-06，不能把本实验吞吐作为它们的吞吐。
+
+报告提供每任务 claim→output_ready 的真实 monotonic P50/P95（线性分位数、ms），
+Worker 阶段和含独立验证的两种 tasks/s，以及每 10 ms 采样的队列深度、各类持有数、
+PG 连接/活动连接/未授予锁和数据库尺寸。采样可能漏掉短峰；PG 统计包含同一合成库的
+其他活动。记录完整硬件/cgroup、版本、源码指纹、每个任务与 Workflow 账本，不强设
+吞吐提升阈值。每档单次有界试验、顺序未随机化，只能作为当前宿主描述性基线。
+
+所有运行写入新的 `evidence/eval/engineering/{load,kill}-<id>/`，失败也保留。
+Go 长日志按 Test 重新拼接再解析，缺失任一并发档、死亡窗口或恢复记录都不能 PASS。
+不声称验证跨主机断电、物理机器故障、生产流量或真实付费模型。

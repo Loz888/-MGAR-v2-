@@ -42,7 +42,7 @@
 | [P7-03A](tasks/P7-03A.md) | P7 | 隔离基线候选证据与执行层 | P7-02 | PASS | `evidence/batches/P7-03A/accept.json` |
 | [P7-03B](tasks/P7-03B.md) | P7 | 七组公平 runner 与失败保留 | P7-03A | PASS | `evidence/batches/P7-03B/accept.json` |
 | [P7-04](tasks/P7-04.md) | P7 | 消融与统计分析报告 | P7-03 | PASS | `evidence/batches/P7-04/accept.json` |
-| [P7-05](tasks/P7-05.md) | P7 | 压力、并发和单机混沌实验总验收 | P7-04 | TODO | `evidence/batches/P7-05/accept.json` |
+| [P7-05](tasks/P7-05.md) | P7 | 压力、并发和单机混沌实验总验收 | P7-04 | PASS | `evidence/batches/P7-05/accept.json` |
 | [P7-06](tasks/P7-06.md) | P7 | 真实模型有限预算评测与对账 | P7-05 以及用户显式实时模型授权；无授权则 BLOCKED/NOT_RUN | TODO | `evidence/batches/P7-06/accept.json` |
 | [P8-01](tasks/P8-01.md) | P8 | 安全与一致性审计 | P7-06 | TODO | `evidence/batches/P8-01/accept.json` |
 | [P8-02](tasks/P8-02.md) | P8 | 干净环境复现与最终发布门禁 | P8-01 | TODO | `evidence/batches/P8-02/accept.json` |

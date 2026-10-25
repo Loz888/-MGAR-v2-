@@ -1,0 +1,1206 @@
+{
+  "command": [
+    "go",
+    "test",
+    "-count=1",
+    "-timeout=240s",
+    "-json",
+    "./tests/chaos/...",
+    "-run",
+    "^(TestKillMatrixCore|TestArtifactStageCrash|TestUnknownModelCrash|TestVerifiedRecoveryCrash)$"
+  ],
+  "environment_after": {
+    "cpu.max": "400000 100000",
+    "cpu_visible": 5,
+    "memory.current": "14504517632",
+    "memory.max": "34359738368",
+    "memory.peak": "16853020672",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "python": "3.12.14"
+  },
+  "environment_before": {
+    "cpu.max": "400000 100000",
+    "cpu_visible": 5,
+    "memory.current": "14498172928",
+    "memory.max": "34359738368",
+    "memory.peak": "16853020672",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "python": "3.12.14"
+  },
+  "evidence_level": "E0_MOCK_ENGINEERING",
+  "exit_code": 0,
+  "go": {
+    "complete": true,
+    "failed_events": 0,
+    "passed": 9,
+    "skipped": 0,
+    "status": "PASS",
+    "tests": 9
+  },
+  "kills": [
+    {
+      "after_death": {
+        "artifacts": 0,
+        "events": 3,
+        "model_calls": 0,
+        "run_id": "4762edda-0c7b-4de8-a269-e336152ef3c9",
+        "tasks": [],
+        "verdicts": 0,
+        "workflow": {
+          "active_plan_version": 0,
+          "revision": 1,
+          "state": "planning"
+        }
+      },
+      "before": {
+        "artifacts": 0,
+        "events": 3,
+        "model_calls": 0,
+        "run_id": "4762edda-0c7b-4de8-a269-e336152ef3c9",
+        "tasks": [],
+        "verdicts": 0,
+        "workflow": {
+          "active_plan_version": 0,
+          "revision": 1,
+          "state": "planning"
+        }
+      },
+      "owned_pid": 1417343,
+      "point": "F-A",
+      "process_group": 1417343,
+      "signal": "SIGKILL"
+    },
+    {
+      "after_death": {
+        "artifacts": 0,
+        "events": 4,
+        "model_calls": 0,
+        "run_id": "5f84b37c-8b16-421f-b70d-c88e184d9eda",
+        "tasks": [
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "191a5b36-079e-4fc4-9ecc-2c07fe761976"
+          },
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "1c078998-b683-46b1-96c0-f6491fb64eca"
+          },
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "758e1bf4-4f34-4b42-aa73-29063c759d85"
+          }
+        ],
+        "verdicts": 0,
+        "workflow": {
+          "active_plan_version": 1,
+          "revision": 2,
+          "state": "running"
+        }
+      },
+      "before": {
+        "artifacts": 0,
+        "events": 4,
+        "model_calls": 0,
+        "run_id": "5f84b37c-8b16-421f-b70d-c88e184d9eda",
+        "tasks": [
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "191a5b36-079e-4fc4-9ecc-2c07fe761976"
+          },
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "1c078998-b683-46b1-96c0-f6491fb64eca"
+          },
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "758e1bf4-4f34-4b42-aa73-29063c759d85"
+          }
+        ],
+        "verdicts": 0,
+        "workflow": {
+          "active_plan_version": 1,
+          "revision": 2,
+          "state": "running"
+        }
+      },
+      "owned_pid": 1417373,
+      "point": "F-B",
+      "process_group": 1417373,
+      "signal": "SIGKILL"
+    },
+    {
+      "after_death": {
+        "artifacts": 0,
+        "events": 9,
+        "model_calls": 0,
+        "run_id": "3789a73d-2347-4902-9ad0-7f368ad95a6a",
+        "tasks": [
+          {
+            "epoch": 0,
+            "revision": 1,
+            "state": "ready",
+            "task_id": "4555a582-07e4-43ba-b935-82440275d970"
+          },
+          {
+            "epoch": 1,
+            "revision": 3,
+            "state": "executing",
+            "task_id": "4c2de6d2-9a0c-4ea7-96c8-f63202fe4506"
+          },
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "536a1113-9312-47c2-994c-1afcbc7cd573"
+          }
+        ],
+        "verdicts": 0,
+        "workflow": {
+          "active_plan_version": 1,
+          "revision": 2,
+          "state": "running"
+        }
+      },
+      "before": {
+        "artifacts": 0,
+        "events": 9,
+        "model_calls": 0,
+        "run_id": "3789a73d-2347-4902-9ad0-7f368ad95a6a",
+        "tasks": [
+          {
+            "epoch": 0,
+            "revision": 1,
+            "state": "ready",
+            "task_id": "4555a582-07e4-43ba-b935-82440275d970"
+          },
+          {
+            "epoch": 1,
+            "revision": 3,
+            "state": "executing",
+            "task_id": "4c2de6d2-9a0c-4ea7-96c8-f63202fe4506"
+          },
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "536a1113-9312-47c2-994c-1afcbc7cd573"
+          }
+        ],
+        "verdicts": 0,
+        "workflow": {
+          "active_plan_version": 1,
+          "revision": 2,
+          "state": "running"
+        }
+      },
+      "owned_pid": 1417403,
+      "point": "F-C",
+      "process_group": 1417403,
+      "signal": "SIGKILL"
+    },
+    {
+      "after_death": {
+        "artifacts": 0,
+        "events": 9,
+        "model_calls": 0,
+        "run_id": "8585f98b-2cef-4831-8827-605dda55664a",
+        "tasks": [
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "2ead2d4d-1a7a-4c07-8429-bb0911ffca58"
+          },
+          {
+            "epoch": 1,
+            "revision": 3,
+            "state": "executing",
+            "task_id": "3fc7adcf-af16-4f8c-840a-accda9a37439"
+          },
+          {
+            "epoch": 0,
+            "revision": 1,
+            "state": "ready",
+            "task_id": "aa1610b1-3003-499d-8884-6b9d6fb6b42a"
+          }
+        ],
+        "verdicts": 0,
+        "workflow": {
+          "active_plan_version": 1,
+          "revision": 2,
+          "state": "running"
+        }
+      },
+      "before": {
+        "artifacts": 0,
+        "events": 9,
+        "model_calls": 0,
+        "run_id": "8585f98b-2cef-4831-8827-605dda55664a",
+        "tasks": [
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "2ead2d4d-1a7a-4c07-8429-bb0911ffca58"
+          },
+          {
+            "epoch": 1,
+            "revision": 3,
+            "state": "executing",
+            "task_id": "3fc7adcf-af16-4f8c-840a-accda9a37439"
+          },
+          {
+            "epoch": 0,
+            "revision": 1,
+            "state": "ready",
+            "task_id": "aa1610b1-3003-499d-8884-6b9d6fb6b42a"
+          }
+        ],
+        "verdicts": 0,
+        "workflow": {
+          "active_plan_version": 1,
+          "revision": 2,
+          "state": "running"
+        }
+      },
+      "owned_pid": 1417315,
+      "point": "F-D",
+      "process_group": 1417315,
+      "signal": "SIGKILL"
+    },
+    {
+      "after_death": {
+        "artifacts": 0,
+        "events": 4,
+        "model_calls": 0,
+        "run_id": "69d966ea-0c81-4fb4-8bb1-2d7ce9ec9cf8",
+        "tasks": [
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "1fda3271-53ac-4d4f-8dda-6b8a67bb7863"
+          },
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "9ffd0f8e-5517-4021-872c-845e6538b9d0"
+          },
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "b8aa735f-f42f-46b4-8f60-b6884f7cdcf3"
+          }
+        ],
+        "verdicts": 0,
+        "workflow": {
+          "active_plan_version": 1,
+          "revision": 2,
+          "state": "running"
+        }
+      },
+      "before": {
+        "artifacts": 0,
+        "events": 4,
+        "model_calls": 0,
+        "run_id": "69d966ea-0c81-4fb4-8bb1-2d7ce9ec9cf8",
+        "tasks": [
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "1fda3271-53ac-4d4f-8dda-6b8a67bb7863"
+          },
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "9ffd0f8e-5517-4021-872c-845e6538b9d0"
+          },
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "b8aa735f-f42f-46b4-8f60-b6884f7cdcf3"
+          }
+        ],
+        "verdicts": 0,
+        "workflow": {
+          "active_plan_version": 1,
+          "revision": 2,
+          "state": "running"
+        }
+      },
+      "owned_pid": 1417435,
+      "point": "F-E",
+      "process_group": 1417435,
+      "signal": "SIGKILL"
+    },
+    {
+      "after_death": {
+        "artifacts": 0,
+        "events": 9,
+        "model_calls": 1,
+        "run_id": "f1cde9aa-75d3-4f43-a2f0-9e72da166bdc",
+        "tasks": [
+          {
+            "epoch": 1,
+            "revision": 3,
+            "state": "executing",
+            "task_id": "834a3b00-e1a2-4730-b26f-960ebdf9a9f9"
+          }
+        ],
+        "verdicts": 0,
+        "workflow": {
+          "active_plan_version": 1,
+          "revision": 2,
+          "state": "running"
+        }
+      },
+      "before": {
+        "artifacts": 0,
+        "events": 9,
+        "model_calls": 1,
+        "run_id": "f1cde9aa-75d3-4f43-a2f0-9e72da166bdc",
+        "tasks": [
+          {
+            "epoch": 1,
+            "revision": 3,
+            "state": "executing",
+            "task_id": "834a3b00-e1a2-4730-b26f-960ebdf9a9f9"
+          }
+        ],
+        "verdicts": 0,
+        "workflow": {
+          "active_plan_version": 1,
+          "revision": 2,
+          "state": "running"
+        }
+      },
+      "owned_pid": 1417460,
+      "point": "F-F",
+      "process_group": 1417460,
+      "signal": "SIGKILL"
+    },
+    {
+      "after_death": {
+        "artifacts": 1,
+        "events": 14,
+        "model_calls": 1,
+        "run_id": "3dab97d0-df89-426f-8245-fa7399442ff9",
+        "tasks": [
+          {
+            "epoch": 1,
+            "revision": 4,
+            "state": "output_ready",
+            "task_id": "4f6f3417-5076-473b-ab96-b85f8c4482a9"
+          }
+        ],
+        "verdicts": 1,
+        "workflow": {
+          "active_plan_version": 1,
+          "revision": 2,
+          "state": "running"
+        }
+      },
+      "before": {
+        "artifacts": 1,
+        "events": 14,
+        "model_calls": 1,
+        "run_id": "3dab97d0-df89-426f-8245-fa7399442ff9",
+        "tasks": [
+          {
+            "epoch": 1,
+            "revision": 4,
+            "state": "output_ready",
+            "task_id": "4f6f3417-5076-473b-ab96-b85f8c4482a9"
+          }
+        ],
+        "verdicts": 1,
+        "workflow": {
+          "active_plan_version": 1,
+          "revision": 2,
+          "state": "running"
+        }
+      },
+      "owned_pid": 1417498,
+      "point": "F-G",
+      "process_group": 1417498,
+      "signal": "SIGKILL"
+    },
+    {
+      "after_death": {
+        "artifacts": 0,
+        "events": 13,
+        "model_calls": 0,
+        "run_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be",
+        "tasks": [
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "38c7fc62-bebf-42b6-b660-5ae63770c0a9"
+          },
+          {
+            "epoch": 0,
+            "revision": 1,
+            "state": "cancelled",
+            "task_id": "606e1f8c-d0ef-4b9b-98b4-57e6f2ed376d"
+          },
+          {
+            "epoch": 0,
+            "revision": 2,
+            "state": "failed",
+            "task_id": "6574f2a8-157e-4ac5-a01e-29a95e646395"
+          },
+          {
+            "epoch": 1,
+            "revision": 4,
+            "state": "cancelled",
+            "task_id": "af893fbd-44fa-4600-9374-110ffa241361"
+          },
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "b285520a-b0ec-4fe1-be11-e7799f41cda0"
+          },
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "f869a8be-7c28-494e-95fe-a0a71f954498"
+          }
+        ],
+        "verdicts": 0,
+        "workflow": {
+          "active_plan_version": 2,
+          "revision": 4,
+          "state": "running"
+        }
+      },
+      "before": {
+        "artifacts": 0,
+        "events": 13,
+        "model_calls": 0,
+        "run_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be",
+        "tasks": [
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "38c7fc62-bebf-42b6-b660-5ae63770c0a9"
+          },
+          {
+            "epoch": 0,
+            "revision": 1,
+            "state": "cancelled",
+            "task_id": "606e1f8c-d0ef-4b9b-98b4-57e6f2ed376d"
+          },
+          {
+            "epoch": 0,
+            "revision": 2,
+            "state": "failed",
+            "task_id": "6574f2a8-157e-4ac5-a01e-29a95e646395"
+          },
+          {
+            "epoch": 1,
+            "revision": 4,
+            "state": "cancelled",
+            "task_id": "af893fbd-44fa-4600-9374-110ffa241361"
+          },
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "b285520a-b0ec-4fe1-be11-e7799f41cda0"
+          },
+          {
+            "epoch": 0,
+            "revision": 0,
+            "state": "pending",
+            "task_id": "f869a8be-7c28-494e-95fe-a0a71f954498"
+          }
+        ],
+        "verdicts": 0,
+        "workflow": {
+          "active_plan_version": 2,
+          "revision": 4,
+          "state": "running"
+        }
+      },
+      "owned_pid": 1417444,
+      "point": "F-H",
+      "process_group": 1417444,
+      "signal": "SIGKILL"
+    }
+  ],
+  "limitations": [
+    "Single host only; no power loss, partition, real provider or production traffic.",
+    "Load uses trusted Go Worker processes, fixed SQL/CPU work and local model stub.",
+    "Queue/DB metrics sampled every 10 ms; short peaks may be missed.",
+    "DB resource metrics include other activity in this owned synthetic database."
+  ],
+  "mode": "kill",
+  "paid_calls": 0,
+  "physical_host_failure": "NOT_RUN",
+  "raw_sha256": "80e93db06b093b6015d570aef0050de8de35773bd3193a44bc6214c84ba397f9",
+  "recoveries": [
+    {
+      "active_plan_version": 1,
+      "events": [
+        {
+          "entity": "artifact",
+          "kind": "artifact_published",
+          "revision": 0,
+          "trace_id": "8585f98b-2cef-4831-8827-605dda55664a"
+        },
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_claimed",
+          "revision": 0,
+          "trace_id": "8585f98b-2cef-4831-8827-605dda55664a"
+        },
+        {
+          "entity": "snapshot",
+          "kind": "context_snapshot_created",
+          "revision": 0,
+          "trace_id": "8585f98b-2cef-4831-8827-605dda55664a"
+        },
+        {
+          "entity": "task",
+          "kind": "task_ready",
+          "revision": 1,
+          "trace_id": "8585f98b-2cef-4831-8827-605dda55664a"
+        },
+        {
+          "entity": "task",
+          "kind": "task_claimed",
+          "revision": 2,
+          "trace_id": "8585f98b-2cef-4831-8827-605dda55664a"
+        },
+        {
+          "entity": "task",
+          "kind": "task_executing",
+          "revision": 3,
+          "trace_id": "8585f98b-2cef-4831-8827-605dda55664a"
+        },
+        {
+          "entity": "task",
+          "kind": "task_claimed",
+          "revision": 4,
+          "trace_id": "8585f98b-2cef-4831-8827-605dda55664a"
+        },
+        {
+          "entity": "task",
+          "kind": "task_executing",
+          "revision": 5,
+          "trace_id": "8585f98b-2cef-4831-8827-605dda55664a"
+        },
+        {
+          "entity": "task",
+          "kind": "output_ready",
+          "revision": 6,
+          "trace_id": "8585f98b-2cef-4831-8827-605dda55664a"
+        },
+        {
+          "entity": "task",
+          "kind": "task_ready",
+          "revision": 1,
+          "trace_id": "8585f98b-2cef-4831-8827-605dda55664a"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_queued",
+          "revision": 0,
+          "trace_id": "8585f98b-2cef-4831-8827-605dda55664a"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_planning",
+          "revision": 1,
+          "trace_id": "8585f98b-2cef-4831-8827-605dda55664a"
+        },
+        {
+          "entity": "workflow",
+          "kind": "plan_committed",
+          "revision": 2,
+          "trace_id": "8585f98b-2cef-4831-8827-605dda55664a"
+        }
+      ],
+      "new_epoch": 2,
+      "old_epoch": 1,
+      "point": "F-D",
+      "run_id": "8585f98b-2cef-4831-8827-605dda55664a",
+      "state": "running"
+    },
+    {
+      "active_plan_version": 0,
+      "events": [
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_claimed",
+          "revision": 0,
+          "trace_id": "4762edda-0c7b-4de8-a269-e336152ef3c9"
+        },
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_claimed",
+          "revision": 1,
+          "trace_id": "4762edda-0c7b-4de8-a269-e336152ef3c9"
+        },
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_renewed",
+          "revision": 2,
+          "trace_id": "4762edda-0c7b-4de8-a269-e336152ef3c9"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_queued",
+          "revision": 0,
+          "trace_id": "4762edda-0c7b-4de8-a269-e336152ef3c9"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_planning",
+          "revision": 1,
+          "trace_id": "4762edda-0c7b-4de8-a269-e336152ef3c9"
+        }
+      ],
+      "new_epoch": 2,
+      "old_epoch": 1,
+      "point": "F-A",
+      "run_id": "4762edda-0c7b-4de8-a269-e336152ef3c9",
+      "state": "planning"
+    },
+    {
+      "active_plan_version": 1,
+      "events": [
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_claimed",
+          "revision": 0,
+          "trace_id": "5f84b37c-8b16-421f-b70d-c88e184d9eda"
+        },
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_claimed",
+          "revision": 1,
+          "trace_id": "5f84b37c-8b16-421f-b70d-c88e184d9eda"
+        },
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_renewed",
+          "revision": 2,
+          "trace_id": "5f84b37c-8b16-421f-b70d-c88e184d9eda"
+        },
+        {
+          "entity": "task",
+          "kind": "task_ready",
+          "revision": 1,
+          "trace_id": "5f84b37c-8b16-421f-b70d-c88e184d9eda"
+        },
+        {
+          "entity": "task",
+          "kind": "task_ready",
+          "revision": 1,
+          "trace_id": "5f84b37c-8b16-421f-b70d-c88e184d9eda"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_queued",
+          "revision": 0,
+          "trace_id": "5f84b37c-8b16-421f-b70d-c88e184d9eda"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_planning",
+          "revision": 1,
+          "trace_id": "5f84b37c-8b16-421f-b70d-c88e184d9eda"
+        },
+        {
+          "entity": "workflow",
+          "kind": "plan_committed",
+          "revision": 2,
+          "trace_id": "5f84b37c-8b16-421f-b70d-c88e184d9eda"
+        }
+      ],
+      "new_epoch": 2,
+      "old_epoch": 1,
+      "point": "F-B",
+      "run_id": "5f84b37c-8b16-421f-b70d-c88e184d9eda",
+      "state": "running"
+    },
+    {
+      "active_plan_version": 1,
+      "events": [
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_claimed",
+          "revision": 0,
+          "trace_id": "3789a73d-2347-4902-9ad0-7f368ad95a6a"
+        },
+        {
+          "entity": "snapshot",
+          "kind": "context_snapshot_created",
+          "revision": 0,
+          "trace_id": "3789a73d-2347-4902-9ad0-7f368ad95a6a"
+        },
+        {
+          "entity": "task",
+          "kind": "task_ready",
+          "revision": 1,
+          "trace_id": "3789a73d-2347-4902-9ad0-7f368ad95a6a"
+        },
+        {
+          "entity": "task",
+          "kind": "task_ready",
+          "revision": 1,
+          "trace_id": "3789a73d-2347-4902-9ad0-7f368ad95a6a"
+        },
+        {
+          "entity": "task",
+          "kind": "task_claimed",
+          "revision": 2,
+          "trace_id": "3789a73d-2347-4902-9ad0-7f368ad95a6a"
+        },
+        {
+          "entity": "task",
+          "kind": "task_executing",
+          "revision": 3,
+          "trace_id": "3789a73d-2347-4902-9ad0-7f368ad95a6a"
+        },
+        {
+          "entity": "task",
+          "kind": "task_claimed",
+          "revision": 4,
+          "trace_id": "3789a73d-2347-4902-9ad0-7f368ad95a6a"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_queued",
+          "revision": 0,
+          "trace_id": "3789a73d-2347-4902-9ad0-7f368ad95a6a"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_planning",
+          "revision": 1,
+          "trace_id": "3789a73d-2347-4902-9ad0-7f368ad95a6a"
+        },
+        {
+          "entity": "workflow",
+          "kind": "plan_committed",
+          "revision": 2,
+          "trace_id": "3789a73d-2347-4902-9ad0-7f368ad95a6a"
+        }
+      ],
+      "new_epoch": 2,
+      "old_epoch": 1,
+      "point": "F-C",
+      "run_id": "3789a73d-2347-4902-9ad0-7f368ad95a6a",
+      "state": "running"
+    },
+    {
+      "active_plan_version": 1,
+      "events": [
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_claimed",
+          "revision": 0,
+          "trace_id": "69d966ea-0c81-4fb4-8bb1-2d7ce9ec9cf8"
+        },
+        {
+          "entity": "task",
+          "kind": "task_ready",
+          "revision": 1,
+          "trace_id": "69d966ea-0c81-4fb4-8bb1-2d7ce9ec9cf8"
+        },
+        {
+          "entity": "task",
+          "kind": "task_ready",
+          "revision": 1,
+          "trace_id": "69d966ea-0c81-4fb4-8bb1-2d7ce9ec9cf8"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_queued",
+          "revision": 0,
+          "trace_id": "69d966ea-0c81-4fb4-8bb1-2d7ce9ec9cf8"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_planning",
+          "revision": 1,
+          "trace_id": "69d966ea-0c81-4fb4-8bb1-2d7ce9ec9cf8"
+        },
+        {
+          "entity": "workflow",
+          "kind": "plan_committed",
+          "revision": 2,
+          "trace_id": "69d966ea-0c81-4fb4-8bb1-2d7ce9ec9cf8"
+        }
+      ],
+      "new_epoch": 1,
+      "old_epoch": 1,
+      "point": "F-E",
+      "run_id": "69d966ea-0c81-4fb4-8bb1-2d7ce9ec9cf8",
+      "state": "running"
+    },
+    {
+      "active_plan_version": 2,
+      "events": [
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_claimed",
+          "revision": 0,
+          "trace_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be"
+        },
+        {
+          "entity": "snapshot",
+          "kind": "context_snapshot_created",
+          "revision": 0,
+          "trace_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be"
+        },
+        {
+          "entity": "task",
+          "kind": "task_cancelled",
+          "revision": 1,
+          "trace_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be"
+        },
+        {
+          "entity": "task",
+          "kind": "task_ready",
+          "revision": 1,
+          "trace_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be"
+        },
+        {
+          "entity": "task",
+          "kind": "task_ready",
+          "revision": 1,
+          "trace_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be"
+        },
+        {
+          "entity": "task",
+          "kind": "task_claimed",
+          "revision": 2,
+          "trace_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be"
+        },
+        {
+          "entity": "task",
+          "kind": "task_executing",
+          "revision": 3,
+          "trace_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be"
+        },
+        {
+          "entity": "task",
+          "kind": "task_cancelled",
+          "revision": 4,
+          "trace_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be"
+        },
+        {
+          "entity": "task",
+          "kind": "task_ready",
+          "revision": 1,
+          "trace_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be"
+        },
+        {
+          "entity": "task",
+          "kind": "task_claimed",
+          "revision": 2,
+          "trace_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be"
+        },
+        {
+          "entity": "task",
+          "kind": "task_ready",
+          "revision": 1,
+          "trace_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_queued",
+          "revision": 0,
+          "trace_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_planning",
+          "revision": 1,
+          "trace_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be"
+        },
+        {
+          "entity": "workflow",
+          "kind": "plan_committed",
+          "revision": 2,
+          "trace_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be"
+        },
+        {
+          "entity": "workflow",
+          "kind": "plan_committed",
+          "revision": 3,
+          "trace_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be"
+        },
+        {
+          "entity": "workflow",
+          "kind": "replan_attempt",
+          "revision": 4,
+          "trace_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be"
+        }
+      ],
+      "new_epoch": 1,
+      "old_epoch": 1,
+      "point": "F-H",
+      "run_id": "b4695d5f-c74b-4282-8ae4-d6c52e91c8be",
+      "state": "running"
+    },
+    {
+      "active_plan_version": 1,
+      "events": [
+        {
+          "entity": "model_call",
+          "kind": "model_reserved",
+          "revision": 0,
+          "trace_id": "f1cde9aa-75d3-4f43-a2f0-9e72da166bdc"
+        },
+        {
+          "entity": "model_call",
+          "kind": "model_unknown",
+          "revision": 1,
+          "trace_id": "f1cde9aa-75d3-4f43-a2f0-9e72da166bdc"
+        },
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_claimed",
+          "revision": 0,
+          "trace_id": "f1cde9aa-75d3-4f43-a2f0-9e72da166bdc"
+        },
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_released",
+          "revision": 1,
+          "trace_id": "f1cde9aa-75d3-4f43-a2f0-9e72da166bdc"
+        },
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_claimed",
+          "revision": 2,
+          "trace_id": "f1cde9aa-75d3-4f43-a2f0-9e72da166bdc"
+        },
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_renewed",
+          "revision": 3,
+          "trace_id": "f1cde9aa-75d3-4f43-a2f0-9e72da166bdc"
+        },
+        {
+          "entity": "snapshot",
+          "kind": "context_snapshot_created",
+          "revision": 0,
+          "trace_id": "f1cde9aa-75d3-4f43-a2f0-9e72da166bdc"
+        },
+        {
+          "entity": "task",
+          "kind": "task_ready",
+          "revision": 1,
+          "trace_id": "f1cde9aa-75d3-4f43-a2f0-9e72da166bdc"
+        },
+        {
+          "entity": "task",
+          "kind": "task_claimed",
+          "revision": 2,
+          "trace_id": "f1cde9aa-75d3-4f43-a2f0-9e72da166bdc"
+        },
+        {
+          "entity": "task",
+          "kind": "task_executing",
+          "revision": 3,
+          "trace_id": "f1cde9aa-75d3-4f43-a2f0-9e72da166bdc"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_queued",
+          "revision": 0,
+          "trace_id": "f1cde9aa-75d3-4f43-a2f0-9e72da166bdc"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_planning",
+          "revision": 1,
+          "trace_id": "f1cde9aa-75d3-4f43-a2f0-9e72da166bdc"
+        },
+        {
+          "entity": "workflow",
+          "kind": "plan_committed",
+          "revision": 2,
+          "trace_id": "f1cde9aa-75d3-4f43-a2f0-9e72da166bdc"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_interrupted",
+          "revision": 3,
+          "trace_id": "f1cde9aa-75d3-4f43-a2f0-9e72da166bdc"
+        }
+      ],
+      "new_epoch": 2,
+      "old_epoch": 1,
+      "point": "H11/F-F",
+      "run_id": "f1cde9aa-75d3-4f43-a2f0-9e72da166bdc",
+      "state": "interrupted"
+    },
+    {
+      "active_plan_version": 1,
+      "events": [
+        {
+          "entity": "artifact",
+          "kind": "artifact_published",
+          "revision": 0,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "model_call",
+          "kind": "model_reserved",
+          "revision": 0,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "model_call",
+          "kind": "model_succeeded",
+          "revision": 1,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_claimed",
+          "revision": 0,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_released",
+          "revision": 1,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_claimed",
+          "revision": 2,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_claimed",
+          "revision": 3,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_renewed",
+          "revision": 4,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "orchestrator",
+          "kind": "orchestrator_renewed",
+          "revision": 5,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "snapshot",
+          "kind": "context_snapshot_created",
+          "revision": 0,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "task",
+          "kind": "task_ready",
+          "revision": 1,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "task",
+          "kind": "task_claimed",
+          "revision": 2,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "task",
+          "kind": "task_executing",
+          "revision": 3,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "task",
+          "kind": "output_ready",
+          "revision": 4,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "task",
+          "kind": "task_verifying",
+          "revision": 5,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "task",
+          "kind": "task_succeeded",
+          "revision": 6,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_queued",
+          "revision": 0,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_planning",
+          "revision": 1,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "workflow",
+          "kind": "plan_committed",
+          "revision": 2,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_verifying",
+          "revision": 3,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        },
+        {
+          "entity": "workflow",
+          "kind": "workflow_succeeded",
+          "revision": 4,
+          "trace_id": "3dab97d0-df89-426f-8245-fa7399442ff9"
+        }
+      ],
+      "new_epoch": 3,
+      "old_epoch": 2,
+      "point": "H12/F-G",
+      "run_id": "3dab97d0-df89-426f-8245-fa7399442ff9",
+      "state": "succeeded"
+    }
+  ],
+  "schema_version": "engineering-experiment.v1",
+  "source_fingerprint": "585294ba659d6b034672928353051eb74f48f7c6db9adc6ddec7a1db92bf58fd",
+  "started_utc": "2026-10-25T12:00:17.353106+00:00",
+  "status": "PASS"
+}
