@@ -1,0 +1,64 @@
+[
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06/prepare_plan.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06/prepare-plan.log",
+    "timestamp_utc": "2026-10-25T12:11:30.477946+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "-c",
+      "go build -o /tmp/mgar-p706-probe ./cmd/mgareval && /tmp/mgar-p706-probe --provider deepseek --case live-001 --arm B0"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06/provider-boundary-reproduction.log",
+    "timestamp_utc": "2026-10-25T12:11:31.327936+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_provider.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06/provider-offline-tests.log",
+    "timestamp_utc": "2026-10-25T12:14:04.314236+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "scripts/validate_plan_docs.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06/docs-check.log",
+    "timestamp_utc": "2026-10-25T12:14:04.371532+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06/final-audit.log",
+    "timestamp_utc": "2026-10-25T12:14:04.496741+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_providers.py",
+      "tests/unit/test_provider_boundaries.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06/provider-boundary-tests.log",
+    "timestamp_utc": "2026-10-25T12:14:17.078711+00:00"
+  }
+]

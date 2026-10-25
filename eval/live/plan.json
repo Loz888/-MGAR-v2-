@@ -1,0 +1,539 @@
+{
+  "schema_version": "live-experiment-proposal.v1",
+  "status": "PROPOSED_NOT_AUTHORIZED",
+  "card_id": "P7-06",
+  "manifest": "eval/cases/frozen-live-24.json",
+  "manifest_sha256": "ec6d5576a75fc2724756abeef2628189c2922038f09cb9258d7a1972e493c8ab",
+  "dataset_manifest_sha256": "0b48a86008574d0a8bdbde1d88d37e718d45e75fe33363075fdcd48f0eb2d511",
+  "arms": [
+    "B0",
+    "B1",
+    "B2",
+    "B4"
+  ],
+  "assignments": [
+    {
+      "case_id": "live-001",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-001",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-001",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-001",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-002",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-002",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-002",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-002",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-003",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-003",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-003",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-003",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-004",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-004",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-004",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-004",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-005",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-005",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-005",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-005",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-006",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-006",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-006",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-006",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-007",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-007",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-007",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-007",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-008",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-008",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-008",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-008",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-009",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-009",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-009",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-009",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-010",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-010",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-010",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-010",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-011",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-011",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-011",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-011",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-012",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-012",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-012",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-012",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-013",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-013",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-013",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-013",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-014",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-014",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-014",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-014",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-015",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-015",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-015",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-015",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-016",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-016",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-016",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-016",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-017",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-017",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-017",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-017",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-018",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-018",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-018",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-018",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-019",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-019",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-019",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-019",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-020",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-020",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-020",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-020",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-021",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-021",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-021",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-021",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-022",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-022",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-022",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-022",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-023",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-023",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-023",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-023",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-024",
+      "arm": "B0",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-024",
+      "arm": "B1",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-024",
+      "arm": "B2",
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-024",
+      "arm": "B4",
+      "status": "NOT_RUN"
+    }
+  ],
+  "deferred_arms": [
+    {
+      "arm": "B3",
+      "status": "NOT_RUN",
+      "reason": "outside initial four-arm proposal"
+    },
+    {
+      "arm": "A1",
+      "status": "NOT_RUN",
+      "reason": "outside initial four-arm proposal"
+    },
+    {
+      "arm": "A2",
+      "status": "NOT_RUN",
+      "reason": "outside initial four-arm proposal"
+    }
+  ],
+  "model_selection": null,
+  "candidate_provider": "deepseek",
+  "candidate_model": "deepseek-chat",
+  "candidate_endpoint": "https://api.deepseek.com/chat/completions",
+  "candidate_key_variable": "DEEPSEEK_API_KEY",
+  "pricing_version": null,
+  "input_usd_per_million": null,
+  "output_usd_per_million": null,
+  "approved_max_cost_usd": null,
+  "estimated_cost_usd": null,
+  "required_runtime_gates": [
+    "--confirm-live",
+    "MGAR_ALLOW_PAID=1",
+    "MGAR_MAX_COST_USD",
+    "MGAR_LIVE_CASELIST",
+    "secure provider key",
+    "frozen verified pricing",
+    "durable real-provider integration"
+  ],
+  "request_count_ceiling": 6144,
+  "token_budget_ceiling": 6291456,
+  "frozen_case_total_cost_ceiling_usd": 96.0,
+  "budget_allocation_proposal": "Immutable 96 slots; each cap <= min(frozen case cap, floor(user cap in micro-USD / 96)); no redistribution or automatic rerun of unknown slots.",
+  "bounds_note": "Ceilings are schema bounds, not expected consumption or approved spend. No price or user cap has been supplied.",
+  "runtime_integration_status": "NOT_IMPLEMENTED",
+  "paid_calls": 0
+}

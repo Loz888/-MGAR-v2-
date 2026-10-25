@@ -29,3 +29,20 @@ P7-03 的无内部 Verifier 组无法直接复用现有严格依赖链：真实 
 历史阻塞记录保留。批准后按 P7-03A → P7-03B 顺序实施验收；runner 完成前不宣称 P7-03 或 P7 全部完成。
 暂停依据：`03_CODEX_WORK_PROTOCOL.md` 的“需求与协议冲突：先写 ... ADR ... 卡状态
 BLOCKED，等待用户批准”，以及用户要求出现规格冲突时提交 ADR/CHANGE_REQUEST 并暂停。
+
+## P7-06 · 真实 Provider 接通与有限预算执行（待确认）
+
+P7-04/P7-05 已通过。P7-06 目前 **BLOCKED / live NOT_RUN**：现有 Python Provider
+尚未接入 Go 实验预算与执行层，不能只填 API key 就视为接入完成。实际 CLI 拒绝
+非 mock 的退出码 2 已记录，详见 [ADR-0016](docs/adr/ADR-0016.md)。
+
+建议按三个可验收子批拆分：
+
+1. [P7-06A](tasks/P7-06A.md)：可信真实 Provider 与 durable 账本接通；本地故障服务器验收。
+2. [P7-06B](tasks/P7-06B.md)：接入四组 live runner、96 个冻结分配与总预算门禁；离线验收。
+3. [P7-06C](tasks/P7-06C.md)：用户明确模型/密钥/价格/费用后执行真实 24×4 和对账。
+
+候选模型为 DeepSeek Chat，尚未选定；预算与单价留空，密钥仅通过环境 Secrets 配置。
+[实验配置提案](eval/live/plan.json) 列明全部 96 项，均为 NOT_RUN。A/B 的离线接入
+批准不授权 C 的付费调用；不新增 DDL、不进入 P8。跨越约八个生产文件的单卡范围，
+按 `03_CODEX_WORK_PROTOCOL.md` 第 4 条提交本拆卡请求并暂停实际接入。
