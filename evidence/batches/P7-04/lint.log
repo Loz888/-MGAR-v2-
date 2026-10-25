@@ -1,0 +1,3 @@
+{
+  "stdout": "E731 Do not assign a `lambda` expression, use a `def`\n  --> tests/unit/test_metrics.py:89:5\n   |\n87 |     report = generate(source, first)\n88 |     generate(source, second)\n89 |     hashes = lambda folder: {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in folder.iterdir()}\n   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n90 |     assert hashes(first) == hashes(second)\n91 |     assert report['assigned'] == 420 and len(report['per_case']) == 420\n   |\nhelp: Rewrite `hashes` as a `def`\n\nFound 1 error.\nNo fixes available (1 hidden fix can be enabled with the `--unsafe-fixes` option).\n"
+}

@@ -1,0 +1,147 @@
+[
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_metrics.py"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-04/card-red.log",
+    "timestamp_utc": "2026-10-25T09:58:18.537908+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_metrics.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-04/metrics-first.log",
+    "timestamp_utc": "2026-10-25T11:46:39.115377+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/analysis/report.py",
+      "--input",
+      "evidence/eval/offline",
+      "--output",
+      ".local/analysis-first"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-04/report-first.log",
+    "timestamp_utc": "2026-10-25T11:46:39.624807+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/analysis/report.py",
+      "--input",
+      "evidence/eval/offline",
+      "--output",
+      ".local/analysis-first"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-04/report-second.log",
+    "timestamp_utc": "2026-10-25T11:46:56.082268+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_metrics.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-04/card-green.log",
+    "timestamp_utc": "2026-10-25T11:47:48.920424+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/analysis/report.py",
+      "--input",
+      "evidence/eval/offline",
+      "--output",
+      "evidence/eval/reports"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-04/card-report.log",
+    "timestamp_utc": "2026-10-25T11:48:02.932866+00:00"
+  },
+  {
+    "command": [
+      "ruff",
+      "check",
+      "."
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-04/lint.log",
+    "timestamp_utc": "2026-10-25T11:48:02.971395+00:00"
+  },
+  {
+    "command": [
+      "ruff",
+      "check",
+      "."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-04/lint-fixed.log",
+    "timestamp_utc": "2026-10-25T11:49:20.647079+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-04/full-offline.log",
+    "timestamp_utc": "2026-10-25T11:51:34.418791+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-04/full-offline-final.log",
+    "timestamp_utc": "2026-10-25T11:55:14.814506+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-04/go-plain.log",
+    "timestamp_utc": "2026-10-25T11:56:46.577580+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-04/build.log",
+    "timestamp_utc": "2026-10-25T11:56:48.325876+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-04/final-audit.log",
+    "timestamp_utc": "2026-10-25T11:56:48.451761+00:00"
+  }
+]

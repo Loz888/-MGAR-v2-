@@ -41,7 +41,7 @@
 | [P7-03](tasks/P7-03.md) | P7 | 公平单 Agent / 固定 / 动态基线 | P7-02 | PASS | `evidence/batches/P7-03/accept.json` |
 | [P7-03A](tasks/P7-03A.md) | P7 | 隔离基线候选证据与执行层 | P7-02 | PASS | `evidence/batches/P7-03A/accept.json` |
 | [P7-03B](tasks/P7-03B.md) | P7 | 七组公平 runner 与失败保留 | P7-03A | PASS | `evidence/batches/P7-03B/accept.json` |
-| [P7-04](tasks/P7-04.md) | P7 | 消融与统计分析报告 | P7-03 | TODO | `evidence/batches/P7-04/accept.json` |
+| [P7-04](tasks/P7-04.md) | P7 | 消融与统计分析报告 | P7-03 | PASS | `evidence/batches/P7-04/accept.json` |
 | [P7-05](tasks/P7-05.md) | P7 | 压力、并发和单机混沌实验总验收 | P7-04 | TODO | `evidence/batches/P7-05/accept.json` |
 | [P7-06](tasks/P7-06.md) | P7 | 真实模型有限预算评测与对账 | P7-05 以及用户显式实时模型授权；无授权则 BLOCKED/NOT_RUN | TODO | `evidence/batches/P7-06/accept.json` |
 | [P8-01](tasks/P8-01.md) | P8 | 安全与一致性审计 | P7-06 | TODO | `evidence/batches/P8-01/accept.json` |
@@ -76,3 +76,5 @@ P0-01 的原始未提交快照与失败记录保留于 `evidence/batches/P0-01/a
 **P7-03 历史阻塞（已获方案 A 授权）：** 无内部 Verifier 消融与严格已验证依赖门禁存在语义冲突，真实 PG 复现保留。见 [CHANGE_REQUEST](CHANGE_REQUEST.md) 与 [ADR-0014](docs/adr/ADR-0014.md)；通过隔离基线解决，不伪造 verdict，P7-03 全部通过前不进入 P7-04/P7-05。
 
 **P7-03 解阻授权（2026-10-25）：** 用户明确批准按 CHANGE_REQUEST 方案 A 拆分 P7-03 并增加隔离基线执行层；历史 BLOCKED 证据保留，新子批分别验收。未经额外授权不新增 DDL、不发付费请求、不进入 P8。
+
+**后续推进授权（2026-10-25）：** 用户要求继续推进后续项目；按依赖逐卡完成 P7-04、P7-05，再准备 P7-06 真实模型评测配置。需要模型、API 密钥和费用上限时提出；未获明确配置与费用授权前不发送真实模型请求。

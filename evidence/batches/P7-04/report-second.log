@@ -1,0 +1,3 @@
+{
+  "stdout": "Fontconfig error: No writable cache directories\n{\"assigned\": 420, \"output\": \".local/analysis-first\", \"evidence_level\": \"E0_MOCK_ENGINEERING\"}\n"
+}
