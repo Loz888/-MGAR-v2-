@@ -1,0 +1,3 @@
+{
+  "stdout": "{\"audit_path\": \"evidence/batches/P7-06C/schema-before-repair.json\", \"namespaces\": 1, \"public_migrations\": [\"001_control\", \"002_artifact_cas\", \"003_context_snapshots\", \"004_plan_node_configs\"], \"assignment_totals\": {\"workflow_rows\": 0, \"tasks\": 0, \"model_calls\": 0, \"tool_calls\": 0}, \"formal_journal_exists\": false, \"allocation_marker_rows\": [{\"state\": \"queued\", \"revision\": 0, \"active_plan_version\": 0, \"finished_at\": null}], \"allocation_model_calls\": 0, \"allocation_tasks\": 0}\n"
+}

@@ -43,11 +43,12 @@
 | [P7-03B](tasks/P7-03B.md) | P7 | 七组公平 runner 与失败保留 | P7-03A | PASS | `evidence/batches/P7-03B/accept.json` |
 | [P7-04](tasks/P7-04.md) | P7 | 消融与统计分析报告 | P7-03 | PASS | `evidence/batches/P7-04/accept.json` |
 | [P7-05](tasks/P7-05.md) | P7 | 压力、并发和单机混沌实验总验收 | P7-04 | PASS | `evidence/batches/P7-05/accept.json` |
-| [P7-06](tasks/P7-06.md) | P7 | 真实模型有限预算评测与对账 | P7-05、P7-06A/B/C | ACTIVE | `evidence/batches/P7-06/accept.json` |
+| [P7-06](tasks/P7-06.md) | P7 | 真实模型有限预算评测与对账 | P7-05、P7-06A/B/C | BLOCKED | `evidence/batches/P7-06/accept.json` |
 | [P7-06A](tasks/P7-06A.md) | P7 | 可信 Provider 与持久账本接通 | P7-05 | PASS | `evidence/batches/P7-06A/accept.json` |
 | [P7-06B](tasks/P7-06B.md) | P7 | 冻结 live runner 与总预算 | P7-06A | PASS | `evidence/batches/P7-06B/accept.json` |
 | [P7-06D](tasks/P7-06D.md) | P7 | 官方 tokenizer 与可证明输入预算上界 | P7-06B、官方 tokenizer 数据 | PASS | `evidence/batches/P7-06D/accept.json` |
-| [P7-06C](tasks/P7-06C.md) | P7 | 真实执行、独立评价与对账 | P7-06B、可证明的输入预算上界 | ACTIVE | `evidence/batches/P7-06C/accept.json` |
+| [P7-06C](tasks/P7-06C.md) | P7 | 真实执行、独立评价与对账 | P7-06B、可证明的输入预算上界 | BLOCKED | `evidence/batches/P7-06C/accept.json` |
+| [P7-06E](tasks/P7-06E.md) | P7 | 零发送初始化恢复（待审阅） | P7-06D、恢复例外批准 | BLOCKED | 提案 `docs/adr/ADR-0018.md`，未实施 |
 | [P8-01](tasks/P8-01.md) | P8 | 安全与一致性审计 | P7-06 | TODO | `evidence/batches/P8-01/accept.json` |
 | [P8-02](tasks/P8-02.md) | P8 | 干净环境复现与最终发布门禁 | P8-01 | TODO | `evidence/batches/P8-02/accept.json` |
 | [P8-03](tasks/P8-03.md) | P8 | 面试 Demo 与项目证据包 | P8-02 | TODO | `evidence/batches/P8-03/accept.json` |
@@ -98,3 +99,11 @@ P0-01 的原始未提交快照与失败记录保留于 `evidence/batches/P0-01/a
 **P7-06D 验收：** 普通 Go 全量及离线全量均退出 0；551 项 Go（含 race）、423 项 Python 和 15 个 subtest 通过，无失败/跳过/xfail。官方参考数据/闭合请求上界与 PG 预算自动停止门禁已验收；验收时正式 allocation 未使用。证据 `evidence/batches/P7-06D/accept.json`。接下来按既有授权继续 C，不增加 2 美元总额。
 
 **P7-06C 启动：** P7-06D 已于本地提交 `be8d780` 通过，输入预留阻塞解除。先修复完整已知失败/未决工具的结果对账，再回归并执行一次原定正式分配；USD 2、Flash-1017、24×4、固定 UUID 和不重试规则保持不变。
+
+**P7-06C 正式启动结果：** 实际命令退出1；public仅001–004，写入queued控制marker后因缺005预算字段失败。固定正式journal未创建，无生成请求，96项仍NOT_RUN。本轮增加marker写入前的只读schema门禁；原marker保留、未删除/重置/重跑。零发送初始化恢复单列P7-06E待审阅，见ADR-0018/CHANGE_REQUEST；原2美元授权继续有效，不进入P8。
+
+**环境修复：** 已显式补应用既有005/006，命令退出0；无新增DDL文件、无生产库写入。升级前后的原分配现场保留，只读schema门禁修复不启用恢复。独立分析退出2，96项NOT_RUN、0生成请求。
+
+**P7-06E 审阅补充：** 恢复例外同时要求完整可读的namespace/账本证据链（缺失不等于0），以及原lease epoch仅1→2的一次性持久封口；第二次接管/崩溃再试均拒绝。具体条件见 `evidence/batches/P7-06C/P7-06E-review-addendum.md`，仅待审阅，未实施。
+
+**本轮最终验收：** C的初始化/对账工具与只读schema修复通过全量（569 Go含race、427 Python、15 subtests，均无失败/跳过/xfail，命令退出0）；正式启动退出1，独立分析退出2，96项NOT_RUN、0生成请求。C/父卡仍BLOCKED，E仅待审阅；证据见各accept与post-init-failure-20261026报告。

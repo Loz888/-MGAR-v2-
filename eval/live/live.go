@@ -18,6 +18,8 @@ import (
 	"github.com/Loz888/-MGAR-v2-/internal/provider"
 	"github.com/Loz888/-MGAR-v2-/internal/store"
 	"github.com/Loz888/-MGAR-v2-/internal/verifier"
+	"github.com/Loz888/-MGAR-v2-/migrations"
+	"github.com/jackc/pgx/v5"
 )
 
 const ManifestSHA = "ec6d5576a75fc2724756abeef2628189c2922038f09cb9258d7a1972e493c8ab"
@@ -136,6 +138,11 @@ func claimExperiment(ctx context.Context, s *store.Store, p Plan) error {
 	if p.Validate() != nil {
 		return ErrGate
 	}
+	// A successful Open/Ping does not apply migrations. Check the existing
+	// schema without writes before committing the one-use allocation marker.
+	if !allocationSchemaReady(ctx, s) {
+		return ErrGate
+	}
 	raw, _ := json.Marshal(p)
 	w, c, e := s.CreateRunClaimed(ctx, demo.LiveRunID("allocation", "all"), "Live allocation "+p.ID+" plan_sha256="+artifact.Digest(raw), 1, "live-allocation-gate", time.Minute)
 	if e != nil {
@@ -149,6 +156,46 @@ func claimExperiment(ctx context.Context, s *store.Store, p Plan) error {
 	}
 	return nil
 }
+
+func allocationSchemaReady(ctx context.Context, s *store.Store) bool {
+	tx, e := s.Pool.BeginTx(ctx, pgx.TxOptions{IsoLevel: pgx.RepeatableRead, AccessMode: pgx.ReadOnly})
+	if e != nil {
+		return false
+	}
+	defer tx.Rollback(ctx)
+	var schema string
+	if tx.QueryRow(ctx, "SELECT current_schema()").Scan(&schema) != nil || schema == "" {
+		return false
+	}
+	for _, m := range []struct{ version, sql string }{{"001_control", migrations.ControlSQL}, {"002_artifact_cas", migrations.ArtifactSQL}, {"003_context_snapshots", migrations.ContextSQL}, {"004_plan_node_configs", migrations.PlanConfigSQL}, {"005_global_budgets", migrations.BudgetSQL}, {"006_resource_admission", migrations.ResourceSQL}} {
+		var checksum string
+		if tx.QueryRow(ctx, "SELECT checksum FROM "+pgx.Identifier{schema, "schema_migrations"}.Sanitize()+" WHERE version=$1", m.version).Scan(&checksum) != nil || checksum != artifact.Digest([]byte(m.sql)) {
+			return false
+		}
+	}
+	// Check physical columns too; a migration record alone cannot establish
+	// readiness after manual schema drift. LIMIT 0 reads no budget contents.
+	rows, e := tx.Query(ctx, "SELECT run_id,max_model_calls,max_tool_calls,max_tokens_est,max_cost_usd,max_call_concurrency,max_concurrency,max_delegations,used_delegations,running_count,reserved_model_calls,settled_model_calls,reserved_tool_calls,settled_tool_calls,reserved_tokens,settled_tokens,reserved_cost,settled_cost FROM "+pgx.Identifier{schema, "run_budgets"}.Sanitize()+" LIMIT 0")
+	if e != nil {
+		return false
+	}
+	rows.Close()
+	if rows.Err() != nil {
+		return false
+	}
+	for table, columns := range map[string]string{"resource_pools": "class,capacity,queue_limit", "resource_requests": "request_id,run_id,task_id,owner,epoch,plan_version,class,token_hash,priority,created_at,deadline,state,revision"} {
+		rows, e := tx.Query(ctx, "SELECT "+columns+" FROM "+pgx.Identifier{schema, table}.Sanitize()+" LIMIT 0")
+		if e != nil {
+			return false
+		}
+		rows.Close()
+		if rows.Err() != nil {
+			return false
+		}
+	}
+	return tx.Commit(ctx) == nil
+}
+
 func Preflight(root string, confirm bool) (r PreflightReport) {
 	r.Blockers = []string{}
 	r.Network = "NOT_PROBED: check managed environment readiness before invocation"

@@ -1,0 +1,1666 @@
+{
+  "timestamp_utc": "2026-10-26T15:22:56.557810+00:00",
+  "read_only": true,
+  "plan_sha256": "0d22c2fff7ae8a1fe507d770cbfb53cffb4f699452e4277b9682d8795f6ba972",
+  "formal_journal_exists": false,
+  "allocation_control_run_id": "92d7ff2b-cf3d-5ec3-a1a0-c938f24aa4a7",
+  "namespaces": [
+    {
+      "schema": "public",
+      "present_tables": [
+        "approval_requests",
+        "artifact_contexts",
+        "artifact_verdicts",
+        "artifacts",
+        "context_snapshots",
+        "inbox_receipts",
+        "model_calls",
+        "orchestrator_leases",
+        "outbox_events",
+        "plan_edges",
+        "plan_node_configs",
+        "plan_nodes",
+        "plans",
+        "resource_pools",
+        "resource_requests",
+        "run_budgets",
+        "schema_migrations",
+        "task_inputs",
+        "task_instances",
+        "tool_invocations",
+        "workflow_events",
+        "workflow_runs"
+      ],
+      "assignments": [
+        {
+          "run_id": "e9291094-dbfc-535f-8b44-ffcefde25634",
+          "case_id": "live-001",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "ede45bf0-a039-5bbc-8354-e25755cc1813",
+          "case_id": "live-001",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "3834d430-c6bd-5017-8239-b88c55aa93d9",
+          "case_id": "live-001",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "ed4db011-6cf1-598f-ad2e-3e6b606473ed",
+          "case_id": "live-001",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "fe584b22-6026-5ff2-a4bd-b3de66aa91a8",
+          "case_id": "live-002",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "1f887897-f205-51b2-8a84-d97dbb89e2aa",
+          "case_id": "live-002",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "f166f602-62ef-5592-b51e-bb65e14a75ed",
+          "case_id": "live-002",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "cb085e05-41a0-5161-8026-23a7ebe681de",
+          "case_id": "live-002",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "a96cdaad-67b0-5dbb-bd2f-898a6c982f46",
+          "case_id": "live-003",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "39ffa707-4d11-5e9b-bbd1-c28819a927c3",
+          "case_id": "live-003",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "e6d070cb-aadc-5fb4-b921-c13f824f0f27",
+          "case_id": "live-003",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "26a8fb8f-2992-5795-9065-d250eca2c689",
+          "case_id": "live-003",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "2383dea6-b7cb-5c27-b3c3-dbc0a5870855",
+          "case_id": "live-004",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "be1b90a7-8954-5936-8bed-67799bc21f3e",
+          "case_id": "live-004",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "78392194-d0ac-5ab3-b82c-dc5ff02fa892",
+          "case_id": "live-004",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "65357a2c-aa49-5dcf-aaf7-0287ec3faf3c",
+          "case_id": "live-004",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "0f219565-4e0e-544e-9447-533e00db9966",
+          "case_id": "live-005",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "25206364-f691-5b3c-bdc2-227d47eb6aed",
+          "case_id": "live-005",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "531879ee-d4c9-560e-ae60-4efa6254bed1",
+          "case_id": "live-005",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "4cca35e4-20be-5109-8b93-525fe69abd37",
+          "case_id": "live-005",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "9328c292-3be5-5406-a51d-a2463f1df22f",
+          "case_id": "live-006",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "85e46d52-c464-511f-8bea-02467f14b319",
+          "case_id": "live-006",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "ae052e3a-4eb5-5f5f-a004-d16584b4a787",
+          "case_id": "live-006",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "22274c4a-8420-550b-9798-1b89e2eef40e",
+          "case_id": "live-006",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "4ac5959d-b5d9-55e1-a20d-02af83e795e0",
+          "case_id": "live-007",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "0a7d3f9a-34ef-5f18-a5e8-30c6d6a066a7",
+          "case_id": "live-007",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "3a2ccf2e-dad5-50c8-9ddf-fa2865128230",
+          "case_id": "live-007",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "12c90f12-ed79-51d8-b290-a61a2a8b36d7",
+          "case_id": "live-007",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "c3df0a84-c664-5049-9189-22c28cf8b02c",
+          "case_id": "live-008",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "4ed19535-8a73-5e52-aed1-12a82440c028",
+          "case_id": "live-008",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "7d5d0845-9aa5-5f92-ac63-943bf1763270",
+          "case_id": "live-008",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "30b1c017-690f-55a7-95f0-4225040f5d2b",
+          "case_id": "live-008",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "087fbbd5-6a0d-5f87-ab5e-9dea99182bc6",
+          "case_id": "live-009",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "d3bf92d3-7d41-53f6-823c-1698b515cea6",
+          "case_id": "live-009",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "03fd2024-c261-5108-93b0-c0b826a1650e",
+          "case_id": "live-009",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "3f1a78c2-1fbd-53ea-b379-83353adc0c58",
+          "case_id": "live-009",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "0ed199a3-7d37-5158-bdca-4db0fa36d8e6",
+          "case_id": "live-010",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "738a2771-43cd-5e97-b10c-901cdae3192f",
+          "case_id": "live-010",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "be28eaaa-300c-5095-bbcc-e8dc7d6850f7",
+          "case_id": "live-010",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "37a30eec-8e4e-5cc8-9393-1d493b8d1ad7",
+          "case_id": "live-010",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "3fe02c93-2bdc-5381-8a74-d96eec83815e",
+          "case_id": "live-011",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "abe57016-c9f3-54e9-8591-a188e26084f1",
+          "case_id": "live-011",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "a47a7dca-8833-58f1-9be2-f6ef01832f52",
+          "case_id": "live-011",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "167ebabd-89a2-5bde-b75a-37e870c63c8a",
+          "case_id": "live-011",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "2b684cbd-8ced-5b36-a68e-efebb17cd521",
+          "case_id": "live-012",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "9b0ecff8-61e4-5dc8-8db7-781659c05f86",
+          "case_id": "live-012",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "fc6a3c01-a0e9-598d-be4b-a70f24efb998",
+          "case_id": "live-012",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "043a9462-1dc7-5d93-94c4-e1ccb5dc40f3",
+          "case_id": "live-012",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "4a7e4c8d-27d4-5f9b-bee4-740565dc8ba9",
+          "case_id": "live-013",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "507431ff-ea87-560b-ab26-aea4c0f5fa2c",
+          "case_id": "live-013",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "2333470c-4dfe-5622-96a4-65ddb490e1a9",
+          "case_id": "live-013",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "6a14ae0c-16f4-5372-95b8-22466d6931b9",
+          "case_id": "live-013",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "4fcd1592-55bb-544b-b3fd-8da731d7ff23",
+          "case_id": "live-014",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "a0a6306a-8768-58e3-b042-a31734d83e6b",
+          "case_id": "live-014",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "dee941dd-08e5-5a70-9ef9-2b4fd17df910",
+          "case_id": "live-014",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "85aaaffe-b281-5c6f-a4b7-f713bee0ad57",
+          "case_id": "live-014",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "2801604e-6558-5150-abf5-9b1823e62a28",
+          "case_id": "live-015",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "f65a959a-287a-5fac-b490-5292c6f4f9ba",
+          "case_id": "live-015",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "f2c7afab-f4ad-5f6b-b47f-588777b54c05",
+          "case_id": "live-015",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "63721b5e-b078-50e0-9718-b0e8161a78bf",
+          "case_id": "live-015",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "575fd41d-cf29-5153-bdda-cb296087d90c",
+          "case_id": "live-016",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "faafd393-08e9-5c46-b99b-249cee214e0a",
+          "case_id": "live-016",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "c8b15911-9a2b-5292-957c-c61e8d1bedaf",
+          "case_id": "live-016",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "b04c0f2b-8c5f-5a0c-9821-2a8343e8f58a",
+          "case_id": "live-016",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "f770129e-c515-5134-bbfc-1170b5e9b31c",
+          "case_id": "live-017",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "ddd3f11e-82f4-582a-860f-28425df1810e",
+          "case_id": "live-017",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "2b8642f3-d92c-537a-8faf-56e288092b45",
+          "case_id": "live-017",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "2465dc09-8de5-50bb-9c5e-d2e8f7c8b5cd",
+          "case_id": "live-017",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "73cb63a3-aba0-5cc6-9388-f29fed83be8e",
+          "case_id": "live-018",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "3da596ab-a707-574c-b93e-bc3c42abfdcb",
+          "case_id": "live-018",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "fea16a5b-495c-5328-96eb-bbd6899dae17",
+          "case_id": "live-018",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "5cd8e07b-5017-5f26-bc9d-5d17cd9214b9",
+          "case_id": "live-018",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "1f4d0625-efff-5c85-9774-12e85941bb1a",
+          "case_id": "live-019",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "14c00683-faaf-54ca-9b1e-ffe936911db2",
+          "case_id": "live-019",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "aafe656c-cb5b-550c-96e5-d70b33072fbe",
+          "case_id": "live-019",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "19f64e44-7194-59e7-9df6-23c9c0d5c9a1",
+          "case_id": "live-019",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "9e089af4-c3eb-5c89-88ea-7a8365064d8b",
+          "case_id": "live-020",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "54115a5d-6fd8-5673-af75-3c7db6207cee",
+          "case_id": "live-020",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "7ce4c5df-edd9-5017-96b6-f918a1bf666f",
+          "case_id": "live-020",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "cbd0f6d5-5874-5bdf-b1b3-3fd8101ec217",
+          "case_id": "live-020",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "5cb3fee7-79f3-5ec4-818b-e8314af89511",
+          "case_id": "live-021",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "a64f5168-c091-55c3-842b-3c1434dc4415",
+          "case_id": "live-021",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "a2abdf61-a137-592e-8c6c-bc928c3b7041",
+          "case_id": "live-021",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "84004713-1d46-5a8e-85e5-30e8feafef31",
+          "case_id": "live-021",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "968ec628-0f92-5a93-9cce-cd821bbb42f2",
+          "case_id": "live-022",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "3d000a4b-daf5-5e99-9e73-15176ed7abc8",
+          "case_id": "live-022",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "b4e2644b-136b-5327-bf48-eb049dd87952",
+          "case_id": "live-022",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "87f89c98-5abc-5512-85a1-cc94864d9ddb",
+          "case_id": "live-022",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "ed89d1e2-ab81-5cb2-880a-4e38899934f1",
+          "case_id": "live-023",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "339baf24-86ec-548e-a175-540af48673d0",
+          "case_id": "live-023",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "47b00da5-43e0-5ac8-826b-d8ea32614eff",
+          "case_id": "live-023",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "8253e6ef-b271-541c-bd50-8744a4f4ed00",
+          "case_id": "live-023",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "8f9f4dd5-8d99-56fb-aa72-900413b48c02",
+          "case_id": "live-024",
+          "arm": "B0",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "737c8397-ad86-54b8-bfde-f66765aaf487",
+          "case_id": "live-024",
+          "arm": "B1",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "f89962f8-4fd4-5372-8a4e-0eeb8e79bfae",
+          "case_id": "live-024",
+          "arm": "B2",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        },
+        {
+          "run_id": "c8e4042d-69e2-5fd2-80a0-369e5c203137",
+          "case_id": "live-024",
+          "arm": "B4",
+          "workflow_rows": 0,
+          "tasks": 0,
+          "model_calls": 0,
+          "tool_calls": 0
+        }
+      ]
+    }
+  ],
+  "assignments": [
+    {
+      "case_id": "live-001",
+      "arm": "B0",
+      "run_id": "e9291094-dbfc-535f-8b44-ffcefde25634",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-001",
+      "arm": "B1",
+      "run_id": "ede45bf0-a039-5bbc-8354-e25755cc1813",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-001",
+      "arm": "B2",
+      "run_id": "3834d430-c6bd-5017-8239-b88c55aa93d9",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-001",
+      "arm": "B4",
+      "run_id": "ed4db011-6cf1-598f-ad2e-3e6b606473ed",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-002",
+      "arm": "B0",
+      "run_id": "fe584b22-6026-5ff2-a4bd-b3de66aa91a8",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-002",
+      "arm": "B1",
+      "run_id": "1f887897-f205-51b2-8a84-d97dbb89e2aa",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-002",
+      "arm": "B2",
+      "run_id": "f166f602-62ef-5592-b51e-bb65e14a75ed",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-002",
+      "arm": "B4",
+      "run_id": "cb085e05-41a0-5161-8026-23a7ebe681de",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-003",
+      "arm": "B0",
+      "run_id": "a96cdaad-67b0-5dbb-bd2f-898a6c982f46",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-003",
+      "arm": "B1",
+      "run_id": "39ffa707-4d11-5e9b-bbd1-c28819a927c3",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-003",
+      "arm": "B2",
+      "run_id": "e6d070cb-aadc-5fb4-b921-c13f824f0f27",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-003",
+      "arm": "B4",
+      "run_id": "26a8fb8f-2992-5795-9065-d250eca2c689",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-004",
+      "arm": "B0",
+      "run_id": "2383dea6-b7cb-5c27-b3c3-dbc0a5870855",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-004",
+      "arm": "B1",
+      "run_id": "be1b90a7-8954-5936-8bed-67799bc21f3e",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-004",
+      "arm": "B2",
+      "run_id": "78392194-d0ac-5ab3-b82c-dc5ff02fa892",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-004",
+      "arm": "B4",
+      "run_id": "65357a2c-aa49-5dcf-aaf7-0287ec3faf3c",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-005",
+      "arm": "B0",
+      "run_id": "0f219565-4e0e-544e-9447-533e00db9966",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-005",
+      "arm": "B1",
+      "run_id": "25206364-f691-5b3c-bdc2-227d47eb6aed",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-005",
+      "arm": "B2",
+      "run_id": "531879ee-d4c9-560e-ae60-4efa6254bed1",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-005",
+      "arm": "B4",
+      "run_id": "4cca35e4-20be-5109-8b93-525fe69abd37",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-006",
+      "arm": "B0",
+      "run_id": "9328c292-3be5-5406-a51d-a2463f1df22f",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-006",
+      "arm": "B1",
+      "run_id": "85e46d52-c464-511f-8bea-02467f14b319",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-006",
+      "arm": "B2",
+      "run_id": "ae052e3a-4eb5-5f5f-a004-d16584b4a787",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-006",
+      "arm": "B4",
+      "run_id": "22274c4a-8420-550b-9798-1b89e2eef40e",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-007",
+      "arm": "B0",
+      "run_id": "4ac5959d-b5d9-55e1-a20d-02af83e795e0",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-007",
+      "arm": "B1",
+      "run_id": "0a7d3f9a-34ef-5f18-a5e8-30c6d6a066a7",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-007",
+      "arm": "B2",
+      "run_id": "3a2ccf2e-dad5-50c8-9ddf-fa2865128230",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-007",
+      "arm": "B4",
+      "run_id": "12c90f12-ed79-51d8-b290-a61a2a8b36d7",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-008",
+      "arm": "B0",
+      "run_id": "c3df0a84-c664-5049-9189-22c28cf8b02c",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-008",
+      "arm": "B1",
+      "run_id": "4ed19535-8a73-5e52-aed1-12a82440c028",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-008",
+      "arm": "B2",
+      "run_id": "7d5d0845-9aa5-5f92-ac63-943bf1763270",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-008",
+      "arm": "B4",
+      "run_id": "30b1c017-690f-55a7-95f0-4225040f5d2b",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-009",
+      "arm": "B0",
+      "run_id": "087fbbd5-6a0d-5f87-ab5e-9dea99182bc6",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-009",
+      "arm": "B1",
+      "run_id": "d3bf92d3-7d41-53f6-823c-1698b515cea6",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-009",
+      "arm": "B2",
+      "run_id": "03fd2024-c261-5108-93b0-c0b826a1650e",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-009",
+      "arm": "B4",
+      "run_id": "3f1a78c2-1fbd-53ea-b379-83353adc0c58",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-010",
+      "arm": "B0",
+      "run_id": "0ed199a3-7d37-5158-bdca-4db0fa36d8e6",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-010",
+      "arm": "B1",
+      "run_id": "738a2771-43cd-5e97-b10c-901cdae3192f",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-010",
+      "arm": "B2",
+      "run_id": "be28eaaa-300c-5095-bbcc-e8dc7d6850f7",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-010",
+      "arm": "B4",
+      "run_id": "37a30eec-8e4e-5cc8-9393-1d493b8d1ad7",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-011",
+      "arm": "B0",
+      "run_id": "3fe02c93-2bdc-5381-8a74-d96eec83815e",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-011",
+      "arm": "B1",
+      "run_id": "abe57016-c9f3-54e9-8591-a188e26084f1",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-011",
+      "arm": "B2",
+      "run_id": "a47a7dca-8833-58f1-9be2-f6ef01832f52",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-011",
+      "arm": "B4",
+      "run_id": "167ebabd-89a2-5bde-b75a-37e870c63c8a",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-012",
+      "arm": "B0",
+      "run_id": "2b684cbd-8ced-5b36-a68e-efebb17cd521",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-012",
+      "arm": "B1",
+      "run_id": "9b0ecff8-61e4-5dc8-8db7-781659c05f86",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-012",
+      "arm": "B2",
+      "run_id": "fc6a3c01-a0e9-598d-be4b-a70f24efb998",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-012",
+      "arm": "B4",
+      "run_id": "043a9462-1dc7-5d93-94c4-e1ccb5dc40f3",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-013",
+      "arm": "B0",
+      "run_id": "4a7e4c8d-27d4-5f9b-bee4-740565dc8ba9",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-013",
+      "arm": "B1",
+      "run_id": "507431ff-ea87-560b-ab26-aea4c0f5fa2c",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-013",
+      "arm": "B2",
+      "run_id": "2333470c-4dfe-5622-96a4-65ddb490e1a9",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-013",
+      "arm": "B4",
+      "run_id": "6a14ae0c-16f4-5372-95b8-22466d6931b9",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-014",
+      "arm": "B0",
+      "run_id": "4fcd1592-55bb-544b-b3fd-8da731d7ff23",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-014",
+      "arm": "B1",
+      "run_id": "a0a6306a-8768-58e3-b042-a31734d83e6b",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-014",
+      "arm": "B2",
+      "run_id": "dee941dd-08e5-5a70-9ef9-2b4fd17df910",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-014",
+      "arm": "B4",
+      "run_id": "85aaaffe-b281-5c6f-a4b7-f713bee0ad57",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-015",
+      "arm": "B0",
+      "run_id": "2801604e-6558-5150-abf5-9b1823e62a28",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-015",
+      "arm": "B1",
+      "run_id": "f65a959a-287a-5fac-b490-5292c6f4f9ba",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-015",
+      "arm": "B2",
+      "run_id": "f2c7afab-f4ad-5f6b-b47f-588777b54c05",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-015",
+      "arm": "B4",
+      "run_id": "63721b5e-b078-50e0-9718-b0e8161a78bf",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-016",
+      "arm": "B0",
+      "run_id": "575fd41d-cf29-5153-bdda-cb296087d90c",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-016",
+      "arm": "B1",
+      "run_id": "faafd393-08e9-5c46-b99b-249cee214e0a",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-016",
+      "arm": "B2",
+      "run_id": "c8b15911-9a2b-5292-957c-c61e8d1bedaf",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-016",
+      "arm": "B4",
+      "run_id": "b04c0f2b-8c5f-5a0c-9821-2a8343e8f58a",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-017",
+      "arm": "B0",
+      "run_id": "f770129e-c515-5134-bbfc-1170b5e9b31c",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-017",
+      "arm": "B1",
+      "run_id": "ddd3f11e-82f4-582a-860f-28425df1810e",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-017",
+      "arm": "B2",
+      "run_id": "2b8642f3-d92c-537a-8faf-56e288092b45",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-017",
+      "arm": "B4",
+      "run_id": "2465dc09-8de5-50bb-9c5e-d2e8f7c8b5cd",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-018",
+      "arm": "B0",
+      "run_id": "73cb63a3-aba0-5cc6-9388-f29fed83be8e",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-018",
+      "arm": "B1",
+      "run_id": "3da596ab-a707-574c-b93e-bc3c42abfdcb",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-018",
+      "arm": "B2",
+      "run_id": "fea16a5b-495c-5328-96eb-bbd6899dae17",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-018",
+      "arm": "B4",
+      "run_id": "5cd8e07b-5017-5f26-bc9d-5d17cd9214b9",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-019",
+      "arm": "B0",
+      "run_id": "1f4d0625-efff-5c85-9774-12e85941bb1a",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-019",
+      "arm": "B1",
+      "run_id": "14c00683-faaf-54ca-9b1e-ffe936911db2",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-019",
+      "arm": "B2",
+      "run_id": "aafe656c-cb5b-550c-96e5-d70b33072fbe",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-019",
+      "arm": "B4",
+      "run_id": "19f64e44-7194-59e7-9df6-23c9c0d5c9a1",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-020",
+      "arm": "B0",
+      "run_id": "9e089af4-c3eb-5c89-88ea-7a8365064d8b",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-020",
+      "arm": "B1",
+      "run_id": "54115a5d-6fd8-5673-af75-3c7db6207cee",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-020",
+      "arm": "B2",
+      "run_id": "7ce4c5df-edd9-5017-96b6-f918a1bf666f",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-020",
+      "arm": "B4",
+      "run_id": "cbd0f6d5-5874-5bdf-b1b3-3fd8101ec217",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-021",
+      "arm": "B0",
+      "run_id": "5cb3fee7-79f3-5ec4-818b-e8314af89511",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-021",
+      "arm": "B1",
+      "run_id": "a64f5168-c091-55c3-842b-3c1434dc4415",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-021",
+      "arm": "B2",
+      "run_id": "a2abdf61-a137-592e-8c6c-bc928c3b7041",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-021",
+      "arm": "B4",
+      "run_id": "84004713-1d46-5a8e-85e5-30e8feafef31",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-022",
+      "arm": "B0",
+      "run_id": "968ec628-0f92-5a93-9cce-cd821bbb42f2",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-022",
+      "arm": "B1",
+      "run_id": "3d000a4b-daf5-5e99-9e73-15176ed7abc8",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-022",
+      "arm": "B2",
+      "run_id": "b4e2644b-136b-5327-bf48-eb049dd87952",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-022",
+      "arm": "B4",
+      "run_id": "87f89c98-5abc-5512-85a1-cc94864d9ddb",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-023",
+      "arm": "B0",
+      "run_id": "ed89d1e2-ab81-5cb2-880a-4e38899934f1",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-023",
+      "arm": "B1",
+      "run_id": "339baf24-86ec-548e-a175-540af48673d0",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-023",
+      "arm": "B2",
+      "run_id": "47b00da5-43e0-5ac8-826b-d8ea32614eff",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-023",
+      "arm": "B4",
+      "run_id": "8253e6ef-b271-541c-bd50-8744a4f4ed00",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-024",
+      "arm": "B0",
+      "run_id": "8f9f4dd5-8d99-56fb-aa72-900413b48c02",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-024",
+      "arm": "B1",
+      "run_id": "737c8397-ad86-54b8-bfde-f66765aaf487",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-024",
+      "arm": "B2",
+      "run_id": "f89962f8-4fd4-5372-8a4e-0eeb8e79bfae",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-024",
+      "arm": "B4",
+      "run_id": "c8e4042d-69e2-5fd2-80a0-369e5c203137",
+      "cap_micros": 20833,
+      "status": "NOT_RUN"
+    }
+  ],
+  "public_migrations": [
+    {
+      "version": "001_control",
+      "checksum": "9d848c5b9d6ed0be72a3ab0b5039549fe45bd92232756bc2f07ef81540225430",
+      "source_checksum_matches": true
+    },
+    {
+      "version": "002_artifact_cas",
+      "checksum": "4b2eb593e547c9aae6c88480fd8ac1304eeb86ebc572d8b2fc2a2da448787bbd",
+      "source_checksum_matches": true
+    },
+    {
+      "version": "003_context_snapshots",
+      "checksum": "12b2c7ed58d2abb070000054f3df94a2d6fea76ce44cad446be8e99038ef0ead",
+      "source_checksum_matches": true
+    },
+    {
+      "version": "004_plan_node_configs",
+      "checksum": "513b788ff925fbb92fa8be7636a36b9ec92897941da8e4c96593b3b506666bd3",
+      "source_checksum_matches": true
+    },
+    {
+      "version": "005_global_budgets",
+      "checksum": "0eb5143f0166cebad3a0f3de8e2a110328d276f585867e4bbac079826c8966e9",
+      "source_checksum_matches": true
+    },
+    {
+      "version": "006_resource_admission",
+      "checksum": "eda93b21302bb8aa32997289339e622120e90827f0912d4f8d4c18f758e95506",
+      "source_checksum_matches": true
+    }
+  ],
+  "public_budget_columns": [
+    "run_id",
+    "max_model_calls",
+    "max_tokens_est",
+    "max_cost_usd",
+    "max_delegations",
+    "used_delegations",
+    "max_concurrency",
+    "running_count",
+    "reserved_model_calls",
+    "settled_model_calls",
+    "reserved_tokens",
+    "settled_tokens",
+    "reserved_cost",
+    "settled_cost",
+    "max_tool_calls",
+    "reserved_tool_calls",
+    "settled_tool_calls",
+    "max_call_concurrency"
+  ],
+  "allocation_marker_rows": [
+    {
+      "state": "queued",
+      "revision": 0,
+      "active_plan_version": 0,
+      "finished_at": null
+    }
+  ],
+  "allocation_budget_rows": [
+    {
+      "run_id": "92d7ff2b-cf3d-5ec3-a1a0-c938f24aa4a7",
+      "max_cost_usd": 0.0,
+      "settled_cost": 0.0,
+      "reserved_cost": 0.0,
+      "running_count": 0,
+      "max_tokens_est": 0,
+      "max_tool_calls": 64,
+      "settled_tokens": 0,
+      "max_concurrency": 4,
+      "max_delegations": 1,
+      "max_model_calls": 0,
+      "reserved_tokens": 0,
+      "used_delegations": 0,
+      "settled_tool_calls": 0,
+      "reserved_tool_calls": 0,
+      "settled_model_calls": 0,
+      "max_call_concurrency": 4,
+      "reserved_model_calls": 0
+    }
+  ],
+  "allocation_model_calls": 0,
+  "allocation_tasks": 0,
+  "assignment_totals": {
+    "workflow_rows": 0,
+    "tasks": 0,
+    "model_calls": 0,
+    "tool_calls": 0
+  }
+}

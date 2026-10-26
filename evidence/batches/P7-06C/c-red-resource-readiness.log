@@ -1,0 +1,3 @@
+{
+  "stdout": "=== RUN   TestLivePostgresSchemaReadinessBeforeAllocation\n=== RUN   TestLivePostgresSchemaReadinessBeforeAllocation/missing-resource-pools\n    live_test.go:562: unready schema consumed allocation: marker_rows=1 err=<nil>\n=== RUN   TestLivePostgresSchemaReadinessBeforeAllocation/missing-resource-requests\n    live_test.go:562: unready schema consumed allocation: marker_rows=1 err=<nil>\n--- FAIL: TestLivePostgresSchemaReadinessBeforeAllocation (0.64s)\n    --- FAIL: TestLivePostgresSchemaReadinessBeforeAllocation/missing-resource-pools (0.32s)\n    --- FAIL: TestLivePostgresSchemaReadinessBeforeAllocation/missing-resource-requests (0.32s)\nFAIL\nFAIL\tgithub.com/Loz888/-MGAR-v2-/eval/live\t0.652s\nFAIL\n"
+}

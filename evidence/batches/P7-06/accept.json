@@ -2,9 +2,9 @@
   "card_id": "P7-06",
   "status": "BLOCKED",
   "git_commit": null,
-  "base_git_commit": "2f776fb3d3f54afa5634d92802ae0e0857b0a0ca",
-  "source_fingerprint": "4b45c14b548dda10fe32c7320b0bfe25a2e5ddd85c3dd382385327a5e7243d66",
-  "scope": "Verified official authentication/version/prices and corrected wire model/thinking parameters; real execution blocked by full-context budget policy",
+  "base_git_commit": "801668a4ba18ae246ed4b5512c2b973094166b0e",
+  "source_fingerprint": "ceecdbfce26241955eaae671f75eb8496b806ba5c2acb30f49643e05a9d952bc",
+  "scope": "Executed formal start once, preserved zero-send initialization failure, repaired existing control migrations and added pre-marker read-only schema gates",
   "subcards": [
     {
       "card_id": "P7-06A",
@@ -19,48 +19,43 @@
       "sha256": "b3ddfdbb73262d9c2c1708497f49da5ce822050769cfd85fbe7c10a2fb0cf168"
     },
     {
+      "card_id": "P7-06D",
+      "status": "PASS",
+      "path": "evidence/batches/P7-06D/accept.json",
+      "sha256": "f28bdfe7957f59156ba9c732148f7e7ae92d765d9861d946c69eb223cf6ea717"
+    },
+    {
       "card_id": "P7-06C",
       "status": "BLOCKED",
       "path": "evidence/batches/P7-06C/accept.json",
-      "sha256": "c6285101dfa5216824e0eccc6f596ba7b52f16b5a5149e9c1522d0e4c6ce8651"
+      "sha256": "904b772c2077b8534f484998ae339ef73d26be0b18fd9f32ce6ff1dc0ceaaca9"
     }
   ],
   "authorization": {
     "provider": "deepseek",
-    "logical_model": "flash-1017",
+    "model": "flash-1017",
     "api_model": "deepseek-flash",
     "total_cap_usd": "2.00",
     "assignments": 96,
-    "date": "2026-10-26"
+    "still_valid": true
   },
   "blockers": [
-    "Approved full-model-context reservation requires 1049600 tokens and 315802 microdollars, exceeding the frozen 65536-token/20833-microdollar share",
-    "Input-bound policy revision is proposed in ADR-0017/P7-06D and awaits review; no tighter unproved bound may be used"
-  ],
-  "known_limitations": [
-    "Full-context reservation is a conservative upper bound, not actual model spending or an expected cost.",
-    "DEEPSEEK_API_KEY is injected; official GET /models and public pricing documentation returned HTTP 200.",
-    "Platform observations still report unknown readiness; only the recorded HTTPS operations are claimed verified.",
-    "Logical flash-1017 is mapped to official deepseek-flash, currently served by DeepSeek-V4.1-Flash-1017; the alias is mutable.",
-    "Peak cache-miss prices are conservative USD estimates; actual invoice/currency conversion not asserted.",
-    "All generation remains NOT_RUN; local HTTP/PG fixtures are not live model quality evidence.",
-    "USD 2, 96 assignments, per-share caps/UUIDs and strict verification are unchanged.",
-    "P7-06D is a proposal only; no official tokenizer download, counter implementation or D acceptance occurred.",
-    "No P8 implementation or release acceptance is included."
+    "Formal one-use allocation marker was committed before initialization failed; existing protocol refuses automatic reuse even with no generation.",
+    "P7-06E/ADR-0018 proposes a narrow zero-send initialization recovery preserving original identity/cap. Its protocol exception awaits review."
   ],
   "test_summary": {
     "go": {
       "status": "PASS",
-      "tests": 527,
-      "passed": 527,
+      "tests": 569,
+      "passed": 569,
       "failed_events": 0,
       "skipped": 0,
       "complete": true
     },
     "python": {
       "status": "PASS",
-      "tests": 399,
-      "passed": 399,
+      "tests": 427,
+      "passed": 427,
       "failed": 0,
       "skipped_or_xfailed": 0,
       "complete": true,
@@ -68,32 +63,40 @@
     },
     "status": "PASS"
   },
+  "known_limitations": [
+    "The official configuration preflight checks configuration; it did not establish public DB schema readiness. This execution preparation error is recorded, not attributed to credentials or budget shortage.",
+    "Full test fixtures migrate their own random namespaces and did not prove the public schema was current; new old-schema PG tests cover the failure before marker writes.",
+    "Only existing synthetic control migrations 005/006 were applied. Original queued marker remains unchanged; no delete/reset/retry/recovery was performed.",
+    "Zero generation is proved by failure before journal/provider creation and read-only checks of all 96 identities; analysis correctly retains NOT_RUN and N/A costs/pairs.",
+    "USD 2, Flash-1017, all 96 assignment UUIDs, caps, permissions and Verifier rules are unchanged. No P8 work.",
+    "P7-06E is a reviewable zero-send recovery proposal only; no recovery implementation is included."
+  ],
   "actual_paid_calls": 0,
-  "formal_allocation_consumed": false,
-  "proposed_input_bound_change": {
-    "status": "PROPOSED",
-    "adr": "docs/adr/ADR-0017.md",
-    "card": "tasks/P7-06D.md"
-  },
-  "commands_reference": "evidence/batches/P7-06C/commands.json",
+  "formal_allocation_consumed": true,
   "unverified": [
     {
-      "name": "24_cases_times_4_arms_live_evaluation",
+      "name": "24x4_real_model_evaluation",
       "status": "NOT_RUN",
-      "assignments": 96,
-      "reason": "Conservative input reservation cannot fit the approved frozen shares"
+      "reason": "Formal one-use allocation marker was committed before initialization failed; existing protocol refuses automatic reuse even with no generation."
     },
     {
       "name": "real_model_closure",
       "status": "NOT_RUN",
-      "reason": "No generation requests sent"
+      "reason": "No model generation sent"
     },
     {
-      "name": "official_tokenizer_request_input_upper_bound",
+      "name": "zero_send_initialization_recovery",
       "status": "NOT_RUN",
-      "reason": "Proposed design change awaits review under 03_CODEX_WORK_PROTOCOL"
+      "reason": "P7-06E is proposed, not implemented or approved"
     }
   ],
-  "historical_acceptance": "evidence/batches/P7-06/accept-pre-runtime-ready-20261026.json",
-  "timestamp_utc": "2026-10-26T12:42:02.857448+00:00"
+  "commands_reference": "evidence/batches/P7-06C/commands.json",
+  "historical_acceptance": "evidence/batches/P7-06/accept-pre-live-execution-20261026.json",
+  "proposed_recovery": {
+    "status": "PROPOSED",
+    "card": "tasks/P7-06E.md",
+    "adr": "docs/adr/ADR-0018.md",
+    "required_addendum": "evidence/batches/P7-06C/P7-06E-review-addendum.md"
+  },
+  "timestamp_utc": "2026-10-26T15:30:23.486382+00:00"
 }

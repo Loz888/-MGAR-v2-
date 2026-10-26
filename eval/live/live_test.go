@@ -3,6 +3,7 @@ package live
 import (
 	"bufio"
 	"context"
+	"crypto/rand"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -12,6 +13,8 @@ import (
 	"github.com/Loz888/-MGAR-v2-/internal/provider"
 	"github.com/Loz888/-MGAR-v2-/internal/store"
 	"github.com/Loz888/-MGAR-v2-/internal/testdb"
+	"github.com/Loz888/-MGAR-v2-/migrations"
+	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"os"
 	"os/exec"
@@ -492,4 +495,72 @@ func TestLivePostgresGuardSurvivesWholeJournalLoss(t *testing.T) {
 		t.Fatal(r, e)
 	}
 	t.Log("two PG-backed OS processes: 1 winner; entire local journal removed; fixed zero-spend Run still refuses a second allocation")
+}
+
+func TestLivePostgresSchemaReadinessBeforeAllocation(t *testing.T) {
+	ctx := context.Background()
+	root, _ := filepath.Abs("../..")
+	p, e := LoadPlan(root)
+	if e != nil {
+		t.Fatal(e)
+	}
+	for _, mode := range []string{"legacy-004", "missing-migration-table", "changed-checksum", "missing-budget-column", "missing-resource-pools", "missing-resource-requests", "ready"} {
+		t.Run(mode, func(t *testing.T) {
+			admin := testdb.New(t)
+			schema := "mgar_live_ready_" + strings.ToLower(rand.Text())
+			ident := pgx.Identifier{schema}.Sanitize()
+			if _, e := admin.Pool.Exec(ctx, "CREATE SCHEMA "+ident); e != nil {
+				t.Fatal(e)
+			}
+			cfg := admin.Pool.Config().Copy()
+			cfg.ConnConfig.RuntimeParams["search_path"] = schema
+			pool, e := pgxpool.NewWithConfig(ctx, cfg)
+			if e != nil {
+				t.Fatal(e)
+			}
+			t.Cleanup(func() {
+				pool.Close()
+				if _, e := admin.Pool.Exec(ctx, "DROP SCHEMA "+ident+" CASCADE"); e != nil {
+					t.Error(e)
+				}
+			})
+			s := &store.Store{Pool: pool}
+			if mode == "legacy-004" {
+				for _, m := range []struct{ version, sql string }{{"001_control", migrations.ControlSQL}, {"002_artifact_cas", migrations.ArtifactSQL}, {"003_context_snapshots", migrations.ContextSQL}, {"004_plan_node_configs", migrations.PlanConfigSQL}} {
+					if e := store.ApplyMigration(ctx, pool, m.version, m.sql); e != nil {
+						t.Fatal(e)
+					}
+				}
+			} else if e := store.Migrate(ctx, pool); e != nil {
+				t.Fatal(e)
+			}
+			switch mode {
+			case "missing-migration-table":
+				_, e = pool.Exec(ctx, "DROP TABLE schema_migrations")
+			case "changed-checksum":
+				_, e = pool.Exec(ctx, "UPDATE schema_migrations SET checksum='changed' WHERE version='005_global_budgets'")
+			case "missing-budget-column":
+				_, e = pool.Exec(ctx, "ALTER TABLE run_budgets DROP COLUMN max_call_concurrency CASCADE")
+			case "missing-resource-pools":
+				_, e = pool.Exec(ctx, "DROP TABLE resource_pools CASCADE")
+			case "missing-resource-requests":
+				_, e = pool.Exec(ctx, "DROP TABLE resource_requests")
+			}
+			if e != nil {
+				t.Fatal(e)
+			}
+			claimErr := claimExperiment(ctx, s, p)
+			var count int
+			if e := pool.QueryRow(ctx, "SELECT count(*) FROM workflow_runs WHERE run_id=$1", demo.LiveRunID("allocation", "all")).Scan(&count); e != nil {
+				t.Fatal(e)
+			}
+			if mode == "ready" {
+				if claimErr != nil || count != 1 {
+					t.Fatal("ready schema failed admission", count, claimErr)
+				}
+			} else if claimErr == nil || count != 0 {
+				t.Fatalf("unready schema consumed allocation: marker_rows=%d err=%v", count, claimErr)
+			}
+		})
+	}
 }

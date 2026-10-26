@@ -374,5 +374,151 @@
     "exit_code": 0,
     "log_path": "evidence/batches/P7-06C/c-prelive-audit.log",
     "timestamp_utc": "2026-10-26T15:15:12.602050+00:00"
+  },
+  {
+    "command": [
+      "env",
+      "MGAR_ALLOW_PAID=1",
+      "MGAR_MAX_COST_USD=2.00",
+      "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+      "bash",
+      "scripts/eval.sh",
+      "--live",
+      "--confirm-live"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06C/actual-live-run.log",
+    "timestamp_utc": "2026-10-26T15:15:21.554779+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06D/check_allocation.py"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06C/after-launch-allocation-check.log",
+    "timestamp_utc": "2026-10-26T15:15:52.531320+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./eval/live",
+      "-run",
+      "^TestLivePostgresSchemaReadinessBeforeAllocation$"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06C/c-red-schema-readiness.log",
+    "timestamp_utc": "2026-10-26T15:19:33.790852+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06C/diagnose_allocation.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/schema-before-repair.log",
+    "timestamp_utc": "2026-10-26T15:21:04.734939+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/live/analyze.py",
+      "--output",
+      "evidence/eval/live/post-init-failure-20261026"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06C/post-init-independent-analysis.log",
+    "timestamp_utc": "2026-10-26T15:21:36.380056+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "run",
+      "./cmd/mgarmigrate"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/apply-existing-control-migrations.log",
+    "timestamp_utc": "2026-10-26T15:21:37.245164+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./eval/live"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/c-schema-readiness.log",
+    "timestamp_utc": "2026-10-26T15:22:18.706565+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06C/diagnose_allocation.py",
+      "schema-after-repair.json"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/schema-after-repair.log",
+    "timestamp_utc": "2026-10-26T15:22:56.709492+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./eval/live",
+      "-run",
+      "^TestLivePostgresSchemaReadinessBeforeAllocation$/missing-resource"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06C/c-red-resource-readiness.log",
+    "timestamp_utc": "2026-10-26T15:23:29.707055+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./eval/live"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/c-resource-readiness.log",
+    "timestamp_utc": "2026-10-26T15:24:11.419835+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-allocation-lease.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/original-allocation-lease.log",
+    "timestamp_utc": "2026-10-26T15:28:49.165767+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/c-final-offline-full.log",
+    "timestamp_utc": "2026-10-26T15:29:34.891477+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/c-final-credential-and-format.log",
+    "timestamp_utc": "2026-10-26T15:30:23.389312+00:00"
   }
 ]
