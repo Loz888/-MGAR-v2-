@@ -150,7 +150,7 @@ func TestChaosProcess(t *testing.T) {
 		}
 		send(barrier{Point: "fenced", Claim: c})
 	default:
-		if !modelChild(t, s, run, mode, send, pause) {
+		if !deepSeekChild(t, s, mode, send, pause) && !modelChild(t, s, run, mode, send, pause) {
 			t.Fatal("unknown owned test operation")
 		}
 	}

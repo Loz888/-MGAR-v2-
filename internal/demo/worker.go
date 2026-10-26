@@ -143,6 +143,17 @@ func (f *fixture) workerWith(ctx context.Context, o Options, c store.TaskClaim, 
 			deny()
 			return
 		}
+		if o.Model != nil {
+			decision, _, err := o.Model.Call(r.Context(), resources, c, request.LogicalID, raw)
+			if err != nil {
+				deny()
+				return
+			}
+			next++
+			w.Header().Set("Content-Type", "application/json")
+			_, _ = w.Write(decision)
+			return
+		}
 		quote := budget.Pricing{Version: "demo-free.v1", Provider: "mock", Model: "demo-mock.v1"}
 		input := int64((len(raw) + 3) / 4)
 		req, err := budget.PricedRequest(request.LogicalID, quote, input, 16000, artifact.Digest(raw))

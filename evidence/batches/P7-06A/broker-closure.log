@@ -1,0 +1,3 @@
+{
+  "stdout": "=== RUN   TestDeepSeekBrokerWorkerClosure\n    deepseek_test.go:72: development closure: requests=7 workers=4 independent_verdicts=5 state=succeeded (local_stub only)\n--- PASS: TestDeepSeekBrokerWorkerClosure (1.03s)\nPASS\nok  \tgithub.com/Loz888/-MGAR-v2-/internal/demo\t1.038s\n"
+}

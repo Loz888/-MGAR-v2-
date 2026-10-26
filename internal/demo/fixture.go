@@ -16,6 +16,7 @@ import (
 
 	"github.com/Loz888/-MGAR-v2-/internal/artifact"
 	"github.com/Loz888/-MGAR-v2-/internal/policy"
+	"github.com/Loz888/-MGAR-v2-/internal/provider"
 	"github.com/Loz888/-MGAR-v2-/internal/store"
 	"github.com/Loz888/-MGAR-v2-/internal/verifier"
 	"github.com/jackc/pgx/v5"
@@ -38,7 +39,10 @@ type Input struct {
 	Documents []string `json:"documents"`
 	Goal      string   `json:"goal"`
 }
-type Options struct{ Root, Case, Fault string }
+type Options struct {
+	Root, Case, Fault string
+	Model             *provider.Client
+}
 type fixture struct {
 	verification             *verificationTask
 	s                        *store.Store
@@ -46,6 +50,7 @@ type fixture struct {
 	reader                   *pgxpool.Pool
 	source                   pgx.Tx
 	schema, role, temp, root string
+	modelVersion             string
 	cas                      *artifact.CAS
 	input                    Input
 	sql                      verifier.SQLJob
@@ -60,6 +65,10 @@ func newFixture(ctx context.Context, o Options) (_ *fixture, err error) {
 		return nil, errors.New("case_not_authorized")
 	}
 	f := &fixture{root: o.Root, original: map[string]string{}}
+	f.modelVersion = "demo-mock.v1"
+	if o.Model != nil {
+		f.modelVersion = o.Model.Model()
+	}
 	defer func() {
 		if err != nil {
 			_ = f.close()

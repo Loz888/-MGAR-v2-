@@ -30,7 +30,10 @@ P7-03 的无内部 Verifier 组无法直接复用现有严格依赖链：真实 
 暂停依据：`03_CODEX_WORK_PROTOCOL.md` 的“需求与协议冲突：先写 ... ADR ... 卡状态
 BLOCKED，等待用户批准”，以及用户要求出现规格冲突时提交 ADR/CHANGE_REQUEST 并暂停。
 
-## P7-06 · 真实 Provider 接通与有限预算执行（待确认）
+## P7-06 · 真实 Provider 接通与有限预算执行（已批准）
+
+2026-10-26 用户确认拆分，DeepSeek `flash-1017`、24×4 整轮 USD 2；依次实施 A/B/C，
+不进入 P8。以下为原提案记录，原先缺授权条件已解除；密钥、官方价格/标识与网络仍需落实。
 
 P7-04/P7-05 已通过。P7-06 目前 **BLOCKED / live NOT_RUN**：现有 Python Provider
 尚未接入 Go 实验预算与执行层，不能只填 API key 就视为接入完成。实际 CLI 拒绝
@@ -42,7 +45,8 @@ P7-04/P7-05 已通过。P7-06 目前 **BLOCKED / live NOT_RUN**：现有 Python 
 2. [P7-06B](tasks/P7-06B.md)：接入四组 live runner、96 个冻结分配与总预算门禁；离线验收。
 3. [P7-06C](tasks/P7-06C.md)：用户明确模型/密钥/价格/费用后执行真实 24×4 和对账。
 
-候选模型为 DeepSeek Chat，尚未选定；预算与单价留空，密钥仅通过环境 Secrets 配置。
+原提案候选为 DeepSeek Chat、预算留空；现已由用户指定 `flash-1017`、整轮 USD 2。
+官方单价仍待核实，密钥仅通过环境 Secrets 配置。
 [实验配置提案](eval/live/plan.json) 列明全部 96 项，均为 NOT_RUN。A/B 的离线接入
-批准不授权 C 的付费调用；不新增 DDL、不进入 P8。跨越约八个生产文件的单卡范围，
-按 `03_CODEX_WORK_PROTOCOL.md` 第 4 条提交本拆卡请求并暂停实际接入。
+提案原先未包含 C 的付费授权；用户本次已给出上述具体授权。不新增 DDL、不进入 P8。
+原暂停依据为 `03_CODEX_WORK_PROTOCOL.md` 第 4 条；本次批准已解除拆卡暂停。

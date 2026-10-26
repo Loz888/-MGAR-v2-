@@ -83,6 +83,9 @@ func runFull(ctx context.Context, o Options, x *experiment) (report Report, err 
 		defer func() { err = errors.Join(err, x.finish(f, report.RunID)) }()
 	}
 	report = Report{Case: o.Case, RunID: uuid.NewString(), Provider: "mock", Workers: []WorkerResult{}, Artifacts: []ArtifactResult{}, Answer: map[string]any{}}
+	if o.Model != nil {
+		report.Provider = "deepseek"
+	}
 	_, owner, e := f.s.CreateRunClaimed(ctx, report.RunID, f.input.Goal, 32, "demo-controller", 5*time.Minute)
 	if e != nil {
 		return report, e
@@ -256,7 +259,7 @@ func (f *fixture) batchWith(ctx context.Context, o Options, r *Report, owner sto
 		if c.NodeKey != n.Key {
 			return errors.New("unexpected_scheduled_node")
 		}
-		snap, e := f.s.BuildSnapshot(ctx, c, "demo-mock.v1", "demo.v1", f.cas)
+		snap, e := f.s.BuildSnapshot(ctx, c, f.modelVersion, "demo.v1", f.cas)
 		if e != nil {
 			return e
 		}
@@ -355,7 +358,7 @@ func (f *fixture) startVerification(ctx context.Context, run string, owner store
 	if e != nil {
 		return e
 	}
-	snap, e := f.s.BuildSnapshot(ctx, c, "demo-mock.v1", "demo.v1", f.cas)
+	snap, e := f.s.BuildSnapshot(ctx, c, f.modelVersion, "demo.v1", f.cas)
 	if e != nil {
 		return e
 	}

@@ -53,6 +53,9 @@ func RunBaseline(ctx context.Context, o Options) (report BaselineReport, err err
 }
 func runBaseline(ctx context.Context, o Options, x *experiment) (report BaselineReport, err error) {
 	report = BaselineReport{Schema: "baseline_execution.v1", Case: o.Case, RunID: uuid.NewString(), Provider: "mock", ExecutionStatus: "failed", SemanticStatus: "unverified", Candidates: []evalbaseline.Candidate{}, Workers: []WorkerResult{}, Errors: []string{}, Answer: map[string]any{}}
+	if o.Model != nil {
+		report.Provider = "deepseek"
+	}
 	switch o.Fault {
 	case "none", "wrong-data", "zero-tools", "forge-action", "forge-aggregate", "wrong-patch":
 	default:
@@ -265,7 +268,7 @@ func (f *fixture) baselineBatch(ctx context.Context, o Options, r *BaselineRepor
 		if c.NodeKey != n.Key {
 			return errors.New("baseline_scheduled_node_mismatch")
 		}
-		snap, e := f.s.BuildSnapshot(ctx, c, "demo-mock.v1", "demo.v1", f.cas)
+		snap, e := f.s.BuildSnapshot(ctx, c, f.modelVersion, "demo.v1", f.cas)
 		if e != nil {
 			return e
 		}

@@ -24,14 +24,17 @@ type ModelRequest struct {
 }
 
 func (r ModelRequest) Valid() bool {
+	if r.Provider == "deepseek" && (r.Pricing == nil || !digest.MatchString(r.InputDigest)) {
+		return false
+	}
 	if r.Routing != nil && (r.Pricing == nil || !r.Routing.valid(r.Model)) {
 		return false
 	}
-	if !logicalID.MatchString(r.LogicalID) || r.Provider != "mock" || !modelName.MatchString(r.Model) || r.Tokens <= 0 || r.Tokens > 10_000_000 || r.CostMicros < 0 || r.CostMicros > 1_000_000_000 || (r.InputDigest != "" && !digest.MatchString(r.InputDigest)) {
+	if !logicalID.MatchString(r.LogicalID) || (r.Provider != "mock" && r.Provider != "deepseek") || !modelName.MatchString(r.Model) || r.Tokens <= 0 || r.Tokens > 10_000_000 || r.CostMicros < 0 || r.CostMicros > 1_000_000_000 || (r.InputDigest != "" && !digest.MatchString(r.InputDigest)) {
 		return false
 	}
 	if r.Pricing == nil {
-		return r.CostMicros > 0 && r.InputTokens == 0 && r.OutputTokens == 0
+		return r.Provider == "mock" && r.CostMicros > 0 && r.InputTokens == 0 && r.OutputTokens == 0
 	}
 	cost, e := r.Pricing.Cost(r.InputTokens, r.OutputTokens)
 	return e == nil && r.Tokens == r.InputTokens+r.OutputTokens && cost == r.CostMicros && r.Pricing.Provider == r.Provider && r.Pricing.Model == r.Model
@@ -66,6 +69,8 @@ type ModelCall struct {
 	Reservation ModelReservation
 }
 type ModelUsage struct {
+	ResponseModel  string `json:"response_model,omitempty"`
+	ResponseDigest string `json:"response_sha256,omitempty"`
 	InputTokens    int64  `json:"input_tokens,omitempty"`
 	OutputTokens   int64  `json:"output_tokens,omitempty"`
 	PricingVersion string `json:"pricing_version,omitempty"`
@@ -77,6 +82,9 @@ type ModelUsage struct {
 }
 
 func (u ModelUsage) Valid() bool {
+	if (u.ResponseModel != "" && !modelName.MatchString(u.ResponseModel)) || (u.ResponseDigest != "" && !digest.MatchString(u.ResponseDigest)) {
+		return false
+	}
 	if !u.Known {
 		return u.Status == "unknown" && u.InputTokens == 0 && u.OutputTokens == 0 && u.PricingVersion == "" && u.Tokens == 0 && u.CostMicros == 0 && u.Source == "unknown"
 	}

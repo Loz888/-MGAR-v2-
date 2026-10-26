@@ -17,7 +17,7 @@ type Pricing struct {
 }
 
 func (p Pricing) Valid() bool {
-	return modelName.MatchString(p.Version) && p.Provider == "mock" && modelName.MatchString(p.Model) && p.InputMicrosPerMillion >= 0 && p.InputMicrosPerMillion <= 1_000_000_000 && p.OutputMicrosPerMillion >= 0 && p.OutputMicrosPerMillion <= 1_000_000_000
+	return modelName.MatchString(p.Version) && (p.Provider == "mock" || p.Provider == "deepseek") && modelName.MatchString(p.Model) && p.InputMicrosPerMillion >= 0 && p.InputMicrosPerMillion <= 1_000_000_000 && p.OutputMicrosPerMillion >= 0 && p.OutputMicrosPerMillion <= 1_000_000_000
 }
 func (p Pricing) Cost(input, output int64) (int64, error) {
 	if !p.Valid() || input < 0 || output < 0 || input > 10_000_000 || output > 10_000_000 || input+output > 10_000_000 {
