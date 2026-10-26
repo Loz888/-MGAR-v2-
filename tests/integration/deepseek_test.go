@@ -38,7 +38,10 @@ func TestDeepSeekDurableTransport(t *testing.T) {
 					t.Error("send before durable reserve", count, e)
 				}
 				raw, _ := io.ReadAll(r.Body)
-				if r.Method != "POST" || r.Header.Get("Authorization") != "Bearer loopback-test-only" || !strings.Contains(string(raw), `"model":"flash-1017"`) {
+				var wire map[string]any
+				_ = json.Unmarshal(raw, &wire)
+				thinking, _ := wire["thinking"].(map[string]any)
+				if r.Method != "POST" || r.Header.Get("Authorization") != "Bearer loopback-test-only" || wire["model"] != "deepseek-flash" || thinking["type"] != "disabled" || wire["temperature"] != float64(0) || wire["max_tokens"] != float64(40) {
 					t.Error("invalid transport")
 				}
 				body := deepseekBody()

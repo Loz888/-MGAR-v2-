@@ -1,0 +1,13 @@
+{
+  "url": "https://api.deepseek.com/user/balance",
+  "method": "GET",
+  "generation_requests_sent": 0,
+  "http_status": 200,
+  "provider_reports_available": true,
+  "observed_currencies": [
+    "CNY"
+  ],
+  "usd_balance_covers_two_dollar_cap": null,
+  "response_sha256": "9db96beb35ad656a10bafff1abb189c9e30287d428db43b72d12be00f2a0e1bd",
+  "note": "Missing USD row means unknown cap coverage, not insufficient funds; no currency conversion inferred. Prior first derivation is retained separately."
+}

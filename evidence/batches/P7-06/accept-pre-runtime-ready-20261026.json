@@ -1,0 +1,92 @@
+{
+  "card_id": "P7-06",
+  "status": "BLOCKED",
+  "git_commit": null,
+  "base_git_commit": "e9f642fb95b347736ca5df7419b7fac091d0ba4e",
+  "scope": "A/B completed and C offline analysis verified; authorized live execution awaits external prerequisites",
+  "authorization": {
+    "date": "2026-10-26",
+    "timezone": "Asia/Shanghai",
+    "split": [
+      "P7-06A",
+      "P7-06B",
+      "P7-06C"
+    ],
+    "provider": "deepseek",
+    "model": "flash-1017",
+    "total_budget_usd": "2.00",
+    "assignments": 96
+  },
+  "source_fingerprint": "a7aeb4060ed04e42a83277f04961c4f9602fcfbbd1346e087ccd9f806abbb7ce",
+  "subcards": [
+    {
+      "card_id": "P7-06A",
+      "status": "PASS",
+      "path": "evidence/batches/P7-06A/accept.json",
+      "sha256": "148617294c746ef150ab79e43d22e102053cdc21737e9ef54e51facb3112caf2"
+    },
+    {
+      "card_id": "P7-06B",
+      "status": "PASS",
+      "path": "evidence/batches/P7-06B/accept.json",
+      "sha256": "b3ddfdbb73262d9c2c1708497f49da5ce822050769cfd85fbe7c10a2fb0cf168"
+    },
+    {
+      "card_id": "P7-06C",
+      "status": "BLOCKED",
+      "path": "evidence/batches/P7-06C/accept.json",
+      "sha256": "5563a00fede32d5f388448a390f802c70742539b493f9533575b3b0b540ffa85"
+    }
+  ],
+  "blockers": [
+    "DEEPSEEK_API_KEY has no saved secure binding and is absent from the current runtime",
+    "Official availability of exact flash-1017 and pricing/context ceiling remain unverified",
+    "Official domain additions are saved in draft revision 5 but not applied to the current environment"
+  ],
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 526,
+      "passed": 526,
+      "failed_events": 0,
+      "skipped": 0,
+      "complete": true
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 399,
+      "passed": 399,
+      "failed": 0,
+      "skipped_or_xfailed": 0,
+      "complete": true,
+      "passed_subtests": 15
+    },
+    "status": "PASS"
+  },
+  "actual_paid_calls": 0,
+  "unverified": [
+    {
+      "name": "24_cases_times_4_arms_live_evaluation",
+      "status": "NOT_RUN",
+      "assignments": 96,
+      "reason": "Key, official model/pricing and applied network readiness missing; paid scope is already authorized"
+    },
+    {
+      "name": "real_model_closure",
+      "status": "NOT_RUN",
+      "reason": "No real model calls executed"
+    }
+  ],
+  "known_limitations": [
+    "C tooling passes synthetic contract tests; the actual 24 x 4 experiment remains NOT_RUN.",
+    "All current provider transport tests are literal loopback fixtures; no real or paid model requests were sent.",
+    "USD 2 authorization is already explicit; no duplicate model/budget/split approval is required.",
+    "Full-context conservative reservation may exceed the 20833-microdollar share; reject rather than invent a lower bound.",
+    "Independent mathematics is rerun; SQL/sandbox/Verifier evidence must originate from the trusted executor. Hashes are not supplier attestation.",
+    "The executor uses a fixed business DAG template; no arbitrary model-generated DAG capability claim.",
+    "No P8 implementation or acceptance is included."
+  ],
+  "historical_acceptance": "evidence/batches/P7-06/accept-pre-authorization-20261025.json",
+  "commands_reference": "evidence/batches/P7-06C/commands.json",
+  "timestamp_utc": "2026-10-26T09:39:45.242507+00:00"
+}

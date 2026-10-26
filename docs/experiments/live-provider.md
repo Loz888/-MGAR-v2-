@@ -1,7 +1,9 @@
 # P7-06 · DeepSeek 受信调用边界
 
 用户于 2026-10-26 确认 A→B→C 拆分，供应商 DeepSeek、模型 `flash-1017`，
-24×4 整轮最多 USD 2。该模型标识和价格尚未从官方核实；不得自动换成别的模型。
+24×4 整轮最多 USD 2。已核实官方 API 名称为 `deepseek-flash`，当前服务版本为
+DeepSeek-V4.1-Flash-1017。账本/分配保留原逻辑版本 `flash-1017`；官方别名可移动，
+不声称锁定不可变权重。请求显式 non-thinking、temperature=0，四组一致。
 
 P7-06A 在 Go broker 中接通受信传输与既有 PostgreSQL `model_calls`、资源和预算
 守卫。Python Worker 仍只有本地 Gateway token；子进程环境采用显式白名单，不包含
@@ -52,8 +54,9 @@ bash scripts/eval.sh --live --preflight
 
 真正执行还需 `--live --confirm-live`、`MGAR_ALLOW_PAID=1`、`MGAR_MAX_COST_USD=2.00`、
 `MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json` 和安全注入的 `DEEPSEEK_API_KEY`。
-没有单题覆盖、force、reset 或自动恢复参数。当前 `pricing.json` 明确 UNVERIFIED；
-零占位价格不被当作免费模型。官方资料需包含请求模型、最大上下文、最保守输入价格、
+没有单题覆盖、force、reset 或自动恢复参数。当前 `pricing.json` 已冻结官方最高费率；
+输入取 peak cache-miss USD 0.30/1M、输出 USD 1.20/1M，低价时段/缓存命中也按该
+保守单价估算，不称为实际账单。官方资料包含请求模型、最大上下文、最保守输入价格、
 输出价格与更新时间，保存到 `official-evidence.json` 后将摘要绑定到受信价格配置；
 资料超过七天需重新核实。配置 preflight 不探测网络，不代替环境实际就绪检查。
 
@@ -75,7 +78,8 @@ python eval/live/analyze.py --output evidence/eval/live/readiness-20261026
 默认只读固定实验目录，输出到新的独立目录。示例输出已归档，重跑时使用新的输出名。
 退出码 0 表示全部 96 项完成评价且至少一条严格真实调用闭环的证据满足检查；2 表示
 BLOCKED（包括未执行/未知/缺少闭环）；1 表示证据损坏或输入无效。这不是发请求入口。
-当前命令实际返回 2，全部 96 项 NOT_RUN，配对差值和整体费用估计均为 N/A。
+示例与最新 `runtime-check-20261026` 检查均实际返回 2，全部 96 项 NOT_RUN，
+配对差值和整体费用估计均为 N/A。
 
 评价器验证冻结数据、分配身份、原始报告 hash、运行时分组契约和预算；按冻结整数
 微美元单价重新计算每次 usage，匹配 PG 导出的模型调用数、token、费用及未知预留。
@@ -93,7 +97,12 @@ BLOCKED（包括未执行/未知/缺少闭环）；1 表示证据损坏或输入
 已观察通过率、全分配通过比例、NOT_RUN/UNKNOWN 数量分开。B3/A1/A2 单列未运行。
 单次顺序运行与固定 DAG 模板的限制仍适用，不预设收益。
 
-环境草稿已登记 `DEEPSEEK_API_KEY`（仅允许发往 api.deepseek.com）及两个官方域名。
-用户需在环境设置安全填写密钥并发布配置；保存草稿不等于运行环境已应用。
-待观察到就绪后再核实模型与报价，检查保守单次预留能否落入每份预算。无需再次授权
-已批准的 USD 2 范围；若官方模型不存在或上界无法容纳，保持阻塞并报告，不擅自改配置。
+环境已注入 `DEEPSEEK_API_KEY`（仅允许发往 api.deepseek.com）；官方 API/文档的
+实际 HTTPS 请求成功。平台状态仍为 unknown，仅报告实际操作结果。当前阻塞已经从
+缺 key/报价转为输入预留：1M 上下文容量加 1024 输出，按原规则需 315802 微美元、
+1049600 token，超过每份 20833 微美元与 65536 token。即使十进制 1M 也无法容纳。
+这不是实际费用估计。正式 preflight 退出 2，不创建分配，不发生成请求。
+
+输入上界修订见 [ADR-0017](../adr/ADR-0017.md)/[P7-06D 提案](../../tasks/P7-06D.md)。
+需要先证明官方 tokenizer 与消息包装的输入上界，才可替代整模型容量预留；当前未
+实施该方案，不降低上界以强行通过。既有 2 美元授权继续有效，未再次请求密钥。

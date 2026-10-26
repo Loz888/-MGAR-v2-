@@ -129,5 +129,162 @@
     "exit_code": 0,
     "log_path": "evidence/batches/P7-06C/whitespace-check.log",
     "timestamp_utc": "2026-10-26T09:39:45.172089+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./tests/integration",
+      "-run",
+      "^TestDeepSeekDurableTransport$"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06C/red-official-wire-contract.log",
+    "timestamp_utc": "2026-10-26T12:23:32.842583+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./internal/provider",
+      "./tests/integration",
+      "-run",
+      "TestDeepSeek"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/official-wire-contract.log",
+    "timestamp_utc": "2026-10-26T12:24:00.194378+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./eval/live",
+      "-run",
+      "^TestOfficialFlash1017QuoteRejectsBeforeAllocation$"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06C/red-published-quote.log",
+    "timestamp_utc": "2026-10-26T12:25:02.188891+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06C/freeze_official.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/freeze-official.log",
+    "timestamp_utc": "2026-10-26T12:26:21.853096+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./eval/live",
+      "-run",
+      "TestOfficialFlash1017QuoteRejectsBeforeAllocation|TestLivePreflight"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/published-quote-gate.log",
+    "timestamp_utc": "2026-10-26T12:26:22.685483+00:00"
+  },
+  {
+    "command": [
+      "env",
+      "MGAR_ALLOW_PAID=1",
+      "MGAR_MAX_COST_USD=2.00",
+      "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+      "bash",
+      "scripts/eval.sh",
+      "--live",
+      "--confirm-live",
+      "--preflight"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06C/runtime-live-preflight.log",
+    "timestamp_utc": "2026-10-26T12:29:09.980394+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/live/analyze.py",
+      "--output",
+      "evidence/eval/live/runtime-check-20261026"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06C/runtime-blocked-report.log",
+    "timestamp_utc": "2026-10-26T12:30:36.857693+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06C/probe_official.py",
+      "evidence/batches/P7-06C/official-check-20261026"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/official-check-20261026/fetch.json",
+    "timestamp_utc": "2026-10-26T12:17:01.570714+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/runtime-plain-go.log",
+    "timestamp_utc": "2026-10-26T12:32:18.093717+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/runtime-credential-and-format-audit.log",
+    "timestamp_utc": "2026-10-26T12:37:53.028770+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/runtime-offline-full.log",
+    "timestamp_utc": "2026-10-26T12:37:59.792298+00:00"
+  },
+  {
+    "command": [
+      "env",
+      "MGAR_ALLOW_PAID=1",
+      "MGAR_MAX_COST_USD=2.00",
+      "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+      "bash",
+      "scripts/eval.sh",
+      "--live",
+      "--confirm-live"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06C/runtime-card-command.log",
+    "timestamp_utc": "2026-10-26T12:41:09.836056+00:00"
+  },
+  {
+    "command": [
+      "git",
+      "-c",
+      "core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol",
+      "diff",
+      "--cached",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/runtime-whitespace-check.log",
+    "timestamp_utc": "2026-10-26T12:41:40.816260+00:00"
   }
 ]

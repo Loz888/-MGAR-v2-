@@ -1,0 +1,25 @@
+[
+  {
+    "name": "token-usage",
+    "url": "https://api-docs.deepseek.com/quick_start/token_usage/",
+    "http_status": 200,
+    "sha256": "f714e2bc8d423cc25ba123a914c2d837c893571086ff75f48c775928aab97897",
+    "links": [
+      "https://github.com/deepseek-ai/awesome-deepseek-integration/tree/main",
+      "https://deepseek-harness.github.io/deepseek-harness/en/guide/quickstart",
+      "https://github.com/deepseek-ai/awesome-deepseek-agent/tree/main",
+      "https://cdn.deepseek.com/api-docs/deepseek_v4_tokenizer.zip",
+      "https://github.com/deepseek-ai"
+    ]
+  },
+  {
+    "name": "chat-api",
+    "url": "https://api-docs.deepseek.com/api/create-chat-completion/",
+    "http_status": 200,
+    "sha256": "5f89e4bafbec8808896d7890ad23ca4caaa8a19ff226d881efae63a61a12d169",
+    "links": [
+      "https://github.com/deepseek-ai/awesome-deepseek-integration/tree/main",
+      "https://github.com/deepseek-ai"
+    ]
+  }
+]

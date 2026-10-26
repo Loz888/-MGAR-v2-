@@ -1,0 +1,64 @@
+{
+  "models": {
+    "url": "https://api.deepseek.com/models",
+    "time_utc": "2026-10-26T12:17:01.570714+00:00",
+    "redirects": [],
+    "http_status": 200,
+    "final_url": "https://api.deepseek.com/models",
+    "sha256": "b4a502059eb2dafad6380e0a57b2debf31219ae859cba9f0e019d48ae473be2f",
+    "model_ids": [
+      "deepseek-flash",
+      "deepseek-v4-pro"
+    ]
+  },
+  "pricing-slash": {
+    "url": "https://api-docs.deepseek.com/quick_start/pricing/",
+    "time_utc": "2026-10-26T12:17:01.571125+00:00",
+    "redirects": [],
+    "http_status": 200,
+    "final_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+    "sha256": "b856a6e93fa4793ecc8f3fd03a01bb7d8f7572f78a4739da8ce6dbdb09328d66",
+    "artifact": "pricing-slash.raw"
+  },
+  "pricing-markdown": {
+    "url": "https://api-docs.deepseek.com/quick_start/pricing.md",
+    "time_utc": "2026-10-26T12:17:01.571433+00:00",
+    "redirects": [],
+    "http_status": 200,
+    "final_url": "https://api-docs.deepseek.com/quick_start/pricing.md",
+    "sha256": "50490e85b6a47700cef1c847cfb505afb136a0d45ce48f519255960c7f63b9f3",
+    "artifact": "pricing-markdown.raw"
+  },
+  "news261017": {
+    "url": "https://api-docs.deepseek.com/news/news261017",
+    "time_utc": "2026-10-26T12:17:01.571670+00:00",
+    "redirects": [
+      {
+        "status": 302,
+        "url": "https://api-docs.deepseek.com/news/news261017/"
+      }
+    ],
+    "http_status": 200,
+    "final_url": "https://api-docs.deepseek.com/news/news261017/",
+    "sha256": "c557ba334297a0a802282431dd15c9ba6942846a71860051c1c7b9e53d5dc037",
+    "artifact": "news261017.raw"
+  },
+  "site-main": {
+    "url": "https://api-docs.deepseek.com/assets/js/main.9486cded.js",
+    "time_utc": "2026-10-26T12:17:02.001546+00:00",
+    "redirects": [],
+    "http_status": 200,
+    "final_url": "https://api-docs.deepseek.com/assets/js/main.9486cded.js",
+    "sha256": "893abbad165957abbb3999b980554b1c01412e84d5341a11a84a2320b5cb6ba4",
+    "artifact": "site-main.raw"
+  },
+  "site-runtime": {
+    "url": "https://api-docs.deepseek.com/assets/js/runtime~main.201766f5.js",
+    "time_utc": "2026-10-26T12:17:02.946836+00:00",
+    "redirects": [],
+    "http_status": 200,
+    "final_url": "https://api-docs.deepseek.com/assets/js/runtime~main.201766f5.js",
+    "sha256": "ea1186a9584a62a24e7694f2a6b7f7bdbf1923640a8e781157e3ea9e552fc017",
+    "artifact": "site-runtime.raw"
+  }
+}

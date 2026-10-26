@@ -83,11 +83,13 @@ Go 长日志按 Test 重新拼接再解析，缺失任一并发档、死亡窗�
 B0/B1/B2/B4 共 96 项、整轮 USD 2。[冻结配置](../eval/live/plan.json) 不允许替换模型、
 转移份额或自动重启已开始的分配。A 的可信 Provider 和 B 的全实验预算守卫均已离线验收。
 
-C 的独立数学评价、逐题/按类/配对统计和整数费用对账工具已实现，当前真实请求仍为 0，
-96 项全部 NOT_RUN。尚缺安全注入的 API key、官方模型/价格核实和已应用的网络配置。
+C 的独立数学评价、逐题/按类/配对统计和整数费用对账工具已实现，当前生成请求仍为 0，
+96 项全部 NOT_RUN。密钥已安全注入，官方 GET /models 返回 200，Flash-1017 映射与
+最高费率已核实。整上下文预留超出冻结份额，正式 preflight 因输入预算上界拒绝。
 费用估计 N/A，不能将合成账本测试或本地 HTTP fixture 当作真实模型表现。
 
-[当前报告](../evidence/eval/live/readiness-20261026/report.md) 与
+[当前报告](../evidence/eval/live/runtime-check-20261026/report.md) 与
 [C 验收记录](../evidence/batches/P7-06C/accept.json) 保存阻塞状态。
 执行入口、评价命令与已知局限见 [可信调用说明](experiments/live-provider.md)。
 范围与验收拆分见 [ADR-0016](adr/ADR-0016.md)；P7-06 父卡和 C 均保持 BLOCKED。
+新的上界复现、待审阅方案及提案子卡见 [ADR-0017](adr/ADR-0017.md)。

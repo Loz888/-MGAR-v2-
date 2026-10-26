@@ -1,19 +1,19 @@
 {
-  "status": "UNVERIFIED",
+  "status": "VERIFIED",
   "config": {
     "price": {
       "provider": "deepseek",
       "model": "flash-1017",
-      "version": "",
-      "input_micros_per_million": 0,
-      "output_micros_per_million": 0
+      "version": "deepseek.flash1017.20261026.peak-miss.v1",
+      "input_micros_per_million": 300000,
+      "output_micros_per_million": 1200000
     },
-    "context_tokens": 0,
+    "context_tokens": 1048576,
     "output_tokens": 1024,
     "max_prompt_bytes": 65536,
-    "official_evidence_sha256": ""
+    "official_evidence_sha256": "cdd435939fa386777d0dd2c22c927eb1ba2c246189addee7df7464752957eae4"
   },
   "pricing_url": "https://api-docs.deepseek.com/quick_start/pricing",
   "models_url": "https://api.deepseek.com/models",
-  "reviewed_at": ""
+  "reviewed_at": "2026-10-26T12:26:21+00:00"
 }

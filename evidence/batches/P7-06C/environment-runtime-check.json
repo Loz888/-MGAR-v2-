@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-26",
+  "timezone": "Asia/Shanghai",
+  "source": "environment_status + process presence + official HTTPS GET evidence",
+  "observations_current": true,
+  "platform_reported_state": {
+    "network": "unknown",
+    "secret": "unknown"
+  },
+  "official_custom_hosts": [
+    "api-docs.deepseek.com",
+    "api.deepseek.com"
+  ],
+  "key_present": true,
+  "actual_models_http_status": 200,
+  "actual_generation_requests": 0,
+  "blocker": "conservative_call_bound_exceeds_slot_budget",
+  "required_call_reservation": {
+    "tokens": 1049600,
+    "cost_micros": 315802
+  },
+  "frozen_assignment_limit": {
+    "tokens": 65536,
+    "cost_micros": 20833
+  },
+  "proposal": "docs/adr/ADR-0017.md; tasks/P7-06D.md (not approved or implemented)"
+}

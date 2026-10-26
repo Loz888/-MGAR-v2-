@@ -46,7 +46,7 @@
 | [P7-06](tasks/P7-06.md) | P7 | 真实模型有限预算评测与对账 | P7-05、P7-06A/B/C | BLOCKED | `evidence/batches/P7-06/accept.json` |
 | [P7-06A](tasks/P7-06A.md) | P7 | 可信 Provider 与持久账本接通 | P7-05 | PASS | `evidence/batches/P7-06A/accept.json` |
 | [P7-06B](tasks/P7-06B.md) | P7 | 冻结 live runner 与总预算 | P7-06A | PASS | `evidence/batches/P7-06B/accept.json` |
-| [P7-06C](tasks/P7-06C.md) | P7 | 真实执行、独立评价与对账 | P7-06B、密钥、官方价格/模型、网络 | BLOCKED | `evidence/batches/P7-06C/accept.json` |
+| [P7-06C](tasks/P7-06C.md) | P7 | 真实执行、独立评价与对账 | P7-06B、可证明的输入预算上界 | BLOCKED | `evidence/batches/P7-06C/accept.json` |
 | [P8-01](tasks/P8-01.md) | P8 | 安全与一致性审计 | P7-06 | TODO | `evidence/batches/P8-01/accept.json` |
 | [P8-02](tasks/P8-02.md) | P8 | 干净环境复现与最终发布门禁 | P8-01 | TODO | `evidence/batches/P8-02/accept.json` |
 | [P8-03](tasks/P8-03.md) | P8 | 面试 Demo 与项目证据包 | P8-02 | TODO | `evidence/batches/P8-03/accept.json` |
@@ -87,3 +87,5 @@ P0-01 的原始未提交快照与失败记录保留于 `evidence/batches/P0-01/a
 **P7-06 授权（2026-10-26）：** 用户确认 A→B→C 拆分，DeepSeek `flash-1017`，24×4 整轮 USD 2。模型不替换，96 份各 20,833 微美元，不重用/转移份额。A/B 离线验收后方可执行 C；授权已明确，当前缺密钥及官方模型/计价核实。不进入 P8。
 
 **P7-06 当前（2026-10-26）：** A/B 已 PASS，C 的只读独立评价与整数费用对账已通过离线验证；完整保留 NOT_RUN/UNKNOWN、逐题/按类/全配对报告。真实分配 96 项仍 NOT_RUN，密钥、官方模型/单价与已应用的官方域名网络配置尚缺。环境草稿已保存，待安全填入密钥并发布；父卡和 C 保持 BLOCKED，未发送付费调用，不进入 P8。
+
+**P7-06 最新（2026-10-26）：** 当前密钥已注入，官方模型列表 GET 200；官方版本为 DeepSeek-V4.1-Flash-1017，API 名称 `deepseek-flash`。已修正接口映射/显式 non-thinking 并冻结最高单价。实际 preflight 因整上下文预留 315802 微美元/1049600 token 超出单项 20833 微美元/65536 token 而拒绝；不是缺少密钥或重复付费授权。96 项仍 NOT_RUN，无生成请求。拟先审阅 [ADR-0017](docs/adr/ADR-0017.md)/[P7-06D](tasks/P7-06D.md) 的官方 tokenizer 输入上界方案；D 未激活，父卡/C 保持 BLOCKED，不进入 P8。前文缺配置记录为历史状态。

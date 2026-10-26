@@ -1,0 +1,62 @@
+{
+  "schema_version": "official-provider-evidence.v1",
+  "reviewed_at": "2026-10-26T12:26:21+00:00",
+  "logical_model": "flash-1017",
+  "api_model": "deepseek-flash",
+  "served_version_at_review": "DeepSeek-V4.1-Flash-1017",
+  "alias_is_mutable": true,
+  "model_list_observation": {
+    "url": "https://api.deepseek.com/models",
+    "time_utc": "2026-10-26T12:17:01.570714+00:00",
+    "redirects": [],
+    "http_status": 200,
+    "final_url": "https://api.deepseek.com/models",
+    "sha256": "b4a502059eb2dafad6380e0a57b2debf31219ae859cba9f0e019d48ae473be2f",
+    "model_ids": [
+      "deepseek-flash",
+      "deepseek-v4-pro"
+    ]
+  },
+  "sources": [
+    {
+      "url": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "http_status": 200,
+      "path": "evidence/batches/P7-06C/official-check-20261026/pricing-slash.raw",
+      "sha256": "b856a6e93fa4793ecc8f3fd03a01bb7d8f7572f78a4739da8ce6dbdb09328d66",
+      "retrieved_at": "2026-10-26T12:17:01.571125+00:00"
+    },
+    {
+      "url": "https://api-docs.deepseek.com/news/news261017/",
+      "http_status": 200,
+      "path": "evidence/batches/P7-06C/official-check-20261026/news261017.raw",
+      "sha256": "c557ba334297a0a802282431dd15c9ba6942846a71860051c1c7b9e53d5dc037",
+      "retrieved_at": "2026-10-26T12:17:01.571670+00:00"
+    }
+  ],
+  "price_basis": {
+    "currency": "USD",
+    "unit_tokens": 1000000,
+    "input": "peak cache-miss ceiling",
+    "output": "peak ceiling",
+    "input_micros_per_million": 300000,
+    "output_micros_per_million": 1200000
+  },
+  "context": {
+    "published_label": "1M",
+    "conservative_interpretation_tokens": 1048576,
+    "interpretation": "API documentation defines K as 1024 (384K = 393216); use 1024 squared for 1M. Even 1000000 cannot fit the current frozen share."
+  },
+  "generation_parameters": {
+    "thinking": {
+      "type": "disabled"
+    },
+    "temperature": 0,
+    "max_tokens": 1024
+  },
+  "generation_requests_sent": 0,
+  "limitations": [
+    "Official API alias is mutable; no immutable model weights or future version guarantee.",
+    "Peak cache-miss rates are conservative estimates, not an actual provider invoice.",
+    "Full-context reservation does not fit frozen cost/token limits; this evidence does not enable live generation."
+  ]
+}

@@ -15,6 +15,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"slices"
 	"syscall"
 	"testing"
 	"time"
@@ -77,6 +78,31 @@ func TestLivePreflightNoKeyNoSend(t *testing.T) {
 	}
 	if _, e := Run(context.Background(), root, false); e == nil {
 		t.Fatal("live default enabled")
+	}
+}
+
+// Public pricing evidence is available, but it cannot make a conservative
+// full-context reservation fit the already frozen cost/token share. This test
+// has no network or database writes and must never consume the live allocation.
+func TestOfficialFlash1017QuoteRejectsBeforeAllocation(t *testing.T) {
+	t.Setenv("DEEPSEEK_API_KEY", "synthetic-never-sent")
+	t.Setenv("MGAR_ALLOW_PAID", "1")
+	t.Setenv("MGAR_MAX_COST_USD", "2.00")
+	t.Setenv("MGAR_LIVE_CASELIST", "eval/cases/frozen-live-24.json")
+	root, _ := filepath.Abs("../..")
+	r := Preflight(root, true)
+	if r.Ready || r.Pricing.Status != "VERIFIED" || !slices.Contains(r.Blockers, "conservative_call_bound_exceeds_slot_budget") {
+		t.Fatal("published quote must be verified but unaffordable under the frozen policy", r.Blockers)
+	}
+	bound, e := r.Pricing.Config.Price.Cost(r.Pricing.Config.ContextTokens, r.Pricing.Config.OutputTokens)
+	if e != nil || bound != 315802 || len(r.Assignments) != 96 || r.AllocatedMicros != 1999968 {
+		t.Fatal("unexpected conservative reservation/allocation", bound, e)
+	}
+	if e := r.Pricing.Config.Price.Valid(); !e {
+		t.Fatal("invalid published price")
+	}
+	if _, e := os.Lstat(statePath(root)); !os.IsNotExist(e) {
+		t.Fatal("preflight consumed or found a live allocation")
 	}
 }
 func TestLiveJournalChild(t *testing.T) {

@@ -1,0 +1,3 @@
+{
+  "stdout": "{\"official_price\": \"VERIFIED\", \"api_model\": \"deepseek-flash\", \"conservative_call_bound_micros\": 315802, \"assignment_cap_micros\": 20833, \"required_input_output_reservation_tokens\": 1049600, \"assignment_token_limit\": 65536, \"generation_requests_sent\": 0}\n"
+}

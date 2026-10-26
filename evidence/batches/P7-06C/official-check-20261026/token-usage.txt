@@ -1,0 +1,71 @@
+Token & Token Usage | DeepSeek API Docs
+Skip to main content
+Search / Fetch API is now available, powered by our in-house search engine and supporting web search and fetch.
+Click here to view the guide.
+DeepSeek API Docs
+Resources
+Integrations
+API Status
+FAQ
+English
+English
+中文（中国）
+DeepSeek Platform
+中
+Quick Start
+API Guides
+API Reference
+News
+Change Log
+Your First API Call
+Models & Pricing
+Token & Token Usage
+Rate Limit & Isolation
+Error Codes
+Agent Integrations
+DeepSeek Harness
+Claude Code
+Codex
+OpenCode
+OpenClaw
+Hermes
+Reasonix
+WorkBuddy/CodeBuddy
+Qoder
+Contribute Your Agent Integrations
+Token & Token Usage
+On this page
+Token & Token Usage
+Tokens are the basic units used by models to represent natural language text, and also the units we use for billing. They can be intuitively understood as 'characters' or 'words'. Typically, a Chinese word, an English word, a number, or a symbol is counted as a token.
+Generally, the conversion ratio between tokens in the model and the number of characters is approximately as following:
+1 English character ≈ 0.3 token.
+1 Chinese character ≈ 0.6 token.
+However, due to the different tokenization methods used by different models, the conversion ratios can vary. The actual number of tokens processed each time is based on the model's return, which you can view from the usage results.
+Calculate token usage offline
+​
+You can run the demo tokenizer code in the following zip package to calculate the token usage for your intput/output.
+deepseek_tokenizer.zip
+Calculate image token usage
+​
+You can estimate the number of tokens consumed by an image based on its dimensions. Images are automatically resized before inference, and there is an upper bound on the number of tokens per image; for details, see
+Vision
+.
+This is an estimate only; the actual number of tokens produced during processing may vary slightly, so refer to the usage returned by the API as the source of truth.
+Image Token Calculator
+Width (px)
+Height (px)
+Calculate
+Previous
+Models & Pricing
+Next
+Rate Limit & Isolation
+Calculate token usage offline
+Calculate image token usage
+WeChat Official Account
+Community
+Email
+Discord
+Twitter
+More
+GitHub
+Copyright © 2026 DeepSeek, Inc.

@@ -1,0 +1,3 @@
+{
+  "stdout": "--- FAIL: TestOfficialFlash1017QuoteRejectsBeforeAllocation (0.00s)\n    live_test.go:95: published quote must be verified but unaffordable under the frozen policy [official_model_and_pricing_unverified]\nFAIL\nFAIL\tgithub.com/Loz888/-MGAR-v2-/eval/live\t0.006s\nFAIL\n"
+}

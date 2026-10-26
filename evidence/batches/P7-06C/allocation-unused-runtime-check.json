@@ -1,0 +1,8 @@
+{
+  "allocation_control_run_id": "92d7ff2b-cf3d-5ec3-a1a0-c938f24aa4a7",
+  "allocation_control_rows": 0,
+  "formal_journal_exists": false,
+  "DEEPSEEK_API_KEY_present": true,
+  "generation_requests_sent": 0,
+  "checked_after": "runtime-card-command exit 2"
+}

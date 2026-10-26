@@ -1,0 +1,11 @@
+{
+  "url": "https://api.deepseek.com/user/balance",
+  "method": "GET",
+  "generation_requests_sent": 0,
+  "http_status": 200,
+  "provider_reports_available": true,
+  "usd_balance_covers_two_dollar_cap": false,
+  "response_sha256": "9db96beb35ad656a10bafff1abb189c9e30287d428db43b72d12be00f2a0e1bd",
+  "superseded_by": "account-availability-check.json",
+  "correction": "The first derived false value did not distinguish missing USD row. The current check reports CNY balance and unknown USD cap coverage."
+}

@@ -1,0 +1,84 @@
+DeepSeek-V4.1-Flash-1017: Wish-Driven Programming Made Real | DeepSeek API Docs
+Skip to main content
+Search / Fetch API is now available, powered by our in-house search engine and supporting web search and fetch.
+Click here to view the guide.
+DeepSeek API Docs
+Resources
+Integrations
+API Status
+FAQ
+English
+English
+中文（中国）
+DeepSeek Platform
+中
+Quick Start
+API Guides
+API Reference
+News
+Change Log
+DeepSeek-V4.1-Flash-1017 Release 2026/10/17
+DeepSeek-V4.1-Flash Release 2026/09/10
+DeepSeek-V4-Flash-Vision-Exp Release 2026/08/21
+DeepSeek-V4-Pro GA Release 2026/08/13
+DeepSeek-V4 Preview Release 2026/04/24
+DeepSeek-V3.2 Release 2025/12/01
+DeepSeek-V3.2-Exp Release 2025/09/29
+DeepSeek V3.1 Update 2025/09/22
+DeepSeek V3.1 Release 2025/08/21
+DeepSeek-R1-0528 Release 2025/05/28
+DeepSeek-V3-0324 Release 2025/03/25
+DeepSeek-R1 Release 2025/01/20
+DeepSeek APP 2025/01/15
+Introducing DeepSeek-V3 2024/12/26
+DeepSeek-V2.5-1210 Release 2024/12/10
+DeepSeek-R1-Lite Release 2024/11/20
+DeepSeek-V2.5 Release 2024/09/05
+Context Caching is Available 2024/08/02
+New API Features 2024/07/25
+DeepSeek-V4.1-Flash-1017 Release 2026/10/17
+On this page
+DeepSeek-V4.1-Flash-1017: Wish-Driven Programming Made Real
+🚀 DeepSeek-V4.1-Flash-1017 is here!
+​
+Stronger benchmark performance, faster task completion, and shorter outputs than the previous version—a Pareto improvement in performance and cost. Now live on our website, app, and API.
+🛠️ Optimized for DeepSeek Harness, Tencent CodeBuddy, WorkBuddy, and more. Upgrade to DeepSeek Harness v0.2.1-rc.1 or later for the best experience with the new model.
+DeepSWE v1.1 Pass@1 vs. cost per task for DeepSeek V4.1 Flash 1017, tested with the mini-swe-v2 harness.
+🎮 Build complete projects from scratch
+​
+DeepSeek-V4.1-Flash-1017 uses reinforcement learning with self-feedback to improve end-to-end project development—from game creation to 3D modeling.
+See it in action 👇
+Example 1: 3D modeling of the Forbidden City
+Example 2: A web-based racing game
+Example 3: A Portal 2 recreation built with the Godot engine
+Example 4: Valley of Ages — a 3D scene tracing the evolution from prehistoric times to the modern era
+🔍 Search & Fetch APIs are now open to everyone!
+​
+Powered by our in-house search engine, serving hundreds of millions of requests daily worldwide.
+💰 Each endpoint: $0.75 per 1,000 calls.
+📖 Docs:
+API Guides - Search & Fetch
+📌 Search & Fetch calls via server-side tools in DeepSeek Harness, Claude Code, and Codex are currently free for DeepSeek API users. Billing starts
+Oct 31, 2026, at 16:00 UTC
+.
+🔓 Open-source release
+​
+Get DeepSeek-V4.1-Flash-1017:
+🤗 Hugging Face:
+https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017
+🔗 ModelScope:
+https://modelscope.cn/models/deepseek-ai/DeepSeek-V4.1-Flash-1017
+Next
+DeepSeek-V4.1-Flash: Smarter, Faster, More Efficient
+🚀 DeepSeek-V4.1-Flash-1017 is here!
+🎮 Build complete projects from scratch
+🔍 Search & Fetch APIs are now open to everyone!
+🔓 Open-source release
+WeChat Official Account
+Community
+Email
+Discord
+Twitter
+More
+GitHub
+Copyright © 2026 DeepSeek, Inc.
