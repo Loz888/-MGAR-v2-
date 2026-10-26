@@ -1,0 +1,19 @@
+{
+  "status": "UNVERIFIED",
+  "config": {
+    "price": {
+      "provider": "deepseek",
+      "model": "flash-1017",
+      "version": "",
+      "input_micros_per_million": 0,
+      "output_micros_per_million": 0
+    },
+    "context_tokens": 0,
+    "output_tokens": 1024,
+    "max_prompt_bytes": 65536,
+    "official_evidence_sha256": ""
+  },
+  "pricing_url": "https://api-docs.deepseek.com/quick_start/pricing",
+  "models_url": "https://api.deepseek.com/models",
+  "reviewed_at": ""
+}

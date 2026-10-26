@@ -45,7 +45,7 @@
 | [P7-05](tasks/P7-05.md) | P7 | 压力、并发和单机混沌实验总验收 | P7-04 | PASS | `evidence/batches/P7-05/accept.json` |
 | [P7-06](tasks/P7-06.md) | P7 | 真实模型有限预算评测与对账 | P7-05、P7-06A/B/C | BLOCKED | `evidence/batches/P7-06/accept.json` |
 | [P7-06A](tasks/P7-06A.md) | P7 | 可信 Provider 与持久账本接通 | P7-05 | PASS | `evidence/batches/P7-06A/accept.json` |
-| [P7-06B](tasks/P7-06B.md) | P7 | 冻结 live runner 与总预算 | P7-06A | TODO | `evidence/batches/P7-06B/accept.json` |
+| [P7-06B](tasks/P7-06B.md) | P7 | 冻结 live runner 与总预算 | P7-06A | PASS | `evidence/batches/P7-06B/accept.json` |
 | [P7-06C](tasks/P7-06C.md) | P7 | 真实执行、独立评价与对账 | P7-06B、密钥、官方价格/模型、网络 | BLOCKED | `evidence/batches/P7-06C/accept.json` |
 | [P8-01](tasks/P8-01.md) | P8 | 安全与一致性审计 | P7-06 | TODO | `evidence/batches/P8-01/accept.json` |
 | [P8-02](tasks/P8-02.md) | P8 | 干净环境复现与最终发布门禁 | P8-01 | TODO | `evidence/batches/P8-02/accept.json` |

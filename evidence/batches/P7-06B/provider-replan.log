@@ -1,0 +1,3 @@
+{
+  "stdout": "=== RUN   TestLiveDevelopmentProviderReplan\n=== RUN   TestLiveDevelopmentProviderReplan/B2\n    live_test.go:193: development replan arm=B2 calls=12 transitions=[prior_input_opened current_input_opened_after_prior_observation baseline_replan_recomputes_unverified_producers]\n=== RUN   TestLiveDevelopmentProviderReplan/B4\n    live_test.go:193: development replan arm=B4 calls=10 transitions=[prior_input_opened current_input_opened_after_prior_observation]\n--- PASS: TestLiveDevelopmentProviderReplan (2.35s)\n    --- PASS: TestLiveDevelopmentProviderReplan/B2 (1.08s)\n    --- PASS: TestLiveDevelopmentProviderReplan/B4 (1.26s)\nPASS\nok  \tgithub.com/Loz888/-MGAR-v2-/internal/demo\t2.354s\n"
+}

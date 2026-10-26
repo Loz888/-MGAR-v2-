@@ -6,6 +6,7 @@ import (
 	"errors"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/Loz888/-MGAR-v2-/internal/artifact"
@@ -15,6 +16,7 @@ import (
 	"github.com/Loz888/-MGAR-v2-/internal/handoff"
 	"github.com/Loz888/-MGAR-v2-/internal/planner"
 	"github.com/Loz888/-MGAR-v2-/internal/policy"
+	"github.com/Loz888/-MGAR-v2-/internal/provider"
 	"github.com/Loz888/-MGAR-v2-/internal/scheduler"
 	"github.com/Loz888/-MGAR-v2-/internal/store"
 	"github.com/Loz888/-MGAR-v2-/internal/verifier"
@@ -82,6 +84,7 @@ type experiment struct {
 	c         ExperimentCase
 	r         *ExperimentReport
 	refreshed bool
+	model     *provider.Client
 }
 type injectedToolFailure struct{}
 
@@ -94,7 +97,23 @@ func RunExperiment(ctx context.Context, o Options, arm string) (r ExperimentRepo
 		return r, errors.New("experiment_configuration_denied")
 	}
 	// No truth file is read by an executor. The caller additionally validates the frozen manifest.
-	raw, e := os.ReadFile(filepath.Join(o.Root, "eval/cases/offline-60.json"))
+	manifest := "eval/cases/offline-60.json"
+	if o.Model != nil {
+		if arm != "B0" && arm != "B1" && arm != "B2" && arm != "B4" {
+			return r, errors.New("live_arm_denied")
+		}
+		if o.CostMicros <= 0 || o.CostMicros > 20833 {
+			return r, errors.New("live_budget_denied")
+		}
+		if o.Model.Local() && strings.HasPrefix(o.Case, "development-") {
+			manifest = "eval/cases/development.json"
+		} else if !o.Model.Local() && strings.HasPrefix(o.Case, "live-") && o.RunID == LiveRunID(o.Case, arm) && o.CostMicros == 20833 {
+			manifest = "eval/cases/frozen-live-24.json"
+		} else {
+			return r, errors.New("live_case_identity_denied")
+		}
+	}
+	raw, e := os.ReadFile(filepath.Join(o.Root, manifest))
 	if e != nil {
 		return r, e
 	}
@@ -111,8 +130,11 @@ func RunExperiment(ctx context.Context, o Options, arm string) (r ExperimentRepo
 	if c.ID == "" || c.Limits.Parallel != 4 || c.Limits.Models < 0 || c.Limits.Models > 64 || c.Limits.Tools != 64 || c.Limits.Tokens != 65536 || c.Limits.Cost != 1000000 {
 		return r, errors.New("experiment_case_denied")
 	}
+	if o.Model != nil {
+		c.Limits.Cost = o.CostMicros
+	}
 	r = ExperimentReport{Schema: "experiment.v1", Arm: arm, Treatment: cfg, Case: c, Models: []json.RawMessage{}, Tools: []json.RawMessage{}, Plans: []planner.Proposal{}, Selections: []inputcontext.SelectionResult{}, Replans: []store.ReplanResult{}, InputTransitions: []string{}, ExecutionStatus: "failed", Answer: map[string]any{}}
-	x := &experiment{arm: cfg, c: c, r: &r}
+	x := &experiment{arm: cfg, c: c, r: &r, model: o.Model}
 	start := time.Now()
 	defer func() {
 		r.ElapsedMS = float64(time.Since(start).Microseconds()) / 1000
@@ -337,12 +359,20 @@ func (x *experiment) replanStrict(ctx context.Context, f *fixture, run string, o
 	// Invoke the same frozen mock adapter only after reservation. Its proposal
 	// remains untrusted until the existing bounded Replan API accepts it.
 	var decision []byte
-	_, e = resources.Model(ctx, f.verification.claim, req, func(context.Context) (budget.ModelUsage, bool, error) {
-		var err error
-		decision, err = mockDecision("planner", request, &p, "none")
-		in, out := int64((len(requestBytes)+3)/4), int64((len(decision)+3)/4)
-		return budget.ModelUsage{Status: "succeeded", Known: true, Source: "local_stub", InputTokens: in, OutputTokens: out, Tokens: in + out, PricingVersion: "demo-free.v1"}, true, err
-	})
+	if x.model != nil {
+		var payload map[string]any
+		_ = json.Unmarshal(requestBytes, &payload)
+		payload["dispatch_contract"] = map[string]any{"node": "planner", "business": f.input.Business, "input_version": f.input.Version, "required_plan": p}
+		requestBytes = inputcontext.Canonical(payload)
+		decision, _, e = x.model.Call(ctx, resources, f.verification.claim, request.LogicalID, requestBytes)
+	} else {
+		_, e = resources.Model(ctx, f.verification.claim, req, func(context.Context) (budget.ModelUsage, bool, error) {
+			var err error
+			decision, err = mockDecision("planner", request, &p, "none")
+			in, out := int64((len(requestBytes)+3)/4), int64((len(decision)+3)/4)
+			return budget.ModelUsage{Status: "succeeded", Known: true, Source: "local_stub", InputTokens: in, OutputTokens: out, Tokens: in + out, PricingVersion: "demo-free.v1"}, true, err
+		})
+	}
 	if e != nil {
 		return p, e
 	}
@@ -350,7 +380,7 @@ func (x *experiment) replanStrict(ctx context.Context, f *fixture, run string, o
 		Type   string           `json:"type"`
 		Output planner.Proposal `json:"output"`
 	}
-	if verifier.StrictJSON(decision, &decoded) != nil || decoded.Type != "final" || planner.Validate(decoded.Output) != nil {
+	if verifier.StrictJSON(decision, &decoded) != nil || decoded.Type != "final" || planner.Validate(decoded.Output) != nil || string(inputcontext.Canonical(decoded.Output)) != string(inputcontext.Canonical(p)) {
 		return p, errors.New("replan_model_output_invalid")
 	}
 	p = decoded.Output
@@ -358,9 +388,9 @@ func (x *experiment) replanStrict(ctx context.Context, f *fixture, run string, o
 	raw := inputcontext.Canonical(candidate)
 	configs := map[string]inputcontext.ExecutionConfig{}
 	for _, n := range p.Nodes {
-		configs[n.Key] = inputcontext.ExecutionConfig{ModelVersion: "demo-mock.v1", PolicyVersion: "demo.v1", OutputToolVersion: "demo.v1"}
+		configs[n.Key] = inputcontext.ExecutionConfig{ModelVersion: f.modelVersion, PolicyVersion: "demo.v1", OutputToolVersion: "demo.v1"}
 	}
-	result, e := f.s.Replan(ctx, run, owner, raw, configs, planner.ReplanPolicy{MaxReplans: 1, MaxDepth: 6, MaxCostMicros: 1000000, CostPerTaskMicros: 1}, f.cas)
+	result, e := f.s.Replan(ctx, run, owner, raw, configs, planner.ReplanPolicy{MaxReplans: 1, MaxDepth: 6, MaxCostMicros: x.c.Limits.Cost, CostPerTaskMicros: 1}, f.cas)
 	x.r.Replans = append(x.r.Replans, result)
 	if e == nil {
 		x.r.Plans = append(x.r.Plans, p)

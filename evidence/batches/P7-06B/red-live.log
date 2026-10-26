@@ -1,0 +1,3 @@
+{
+  "stdout": "# github.com/Loz888/-MGAR-v2-/eval/live [github.com/Loz888/-MGAR-v2-/eval/live.test]\neval/live/live_test.go:14:7: undefined: LoadPlan\neval/live/live_test.go:20:32: undefined: Plan\neval/live/live_test.go:27:35: undefined: Preflight\neval/live/live_test.go:29:10: undefined: Run\neval/live/live_test.go:33:37: undefined: LoadPlan\neval/live/live_test.go:34:9: undefined: begin\neval/live/live_test.go:43:37: undefined: LoadPlan\neval/live/live_test.go:44:9: undefined: begin\neval/live/live_test.go:46:9: undefined: begin\nFAIL\tgithub.com/Loz888/-MGAR-v2-/eval/live [build failed]\nFAIL\n"
+}

@@ -1,0 +1,3 @@
+{
+  "stdout": "=== RUN   TestLivePostgresGuardSurvivesWholeJournalLoss\n    live_test.go:352: two PG-backed OS processes: 1 winner; entire local journal removed; fixed zero-spend Run still refuses a second allocation\n--- PASS: TestLivePostgresGuardSurvivesWholeJournalLoss (0.12s)\nPASS\nok  \tgithub.com/Loz888/-MGAR-v2-/eval/live\t0.123s\n"
+}

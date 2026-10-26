@@ -86,6 +86,9 @@ func runFull(ctx context.Context, o Options, x *experiment) (report Report, err 
 	if o.Model != nil {
 		report.Provider = "deepseek"
 	}
+	if o.RunID != "" {
+		report.RunID = o.RunID
+	}
 	_, owner, e := f.s.CreateRunClaimed(ctx, report.RunID, f.input.Goal, 32, "demo-controller", 5*time.Minute)
 	if e != nil {
 		return report, e
@@ -121,6 +124,9 @@ func runFull(ctx context.Context, o Options, x *experiment) (report Report, err 
 		return report, e
 	}
 	limits := budget.Limits{ModelCalls: 64, ToolCalls: 64, Tokens: 65536, CostMicros: 1_000_000, ConcurrentCalls: 4, TaskConcurrency: 4, Delegations: 32}
+	if o.Model != nil && o.CostMicros > 0 {
+		limits.CostMicros = o.CostMicros
+	}
 	if x != nil {
 		limits = x.limits()
 	}

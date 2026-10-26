@@ -19,6 +19,7 @@ import (
 	"github.com/Loz888/-MGAR-v2-/internal/provider"
 	"github.com/Loz888/-MGAR-v2-/internal/store"
 	"github.com/Loz888/-MGAR-v2-/internal/verifier"
+	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
@@ -42,6 +43,8 @@ type Input struct {
 type Options struct {
 	Root, Case, Fault string
 	Model             *provider.Client
+	RunID             string
+	CostMicros        int64
 }
 type fixture struct {
 	verification             *verificationTask
@@ -51,6 +54,7 @@ type fixture struct {
 	source                   pgx.Tx
 	schema, role, temp, root string
 	modelVersion             string
+	retain                   bool
 	cas                      *artifact.CAS
 	input                    Input
 	sql                      verifier.SQLJob
@@ -61,10 +65,11 @@ type fixture struct {
 var caseName = regexp.MustCompile(`^(offline|development)-[0-9]{3}$`)
 
 func newFixture(ctx context.Context, o Options) (_ *fixture, err error) {
-	if !caseName.MatchString(o.Case) {
+	live := strings.HasPrefix(o.Case, "live-")
+	if (!caseName.MatchString(o.Case) && !live) || (live && (o.Model == nil || o.Model.Local() || o.CostMicros != 20833 || o.RunID == "")) {
 		return nil, errors.New("case_not_authorized")
 	}
-	f := &fixture{root: o.Root, original: map[string]string{}}
+	f := &fixture{root: o.Root, original: map[string]string{}, retain: live}
 	f.modelVersion = "demo-mock.v1"
 	if o.Model != nil {
 		f.modelVersion = o.Model.Model()
@@ -85,7 +90,17 @@ func newFixture(ctx context.Context, o Options) (_ *fixture, err error) {
 	if len(f.input.Orders) < 1 || len(f.input.Orders) > 32 || len(f.input.Documents) > 4 || len(f.input.Goal) > 2048 || (f.input.Business != "incident" && f.input.Business != "analysis") {
 		return nil, errors.New("invalid_fixture")
 	}
-	f.temp, e = os.MkdirTemp("", "mgar-demo-")
+	parent := ""
+	if live {
+		parent = filepath.Join(o.Root, ".local/live-cas")
+		if e = os.MkdirAll(parent, 0700); e != nil {
+			return nil, e
+		}
+		if resolved, err := filepath.EvalSymlinks(parent); err != nil || resolved != parent {
+			return nil, errors.New("unsafe_live_state")
+		}
+	}
+	f.temp, e = os.MkdirTemp(parent, "mgar-demo-")
 	if e != nil {
 		return nil, e
 	}
@@ -213,11 +228,16 @@ func (f *fixture) close() error {
 		f.s.Pool.Close()
 	}
 	if f.admin != nil {
-		if f.schema != "" {
+		if f.schema != "" && !f.retain {
 			_, e := f.admin.Pool.Exec(ctx, "DROP SCHEMA "+pgx.Identifier{f.schema}.Sanitize()+" CASCADE")
 			errs = append(errs, e)
 		}
 		if f.role != "" {
+			if f.retain && f.schema != "" {
+				role, schema := pgx.Identifier{f.role}.Sanitize(), pgx.Identifier{f.schema}.Sanitize()
+				_, e := f.admin.Pool.Exec(ctx, "REVOKE ALL ON ALL TABLES IN SCHEMA "+schema+" FROM "+role+"; REVOKE ALL ON SCHEMA "+schema+" FROM "+role)
+				errs = append(errs, e)
+			}
 			_, e := f.admin.Pool.Exec(ctx, "DROP ROLE "+pgx.Identifier{f.role}.Sanitize())
 			errs = append(errs, e)
 		}
@@ -226,8 +246,13 @@ func (f *fixture) close() error {
 	if f.cas != nil {
 		errs = append(errs, f.cas.Close())
 	}
-	if f.temp != "" {
+	if f.temp != "" && !f.retain {
 		errs = append(errs, os.RemoveAll(f.temp))
 	}
 	return errors.Join(errs...)
+}
+
+// One identity per approved assignment, shared by admission and execution.
+func LiveRunID(caseID, arm string) string {
+	return uuid.NewSHA1(uuid.NameSpaceURL, []byte("mgar/P7-06/deepseek/flash-1017/2026-10-26/"+caseID+"/"+arm)).String()
 }

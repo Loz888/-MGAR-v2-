@@ -1,0 +1,139 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "./eval/live",
+      "-count=1"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06B/red-live.log",
+    "timestamp_utc": "2026-10-26T01:34:50.536603+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./eval/live",
+      "-count=1",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06B/live-targeted.log",
+    "timestamp_utc": "2026-10-26T01:39:11.737411+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/demo",
+      "-run",
+      "TestLive",
+      "-count=1",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06B/development-closure.log",
+    "timestamp_utc": "2026-10-26T01:42:01.456062+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./eval/live",
+      "-count=1",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06B/journal-and-gates.log",
+    "timestamp_utc": "2026-10-26T01:43:21.023801+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./eval/live",
+      "-run",
+      "TestLivePostgres",
+      "-count=1",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06B/pg-allocation.log",
+    "timestamp_utc": "2026-10-26T01:46:04.732279+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./internal/demo",
+      "-run",
+      "TestLiveDevelopmentProviderReplan",
+      "-count=1",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06B/provider-replan.log",
+    "timestamp_utc": "2026-10-26T01:46:44.224382+00:00"
+  },
+  {
+    "command": [
+      "env",
+      "MGAR_ALLOW_PAID=1",
+      "MGAR_MAX_COST_USD=2.00",
+      "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+      "bash",
+      "scripts/eval.sh",
+      "--live",
+      "--confirm-live",
+      "--preflight"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06B/live-preflight.log",
+    "timestamp_utc": "2026-10-26T01:48:32.818727+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06B/go-plain.log",
+    "timestamp_utc": "2026-10-26T01:50:45.430189+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "./eval/live",
+      "-run",
+      "TestLiveJournalActualSIGKILL",
+      "-count=1",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06B/pg-allocation-kill.log",
+    "timestamp_utc": "2026-10-26T01:51:50.066880+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06B/full-offline.log",
+    "timestamp_utc": "2026-10-26T01:55:40.704545+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06B/final-audit.log",
+    "timestamp_utc": "2026-10-26T01:56:43.549814+00:00"
+  }
+]

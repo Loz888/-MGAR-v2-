@@ -1,0 +1,3 @@
+{
+  "stdout": "=== RUN   TestLiveJournalActualSIGKILL\n    live_test.go:209: actual SIGKILL pid=2469654; started assignment retained and restart denied\n--- PASS: TestLiveJournalActualSIGKILL (0.15s)\nPASS\nok  \tgithub.com/Loz888/-MGAR-v2-/eval/live\t0.157s\n"
+}

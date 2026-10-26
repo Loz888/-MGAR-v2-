@@ -56,6 +56,9 @@ func runBaseline(ctx context.Context, o Options, x *experiment) (report Baseline
 	if o.Model != nil {
 		report.Provider = "deepseek"
 	}
+	if o.RunID != "" {
+		report.RunID = o.RunID
+	}
 	switch o.Fault {
 	case "none", "wrong-data", "zero-tools", "forge-action", "forge-aggregate", "wrong-patch":
 	default:
@@ -125,6 +128,9 @@ func runBaseline(ctx context.Context, o Options, x *experiment) (report Baseline
 		return report, e
 	}
 	limits := budget.Limits{ModelCalls: 64, ToolCalls: 64, Tokens: 65536, CostMicros: 1_000_000, ConcurrentCalls: 4, TaskConcurrency: 4, Delegations: 32}
+	if o.Model != nil && o.CostMicros > 0 {
+		limits.CostMicros = o.CostMicros
+	}
 	if x != nil {
 		limits = x.limits()
 	}

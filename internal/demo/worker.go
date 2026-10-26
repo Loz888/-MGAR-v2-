@@ -144,7 +144,11 @@ func (f *fixture) workerWith(ctx context.Context, o Options, c store.TaskClaim, 
 			return
 		}
 		if o.Model != nil {
-			decision, _, err := o.Model.Call(r.Context(), resources, c, request.LogicalID, raw)
+			// Controller-owned dispatch contract, never supplied as authority by a Worker.
+			var payload map[string]any
+			_ = json.Unmarshal(raw, &payload)
+			payload["dispatch_contract"] = map[string]any{"node": c.NodeKey, "business": f.input.Business, "input_version": f.input.Version, "required_plan": proposal, "planner_scope": "The current executor accepts only this bounded business DAG template; if required_plan is non-null return it as final output. This is constrained template planning, not arbitrary DAG generation.", "baseline_final": "If candidate.read or single-role execution is used, return {answer:{decision,metrics:{paid_total,paid_orders,duplicate_paid_events},reason,input_version},citations:[actual candidates],semantic_status:unverified}. Otherwise preserve the actual final tool observation."}
+			decision, _, err := o.Model.Call(r.Context(), resources, c, request.LogicalID, inputcontext.Canonical(payload))
 			if err != nil {
 				deny()
 				return
