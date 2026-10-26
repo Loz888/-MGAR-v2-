@@ -79,10 +79,15 @@ Go 长日志按 Test 重新拼接再解析，缺失任一并发档、死亡窗�
 
 ## P7-06 真实模型准备状态
 
-截至 2026-10-25，[配置提案](../eval/live/plan.json) 固定 24 题 × B0/B1/B2/B4 共 96 项，
-全部 NOT_RUN。模型、官方单价版本、用户美元上限尚未确定，费用估计 N/A；环境未配置密钥，
-候选 Provider 域名尚未获网络放行。未发任何真实模型请求。
+截至 2026-10-26，用户已确认 A→B→C 拆分、DeepSeek `flash-1017`、24 题 ×
+B0/B1/B2/B4 共 96 项、整轮 USD 2。[冻结配置](../eval/live/plan.json) 不允许替换模型、
+转移份额或自动重启已开始的分配。A 的可信 Provider 和 B 的全实验预算守卫均已离线验收。
 
-实际 CLI 的非 mock 拒绝已复现。Provider 接入 Go 持久预算/实验层仍需实现，不能将现成
-Python 适配器视作完整闭环。范围与验收拆分见 [ADR-0016](adr/ADR-0016.md) 和
-[CHANGE_REQUEST](../CHANGE_REQUEST.md)，等待用户确认；P7-06 父卡为 BLOCKED。
+C 的独立数学评价、逐题/按类/配对统计和整数费用对账工具已实现，当前真实请求仍为 0，
+96 项全部 NOT_RUN。尚缺安全注入的 API key、官方模型/价格核实和已应用的网络配置。
+费用估计 N/A，不能将合成账本测试或本地 HTTP fixture 当作真实模型表现。
+
+[当前报告](../evidence/eval/live/readiness-20261026/report.md) 与
+[C 验收记录](../evidence/batches/P7-06C/accept.json) 保存阻塞状态。
+执行入口、评价命令与已知局限见 [可信调用说明](experiments/live-provider.md)。
+范围与验收拆分见 [ADR-0016](adr/ADR-0016.md)；P7-06 父卡和 C 均保持 BLOCKED。

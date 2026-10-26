@@ -2,200 +2,91 @@
   "card_id": "P7-06",
   "status": "BLOCKED",
   "git_commit": null,
-  "base_git_commit": "304e89d3b2ed334fc9db00deefe3c296ee21f077",
-  "scope": "Offline preparation and proposed split only; no live provider integration or evaluation executed",
-  "source_fingerprint": "3e8eb525fd1f3f1cd3ed59c77c424233ccbcfb10b6426945604983c6cf98be4b",
-  "commands": [
+  "base_git_commit": "e9f642fb95b347736ca5df7419b7fac091d0ba4e",
+  "scope": "A/B completed and C offline analysis verified; authorized live execution awaits external prerequisites",
+  "authorization": {
+    "date": "2026-10-26",
+    "timezone": "Asia/Shanghai",
+    "split": [
+      "P7-06A",
+      "P7-06B",
+      "P7-06C"
+    ],
+    "provider": "deepseek",
+    "model": "flash-1017",
+    "total_budget_usd": "2.00",
+    "assignments": 96
+  },
+  "source_fingerprint": "a7aeb4060ed04e42a83277f04961c4f9602fcfbbd1346e087ccd9f806abbb7ce",
+  "subcards": [
     {
-      "command": [
-        "python",
-        "evidence/batches/P7-06/prepare_plan.py"
-      ],
-      "exit_code": 0,
-      "log_path": "evidence/batches/P7-06/prepare-plan.log",
-      "timestamp_utc": "2026-10-25T12:11:30.477946+00:00"
+      "card_id": "P7-06A",
+      "status": "PASS",
+      "path": "evidence/batches/P7-06A/accept.json",
+      "sha256": "148617294c746ef150ab79e43d22e102053cdc21737e9ef54e51facb3112caf2"
     },
     {
-      "command": [
-        "bash",
-        "-c",
-        "go build -o /tmp/mgar-p706-probe ./cmd/mgareval && /tmp/mgar-p706-probe --provider deepseek --case live-001 --arm B0"
-      ],
-      "exit_code": 2,
-      "log_path": "evidence/batches/P7-06/provider-boundary-reproduction.log",
-      "timestamp_utc": "2026-10-25T12:11:31.327936+00:00"
+      "card_id": "P7-06B",
+      "status": "PASS",
+      "path": "evidence/batches/P7-06B/accept.json",
+      "sha256": "b3ddfdbb73262d9c2c1708497f49da5ce822050769cfd85fbe7c10a2fb0cf168"
     },
     {
-      "command": [
-        "python",
-        "-m",
-        "pytest",
-        "-q",
-        "tests/test_provider.py"
-      ],
-      "exit_code": 0,
-      "log_path": "evidence/batches/P7-06/provider-offline-tests.log",
-      "timestamp_utc": "2026-10-25T12:14:04.314236+00:00"
-    },
-    {
-      "command": [
-        "python",
-        "scripts/validate_plan_docs.py"
-      ],
-      "exit_code": 0,
-      "log_path": "evidence/batches/P7-06/docs-check.log",
-      "timestamp_utc": "2026-10-25T12:14:04.371532+00:00"
-    },
-    {
-      "command": [
-        "python",
-        "/tmp/mgar-final-audit.py"
-      ],
-      "exit_code": 0,
-      "log_path": "evidence/batches/P7-06/final-audit.log",
-      "timestamp_utc": "2026-10-25T12:14:04.496741+00:00"
-    },
-    {
-      "command": [
-        "python",
-        "-m",
-        "pytest",
-        "-q",
-        "tests/unit/test_providers.py",
-        "tests/unit/test_provider_boundaries.py"
-      ],
-      "exit_code": 0,
-      "log_path": "evidence/batches/P7-06/provider-boundary-tests.log",
-      "timestamp_utc": "2026-10-25T12:14:17.078711+00:00"
-    }
-  ],
-  "positive_assertions": [
-    {
-      "name": "frozen_24_cases_and_96_assignments_validated",
-      "passed": true
-    },
-    {
-      "name": "existing_non_mock_experiment_rejected_before_execution_exit_2",
-      "passed": true
-    },
-    {
-      "name": "50_provider_transport_and_boundary_tests_passed_offline",
-      "passed": true
-    }
-  ],
-  "negative_assertions": [
-    {
-      "name": "no_real_model_request_or_paid_call",
-      "passed": true
+      "card_id": "P7-06C",
+      "status": "BLOCKED",
+      "path": "evidence/batches/P7-06C/accept.json",
+      "sha256": "5563a00fede32d5f388448a390f802c70742539b493f9533575b3b0b540ffa85"
     }
   ],
   "blockers": [
-    "User confirmation of P7-06A/B/C split required by 03_CODEX_WORK_PROTOCOL section 4",
-    "Go durable provider and live experiment wiring not implemented",
-    "Provider/model selection missing",
-    "API key not configured",
-    "Global USD cap and explicit live authorization missing",
-    "Official pricing version not frozen",
-    "Candidate api.deepseek.com absent from restricted network allowlist"
+    "DEEPSEEK_API_KEY has no saved secure binding and is absent from the current runtime",
+    "Official availability of exact flash-1017 and pricing/context ceiling remain unverified",
+    "Official domain additions are saved in draft revision 5 but not applied to the current environment"
   ],
-  "environment_observation": {
-    "date": "2026-10-25",
-    "timezone": "Asia/Shanghai",
-    "configured_secret_bindings": 0,
-    "DEEPSEEK_API_KEY_present": false,
-    "MGAR_ALLOW_PAID_enabled": false,
-    "MGAR_MAX_COST_USD_present": false,
-    "network_mode": "restricted",
-    "candidate_provider_host_allowed": false,
-    "provider_connectivity_test": "NOT_RUN"
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 526,
+      "passed": 526,
+      "failed_events": 0,
+      "skipped": 0,
+      "complete": true
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 399,
+      "passed": 399,
+      "failed": 0,
+      "skipped_or_xfailed": 0,
+      "complete": true,
+      "passed_subtests": 15
+    },
+    "status": "PASS"
   },
+  "actual_paid_calls": 0,
   "unverified": [
     {
       "name": "24_cases_times_4_arms_live_evaluation",
       "status": "NOT_RUN",
       "assignments": 96,
-      "reason": "integration and authorization prerequisites missing"
+      "reason": "Key, official model/pricing and applied network readiness missing; paid scope is already authorized"
     },
     {
-      "name": "P7-06A_B_implementation",
+      "name": "real_model_closure",
       "status": "NOT_RUN",
-      "reason": "proposed split pending confirmation"
+      "reason": "No real model calls executed"
     }
   ],
   "known_limitations": [
-    "Preparation command exit 0 does not mean P7-06 PASS",
-    "Provider tests use local fault servers; not paid provider evidence",
-    "Full engineering regression belongs to P7-05 commit 304e89d; this preparation only adds docs/config/evidence"
+    "C tooling passes synthetic contract tests; the actual 24 x 4 experiment remains NOT_RUN.",
+    "All current provider transport tests are literal loopback fixtures; no real or paid model requests were sent.",
+    "USD 2 authorization is already explicit; no duplicate model/budget/split approval is required.",
+    "Full-context conservative reservation may exceed the 20833-microdollar share; reject rather than invent a lower bound.",
+    "Independent mathematics is rerun; SQL/sandbox/Verifier evidence must originate from the trusted executor. Hashes are not supplier attestation.",
+    "The executor uses a fixed business DAG template; no arbitrary model-generated DAG capability claim.",
+    "No P8 implementation or acceptance is included."
   ],
-  "artifacts": [
-    {
-      "path": "CHANGE_REQUEST.md",
-      "sha256": "435064357f5e61c0d8217634f0d77f5e9f6b4f52293e85a9e264033763742e94"
-    },
-    {
-      "path": "TASK_QUEUE.md",
-      "sha256": "48e661308e89f7afe6df231ef6f6cb9ccdb8ec385fdb8cc6cd29f610e3ff4c26"
-    },
-    {
-      "path": "docs/adr/ADR-0016.md",
-      "sha256": "3781fd0386e80dd878e72339fd0bbf4c4478f6cccd5042327c0488c9382755c5"
-    },
-    {
-      "path": "docs/experiments.md",
-      "sha256": "232f03b81cbf2ede0bfdf1e3f39284d555f399d1bfecc74af2e99cfe3d7d96e1"
-    },
-    {
-      "path": "eval/live/plan.json",
-      "sha256": "a3f5b44cff3f66798b9691fb6cf9e1d20ee073ea18b6dae6710efe7f4ff4e0a9"
-    },
-    {
-      "path": "evidence/batches/P7-06/commands.json",
-      "sha256": "71bb1970d3d21d7dbd56ce83aa2e9c2866ec6b96deebe4e2bd7500cd212e728e"
-    },
-    {
-      "path": "evidence/batches/P7-06/docs-check.log",
-      "sha256": "22224502b99caaa076eb71c1492c264560bde22f7810cbef2e401856dd9ce19a"
-    },
-    {
-      "path": "evidence/batches/P7-06/final-audit.log",
-      "sha256": "5fa31a5913b04a07de92d278d19259a628e8fb1823fe4743e222fbd365560618"
-    },
-    {
-      "path": "evidence/batches/P7-06/prepare-plan.log",
-      "sha256": "8a4dec43755f0c6e41bebbb7b7805c826224f3fe99075f8957d2604cb4cc2261"
-    },
-    {
-      "path": "evidence/batches/P7-06/prepare_plan.py",
-      "sha256": "b0e8491cffc6aa30de13149a0263146f79ce4aaaa66b4b719ec91fbdc536d0cf"
-    },
-    {
-      "path": "evidence/batches/P7-06/provider-boundary-reproduction.log",
-      "sha256": "5b67765be9ebb51aaf89db9e7347fa4b2b5d6cb6c33e3047efe9bcbd595ee711"
-    },
-    {
-      "path": "evidence/batches/P7-06/provider-boundary-tests.log",
-      "sha256": "efc675e2a6c164b5ed1869ef5e26e3a69b9a35c820b29b738ae53a3aaaa55a65"
-    },
-    {
-      "path": "evidence/batches/P7-06/provider-offline-tests.log",
-      "sha256": "7f68d657d5392ddbd2afbcc3605addaa1af240f09207a7eab2ad993299e72705"
-    },
-    {
-      "path": "evidence/eval/live/assignment-proposal.json",
-      "sha256": "a3f5b44cff3f66798b9691fb6cf9e1d20ee073ea18b6dae6710efe7f4ff4e0a9"
-    },
-    {
-      "path": "tasks/P7-06A.md",
-      "sha256": "211a015ac06e344071a23f2e83bf1817f01b1ef8285d65e82db97824f757b718"
-    },
-    {
-      "path": "tasks/P7-06B.md",
-      "sha256": "7587aa0bd55627b05c718d463404a80f023017059a14b558a8016b6a7ed576db"
-    },
-    {
-      "path": "tasks/P7-06C.md",
-      "sha256": "4b6ca465516e7a4c346c67be2970615db9f482c4634aeb37112086f0fd9d7d76"
-    }
-  ],
-  "timestamp_utc": "2026-10-25T12:16:02.554302+00:00"
+  "historical_acceptance": "evidence/batches/P7-06/accept-pre-authorization-20261025.json",
+  "commands_reference": "evidence/batches/P7-06C/commands.json",
+  "timestamp_utc": "2026-10-26T09:39:45.242507+00:00"
 }

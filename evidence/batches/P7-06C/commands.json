@@ -1,0 +1,133 @@
+[
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_live_analysis.py"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06C/red-analysis.log",
+    "timestamp_utc": "2026-10-26T01:57:16.397792+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_live_analysis.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/analysis-tests.log",
+    "timestamp_utc": "2026-10-26T09:28:13.270497+00:00"
+  },
+  {
+    "command": [
+      "ruff",
+      "check",
+      "--isolated",
+      "eval/live/analyze.py",
+      "tests/unit/test_live_analysis.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/analyzer-lint.log",
+    "timestamp_utc": "2026-10-26T09:28:23.004671+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_live_analysis.py"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06C/red-journal-contract.log",
+    "timestamp_utc": "2026-10-26T09:29:57.415172+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_live_analysis.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/journal-contract-tests.log",
+    "timestamp_utc": "2026-10-26T09:30:28.154934+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_live_analysis.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/accounting-contract-tests.log",
+    "timestamp_utc": "2026-10-26T09:31:47.118009+00:00"
+  },
+  {
+    "command": [
+      "env",
+      "MGAR_ALLOW_PAID=1",
+      "MGAR_MAX_COST_USD=2.00",
+      "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+      "bash",
+      "scripts/eval.sh",
+      "--live",
+      "--confirm-live",
+      "--preflight"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06C/live-preflight.log",
+    "timestamp_utc": "2026-10-26T09:35:29.186509+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/live/analyze.py",
+      "--output",
+      "evidence/eval/live/readiness-20261026"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06C/blocked-report.log",
+    "timestamp_utc": "2026-10-26T09:36:09.929120+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/final-audit.log",
+    "timestamp_utc": "2026-10-26T09:37:47.461763+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/offline-full.log",
+    "timestamp_utc": "2026-10-26T09:37:48.588402+00:00"
+  },
+  {
+    "command": [
+      "git",
+      "-c",
+      "core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol",
+      "diff",
+      "--cached",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/whitespace-check.log",
+    "timestamp_utc": "2026-10-26T09:39:45.172089+00:00"
+  }
+]

@@ -1,0 +1,393 @@
+{
+  "card_id": "P7-06C",
+  "status": "BLOCKED",
+  "git_commit": null,
+  "base_git_commit": "e9f642fb95b347736ca5df7419b7fac091d0ba4e",
+  "scope": "Independent live analysis and reconciliation tooling implemented; real provider execution blocked by external prerequisites",
+  "source_fingerprint": "a7aeb4060ed04e42a83277f04961c4f9602fcfbbd1346e087ccd9f806abbb7ce",
+  "offline_tooling_status": "PASS",
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 526,
+      "passed": 526,
+      "failed_events": 0,
+      "skipped": 0,
+      "complete": true
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 399,
+      "passed": 399,
+      "failed": 0,
+      "skipped_or_xfailed": 0,
+      "complete": true,
+      "passed_subtests": 15
+    },
+    "status": "PASS"
+  },
+  "commands": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06C/red-analysis.log",
+      "timestamp_utc": "2026-10-26T01:57:16.397792+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/analysis-tests.log",
+      "timestamp_utc": "2026-10-26T09:28:13.270497+00:00"
+    },
+    {
+      "command": [
+        "ruff",
+        "check",
+        "--isolated",
+        "eval/live/analyze.py",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/analyzer-lint.log",
+      "timestamp_utc": "2026-10-26T09:28:23.004671+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06C/red-journal-contract.log",
+      "timestamp_utc": "2026-10-26T09:29:57.415172+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/journal-contract-tests.log",
+      "timestamp_utc": "2026-10-26T09:30:28.154934+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/accounting-contract-tests.log",
+      "timestamp_utc": "2026-10-26T09:31:47.118009+00:00"
+    },
+    {
+      "command": [
+        "env",
+        "MGAR_ALLOW_PAID=1",
+        "MGAR_MAX_COST_USD=2.00",
+        "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+        "bash",
+        "scripts/eval.sh",
+        "--live",
+        "--confirm-live",
+        "--preflight"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06C/live-preflight.log",
+      "timestamp_utc": "2026-10-26T09:35:29.186509+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "eval/live/analyze.py",
+        "--output",
+        "evidence/eval/live/readiness-20261026"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06C/blocked-report.log",
+      "timestamp_utc": "2026-10-26T09:36:09.929120+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/final-audit.log",
+      "timestamp_utc": "2026-10-26T09:37:47.461763+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/offline-full.log",
+      "timestamp_utc": "2026-10-26T09:37:48.588402+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "-c",
+        "core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/whitespace-check.log",
+      "timestamp_utc": "2026-10-26T09:39:45.172089+00:00"
+    }
+  ],
+  "positive_assertions": [
+    {
+      "name": "28_synthetic_analyzer_tests_passed",
+      "passed": true
+    },
+    {
+      "name": "full_engineering_regression_passed_without_skips_or_xfails",
+      "passed": true
+    },
+    {
+      "name": "all_96_NOT_RUN_assignments_retained_in_blocked_report",
+      "passed": true
+    },
+    {
+      "name": "missing_pairs_and_total_cost_remain_NA",
+      "passed": true
+    },
+    {
+      "name": "known_usage_recomputed_with_frozen_integer_prices_and_reconciled_against_ledger",
+      "passed": true
+    },
+    {
+      "name": "unknown_or_crashed_assignment_keeps_entire_share",
+      "passed": true
+    }
+  ],
+  "negative_assertions": [
+    {
+      "name": "local_stub_cannot_be_counted_as_provider_usage",
+      "passed": true
+    },
+    {
+      "name": "corrupt_hash_duplicate_call_or_altered_accounting_rejected",
+      "passed": true
+    },
+    {
+      "name": "baseline_workflow_elevation_and_artifact_tampering_rejected",
+      "passed": true
+    },
+    {
+      "name": "model_self_claim_without_independent_oracle_and_verifier_is_not_closure",
+      "passed": true
+    },
+    {
+      "name": "live_preflight_returns_exit_2_before_network_or_database_allocation",
+      "passed": true
+    }
+  ],
+  "blockers": [
+    "DEEPSEEK_API_KEY has no saved secure binding and is absent from the current runtime",
+    "Official availability of exact flash-1017 and pricing/context ceiling remain unverified",
+    "Official domain additions are saved in draft revision 5 but not applied to the current environment"
+  ],
+  "known_limitations": [
+    "C tooling passes synthetic contract tests; the actual 24 x 4 experiment remains NOT_RUN.",
+    "All current provider transport tests are literal loopback fixtures; no real or paid model requests were sent.",
+    "USD 2 authorization is already explicit; no duplicate model/budget/split approval is required.",
+    "Full-context conservative reservation may exceed the 20833-microdollar share; reject rather than invent a lower bound.",
+    "Independent mathematics is rerun; SQL/sandbox/Verifier evidence must originate from the trusted executor. Hashes are not supplier attestation.",
+    "The executor uses a fixed business DAG template; no arbitrary model-generated DAG capability claim.",
+    "No P8 implementation or acceptance is included."
+  ],
+  "unverified": [
+    {
+      "name": "24_cases_times_4_arms_live_evaluation",
+      "status": "NOT_RUN",
+      "assignments": 96,
+      "reason": "Key, official model/pricing and applied network readiness missing; paid scope is already authorized"
+    },
+    {
+      "name": "real_model_closure",
+      "status": "NOT_RUN",
+      "reason": "No real model calls executed"
+    }
+  ],
+  "actual_paid_calls": 0,
+  "artifacts": [
+    {
+      "path": "TASK_QUEUE.md",
+      "sha256": "254d796510113cf7aa65d372b2d9342a600621b37a52cabb88585d729c0635ac"
+    },
+    {
+      "path": "docs/experiments.md",
+      "sha256": "1a9dc6454bf7f07b5677af54e372ee3cd84876fde79f456a8c9f7b80f554187a"
+    },
+    {
+      "path": "docs/experiments/live-provider.md",
+      "sha256": "32464a70c97ffbb48930fc271790d39d90ca1483e819602421c5767c7271d7e7"
+    },
+    {
+      "path": "eval/live/analyze.py",
+      "sha256": "51e63b8ecea7d2861e474ced55d49af54512a8487adfe54e9876f51a538b0569"
+    },
+    {
+      "path": "evidence/batches/P7-06/accept-pre-authorization-20261025.json",
+      "sha256": "6344e20840966039288236c61c76ee40da9cff91b2d2036bbac5dc83b3d9d116"
+    },
+    {
+      "path": "evidence/batches/P7-06C/accounting-contract-tests.log",
+      "sha256": "16fa07eba4c3ca8e85c4a6dabc4ff93125331931ba1ef69388a529b2e2bab8fa"
+    },
+    {
+      "path": "evidence/batches/P7-06C/analysis-tests.log",
+      "sha256": "69007f8476e7ca268196ded581dc2536b8fde18fcf4eade646920201355d8054"
+    },
+    {
+      "path": "evidence/batches/P7-06C/analyzer-lint.log",
+      "sha256": "9a703557e17ca66280bc5d5e57766b72749dd48d4dc62a6fc66be915df314fed"
+    },
+    {
+      "path": "evidence/batches/P7-06C/blocked-report.log",
+      "sha256": "559587591fe39a82a117fda98c08e97c93383275706a5277ec0ef85561b884f4"
+    },
+    {
+      "path": "evidence/batches/P7-06C/commands.json",
+      "sha256": "e4d3b91911d67585fd6bea6ff38539228cb29ab239dae3e220d04b0b144d715f"
+    },
+    {
+      "path": "evidence/batches/P7-06C/environment-readiness.json",
+      "sha256": "878794635f89d1883fc768f8db922e97360573e12a825b6bbdb209f2f7caacd1"
+    },
+    {
+      "path": "evidence/batches/P7-06C/final-audit.log",
+      "sha256": "139841cce9bbe6c67b2cbec92353c82aa378a027490e6dc3105b696141b8da9d"
+    },
+    {
+      "path": "evidence/batches/P7-06C/journal-contract-tests.log",
+      "sha256": "2cd144d554d50766390923c0c2d1421a25731528cd8b23fbdcdf6889393db00c"
+    },
+    {
+      "path": "evidence/batches/P7-06C/live-preflight.log",
+      "sha256": "5abd56fae74efcf804360f279a1e85c15af19ca2e82572cd0ffaf28fab04e56d"
+    },
+    {
+      "path": "evidence/batches/P7-06C/offline-docs.json.json",
+      "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+    },
+    {
+      "path": "evidence/batches/P7-06C/offline-fingerprint.json",
+      "sha256": "6e96fdff5fe612d4ecc30f3df30fb7ae40f144b364f012e702758ec393e14811"
+    },
+    {
+      "path": "evidence/batches/P7-06C/offline-full.log",
+      "sha256": "b954abcbdea702a25e2a63837d4b4766517f2550165e4f77f4d5497b831953e9"
+    },
+    {
+      "path": "evidence/batches/P7-06C/offline-go.json.json",
+      "sha256": "f7cc17b34c3c27394468afdbd99061ac94e8136c81bb435341100f93371a3170"
+    },
+    {
+      "path": "evidence/batches/P7-06C/offline-mypy.log.json",
+      "sha256": "8e7a0a8352a322d19e55605ee61df9b305de124895458472f4062bc11baad1c7"
+    },
+    {
+      "path": "evidence/batches/P7-06C/offline-pytest-events.json.json",
+      "sha256": "fbacd64e63319c4806a76abfa4d6a05f5c8f5b314bfc7eadfa890888939ef890"
+    },
+    {
+      "path": "evidence/batches/P7-06C/offline-pytest.log.json",
+      "sha256": "0e9f278e344c4ddac76adf579418bfa216ba8bd8b02f81af4d9757c5b116dfef"
+    },
+    {
+      "path": "evidence/batches/P7-06C/offline-pytest.xml.json",
+      "sha256": "3395426d95b82c5d896bb0242b4c832422450b2d20b14c464bf2b1aa4bee73c7"
+    },
+    {
+      "path": "evidence/batches/P7-06C/offline-report.json.json",
+      "sha256": "ab5f380bd12ce4adde50d9438cf4298d1e48af005dce8ac09a6d34b023127336"
+    },
+    {
+      "path": "evidence/batches/P7-06C/offline-ruff.log.json",
+      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+    },
+    {
+      "path": "evidence/batches/P7-06C/offline-vet.log.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P7-06C/red-analysis.log",
+      "sha256": "89f388c06b796854c3c7d83eb1c905ad44023ae7e0dfa8d0a9ac6d247868387b"
+    },
+    {
+      "path": "evidence/batches/P7-06C/red-journal-contract.log",
+      "sha256": "ea5975e55753699cfb19d633ec540cb722f7272324ad4deb7a8e38c809f0613e"
+    },
+    {
+      "path": "evidence/batches/P7-06C/whitespace-check.log",
+      "sha256": "b4ba12673cbed1a6b5424f5da9e830d424b33e76a678147ecc696974b3350dd0"
+    },
+    {
+      "path": "evidence/eval/live/readiness-20261026/by_arm.csv",
+      "sha256": "81002b27713951e48b7d8b580da26db30485324f0ea1ff8b078a11ce706ae300"
+    },
+    {
+      "path": "evidence/eval/live/readiness-20261026/by_category.csv",
+      "sha256": "df5457ad08f50e9cfdc3813f6d54e4bfd8dd25f2eccae2e9ecbb35a76c512421"
+    },
+    {
+      "path": "evidence/eval/live/readiness-20261026/files.sha256.json",
+      "sha256": "6a2ef393ee2e5c7fc262e156f325ecb2a715bb4234a811bdb72704026bd2baf4"
+    },
+    {
+      "path": "evidence/eval/live/readiness-20261026/metrics.json",
+      "sha256": "b4325c1c01bb584688fa1140a6c9415c7c626315cb4d0ac84429eac7d1a14b04"
+    },
+    {
+      "path": "evidence/eval/live/readiness-20261026/paired.csv",
+      "sha256": "ea9e49b0df29d363086eaafc389d160b3d9cb5b9d5d11fb77fa2cba895b8fc41"
+    },
+    {
+      "path": "evidence/eval/live/readiness-20261026/per_case.csv",
+      "sha256": "3857eef09179451111010476fdb5f3329d9ca66e11b4899df7f6e52ec67e6930"
+    },
+    {
+      "path": "evidence/eval/live/readiness-20261026/report.md",
+      "sha256": "39ef7056ddcfc27338f35df13dcf4a9b6cf5e76facb609ac4aa21d760ace0d80"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "12dc45ea4603e8225ec7aa2242a046b6a06f64d38180467ab574d3e5e47ee731"
+    },
+    {
+      "path": "tasks/P7-06C.md",
+      "sha256": "0df2b0b835ee6d7c703a61b86e2dab44b54184c4192920137b52bb4d65fa25cf"
+    },
+    {
+      "path": "tests/unit/test_live_analysis.py",
+      "sha256": "575c663d2b5148b7000ee6b3c23a9bf0162224d7ae467c280d96a8e29dddb488"
+    }
+  ],
+  "timestamp_utc": "2026-10-26T09:39:45.242507+00:00"
+}

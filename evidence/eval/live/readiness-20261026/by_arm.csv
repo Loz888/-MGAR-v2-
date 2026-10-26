@@ -1,0 +1,5 @@
+arm,assigned,evaluated,known_cost_micros,latency_p50_ms,latency_p95_ms,oracle_pass,oracle_pass_rate_all_assigned,oracle_pass_rate_observed,statuses.NOT_RUN,upper_cost_micros
+B0,24,0,0,N/A,N/A,0,N/A,N/A,24,0
+B1,24,0,0,N/A,N/A,0,N/A,N/A,24,0
+B2,24,0,0,N/A,N/A,0,N/A,N/A,24,0
+B4,24,0,0,N/A,N/A,0,N/A,N/A,24,0
