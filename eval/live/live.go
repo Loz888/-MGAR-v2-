@@ -301,14 +301,18 @@ func execute(ctx context.Context, path string, p Plan, invoke func(context.Conte
 		record.RawSHA = artifact.Digest(append(raw, '\n'))
 		// A complete report still may contain unknown reservations: stop the whole
 		// experiment and retain the share. Never open a fresh Run for that assignment.
-		if e == nil && observed.RunID == a.RunID && observed.Case.ID == a.Case && observed.Arm == a.Arm && slices.Contains([]string{"completed", "failed", "blocked"}, observed.ExecutionStatus) {
+		if observed.RunID == a.RunID && observed.Case.ID == a.Case && observed.Arm == a.Arm && slices.Contains([]string{"completed", "failed", "blocked"}, observed.ExecutionStatus) {
 			var result struct {
 				Budget budget.Report `json:"budget"`
 			}
 			resultBytes, _ := json.Marshal(observed.Result)
-			if json.Unmarshal(resultBytes, &result) == nil && result.Budget.Conserved && result.Budget.Limits.CostMicros == a.CapMicros && int64(len(observed.Models)) == result.Budget.ReservedModels+result.Budget.SettledModels && result.Budget.SettledCostMicros >= 0 && result.Budget.ReservedCostMicros >= 0 && result.Budget.SettledCostMicros+result.Budget.ReservedCostMicros <= a.CapMicros {
-				record.KnownCostMicros = result.Budget.SettledCostMicros
-				if result.Budget.UnknownModels == 0 && result.Budget.PendingModels == 0 {
+			if json.Unmarshal(resultBytes, &result) == nil && completeLedger(result.Budget, observed, a) {
+				b := result.Budget
+				// A control/cleanup error does not erase usage already settled in PG.
+				// Only an explicitly failed report can be known despite that error;
+				// contradictory success and all unfinished effects remain uncertain.
+				record.KnownCostMicros = b.SettledCostMicros
+				if b.UnknownModels == 0 && b.PendingModels == 0 && b.UnknownTools == 0 && b.PendingTools == 0 && (e == nil || observed.ExecutionStatus == "failed") {
 					record.Status = observed.ExecutionStatus
 					record.Reason = ""
 					record.UpperCostMicros = result.Budget.SettledCostMicros + result.Budget.ReservedCostMicros
@@ -330,6 +334,21 @@ func execute(ctx context.Context, path string, p Plan, invoke func(context.Conte
 	}
 	return r, nil
 }
+
+func completeLedger(b budget.Report, observed demo.ExperimentReport, a Assignment) bool {
+	if !b.Conserved || b.RunID != a.RunID || b.Limits.CostMicros != a.CapMicros {
+		return false
+	}
+	for _, count := range []int64{b.ReservedModels, b.SettledModels, b.PendingModels, b.UnknownModels, b.ReservedTools, b.SettledTools, b.PendingTools, b.UnknownTools} {
+		if count < 0 || count > int64(len(observed.Models)+len(observed.Tools)) {
+			return false
+		}
+	}
+	return int64(len(observed.Models)) == b.ReservedModels+b.SettledModels && b.ReservedModels == b.PendingModels+b.UnknownModels &&
+		int64(len(observed.Tools)) == b.ReservedTools+b.SettledTools && b.ReservedTools == b.PendingTools+b.UnknownTools &&
+		b.SettledCostMicros >= 0 && b.SettledCostMicros <= a.CapMicros && b.ReservedCostMicros >= 0 && b.ReservedCostMicros <= a.CapMicros && b.SettledCostMicros+b.ReservedCostMicros <= a.CapMicros
+}
+
 func Run(ctx context.Context, root string, confirm bool) (Report, error) {
 	checked := Preflight(root, confirm)
 	if !checked.Ready {

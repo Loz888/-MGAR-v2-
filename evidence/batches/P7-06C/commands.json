@@ -286,5 +286,93 @@
     "exit_code": 0,
     "log_path": "evidence/batches/P7-06C/runtime-whitespace-check.log",
     "timestamp_utc": "2026-10-26T12:41:40.816260+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./eval/live",
+      "-run",
+      "^TestLiveKnownFailureAccountingAndUncertainTools$"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06C/c-red-accounting-go.log",
+    "timestamp_utc": "2026-10-26T15:07:27.761897+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_live_analysis.py",
+      "-k",
+      "unfinished_tool"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06C/c-red-accounting-python.log",
+    "timestamp_utc": "2026-10-26T15:07:32.452854+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./eval/live"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/c-accounting-go.log",
+    "timestamp_utc": "2026-10-26T15:08:55.851815+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_live_analysis.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/c-accounting-python.log",
+    "timestamp_utc": "2026-10-26T15:09:05.843158+00:00"
+  },
+  {
+    "command": [
+      "env",
+      "MGAR_ALLOW_PAID=1",
+      "MGAR_MAX_COST_USD=2.00",
+      "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+      "bash",
+      "scripts/eval.sh",
+      "--live",
+      "--confirm-live",
+      "--preflight"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/c-live-preflight.log",
+    "timestamp_utc": "2026-10-26T15:11:20.569155+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/c-offline-full.log",
+    "timestamp_utc": "2026-10-26T15:14:39.439425+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/c-prelive-audit.log",
+    "timestamp_utc": "2026-10-26T15:15:12.602050+00:00"
   }
 ]

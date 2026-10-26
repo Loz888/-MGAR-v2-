@@ -159,7 +159,8 @@ def synthetic_journal(tmp_path, count=96):
                   'tokens': 65536, 'concurrent_calls': 4, 'task_concurrency': 4, 'delegations': 32},
                   'settled_models': 1, 'reserved_models': 0, 'settled_tokens': 15, 'reserved_tokens': 0,
                   'settled_cost_micros': 15, 'reserved_cost_micros': 0, 'unknown_models': 0,
-                  'pending_models': 0, 'settled_tools': 0, 'reserved_tools': 0}
+                  'pending_models': 0, 'settled_tools': 0, 'reserved_tools': 0,
+                  'pending_tools': 0, 'unknown_tools': 0}
         artifacts = []
         for kind in ['finding', 'sql_evidence', 'report', 'patch']:
             artifact_id = f'synthetic-artifact-{i}-{kind}'
@@ -293,6 +294,38 @@ def test_live_known_failed_call_still_costs(tmp_path):
     report = analyze(journal, root=root)
     assert report['per_case'][0]['oracle_pass'] is False
     assert report['known_cost_micros'] == 15
+
+
+@pytest.mark.parametrize('state', ['unknown', 'reserved'])
+def test_live_unfinished_tool_cannot_be_known_result(tmp_path, state):
+    root, journal = synthetic_journal(tmp_path, count=1)
+
+    def mutate(raw):
+        raw['tool_calls'] = [{'run_id': raw['run_id'], 'tool_version': 'demo.v1',
+                             'invocation_id': 'synthetic-tool', 'status': state}]
+        raw['result']['budget'].update(reserved_tools=1, unknown_tools=int(state == 'unknown'),
+                                      pending_tools=int(state == 'reserved'))
+    rewrite_raw(journal, 0, mutate)
+    with pytest.raises(ValueError, match='UNFINISHED_TOOL_ACCOUNTING'):
+        analyze(journal, root=root)
+
+
+@pytest.mark.parametrize('state', ['unknown', 'reserved'])
+def test_live_unfinished_tool_unknown_preserves_known_model_cost(tmp_path, state):
+    root, journal = synthetic_journal(tmp_path, count=1)
+
+    def mutate(raw):
+        raw['tool_calls'] = [{'run_id': raw['run_id'], 'tool_version': 'demo.v1',
+                             'invocation_id': 'synthetic-tool', 'status': state}]
+        raw['result']['budget'].update(reserved_tools=1, unknown_tools=int(state == 'unknown'),
+                                      pending_tools=int(state == 'reserved'))
+    rewrite_raw(journal, 0, mutate)
+    result = journal / '000.result.json'
+    result.write_text(json.dumps(json.loads(result.read_text()) | {'status': 'UNKNOWN', 'upper_cost_micros': 20833}))
+    report = analyze(journal, root=root)
+    assert report['per_case'][0]['oracle_pass'] is None
+    assert report['known_cost_micros'] == 15 and report['upper_cost_micros'] == 20833
+    assert sum(row['status'] == 'NOT_RUN' for row in report['per_case']) == 95
 
 
 def test_live_zero_output_go_omitempty_is_valid_known_usage():

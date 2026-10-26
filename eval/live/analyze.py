@@ -221,10 +221,17 @@ def audit_raw(raw, assignment, price, case, seen, bound=None):
             'UNKNOWN_LEDGER_RECONCILIATION')
     require(len(raw.get('tool_calls') or []) == integer(budget.get('settled_tools')) + integer(budget.get('reserved_tools')),
             'TOOL_LEDGER_RECONCILIATION')
+    require(integer(budget.get('pending_tools')) + integer(budget.get('unknown_tools')) == integer(budget.get('reserved_tools')),
+            'TOOL_LEDGER_RECONCILIATION')
+    tool_states = Counter()
     for tool in raw.get('tool_calls') or []:
         require(tool.get('run_id') == assignment['run_id'] and tool.get('tool_version') == 'demo.v1'
                 and isinstance(tool.get('invocation_id'), str) and tool['invocation_id'] not in seen, 'TOOL_IDENTITY')
         seen.add(tool['invocation_id'])
+        require(tool.get('status') in ['reserved', 'unknown', 'succeeded', 'failed'], 'TOOL_LEDGER_RECONCILIATION')
+        tool_states[tool['status']] += 1
+    require(tool_states['reserved'] == budget['pending_tools'] and tool_states['unknown'] == budget['unknown_tools']
+            and tool_states['succeeded'] + tool_states['failed'] == budget['settled_tools'], 'TOOL_LEDGER_RECONCILIATION')
     if assignment['arm'] != 'B4':
         require(raw.get('workflow_success') is None and raw['result'].get('verdict_count') == 0,
                 'BASELINE_VERIFICATION_ELEVATED')
@@ -312,6 +319,7 @@ def analyze(input_dir, *, root=ROOT):
             require(integer(record.get('upper_cost_micros')) == CAP, 'UNKNOWN_COST_BOUND')
             stopped = True
         else:
+            require(integer(raw['result']['budget'].get('reserved_tools')) == 0, 'UNFINISHED_TOOL_ACCOUNTING')
             require(reserved == 0 and raw.get('execution_status') == status
                     and integer(record.get('upper_cost_micros')) == upper, 'RESULT_ACCOUNTING_CHANGED')
         row.update(status=status, known_cost_micros=known, upper_cost_micros=CAP if status == 'UNKNOWN' else upper,

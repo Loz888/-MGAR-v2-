@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/Loz888/-MGAR-v2-/internal/artifact"
 	"github.com/Loz888/-MGAR-v2-/internal/budget"
@@ -331,6 +332,80 @@ func TestLivePreflightPriceBoundsAndEvidence(t *testing.T) {
 			r := Preflight(root, true)
 			if r.Ready != (mode == "valid" || mode == "byte-bound") {
 				t.Fatal(mode, r.Blockers)
+			}
+		})
+	}
+}
+
+func TestLiveKnownFailureAccountingAndUncertainTools(t *testing.T) {
+	root, _ := filepath.Abs("../..")
+	p, e := LoadPlan(root)
+	if e != nil {
+		t.Fatal(e)
+	}
+	for _, mode := range []string{"known-failure", "known-failure-error", "contradictory-error", "unknown-model-error", "unknown-tool", "pending-tool", "wrong-budget-run", "missing-model", "missing-tool"} {
+		t.Run(mode, func(t *testing.T) {
+			path, e := begin(filepath.Join(t.TempDir(), "experiment"), p)
+			if e != nil {
+				t.Fatal(e)
+			}
+			calls := 0
+			report, e := execute(context.Background(), path, p, func(_ context.Context, a Assignment) (demo.ExperimentReport, error) {
+				calls++
+				b := budget.Report{RunID: a.RunID, Conserved: true, Limits: budget.Limits{CostMicros: a.CapMicros}, SettledModels: 1, SettledCostMicros: 15}
+				observed := demo.ExperimentReport{RunID: a.RunID, Arm: a.Arm, Case: demo.ExperimentCase{ID: a.Case}, ExecutionStatus: "failed", Models: []json.RawMessage{json.RawMessage(`{"status":"failed"}`)}}
+				var invokeErr error
+				switch mode {
+				case "known-failure-error":
+					invokeErr = errors.New("synthetic_control_error")
+				case "contradictory-error":
+					observed.ExecutionStatus = "completed"
+					invokeErr = errors.New("synthetic_control_error")
+				case "unknown-model-error":
+					b.UnknownModels, b.ReservedModels, b.ReservedCostMicros = 1, 1, 10
+					observed.Models = append(observed.Models, json.RawMessage(`{"status":"unknown"}`))
+					invokeErr = errors.New("synthetic_control_error")
+				case "unknown-tool", "pending-tool":
+					b.ReservedTools = 1
+					if mode == "unknown-tool" {
+						b.UnknownTools = 1
+					} else {
+						b.PendingTools = 1
+					}
+					observed.Tools = []json.RawMessage{json.RawMessage(`{"status":"unknown"}`)}
+				case "wrong-budget-run":
+					b.RunID = "other-run"
+				case "missing-model":
+					observed.Models = nil
+				case "missing-tool":
+					b.SettledTools = 1
+				}
+				observed.Result = map[string]any{"budget": b}
+				return observed, invokeErr
+			})
+			knownFailure := mode == "known-failure" || mode == "known-failure-error"
+			wantKnown := int64(15)
+			if mode == "wrong-budget-run" || mode == "missing-model" || mode == "missing-tool" {
+				wantKnown = 0
+			}
+			if knownFailure {
+				if e != nil || calls != 96 || report.Status != "EXECUTED_PENDING_INDEPENDENT_EVALUATION" || report.KnownCostMicros != 96*15 || report.UpperCostMicros != 96*15 {
+					t.Fatalf("known failed assignments not retained: calls=%d report=%+v err=%v", calls, report, e)
+				}
+				for _, record := range report.Records {
+					if record.Status != "failed" {
+						t.Fatal("failed result was promoted or lost")
+					}
+				}
+			} else {
+				if e != nil || calls != 1 || report.Status != "STOPPED_UNKNOWN" || report.KnownCostMicros != wantKnown || report.UpperCostMicros != 20833 {
+					t.Fatalf("uncertain assignment did not stop with preserved cost: calls=%d known=%d upper=%d status=%s err=%v", calls, report.KnownCostMicros, report.UpperCostMicros, report.Status, e)
+				}
+				for _, record := range report.Records[1:] {
+					if record.Status != "NOT_RUN" {
+						t.Fatal("uncertain result admitted another assignment")
+					}
+				}
 			}
 		})
 	}
