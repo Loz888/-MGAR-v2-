@@ -14,6 +14,7 @@ from eval.analysis.metrics import number, paired_delta, percentile, rate  # noqa
 from eval.analysis.report import csv_file  # noqa: E402
 from eval.oracle.reference import judge  # noqa: E402
 from eval.runner import KEYS, TREATMENTS, canonical  # noqa: E402
+from eval.live.tokenizer_data import proof_fingerprint  # noqa: E402
 
 EXPERIMENT = 'P7-06-deepseek-flash-1017-20261026'
 MANIFEST_SHA = 'ec6d5576a75fc2724756abeef2628189c2922038f09cb9258d7a1972e493c8ab'
@@ -86,7 +87,7 @@ def frozen(root):
     return plan, cases, read_json(root / manifest['inputs_path']), read_json(root / manifest['truth_path'])
 
 
-def audit_call(call, price, run_id):
+def audit_call(call, price, run_id, *, bound=None):
     """Return known cost (or None), conservative upper cost, and usage coverage."""
     require(price.get('provider') == 'deepseek' and price.get('model') == 'flash-1017'
             and isinstance(price.get('version'), str) and price['version'], 'INVALID_PRICE')
@@ -109,6 +110,14 @@ def audit_call(call, price, run_id):
 
     rin, rout, reserved = cost(reservation)
     require(rin + rout > 0, 'EMPTY_RESERVATION')
+    if bound is None:
+        require('.u8-' not in price['version'], 'MISSING_INPUT_BOUND')
+    else:
+        fingerprint = proof_fingerprint(bound.get('proof'))
+        maximum = integer(bound.get('maximum_input_tokens'))
+        require(price['version'].endswith('.u8-' + fingerprint[:16])
+                and 0 < rin <= maximum <= 65536
+                and rout == integer(bound.get('output_tokens')), 'INPUT_BOUND_MISMATCH')
     if call.get('usage_known') is False:
         require(call.get('status') in ['reserved', 'unknown'] and not usage
                 and call.get('usage_source') in ['unknown', 'conservative_bound'], 'UNKNOWN_CALL_CHANGED')
@@ -142,11 +151,22 @@ def launch_price(path, plan, root):
             and evidence.get('pricing_url') == 'https://api-docs.deepseek.com/quick_start/pricing'
             and evidence.get('models_url') == 'https://api.deepseek.com/models'
             and hash_string(cfg.get('official_evidence_sha256')), 'UNVERIFIED_PRICE')
-    require(digest(read_bytes(root / 'eval/live/official-evidence.json')) == cfg['official_evidence_sha256'],
+    official = read_bytes(root / 'eval/live/official-evidence.json')
+    require(digest(official) == cfg['official_evidence_sha256'],
             'OFFICIAL_EVIDENCE_HASH')
     executor = read_json(path / 'executor.json')
     require(hash_string(executor.get('sha256')), 'EXECUTOR_IDENTITY')
-    return cfg['price']
+    bound = None
+    if cfg.get('input_bound') is None:
+        require('.u8-' not in cfg['price']['version'], 'MISSING_INPUT_BOUND')
+    if cfg.get('input_bound') is not None:
+        bound = {'proof': cfg['input_bound'], 'maximum_input_tokens': preflight.get('input_reservation_tokens'),
+                 'output_tokens': cfg.get('output_tokens')}
+        described = json.loads(official, object_pairs_hook=unique_object).get('input_bound') or {}
+        require(cfg.get('max_prompt_bytes') == 48000 and cfg.get('output_tokens') == 1024
+                and described.get('proof_sha256') == proof_fingerprint(cfg['input_bound'])
+                and described.get('maximum_request_input_tokens') == bound['maximum_input_tokens'], 'INPUT_BOUND_EVIDENCE')
+    return cfg['price'], bound
 
 
 def execution_pass(raw, case):
@@ -162,7 +182,7 @@ def execution_pass(raw, case):
             and observation['exit_code'] == 0 and type(observation.get('tests')) is int and observation['tests'] > 0)
 
 
-def audit_raw(raw, assignment, price, case, seen):
+def audit_raw(raw, assignment, price, case, seen, bound=None):
     require(raw.get('run_id') == assignment['run_id'] and raw.get('arm') == assignment['arm']
             and (raw.get('case') or {}).get('case_id') == case['case_id'], 'RAW_IDENTITY')
     expected_case = {k: case[k] for k in ['case_id', 'category', 'seed', 'negative', 'limits']}
@@ -173,11 +193,11 @@ def audit_raw(raw, assignment, price, case, seen):
     models = raw.get('model_calls') or []
     known, upper, settled, reserved, settled_tokens, reserved_tokens = 0, 0, 0, 0, 0, 0
     for call in models:
-        cost, bound, complete = audit_call(call, price, assignment['run_id'])
+        cost, call_upper, complete = audit_call(call, price, assignment['run_id'], bound=bound)
         require(call['call_id'] not in seen, 'DUPLICATE_CALL')
         seen.add(call['call_id'])
         known += cost or 0
-        upper += bound
+        upper += call_upper
         settled += complete
         reserved += not complete
         if complete:
@@ -252,7 +272,7 @@ def analyze(input_dir, *, root=ROOT):
         expected_files = {'assignment.json', 'preflight.json', 'executor.json', 'report.json'}
         expected_files |= {f'{i:03d}.{kind}.json' for i in range(96) for kind in ['started', 'result', 'raw']}
         require({p.name for p in path.iterdir()} <= expected_files, 'UNEXPECTED_JOURNAL_FILE')
-    rows, seen, price = [], set(), None
+    rows, seen, price, input_bound = [], set(), None, None
     stopped = False
     for i, assignment in enumerate(plan['assignments']):
         row = dict(assignment, category=cases[assignment['case_id']]['category'], oracle_pass=None,
@@ -285,8 +305,8 @@ def analyze(input_dir, *, root=ROOT):
             stopped = True
             continue
         if price is None:
-            price = launch_price(path, plan, root)
-        known, upper, settled, reserved = audit_raw(raw, assignment, price, cases[assignment['case_id']], seen)
+            price, input_bound = launch_price(path, plan, root)
+        known, upper, settled, reserved = audit_raw(raw, assignment, price, cases[assignment['case_id']], seen, input_bound)
         require(integer(record.get('known_cost_micros')) == known, 'RESULT_COST_CHANGED')
         if status == 'UNKNOWN':
             require(integer(record.get('upper_cost_micros')) == CAP, 'UNKNOWN_COST_BOUND')

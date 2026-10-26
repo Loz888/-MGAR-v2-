@@ -46,6 +46,7 @@
 | [P7-06](tasks/P7-06.md) | P7 | 真实模型有限预算评测与对账 | P7-05、P7-06A/B/C | BLOCKED | `evidence/batches/P7-06/accept.json` |
 | [P7-06A](tasks/P7-06A.md) | P7 | 可信 Provider 与持久账本接通 | P7-05 | PASS | `evidence/batches/P7-06A/accept.json` |
 | [P7-06B](tasks/P7-06B.md) | P7 | 冻结 live runner 与总预算 | P7-06A | PASS | `evidence/batches/P7-06B/accept.json` |
+| [P7-06D](tasks/P7-06D.md) | P7 | 官方 tokenizer 与可证明输入预算上界 | P7-06B、官方 tokenizer 数据 | PASS | `evidence/batches/P7-06D/accept.json` |
 | [P7-06C](tasks/P7-06C.md) | P7 | 真实执行、独立评价与对账 | P7-06B、可证明的输入预算上界 | BLOCKED | `evidence/batches/P7-06C/accept.json` |
 | [P8-01](tasks/P8-01.md) | P8 | 安全与一致性审计 | P7-06 | TODO | `evidence/batches/P8-01/accept.json` |
 | [P8-02](tasks/P8-02.md) | P8 | 干净环境复现与最终发布门禁 | P8-01 | TODO | `evidence/batches/P8-02/accept.json` |
@@ -89,3 +90,9 @@ P0-01 的原始未提交快照与失败记录保留于 `evidence/batches/P0-01/a
 **P7-06 当前（2026-10-26）：** A/B 已 PASS，C 的只读独立评价与整数费用对账已通过离线验证；完整保留 NOT_RUN/UNKNOWN、逐题/按类/全配对报告。真实分配 96 项仍 NOT_RUN，密钥、官方模型/单价与已应用的官方域名网络配置尚缺。环境草稿已保存，待安全填入密钥并发布；父卡和 C 保持 BLOCKED，未发送付费调用，不进入 P8。
 
 **P7-06 最新（2026-10-26）：** 当前密钥已注入，官方模型列表 GET 200；官方版本为 DeepSeek-V4.1-Flash-1017，API 名称 `deepseek-flash`。已修正接口映射/显式 non-thinking 并冻结最高单价。实际 preflight 因整上下文预留 315802 微美元/1049600 token 超出单项 20833 微美元/65536 token 而拒绝；不是缺少密钥或重复付费授权。96 项仍 NOT_RUN，无生成请求。拟先审阅 [ADR-0017](docs/adr/ADR-0017.md)/[P7-06D](tasks/P7-06D.md) 的官方 tokenizer 输入上界方案；D 未激活，父卡/C 保持 BLOCKED，不进入 P8。前文缺配置记录为历史状态。
+
+**输入上界修订授权（2026-10-26）：** 用户回复“先用二美元，如果实在不够了，到时候让它自动停止吧”。按前文 P7-06D 方案继续推进，整轮上限仍为 2 美元，额度不足/未知结果自动停止，不自动追加预算；保留 96 项分配和身份，不转移份额。D 先验证官方输入上界，成功后继续已授权 C；未证明上界前不发送生成请求，不进入 P8。
+
+**P7-06D 实施检查：** 官方 ZIP 已下载并冻结；仅使用固定两条文本消息/非思考模式的官方参考模板与 ByteLevel/BPE 上界。48,000 字节 payload 对应最大 48,454 输入 token；加输出上界的最高费率预留为 15,765 微美元，已落入单份限额。正式 preflight 已 ready，但实际生成须等待 D 全量回归验收。其他未公布 API 包装不在证明范围，出现用量越界则保留 unknown 并停止。此前全上下文拒绝为历史状态。
+
+**P7-06D 验收：** 普通 Go 全量及离线全量均退出 0；551 项 Go（含 race）、423 项 Python 和 15 个 subtest 通过，无失败/跳过/xfail。官方参考数据/闭合请求上界与 PG 预算自动停止门禁已验收；验收时正式 allocation 未使用。证据 `evidence/batches/P7-06D/accept.json`。接下来按既有授权继续 C，不增加 2 美元总额。

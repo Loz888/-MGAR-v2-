@@ -1,0 +1,3 @@
+{
+  "stdout": "{\"data_audit_and_reference_proof\": \"PASS\", \"proof_sha256\": \"19f4cca1f09d1b27d6af097b881253455b679b7c984695b901ddf0bea95f6ce9\", \"maximum_request_input_tokens\": 48454, \"maximum_request_cost_micros\": 15765, \"output_token_cap\": 1024, \"global_cap_micros\": 2000000, \"assignments\": 96, \"timestamp_utc\": \"2026-10-26T13:49:51.728525+00:00\", \"generation_requests_sent\": 0}\n"
+}

@@ -167,3 +167,93 @@ func TestDeepSeekConcurrentLastQuotaAndCrossRun(t *testing.T) {
 	}
 	t.Log(fmt.Sprintf("last quota: sent=%d winners=%d", sent.Load(), wins.Load()))
 }
+
+func TestDeepSeekVerifiedInputBoundAndAutomaticStop(t *testing.T) {
+	for _, mode := range []string{"success", "budget", "usage-over-bound", "oversize", "bad-proof"} {
+		t.Run(mode, func(t *testing.T) {
+			s, run, owner, claims, _ := budgetFixture(t, 1)
+			ctx := context.Background()
+			cost, tokens := int64(100000), int64(100000)
+			if mode == "budget" {
+				cost, tokens = 100, 100
+			}
+			if e := s.ConfigureBudget(ctx, run, owner, budget.Limits{ModelCalls: 2, ToolCalls: 2, Tokens: tokens, CostMicros: cost, ConcurrentCalls: 2, TaskConcurrency: 2, Delegations: 24}); e != nil {
+				t.Fatal(e)
+			}
+			var sent atomic.Int64
+			var reservedInput int64
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				sent.Add(1)
+				raw, _ := io.ReadAll(r.Body)
+				var request struct {
+					Messages []struct{ Content string } `json:"messages"`
+				}
+				_ = json.Unmarshal(raw, &request)
+				if len(request.Messages) != 2 || strings.Contains(string(raw), `"response_format"`) {
+					t.Error("unproved serialization used")
+					return
+				}
+				want := int64(len("<｜begin▁of▁sentence｜>" + request.Messages[0].Content + "<｜User｜>" + request.Messages[1].Content + "<｜Assistant｜>"))
+				if e := s.Pool.QueryRow(ctx, "SELECT (reservation->>'input_tokens')::bigint FROM model_calls WHERE run_id=$1 AND status='reserved'", run).Scan(&reservedInput); e != nil || reservedInput != want || reservedInput >= 1048576 {
+					t.Error("bound was not persisted before send", reservedInput, want, e)
+				}
+				body := strings.ReplaceAll(deepseekBody(), `"model":"flash-1017"`, `"model":"deepseek-flash"`)
+				if mode == "usage-over-bound" {
+					body = strings.Replace(body, `"prompt_tokens":10`, fmt.Sprintf(`"prompt_tokens":%d`, reservedInput+1), 1)
+					body = strings.Replace(body, `"total_tokens":15`, fmt.Sprintf(`"total_tokens":%d`, reservedInput+6), 1)
+				}
+				_, _ = io.WriteString(w, body)
+			}))
+			defer server.Close()
+			cfg := deepseekConfig()
+			proof := provider.OfficialTextInputBound()
+			cfg.InputBound = &proof
+			cfg.ContextTokens = 1048576
+			cfg.Price.Version = provider.TextBoundPriceVersion(cfg.Price.Version)
+			if mode == "bad-proof" {
+				cfg.InputBound.TokenizerSHA256 = "not-official"
+			}
+			client, e := provider.NewLoopback(cfg, server.URL)
+			if mode == "bad-proof" {
+				if e == nil || client != nil || sent.Load() != 0 {
+					t.Fatal("bad proof sent a request")
+				}
+				return
+			}
+			if e != nil {
+				t.Fatal(e)
+			}
+			defer client.Close()
+			resources, _ := scheduler.NewResources(ctx, s)
+			payload := []byte(`{"goal":"bounded synthetic request 汉字🙂"}`)
+			if mode == "oversize" {
+				payload = []byte(`{"goal":"` + strings.Repeat("x", 4096) + `"}`)
+			}
+			_, _, e = client.Call(ctx, resources, claims[0], uuid.NewString(), payload)
+			if (e == nil) != (mode == "success") {
+				t.Fatal("wrong result", mode, e)
+			}
+			report, _ := s.BudgetReport(ctx, run)
+			if !report.Conserved {
+				t.Fatal("budget not conserved")
+			}
+			switch mode {
+			case "success":
+				if sent.Load() != 1 || report.SettledModels != 1 || report.SettledCostMicros != 15 {
+					t.Fatal("known usage did not settle", report)
+				}
+			case "budget", "oversize":
+				if sent.Load() != 0 || report.ReservedModels != 0 || report.SettledModels != 0 {
+					t.Fatal("refused request reached transport", report)
+				}
+			case "usage-over-bound":
+				if sent.Load() != 1 || report.UnknownModels != 1 || report.SettledModels != 0 || report.ReservedCostMicros != reservedInput+cfg.OutputTokens {
+					t.Fatal("counter violation released its reservation", report)
+				}
+				if _, _, e = client.Call(ctx, resources, claims[0], uuid.NewString(), payload); e == nil || sent.Load() != 1 {
+					t.Fatal("counter violation replayed")
+				}
+			}
+		})
+	}
+}

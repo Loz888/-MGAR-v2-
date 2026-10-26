@@ -1,0 +1,293 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./tests/integration",
+      "./tests/chaos",
+      "./eval/live",
+      "-run",
+      "TestDeepSeekConcurrentLastQuotaAndCrossRun|TestDeepSeekTwoProcessesLastQuota|TestDeepSeekPhysicalCallSIGKILL|TestLiveJournalUnknownStopsAndKeepsAllAssignments|TestLivePostgresGuardSurvivesWholeJournalLoss|TestResourceModelBudgetAndUnknownStop"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/budget-stop-verification.log",
+    "timestamp_utc": "2026-10-26T13:02:28.770534+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_tokenizer_data.py"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06D/red-tokenizer-dependency-audit.log",
+    "timestamp_utc": "2026-10-26T13:05:15.242210+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_tokenizer_data.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/tokenizer-dependency-audit.log",
+    "timestamp_utc": "2026-10-26T13:06:39.947108+00:00"
+  },
+  {
+    "command": [
+      "ruff",
+      "check",
+      "eval/live/tokenizer_data.py",
+      "tests/unit/test_tokenizer_data.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/dependency-lint.log",
+    "timestamp_utc": "2026-10-26T13:06:40.007736+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/live/tokenizer_data.py",
+      "--output",
+      ".local/tokenizer-check-20261026-1"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/official-tokenizer-download.log",
+    "timestamp_utc": "2026-10-26T13:07:48.346124+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_tokenizer_data.py"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06D/red-tokenizer-response-integrity.log",
+    "timestamp_utc": "2026-10-26T13:08:19.160873+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_tokenizer_data.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/tokenizer-response-integrity.log",
+    "timestamp_utc": "2026-10-26T13:08:34.114103+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./internal/provider",
+      "-run",
+      "^TestTextInputBound"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06D/red-text-input-bound.log",
+    "timestamp_utc": "2026-10-26T13:21:01.654154+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./internal/provider",
+      "-run",
+      "^TestTextInputBound"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/text-input-bound.log",
+    "timestamp_utc": "2026-10-26T13:23:20.349052+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./eval/live",
+      "-run",
+      "^TestLivePreflightPriceBoundsAndEvidence$"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06D/red-preflight-input-bound.log",
+    "timestamp_utc": "2026-10-26T13:25:15.043625+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./eval/live",
+      "-run",
+      "^TestLivePreflightPriceBoundsAndEvidence$"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/preflight-input-bound.log",
+    "timestamp_utc": "2026-10-26T13:27:08.472982+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./tests/integration",
+      "-run",
+      "^TestDeepSeekVerifiedInputBoundAndAutomaticStop$"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/bound-ledger-and-stop.log",
+    "timestamp_utc": "2026-10-26T13:28:33.637716+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./eval/live",
+      "-run",
+      "TestOfficialFlash1017QuoteRejectsBeforeAllocation|TestLivePreflightPriceBoundsAndEvidence"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/preflight-regression.log",
+    "timestamp_utc": "2026-10-26T13:33:32.119654+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_live_analysis.py"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06D/red-analysis-bound-binding.log",
+    "timestamp_utc": "2026-10-26T13:36:08.205524+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_live_analysis.py",
+      "tests/unit/test_tokenizer_data.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/analysis-bound-binding.log",
+    "timestamp_utc": "2026-10-26T13:37:22.760164+00:00"
+  },
+  {
+    "command": [
+      "ruff",
+      "check",
+      "eval/live",
+      "tests/unit/test_live_analysis.py",
+      "tests/unit/test_tokenizer_data.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/updated-python-lint.log",
+    "timestamp_utc": "2026-10-26T13:37:22.807017+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/demo",
+      "-run",
+      "TestLiveFourArmsDevelopmentClosure|TestLiveDevelopment"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/development-four-arm-closures.log",
+    "timestamp_utc": "2026-10-26T13:43:45.894891+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06D/freeze_bound.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/freeze-input-bound.log",
+    "timestamp_utc": "2026-10-26T13:49:51.753620+00:00"
+  },
+  {
+    "command": [
+      "env",
+      "MGAR_ALLOW_PAID=1",
+      "MGAR_MAX_COST_USD=2.00",
+      "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+      "bash",
+      "scripts/eval.sh",
+      "--live",
+      "--confirm-live",
+      "--preflight"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/ready-preflight.log",
+    "timestamp_utc": "2026-10-26T13:49:53.674017+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/plain-go.log",
+    "timestamp_utc": "2026-10-26T13:59:41.555254+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06D/check_allocation.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/allocation-unused.log",
+    "timestamp_utc": "2026-10-26T14:48:38.822774+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/offline-full.log",
+    "timestamp_utc": "2026-10-26T14:51:16.632538+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/final-credential-and-format.log",
+    "timestamp_utc": "2026-10-26T15:05:29.442221+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "/tmp/mgar-final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06D/archived-evidence-audit.log",
+    "timestamp_utc": "2026-10-26T15:06:05.113925+00:00"
+  }
+]

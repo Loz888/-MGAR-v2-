@@ -8,6 +8,7 @@ import pytest
 
 from eval.live.analyze import analyze, audit_call
 from eval.runner import KEYS, TREATMENTS
+from eval.live.tokenizer_data import OFFICIAL_TEXT_BOUND, proof_fingerprint
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -92,6 +93,32 @@ def test_live_unknown_is_not_zero_usage():
     call, price = fixture_call()
     call.update(status='unknown', usage_known=False, usage_source='unknown', usage={})
     assert audit_call(call, price, 'synthetic-run') == (None, 60, False)
+
+
+@pytest.mark.parametrize('fault', ['', 'proof', 'price', 'input', 'output', 'missing'])
+def test_live_byte_bound_is_linked_to_frozen_quote_and_envelope(fault):
+    call, price = fixture_call()
+    price['version'] += '.u8-' + proof_fingerprint(OFFICIAL_TEXT_BOUND)[:16]
+    call['reservation']['pricing_version'] = price['version']
+    call['usage']['pricing_version'] = price['version']
+    bound = {'proof': OFFICIAL_TEXT_BOUND.copy(), 'maximum_input_tokens': 40, 'output_tokens': 20}
+    if fault == 'proof':
+        bound['proof']['tokenizer_sha256'] = '0' * 64
+    elif fault == 'price':
+        price['version'] = 'unlinked.v1'
+        call['reservation']['pricing_version'] = price['version']
+        call['usage']['pricing_version'] = price['version']
+    elif fault == 'input':
+        bound['maximum_input_tokens'] = 39
+    elif fault == 'output':
+        bound['output_tokens'] = 19
+    elif fault == 'missing':
+        bound = None
+    if fault:
+        with pytest.raises(ValueError):
+            audit_call(call, price, 'synthetic-run', bound=bound)
+    else:
+        assert audit_call(call, price, 'synthetic-run', bound=bound) == (15, 15, True)
 
 
 def synthetic_journal(tmp_path, count=96):

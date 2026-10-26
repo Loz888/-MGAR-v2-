@@ -51,12 +51,53 @@
       "type": "disabled"
     },
     "temperature": 0,
-    "max_tokens": 1024
+    "max_tokens": 1024,
+    "response_format": "omitted: strict JSON is validated by the controller",
+    "stream": false
   },
   "generation_requests_sent": 0,
   "limitations": [
     "Official API alias is mutable; no immutable model weights or future version guarantee.",
     "Peak cache-miss rates are conservative estimates, not an actual provider invoice.",
-    "Full-context reservation does not fit frozen cost/token limits; this evidence does not enable live generation."
-  ]
+    "The text-only input bound uses the pinned official reference serializer/codec contract; unknown usage is not zero-filled."
+  ],
+  "input_bound": {
+    "certificate": {
+      "method": "utf8-byte-bpe-chat.v1",
+      "archive_sha256": "e7310d1dafe0a86d8a5629fe78a7c763760f651db9b8682718a1781dcd6fe495",
+      "tokenizer_sha256": "89085f12ef79460ac5f66d1119325ddfc694b4ab209d80bbd81d35f081dc9614",
+      "config_sha256": "841f8cf146e3f0ad1082594a31f68ecf7608c20467ef355081333d85bbaeb1cb",
+      "template_sha256": "3b8267e54b67df6500f231ffa969955cc9d26b3444a291ced4eb96ca7d3ca1ea",
+      "request_mode": "two-text-messages.non-thinking.no-native-format.v1"
+    },
+    "proof_sha256": "19f4cca1f09d1b27d6af097b881253455b679b7c984695b901ddf0bea95f6ce9",
+    "source_url": "https://cdn.deepseek.com/api-docs/deepseek_v4_tokenizer.zip",
+    "source_doc": "https://api-docs.deepseek.com/quick_start/token_usage/",
+    "base_byte_symbols_verified": 256,
+    "vocab_entries": 128000,
+    "system_instruction_sha256": "f718f8348f9800f5d72b5cbbdcfb89328c3089a9fb2760900ede937817de01f3",
+    "system_and_wrapper_bytes": 454,
+    "maximum_request_input_tokens": 48454,
+    "maximum_request_cost_micros": 15765,
+    "request_scope": [
+      "one system and one user text message",
+      "non-thinking",
+      "no native tools, names, images, prefix completion or response_format"
+    ],
+    "derivation": [
+      "Identity normalization does not expand UTF-8.",
+      "Isolated splits preserve all content; ByteLevel has no added prefix space.",
+      "Each input byte has an initial vocabulary symbol; BPE merges cannot increase count.",
+      "Added-token matches replace nonempty content with one ID; ByteLevel postprocessing changes offsets only.",
+      "Published template on the closed request branch is BOS + system + User + user + Assistant.",
+      "Reserve every UTF-8 byte of that exact reference string, including literal special markers."
+    ],
+    "legacy_model_max_length_metadata": 16384,
+    "limitations": [
+      "Reference serializer contract is limited to the pinned official text-only mode; other server features are rejected.",
+      "Offline model_max_length metadata is not used to infer current API capacity.",
+      "A reported usage exceeding the bound invalidates the contract and retains unknown reservation, stopping subsequent assignments.",
+      "No remote Python code or native tokenizer plugin was executed."
+    ]
+  }
 }

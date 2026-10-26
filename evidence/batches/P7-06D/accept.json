@@ -1,0 +1,603 @@
+{
+  "card_id": "P7-06D",
+  "status": "PASS",
+  "git_commit": null,
+  "base_git_commit": "48893d02e8a76af7ecbef738fd7af023ce35e9f8",
+  "source_fingerprint": "0e2f8ffadc58e63ee3ae8eacd06a9d41fa045f9b2f0af2a9df8fd78d36855384",
+  "scope": "Pinned official reference tokenizer data and closed two-text-message UTF-8/BPE input bound, pre-send PG reservation and automatic budget/unknown stop",
+  "authorization": {
+    "provider": "deepseek",
+    "model": "flash-1017",
+    "api_model": "deepseek-flash",
+    "total_cap_usd": "2.00",
+    "assignments": 96,
+    "allocation_changed": false
+  },
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 551,
+      "passed": 551,
+      "failed_events": 0,
+      "skipped": 0,
+      "complete": true
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 423,
+      "passed": 423,
+      "failed": 0,
+      "skipped_or_xfailed": 0,
+      "complete": true,
+      "passed_subtests": 15
+    },
+    "status": "PASS"
+  },
+  "commands": [
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./tests/integration",
+        "./tests/chaos",
+        "./eval/live",
+        "-run",
+        "TestDeepSeekConcurrentLastQuotaAndCrossRun|TestDeepSeekTwoProcessesLastQuota|TestDeepSeekPhysicalCallSIGKILL|TestLiveJournalUnknownStopsAndKeepsAllAssignments|TestLivePostgresGuardSurvivesWholeJournalLoss|TestResourceModelBudgetAndUnknownStop"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/budget-stop-verification.log",
+      "timestamp_utc": "2026-10-26T13:02:28.770534+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_tokenizer_data.py"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06D/red-tokenizer-dependency-audit.log",
+      "timestamp_utc": "2026-10-26T13:05:15.242210+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_tokenizer_data.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/tokenizer-dependency-audit.log",
+      "timestamp_utc": "2026-10-26T13:06:39.947108+00:00"
+    },
+    {
+      "command": [
+        "ruff",
+        "check",
+        "eval/live/tokenizer_data.py",
+        "tests/unit/test_tokenizer_data.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/dependency-lint.log",
+      "timestamp_utc": "2026-10-26T13:06:40.007736+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "eval/live/tokenizer_data.py",
+        "--output",
+        ".local/tokenizer-check-20261026-1"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/official-tokenizer-download.log",
+      "timestamp_utc": "2026-10-26T13:07:48.346124+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_tokenizer_data.py"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06D/red-tokenizer-response-integrity.log",
+      "timestamp_utc": "2026-10-26T13:08:19.160873+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_tokenizer_data.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/tokenizer-response-integrity.log",
+      "timestamp_utc": "2026-10-26T13:08:34.114103+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./internal/provider",
+        "-run",
+        "^TestTextInputBound"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06D/red-text-input-bound.log",
+      "timestamp_utc": "2026-10-26T13:21:01.654154+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./internal/provider",
+        "-run",
+        "^TestTextInputBound"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/text-input-bound.log",
+      "timestamp_utc": "2026-10-26T13:23:20.349052+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./eval/live",
+        "-run",
+        "^TestLivePreflightPriceBoundsAndEvidence$"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06D/red-preflight-input-bound.log",
+      "timestamp_utc": "2026-10-26T13:25:15.043625+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./eval/live",
+        "-run",
+        "^TestLivePreflightPriceBoundsAndEvidence$"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/preflight-input-bound.log",
+      "timestamp_utc": "2026-10-26T13:27:08.472982+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./tests/integration",
+        "-run",
+        "^TestDeepSeekVerifiedInputBoundAndAutomaticStop$"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/bound-ledger-and-stop.log",
+      "timestamp_utc": "2026-10-26T13:28:33.637716+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./eval/live",
+        "-run",
+        "TestOfficialFlash1017QuoteRejectsBeforeAllocation|TestLivePreflightPriceBoundsAndEvidence"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/preflight-regression.log",
+      "timestamp_utc": "2026-10-26T13:33:32.119654+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06D/red-analysis-bound-binding.log",
+      "timestamp_utc": "2026-10-26T13:36:08.205524+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py",
+        "tests/unit/test_tokenizer_data.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/analysis-bound-binding.log",
+      "timestamp_utc": "2026-10-26T13:37:22.760164+00:00"
+    },
+    {
+      "command": [
+        "ruff",
+        "check",
+        "eval/live",
+        "tests/unit/test_live_analysis.py",
+        "tests/unit/test_tokenizer_data.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/updated-python-lint.log",
+      "timestamp_utc": "2026-10-26T13:37:22.807017+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-v",
+        "./internal/demo",
+        "-run",
+        "TestLiveFourArmsDevelopmentClosure|TestLiveDevelopment"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/development-four-arm-closures.log",
+      "timestamp_utc": "2026-10-26T13:43:45.894891+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "evidence/batches/P7-06D/freeze_bound.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/freeze-input-bound.log",
+      "timestamp_utc": "2026-10-26T13:49:51.753620+00:00"
+    },
+    {
+      "command": [
+        "env",
+        "MGAR_ALLOW_PAID=1",
+        "MGAR_MAX_COST_USD=2.00",
+        "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+        "bash",
+        "scripts/eval.sh",
+        "--live",
+        "--confirm-live",
+        "--preflight"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/ready-preflight.log",
+      "timestamp_utc": "2026-10-26T13:49:53.674017+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./..."
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/plain-go.log",
+      "timestamp_utc": "2026-10-26T13:59:41.555254+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "evidence/batches/P7-06D/check_allocation.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/allocation-unused.log",
+      "timestamp_utc": "2026-10-26T14:48:38.822774+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/offline-full.log",
+      "timestamp_utc": "2026-10-26T14:51:16.632538+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/final-credential-and-format.log",
+      "timestamp_utc": "2026-10-26T15:05:29.442221+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06D/archived-evidence-audit.log",
+      "timestamp_utc": "2026-10-26T15:06:05.113925+00:00"
+    }
+  ],
+  "input_bound": {
+    "proof_sha256": "19f4cca1f09d1b27d6af097b881253455b679b7c984695b901ddf0bea95f6ce9",
+    "maximum_request_input_tokens": 48454,
+    "maximum_output_tokens": 1024,
+    "maximum_request_cost_micros": 15765,
+    "slot_cap_micros": 20833
+  },
+  "positive_assertions": [
+    "Official HTTPS tokenizer archive HTTP 200, full archive/JSON/template hashes pinned; no remote code executed",
+    "All 256 ByteLevel initial symbols checked; identity normalization and BPE merging bound proved for the closed reference serialization",
+    "Multibyte, marker, empty, large JSON and immutable request/proof checks passed",
+    "Real PG reservation precedes local HTTP; known usage settles and reservation versions bind method and evidence",
+    "Four-arm development business closures and independent Oracle passed using local_stub only",
+    "Ordinary Go, full race Go, full Python, vet, ruff, mypy and static contract checks passed"
+  ],
+  "negative_assertions": [
+    "Missing/corrupt data, unsupported message features, hash/model/price mismatch and over-budget requests fail before physical send",
+    "Usage exceeding original bound retains unknown reservation and refuses replay",
+    "Cross-run and two-process last-quota, actual SIGKILL and lost whole journal cannot mint allocation",
+    "All 96 formal UUIDs/caps and business permission/Verifier contracts unchanged"
+  ],
+  "known_limitations": [
+    "Proof assumes pinned official reference serializer and codec; undocumented server augmentation is not proven. Bound violations stop subsequent assignments and retain reservation.",
+    "Mutable provider alias is not immutable weights; peak cache-miss USD estimates are not provider invoices.",
+    "D development/local HTTP checks are not real model quality evidence. C remains separately evaluated under existing authorization."
+  ],
+  "actual_paid_calls": 0,
+  "formal_allocation_consumed": false,
+  "unverified": [
+    {
+      "name": "real_24x4_model_execution",
+      "status": "NOT_RUN",
+      "reason": "D is offline prerequisite; authorized C follows acceptance"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "CHANGE_REQUEST.md",
+      "sha256": "7f5788542a18fb65d2e5e2219f559bfdd1e164f69967770b0098d12ebbfa6734"
+    },
+    {
+      "path": "TASK_QUEUE.md",
+      "sha256": "53367b88481ceb7c4b74fb27026afe3c211e0dfbe09e371d29c87b3524bd55b7"
+    },
+    {
+      "path": "docs/adr/ADR-0017.md",
+      "sha256": "8c07c6d256d17853e9bb2d9e9983576875af62a0afabeb0d80b498f34627cb4d"
+    },
+    {
+      "path": "docs/experiments/live-provider.md",
+      "sha256": "9114fb4d1fec6c0ef74f947f8b1f3746f8f0dab9b36f0d92e72d85376cf375fd"
+    },
+    {
+      "path": "eval/live/analyze.py",
+      "sha256": "98f6c102b392f709b596d965a3e527907507225854a761979635788d12c2a29e"
+    },
+    {
+      "path": "eval/live/live.go",
+      "sha256": "f0c9d6dd1ff430c5e6cc3a90594ad0b633dce80181128ee729cc48e2d3aab51d"
+    },
+    {
+      "path": "eval/live/live_test.go",
+      "sha256": "80783a48761210c2b199b91b703a0011d7740f96694416644a5b029aac5a3e14"
+    },
+    {
+      "path": "eval/live/official-evidence.json",
+      "sha256": "4de4fffe49cfc8c2e87971743b824d9a91e383f828b8c2a5c67ca3a5049ed139"
+    },
+    {
+      "path": "eval/live/pricing.json",
+      "sha256": "84488462e7acbefa9f9f1fb7ec72cf42f9e4529eaf5f4c82e132d9df3bb923ff"
+    },
+    {
+      "path": "eval/live/tokenizer_data.py",
+      "sha256": "bc469d4872a089c478571eb08278871a53d94835a8dcd02aac3383a0d0721844"
+    },
+    {
+      "path": "evidence/batches/P7-06D/allocation-unused.log",
+      "sha256": "ad39940beedc06d3c916f58db0b2075b3a16be04740f5d26a5cd427abcedd506"
+    },
+    {
+      "path": "evidence/batches/P7-06D/analysis-bound-binding.log",
+      "sha256": "4773d9b2d7217b9b79879c3e975c4ecbd79e26ab75f9490e35f0315e8bfa5737"
+    },
+    {
+      "path": "evidence/batches/P7-06D/archived-evidence-audit.log",
+      "sha256": "5a0b7673987ace955bfb0042e140cabd73fd30df8960cd4176da12f78a557a11"
+    },
+    {
+      "path": "evidence/batches/P7-06D/bound-ledger-and-stop.log",
+      "sha256": "b70f871309ebaa4d80bd69f97a4fce12704dd2c31efd142083ad691b9ed8c638"
+    },
+    {
+      "path": "evidence/batches/P7-06D/budget-stop-verification.log",
+      "sha256": "39bf0bbb7d2e70c06b74c9594fe8dfe49ef0e0eaec24bf286d7f9b3e963aeab6"
+    },
+    {
+      "path": "evidence/batches/P7-06D/check_allocation.py",
+      "sha256": "4b76ce4ced0cdb921c59da0c0ec7791d41da933a04eb92ce9bccb91d39ebf795"
+    },
+    {
+      "path": "evidence/batches/P7-06D/commands.json",
+      "sha256": "87ee7aa7415ddf8a97e17637a1230766cb69ab0b5d671747608bae7667a36277"
+    },
+    {
+      "path": "evidence/batches/P7-06D/dependency-lint.log",
+      "sha256": "9a703557e17ca66280bc5d5e57766b72749dd48d4dc62a6fc66be915df314fed"
+    },
+    {
+      "path": "evidence/batches/P7-06D/development-four-arm-closures.log",
+      "sha256": "100de5e2906fdd3f9ac73884c90b9f1f5c6e3a1e998a5238e3bdc613a14310cd"
+    },
+    {
+      "path": "evidence/batches/P7-06D/final-credential-and-format.log",
+      "sha256": "0aa4b7213fcf591df482cb0a10703e99e4a8ea45be7d63315001fb2bb90abf4c"
+    },
+    {
+      "path": "evidence/batches/P7-06D/freeze-input-bound.log",
+      "sha256": "7631a6f3626156346f6b1c91b2fc7142e86ae24b396684878cd05dee4d8750d9"
+    },
+    {
+      "path": "evidence/batches/P7-06D/freeze_bound.py",
+      "sha256": "6358c7158f666a7f92c77ac93b38105675891bd9d9662e9edb60a1365ab0d101"
+    },
+    {
+      "path": "evidence/batches/P7-06D/official-tokenizer-download.log",
+      "sha256": "4e2e71e03670c247c5d8f26aaba501f89693977b24ccd40bb08e703f678ace06"
+    },
+    {
+      "path": "evidence/batches/P7-06D/offline-docs.json.json",
+      "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+    },
+    {
+      "path": "evidence/batches/P7-06D/offline-fingerprint.json",
+      "sha256": "5055529f75a55d7308347a26329e74b96da539e039b393e45a414396079cf673"
+    },
+    {
+      "path": "evidence/batches/P7-06D/offline-full.log",
+      "sha256": "e0c74bc6e6171d0783cf63e0ff1e83b1ea6e33d81e35184dc068709d67c50ef8"
+    },
+    {
+      "path": "evidence/batches/P7-06D/offline-go.json.json",
+      "sha256": "29caf05787afedb5e9485337163674ed0d8ea228cceed9ea596a0a2ca87c6ae0"
+    },
+    {
+      "path": "evidence/batches/P7-06D/offline-mypy.log.json",
+      "sha256": "8e7a0a8352a322d19e55605ee61df9b305de124895458472f4062bc11baad1c7"
+    },
+    {
+      "path": "evidence/batches/P7-06D/offline-pytest-events.json.json",
+      "sha256": "ca5b647472eb20a3a889c5d25d9d201dd2d009518580ce5bc9adf9b84e081c3e"
+    },
+    {
+      "path": "evidence/batches/P7-06D/offline-pytest.log.json",
+      "sha256": "c2701ee4030cb897a47c07d79259ace65000b249797b2fef05089b726b11c523"
+    },
+    {
+      "path": "evidence/batches/P7-06D/offline-pytest.xml.json",
+      "sha256": "1e3da844cf7f689be7cfeda08451a7bd05bfea3194807bda2d0734482cf361cd"
+    },
+    {
+      "path": "evidence/batches/P7-06D/offline-report.json.json",
+      "sha256": "048f4429e6e7ff5420ad5f8ded542923022add8d9d73c829c53c7752cec0db6e"
+    },
+    {
+      "path": "evidence/batches/P7-06D/offline-ruff.log.json",
+      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+    },
+    {
+      "path": "evidence/batches/P7-06D/offline-vet.log.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P7-06D/plain-go.log",
+      "sha256": "ae63db24446e676d781a2572e076331cc476f8691b30ba4423f51a7bcb166d56"
+    },
+    {
+      "path": "evidence/batches/P7-06D/preflight-input-bound.log",
+      "sha256": "d9aee46a6eac22618e5bb53eceb99ba5acc532583c34d98a2741c8cd5759312b"
+    },
+    {
+      "path": "evidence/batches/P7-06D/preflight-regression.log",
+      "sha256": "782f5eaf2f6daaaace2c856de5e553289052785fe71c7e9cc95ced826fd912d1"
+    },
+    {
+      "path": "evidence/batches/P7-06D/ready-preflight.log",
+      "sha256": "ec75463e0693f86ef12818fbf80293913e7803d796f4f9198398328a04b655a2"
+    },
+    {
+      "path": "evidence/batches/P7-06D/red-analysis-bound-binding.log",
+      "sha256": "b37745d50d5bb113d795828e059f6c2ac740c68832f88289636f728b48a45238"
+    },
+    {
+      "path": "evidence/batches/P7-06D/red-preflight-input-bound.log",
+      "sha256": "35b6c0145739a3adc2594874a5160c7c5f2b1fb9cc28f39f60026fa3d28aeb83"
+    },
+    {
+      "path": "evidence/batches/P7-06D/red-text-input-bound.log",
+      "sha256": "c5ed532f47445d48635071d88c92524fa7cae0d595cda796e3b09969a872fad8"
+    },
+    {
+      "path": "evidence/batches/P7-06D/red-tokenizer-dependency-audit.log",
+      "sha256": "ece8e51c0d98c91dc6553292dfd7dcf1d322fcfe2d6fca6a097ff6c7e2bedf4a"
+    },
+    {
+      "path": "evidence/batches/P7-06D/red-tokenizer-response-integrity.log",
+      "sha256": "be66aff201298ddab2af4b2dbb31fbde2115cc3fe1f5a3b26fb2d3a36f7d7a24"
+    },
+    {
+      "path": "evidence/batches/P7-06D/reference-proof.json",
+      "sha256": "77411ce9a49b46f10d9eb46744c5eb5f8d581851b770ea316469de33c988a3f0"
+    },
+    {
+      "path": "evidence/batches/P7-06D/text-input-bound.log",
+      "sha256": "a6d64ecbf7e59f50f74a1d6a0924565bf788e937c2b5a334fd0369a5b3d1507e"
+    },
+    {
+      "path": "evidence/batches/P7-06D/tokenizer-dependency-audit.log",
+      "sha256": "1af066efc8fbda1bb6748389b4809bcdf63792c5b10ca8d59a475f54467c72ab"
+    },
+    {
+      "path": "evidence/batches/P7-06D/tokenizer-fetch.json",
+      "sha256": "bdc5f861a5c0016a7654dfb10d81edc78f8a646ed6014fcf4e6a61f78de311ad"
+    },
+    {
+      "path": "evidence/batches/P7-06D/tokenizer-response-integrity.log",
+      "sha256": "189b9fa87e97376a68f446a5f58b27764002a73639b83bb86153ae2b8b6639aa"
+    },
+    {
+      "path": "evidence/batches/P7-06D/updated-python-lint.log",
+      "sha256": "9a703557e17ca66280bc5d5e57766b72749dd48d4dc62a6fc66be915df314fed"
+    },
+    {
+      "path": "internal/demo/live_test.go",
+      "sha256": "e8eabbd9e5dd18fdcc7e0e09cbf76408e99475495391d5173f904c9b70511709"
+    },
+    {
+      "path": "internal/provider/data/deepseek_v4_tokenizer.zip",
+      "sha256": "e7310d1dafe0a86d8a5629fe78a7c763760f651db9b8682718a1781dcd6fe495"
+    },
+    {
+      "path": "internal/provider/deepseek.go",
+      "sha256": "d0e95abc3308a084583302498c034cd7fc57536d4f7a54ff50f1d40a45a29160"
+    },
+    {
+      "path": "internal/provider/input_bound.go",
+      "sha256": "f0af6b63a05355830ee0f5a612c4906ddb9af6a1456dd0884ae2fe05d0823441"
+    },
+    {
+      "path": "internal/provider/input_bound_test.go",
+      "sha256": "d3afb19d48d251aaf926c8c9ca26b6b72b27db088efc21a7ef53dbc0493b9d9f"
+    },
+    {
+      "path": "tasks/P7-06C.md",
+      "sha256": "d77d8dbb7a90e3d8bac5df5f59ca6ab7da9b1df182534f14686c058a4bfed688"
+    },
+    {
+      "path": "tasks/P7-06D.md",
+      "sha256": "c454ce029c36eeb02e1974ec5f3d799e0b449d987e95ff014e92a3122e1b7abc"
+    },
+    {
+      "path": "tests/integration/deepseek_test.go",
+      "sha256": "2a32718ce20de9a0f0ff8f0280083380432786edae6c2225da8f5b6639ecf702"
+    },
+    {
+      "path": "tests/unit/test_live_analysis.py",
+      "sha256": "437ed173e18e24ed3fe1de39af7630aec883ab16e147dcf8def78b88af6435a3"
+    },
+    {
+      "path": "tests/unit/test_tokenizer_data.py",
+      "sha256": "fe8dec7ad1a680a35edf10eebed3fb91deea9f7c420ee3ec7b548acf1ca0efe5"
+    }
+  ],
+  "timestamp_utc": "2026-10-26T15:06:05.210512+00:00"
+}

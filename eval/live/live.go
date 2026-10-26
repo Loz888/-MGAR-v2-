@@ -116,14 +116,15 @@ type PricingEvidence struct {
 	ReviewedAt string          `json:"reviewed_at"`
 }
 type PreflightReport struct {
-	Ready           bool            `json:"ready"`
-	Assigned        int             `json:"assigned"`
-	CapMicros       int64           `json:"cap_micros"`
-	AllocatedMicros int64           `json:"allocated_micros"`
-	Blockers        []string        `json:"blockers"`
-	Network         string          `json:"network"`
-	Assignments     []Assignment    `json:"assignments"`
-	Pricing         PricingEvidence `json:"pricing"`
+	Ready                  bool            `json:"ready"`
+	Assigned               int             `json:"assigned"`
+	CapMicros              int64           `json:"cap_micros"`
+	AllocatedMicros        int64           `json:"allocated_micros"`
+	Blockers               []string        `json:"blockers"`
+	Network                string          `json:"network"`
+	Assignments            []Assignment    `json:"assignments"`
+	Pricing                PricingEvidence `json:"pricing"`
+	InputReservationTokens int64           `json:"input_reservation_tokens"`
 }
 
 func statePath(root string) string { return filepath.Join(root, "evidence/eval/live", experimentID) }
@@ -181,11 +182,16 @@ func Preflight(root string, confirm bool) (r PreflightReport) {
 		cfg := r.Pricing.Config
 		reviewed, e := time.Parse(time.RFC3339, r.Pricing.ReviewedAt)
 		raw, readErr := os.ReadFile(filepath.Join(root, "eval/live/official-evidence.json"))
-		if e != nil || reviewed.After(time.Now()) || time.Since(reviewed) > 7*24*time.Hour || readErr != nil || artifact.Digest(raw) != cfg.EvidenceSHA256 || r.Pricing.PricingURL != "https://api-docs.deepseek.com/quick_start/pricing" || r.Pricing.ModelsURL != "https://api.deepseek.com/models" || cfg.Price.Provider != "deepseek" || cfg.Price.Model != p.Model || cfg.Price.Version == "" || cfg.Price.InputMicrosPerMillion <= 0 || cfg.Price.OutputMicrosPerMillion <= 0 || cfg.ContextTokens <= 0 || cfg.OutputTokens <= 0 || cfg.OutputTokens > 8192 || cfg.MaxPromptBytes != 65536 {
+		validPayloadLimit := cfg.InputBound == nil && cfg.MaxPromptBytes == 65536 || cfg.InputBound != nil && cfg.MaxPromptBytes == 48000
+		if e != nil || reviewed.After(time.Now()) || time.Since(reviewed) > 7*24*time.Hour || readErr != nil || artifact.Digest(raw) != cfg.EvidenceSHA256 || r.Pricing.PricingURL != "https://api-docs.deepseek.com/quick_start/pricing" || r.Pricing.ModelsURL != "https://api.deepseek.com/models" || cfg.Price.Provider != "deepseek" || cfg.Price.Model != p.Model || cfg.Price.Version == "" || cfg.Price.InputMicrosPerMillion <= 0 || cfg.Price.OutputMicrosPerMillion <= 0 || cfg.ContextTokens <= 0 || cfg.OutputTokens <= 0 || cfg.OutputTokens > 8192 || !validPayloadLimit {
 			r.Blockers = append(r.Blockers, "official_evidence_invalid_or_expired")
 		}
-		price, priceErr := cfg.Price.Cost(cfg.ContextTokens, cfg.OutputTokens)
-		if priceErr != nil || price > 20833 || cfg.ContextTokens+cfg.OutputTokens > 65536 {
+		input, boundErr := cfg.InputReservationCeiling()
+		r.InputReservationTokens = input
+		price, priceErr := cfg.Price.Cost(input, cfg.OutputTokens)
+		if boundErr != nil {
+			r.Blockers = append(r.Blockers, "verified_input_bound_invalid")
+		} else if priceErr != nil || price > 20833 || input+cfg.OutputTokens > 65536 {
 			r.Blockers = append(r.Blockers, "conservative_call_bound_exceeds_slot_budget")
 		}
 	}

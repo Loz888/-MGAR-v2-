@@ -72,7 +72,8 @@ func developmentProvider(t *testing.T, arm, mode string) (*provider.Client, *ato
 	if mode == "unaffordable" {
 		price = 100_000_000
 	}
-	c, e := provider.NewLoopback(provider.Config{Price: budget.Pricing{Provider: "deepseek", Model: "flash-1017", Version: "development-local.v1", InputMicrosPerMillion: price, OutputMicrosPerMillion: price}, ContextTokens: 4096, OutputTokens: 1024, MaxPromptBytes: 65536}, server.URL)
+	proof := provider.OfficialTextInputBound()
+	c, e := provider.NewLoopback(provider.Config{Price: budget.Pricing{Provider: "deepseek", Model: "flash-1017", Version: provider.TextBoundPriceVersion("development-local.v1"), InputMicrosPerMillion: price, OutputMicrosPerMillion: price}, ContextTokens: 1048576, OutputTokens: 1024, MaxPromptBytes: 48000, InputBound: &proof}, server.URL)
 	if e != nil {
 		t.Fatal(e)
 	}

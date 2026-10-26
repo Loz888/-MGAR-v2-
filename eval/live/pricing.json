@@ -4,14 +4,22 @@
     "price": {
       "provider": "deepseek",
       "model": "flash-1017",
-      "version": "deepseek.flash1017.20261026.peak-miss.v1",
+      "version": "deepseek.flash1017.20261026.peak-miss.v1.u8-19f4cca1f09d1b27",
       "input_micros_per_million": 300000,
       "output_micros_per_million": 1200000
     },
     "context_tokens": 1048576,
     "output_tokens": 1024,
-    "max_prompt_bytes": 65536,
-    "official_evidence_sha256": "cdd435939fa386777d0dd2c22c927eb1ba2c246189addee7df7464752957eae4"
+    "max_prompt_bytes": 48000,
+    "official_evidence_sha256": "4de4fffe49cfc8c2e87971743b824d9a91e383f828b8c2a5c67ca3a5049ed139",
+    "input_bound": {
+      "method": "utf8-byte-bpe-chat.v1",
+      "archive_sha256": "e7310d1dafe0a86d8a5629fe78a7c763760f651db9b8682718a1781dcd6fe495",
+      "tokenizer_sha256": "89085f12ef79460ac5f66d1119325ddfc694b4ab209d80bbd81d35f081dc9614",
+      "config_sha256": "841f8cf146e3f0ad1082594a31f68ecf7608c20467ef355081333d85bbaeb1cb",
+      "template_sha256": "3b8267e54b67df6500f231ffa969955cc9d26b3444a291ced4eb96ca7d3ca1ea",
+      "request_mode": "two-text-messages.non-thinking.no-native-format.v1"
+    }
   },
   "pricing_url": "https://api-docs.deepseek.com/quick_start/pricing",
   "models_url": "https://api.deepseek.com/models",

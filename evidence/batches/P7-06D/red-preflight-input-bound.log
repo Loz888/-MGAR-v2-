@@ -1,0 +1,3 @@
+{
+  "stdout": "--- FAIL: TestLivePreflightPriceBoundsAndEvidence (0.02s)\n    --- FAIL: TestLivePreflightPriceBoundsAndEvidence/byte-bound (0.00s)\n        live_test.go:336: byte-bound [official_evidence_invalid_or_expired conservative_call_bound_exceeds_slot_budget]\nFAIL\nFAIL\tgithub.com/Loz888/-MGAR-v2-/eval/live\t0.021s\nFAIL\n"
+}

@@ -16,6 +16,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"slices"
+	"strings"
 	"syscall"
 	"testing"
 	"time"
@@ -89,7 +90,25 @@ func TestOfficialFlash1017QuoteRejectsBeforeAllocation(t *testing.T) {
 	t.Setenv("MGAR_ALLOW_PAID", "1")
 	t.Setenv("MGAR_MAX_COST_USD", "2.00")
 	t.Setenv("MGAR_LIVE_CASELIST", "eval/cases/frozen-live-24.json")
-	root, _ := filepath.Abs("../..")
+	source, _ := filepath.Abs("../..")
+	root := copyLiveInputs(t)
+	var frozenPrice PricingEvidence
+	if readJSON(filepath.Join(source, "eval/live/pricing.json"), &frozenPrice) != nil {
+		t.Fatal("read published price")
+	}
+	frozenPrice.Config.InputBound = nil
+	frozenPrice.Config.MaxPromptBytes = 65536
+	frozenPrice.Config.Price.Version = strings.Split(frozenPrice.Config.Price.Version, ".u8-")[0]
+	for _, name := range []string{"official-evidence.json"} {
+		raw, e := os.ReadFile(filepath.Join(source, "eval/live", name))
+		if e != nil || os.WriteFile(filepath.Join(root, "eval/live", name), raw, 0600) != nil {
+			t.Fatal("copy published evidence")
+		}
+	}
+	raw, _ := json.Marshal(frozenPrice)
+	if os.WriteFile(filepath.Join(root, "eval/live/pricing.json"), raw, 0600) != nil {
+		t.Fatal("copy legacy price")
+	}
 	r := Preflight(root, true)
 	if r.Ready || r.Pricing.Status != "VERIFIED" || !slices.Contains(r.Blockers, "conservative_call_bound_exceeds_slot_budget") {
 		t.Fatal("published quote must be verified but unaffordable under the frozen policy", r.Blockers)
@@ -266,6 +285,59 @@ func TestLiveJournalUnknownStopsAndKeepsAllAssignments(t *testing.T) {
 	}
 }
 func TestLivePreflightPriceBoundsAndEvidence(t *testing.T) {
+	root := copyLiveInputs(t)
+	t.Setenv("DEEPSEEK_API_KEY", "synthetic-never-sent")
+	t.Setenv("MGAR_ALLOW_PAID", "1")
+	t.Setenv("MGAR_MAX_COST_USD", "2.00")
+	t.Setenv("MGAR_LIVE_CASELIST", "eval/cases/frozen-live-24.json")
+	evidence := []byte(`{"fixture":"SYNTHETIC UNIT TEST, NOT OFFICIAL PRICING"}`)
+	if e := os.WriteFile(filepath.Join(root, "eval/live/official-evidence.json"), evidence, 0600); e != nil {
+		t.Fatal(e)
+	}
+	price := PricingEvidence{Status: "VERIFIED", ReviewedAt: time.Now().UTC().Format(time.RFC3339), PricingURL: "https://api-docs.deepseek.com/quick_start/pricing", ModelsURL: "https://api.deepseek.com/models", Config: provider.Config{Price: budget.Pricing{Provider: "deepseek", Model: "flash-1017", Version: "synthetic-test.v1", InputMicrosPerMillion: 1000, OutputMicrosPerMillion: 1000}, ContextTokens: 4096, OutputTokens: 1024, MaxPromptBytes: 65536, EvidenceSHA256: artifact.Digest(evidence)}}
+	for _, mode := range []string{"valid", "unaffordable", "context", "price", "hash", "stale", "model", "byte-bound", "bad-bound", "unbound-price"} {
+		t.Run(mode, func(t *testing.T) {
+			q := price
+			switch mode {
+			case "unaffordable":
+				q.Config.Price.InputMicrosPerMillion = 100_000_000
+			case "context":
+				q.Config.ContextTokens = 100000
+			case "price":
+				q.Config.Price.InputMicrosPerMillion = 0
+			case "hash":
+				q.Config.EvidenceSHA256 = "bad"
+			case "stale":
+				q.ReviewedAt = time.Now().Add(-8 * 24 * time.Hour).UTC().Format(time.RFC3339)
+			case "model":
+				q.Config.Price.Model = "another-model"
+			case "byte-bound", "bad-bound", "unbound-price":
+				proof := provider.OfficialTextInputBound()
+				q.Config.InputBound = &proof
+				q.Config.ContextTokens = 1048576
+				q.Config.MaxPromptBytes = 48000
+				q.Config.Price.Version = provider.TextBoundPriceVersion(q.Config.Price.Version)
+				if mode == "bad-bound" {
+					q.Config.InputBound.TokenizerSHA256 = "changed"
+				}
+				if mode == "unbound-price" {
+					q.Config.Price.Version = "old-unbound.v1"
+				}
+			}
+			raw, _ := json.Marshal(q)
+			if e := os.WriteFile(filepath.Join(root, "eval/live/pricing.json"), raw, 0600); e != nil {
+				t.Fatal(e)
+			}
+			r := Preflight(root, true)
+			if r.Ready != (mode == "valid" || mode == "byte-bound") {
+				t.Fatal(mode, r.Blockers)
+			}
+		})
+	}
+}
+
+func copyLiveInputs(t *testing.T) string {
+	t.Helper()
 	source, _ := filepath.Abs("../..")
 	root := t.TempDir()
 	var manifest struct {
@@ -289,42 +361,7 @@ func TestLivePreflightPriceBoundsAndEvidence(t *testing.T) {
 			t.Fatal(e)
 		}
 	}
-	t.Setenv("DEEPSEEK_API_KEY", "synthetic-never-sent")
-	t.Setenv("MGAR_ALLOW_PAID", "1")
-	t.Setenv("MGAR_MAX_COST_USD", "2.00")
-	t.Setenv("MGAR_LIVE_CASELIST", "eval/cases/frozen-live-24.json")
-	evidence := []byte(`{"fixture":"SYNTHETIC UNIT TEST, NOT OFFICIAL PRICING"}`)
-	if e = os.WriteFile(filepath.Join(root, "eval/live/official-evidence.json"), evidence, 0600); e != nil {
-		t.Fatal(e)
-	}
-	price := PricingEvidence{Status: "VERIFIED", ReviewedAt: time.Now().UTC().Format(time.RFC3339), PricingURL: "https://api-docs.deepseek.com/quick_start/pricing", ModelsURL: "https://api.deepseek.com/models", Config: provider.Config{Price: budget.Pricing{Provider: "deepseek", Model: "flash-1017", Version: "synthetic-test.v1", InputMicrosPerMillion: 1000, OutputMicrosPerMillion: 1000}, ContextTokens: 4096, OutputTokens: 1024, MaxPromptBytes: 65536, EvidenceSHA256: artifact.Digest(evidence)}}
-	for _, mode := range []string{"valid", "unaffordable", "context", "price", "hash", "stale", "model"} {
-		t.Run(mode, func(t *testing.T) {
-			q := price
-			switch mode {
-			case "unaffordable":
-				q.Config.Price.InputMicrosPerMillion = 100_000_000
-			case "context":
-				q.Config.ContextTokens = 100000
-			case "price":
-				q.Config.Price.InputMicrosPerMillion = 0
-			case "hash":
-				q.Config.EvidenceSHA256 = "bad"
-			case "stale":
-				q.ReviewedAt = time.Now().Add(-8 * 24 * time.Hour).UTC().Format(time.RFC3339)
-			case "model":
-				q.Config.Price.Model = "another-model"
-			}
-			raw, _ := json.Marshal(q)
-			if e := os.WriteFile(filepath.Join(root, "eval/live/pricing.json"), raw, 0600); e != nil {
-				t.Fatal(e)
-			}
-			r := Preflight(root, true)
-			if r.Ready != (mode == "valid") {
-				t.Fatal(mode, r.Blockers)
-			}
-		})
-	}
+	return root
 }
 func mapKeys(m map[string]string) []string {
 	out := []string{}
