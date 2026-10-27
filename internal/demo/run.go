@@ -305,6 +305,14 @@ func (f *fixture) batchWith(ctx context.Context, o Options, r *Report, owner sto
 			continue
 		}
 		body := inputcontext.Canonical(j.result.Output)
+		if j.node.Role == "aggregate" {
+			var resolveErr error
+			body, resolveErr = f.resolveAggregate(ctx, j.claim, j.state, body)
+			if resolveErr != nil {
+				failed = errors.Join(failed, resolveErr)
+				continue
+			}
+		}
 		a, e := f.s.PublishArtifact(ctx, j.claim, f.cas, j.node.OutputKind, "application/json", "demo.v1", body)
 		if e != nil {
 			return e

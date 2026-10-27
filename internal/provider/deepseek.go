@@ -26,6 +26,8 @@ import (
 var ErrPolicy = errors.New("provider_configuration_denied")
 var ErrUnknown = errors.New("provider_usage_unknown")
 var ErrDecision = errors.New("provider_decision_invalid")
+var ErrOutputLimit = errors.New("provider_output_limit")
+var ErrInputLimit = errors.New("provider_input_limit")
 var modelPattern = regexp.MustCompile(`^[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}$`)
 var shaPattern = regexp.MustCompile(`^[0-9a-f]{64}$`)
 
@@ -119,7 +121,13 @@ func (c *Client) apiModel() string {
 // Call keeps network errors and provider bodies out of logs. Each logical call
 // has ONE transport attempt; 429/503 and disconnects never trigger auto replay.
 func (c *Client) Call(ctx context.Context, resources *scheduler.Resources, claim store.TaskClaim, id string, payload []byte) (decision []byte, call budget.ModelCall, err error) {
-	if c == nil || resources == nil || len(payload) > c.config.MaxPromptBytes || !utf8.Valid(payload) || !json.Valid(payload) {
+	if c == nil || resources == nil {
+		return nil, call, ErrPolicy
+	}
+	if len(payload) > c.config.MaxPromptBytes {
+		return nil, call, ErrInputLimit
+	}
+	if !utf8.Valid(payload) || !json.Valid(payload) {
 		return nil, call, ErrPolicy
 	}
 	if c.caseID != "" {
@@ -203,6 +211,9 @@ func (c *Client) send(ctx context.Context, body []byte) ([]byte, budget.ModelUsa
 		return nil, unknown, ErrUnknown
 	}
 	usage := budget.ModelUsage{Status: "failed", Known: true, Source: c.source, InputTokens: in, OutputTokens: out, Tokens: total, CostMicros: cost, PricingVersion: c.config.Price.Version, ResponseModel: wire.Model, ResponseDigest: artifact.Digest(raw)}
+	if len(wire.Choices) == 1 && wire.Choices[0].Finish == "length" {
+		return nil, usage, ErrOutputLimit
+	}
 	if len(wire.Choices) != 1 || wire.Choices[0].Finish != "stop" {
 		return nil, usage, ErrDecision
 	}

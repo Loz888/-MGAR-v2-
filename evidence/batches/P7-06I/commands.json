@@ -1,0 +1,78 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/demo",
+      "-run",
+      "TestDevelopmentAggregateCapacity|TestDevelopmentModelFailureClasses"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06I/red-capacity-and-classification.log",
+    "started_at": "2026-10-27T02:52:19.737687+00:00",
+    "finished_at": "2026-10-27T02:52:19.918315+00:00",
+    "duration_seconds": 0.18
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/demo",
+      "-run",
+      "TestDevelopmentAggregateCapacity|TestDevelopmentModelFailureClasses"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06I/red-runtime-reproduction.log",
+    "started_at": "2026-10-27T02:52:27.028178+00:00",
+    "finished_at": "2026-10-27T02:52:53.881465+00:00",
+    "duration_seconds": 26.852
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_model_bridge.py"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06I/red-python-error-envelope.log",
+    "started_at": "2026-10-27T02:53:11.353218+00:00",
+    "finished_at": "2026-10-27T02:53:18.435918+00:00",
+    "duration_seconds": 7.082
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/demo",
+      "-run",
+      "TestDevelopmentAggregateCapacity|TestDevelopmentModelFailureClasses"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06I/green-development-capacity-classes.log",
+    "started_at": "2026-10-27T02:57:51.432754+00:00",
+    "finished_at": "2026-10-27T02:58:21.438485+00:00",
+    "duration_seconds": 30.005
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_model_bridge.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06I/green-python-error-envelope.log",
+    "started_at": "2026-10-27T02:58:26.903592+00:00",
+    "finished_at": "2026-10-27T02:58:34.350161+00:00",
+    "duration_seconds": 7.445
+  }
+]

@@ -132,7 +132,7 @@ func (f *fixture) workerWith(ctx context.Context, o Options, c store.TaskClaim, 
 	mux.HandleFunc("/v1/models", func(w http.ResponseWriter, r *http.Request) {
 		lock.Lock()
 		defer lock.Unlock()
-		deny := func() { http.Error(w, "model_request_denied", 403) }
+		deny := func() { writeModelFailure(w, store.ErrPolicy, budget.ModelCall{}) }
 		raw, err := io.ReadAll(io.LimitReader(r.Body, 65537))
 		request, parseErr := parseModelRequest(r, raw, token, c, o.Case, f.input.Goal, selected.WireJSON, next)
 		if err != nil || parseErr != nil {
@@ -153,9 +153,9 @@ func (f *fixture) workerWith(ctx context.Context, o Options, c store.TaskClaim, 
 				return
 			}
 			payload["dispatch_contract"] = contract
-			decision, _, err := o.Model.Call(r.Context(), resources, c, request.LogicalID, inputcontext.Canonical(payload))
+			decision, call, err := o.Model.Call(r.Context(), resources, c, request.LogicalID, inputcontext.Canonical(payload))
 			if err != nil {
-				deny()
+				writeModelFailure(w, err, call)
 				return
 			}
 			next++
@@ -167,7 +167,7 @@ func (f *fixture) workerWith(ctx context.Context, o Options, c store.TaskClaim, 
 		input := int64((len(raw) + 3) / 4)
 		req, err := budget.PricedRequest(request.LogicalID, quote, input, 16000, artifact.Digest(raw))
 		if err != nil {
-			deny()
+			writeModelFailure(w, err, budget.ModelCall{})
 			return
 		}
 		var decision []byte

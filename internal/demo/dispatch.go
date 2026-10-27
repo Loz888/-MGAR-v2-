@@ -7,7 +7,7 @@ import (
 	"github.com/Loz888/-MGAR-v2-/internal/policy"
 )
 
-const dispatchVersion = "demo.live-dispatch.v2"
+const dispatchVersion = "demo.live-dispatch.v3"
 
 // liveDispatch describes public task/role requirements, never Oracle values or
 // execution authority. The existing Go validators still accept/reject output.
@@ -24,7 +24,7 @@ func liveDispatch(node, business string, version int, plan *planner.Proposal, de
 		"candidate.read":  "Read the granted immutable candidate inputs. They are semantically unverified. Preserve original candidates as citations when producing a candidate report.",
 		"action.patch":    "Apply a declared patch only in the owned synthetic worktree. Choose from the declared enums using observed rule/source/data.",
 		"action.test":     "Run actual sandbox tests after applying a patch; preserve the actual returned test observation.",
-		"aggregate.merge": "Merge the fixed, verified input references; return the actual merge result, without a business-answer wrapper.",
+		"aggregate.merge": "Merge the fixed verified input references. Returns a compact merge-receipt.v1 binding the full result SHA256. Go retains and verifies full provenance.",
 	}
 	for _, d := range defs {
 		toolNames = append(toolNames, d.Name)
@@ -58,8 +58,8 @@ func liveDispatch(node, business string, version int, plan *planner.Proposal, de
 		contract["output_schema"] = observation
 	case "aggregate":
 		if !hasCandidates {
-			contract["task_goal"] = "Use aggregate.merge on the authorized verified inputs. Return that entire actual MergeResult as final.output verbatim, including original provenance, claims and verification status. Do not replace it with an answer/citations wrapper."
-			contract["output_schema"] = map[string]any{"type": "object", "description": "The exact complete object returned by aggregate.merge."}
+			contract["task_goal"] = "Use aggregate.merge on the authorized verified inputs. Return its exact compact merge-receipt.v1 object verbatim as final.output. Go binds the receipt to the successful tool result and checks the full original provenance through the existing Verifier. The receipt cannot authorize actions or mark evidence verified."
+			contract["output_schema"] = object([]string{"schema_version", "merge_sha256"}, map[string]any{"schema_version": map[string]any{"const": "merge-receipt.v1"}, "merge_sha256": map[string]any{"type": "string", "pattern": "^[0-9a-f]{64}$"}})
 			break
 		}
 		fallthrough

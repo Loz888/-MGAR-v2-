@@ -1,0 +1,17 @@
+{
+  "stdout": "# github.com/Loz888/-MGAR-v2-/internal/demo [github.com/Loz888/-MGAR-v2-/internal/demo.test]\ninternal/demo/aggregate_capacity_test.go:163:4: non-name o.Model on left side of :=\nFAIL\tgithub.com/Loz888/-MGAR-v2-/internal/demo [build failed]\nFAIL\n",
+  "command": [
+    "go",
+    "test",
+    "-count=1",
+    "-v",
+    "./internal/demo",
+    "-run",
+    "TestDevelopmentAggregateCapacity|TestDevelopmentModelFailureClasses"
+  ],
+  "exit_code": 1,
+  "log_path": "evidence/batches/P7-06I/red-capacity-and-classification.log",
+  "started_at": "2026-10-27T02:52:19.737687+00:00",
+  "finished_at": "2026-10-27T02:52:19.918315+00:00",
+  "duration_seconds": 0.18
+}

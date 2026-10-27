@@ -10,6 +10,7 @@ from typing import Any
 from urllib.parse import urlsplit
 
 from mgar_agents.core.agent import Agent
+from mgar_agents.core.errors import ProviderFailure
 from mgar_agents.core.claim import Claim
 from mgar_agents.core.gateway import GatewayClient
 from mgar_agents.core.provider import ModelRequest
@@ -33,9 +34,28 @@ class RemoteMock:
                                {'Authorization': 'Bearer ' + self.token, 'Content-Type': 'application/json'})
             response = connection.getresponse()
             raw = response.read(65537)
-            if response.status != 200 or len(raw) > 65536:
-                raise PermissionError('model admission rejected')
+            if len(raw) > 65536:
+                raise ProviderFailure('model_usage_unknown', 'unknown')
+            if response.status != 200:
+                allowed = {
+                    'model_output_limit': (422, 'known'), 'model_invalid_response': (422, 'known'),
+                    'model_input_limit': (413, 'not_sent'), 'budget_exhausted': (402, 'not_sent'),
+                    'resource_exhausted': (423, 'not_sent'), 'policy_denied': (403, 'not_sent'),
+                    'model_usage_unknown': (409, 'unknown'),
+                }
+                try:
+                    error = strict_json(raw.decode('utf-8'))
+                    if (type(error) is not dict or set(error) != {'schema_version', 'error', 'usage_status', 'retryable'}
+                            or error['schema_version'] != 'model-error.v1' or error['retryable'] is not False
+                            or type(error['error']) is not str
+                            or allowed.get(error['error']) != (response.status, error['usage_status'])):
+                        raise ValueError('invalid failure envelope')
+                except (ValueError, KeyError, TypeError, RecursionError):
+                    raise ProviderFailure('model_usage_unknown', 'unknown') from None
+                raise ProviderFailure(error['error'], error['usage_status'])
             return raw.decode()
+        except (OSError, http.client.HTTPException, UnicodeError):
+            raise ProviderFailure('model_usage_unknown', 'unknown') from None
         finally:
             connection.close()
 

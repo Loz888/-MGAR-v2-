@@ -1,0 +1,17 @@
+{
+  "stdout": "=== RUN   TestDevelopmentAggregateCapacity\n=== RUN   TestDevelopmentAggregateCapacity/development-001\n    live_test.go:102: aggregate output bytes=79 published-vocabulary minimum_tokens=24 max_tokens=1024\n    live_test.go:102: aggregate output bytes=145 published-vocabulary minimum_tokens=57 max_tokens=1024\n    aggregate_capacity_test.go:153: local HTTP with published-vocabulary lower-bound quota and real PG/Verifier closes under fixed 1024 output limit\n=== RUN   TestDevelopmentAggregateCapacity/development-002\n    live_test.go:102: aggregate output bytes=79 published-vocabulary minimum_tokens=24 max_tokens=1024\n    live_test.go:102: aggregate output bytes=145 published-vocabulary minimum_tokens=58 max_tokens=1024\n    aggregate_capacity_test.go:153: local HTTP with published-vocabulary lower-bound quota and real PG/Verifier closes under fixed 1024 output limit\n--- PASS: TestDevelopmentAggregateCapacity (26.07s)\n    --- PASS: TestDevelopmentAggregateCapacity/development-001 (25.00s)\n    --- PASS: TestDevelopmentAggregateCapacity/development-002 (1.07s)\n=== RUN   TestDevelopmentModelFailureClasses\n=== RUN   TestDevelopmentModelFailureClasses/aggregate-length\n=== RUN   TestDevelopmentModelFailureClasses/aggregate-invalid\n=== RUN   TestDevelopmentModelFailureClasses/unknown\n=== RUN   TestDevelopmentModelFailureClasses/unaffordable\n--- PASS: TestDevelopmentModelFailureClasses (2.72s)\n    --- PASS: TestDevelopmentModelFailureClasses/aggregate-length (1.05s)\n    --- PASS: TestDevelopmentModelFailureClasses/aggregate-invalid (1.03s)\n    --- PASS: TestDevelopmentModelFailureClasses/unknown (0.32s)\n    --- PASS: TestDevelopmentModelFailureClasses/unaffordable (0.33s)\nPASS\nok  \tgithub.com/Loz888/-MGAR-v2-/internal/demo\t28.802s\n",
+  "command": [
+    "go",
+    "test",
+    "-count=1",
+    "-v",
+    "./internal/demo",
+    "-run",
+    "TestDevelopmentAggregateCapacity|TestDevelopmentModelFailureClasses"
+  ],
+  "exit_code": 0,
+  "log_path": "evidence/batches/P7-06I/green-development-capacity-classes.log",
+  "started_at": "2026-10-27T02:57:51.432754+00:00",
+  "finished_at": "2026-10-27T02:58:21.438485+00:00",
+  "duration_seconds": 30.005
+}

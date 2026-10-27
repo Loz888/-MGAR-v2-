@@ -114,7 +114,10 @@ func (f *fixture) definitions(c store.TaskClaim, snap inputcontext.Snapshot, sta
 				return nil, errors.New("merge_incomplete")
 			}
 			state.expected = inputcontext.Canonical(merged)
-			return state.expected, nil
+			if len(state.expected) > 60000 {
+				return nil, errors.New("merge_capacity")
+			}
+			return receiptFor(state.expected), nil
 		})}
 	}
 	return nil

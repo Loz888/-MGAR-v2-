@@ -27,6 +27,7 @@ func developmentProvider(t *testing.T, arm, mode string) (*provider.Client, *ato
 			return
 		}
 		var wire struct {
+			Maximum  int `json:"max_tokens"`
 			Messages []struct {
 				Content string `json:"content"`
 			} `json:"messages"`
@@ -88,7 +89,26 @@ func developmentProvider(t *testing.T, arm, mode string) (*provider.Client, *ato
 			w.WriteHeader(400)
 			return
 		}
-		_ = json.NewEncoder(w).Encode(map[string]any{"model": "flash-1017", "choices": []any{map[string]any{"finish_reason": "stop", "message": map[string]string{"content": string(decision)}}}, "usage": map[string]int{"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15}})
+		finish, output := "stop", 5
+		if mode == "bounded" || mode == "aggregate-length" || mode == "aggregate-invalid" {
+			minimum, err := minimumReferenceTokens(decision)
+			if err != nil {
+				t.Error(err)
+				w.WriteHeader(400)
+				return
+			}
+			output = minimum
+			if mode == "bounded" && d.Node == "aggregate" {
+				t.Logf("aggregate output bytes=%d published-vocabulary minimum_tokens=%d max_tokens=%d", len(decision), minimum, wire.Maximum)
+			}
+			if minimum > wire.Maximum || (mode == "aggregate-length" && d.Node == "aggregate" && request.Turn > 1) {
+				finish, output, decision = "length", wire.Maximum, []byte(`{"type":"final","output":{`)
+			}
+			if mode == "aggregate-invalid" && d.Node == "aggregate" && request.Turn > 1 {
+				decision = []byte(`{"broken":`)
+			}
+		}
+		_ = json.NewEncoder(w).Encode(map[string]any{"model": "flash-1017", "choices": []any{map[string]any{"finish_reason": finish, "message": map[string]string{"content": string(decision)}}}, "usage": map[string]int{"prompt_tokens": 10, "completion_tokens": output, "total_tokens": 10 + output}})
 	}))
 	t.Cleanup(server.Close)
 	price := int64(1000)
