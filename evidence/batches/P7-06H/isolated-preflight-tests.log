@@ -1,0 +1,18 @@
+{
+  "stdout": "=== RUN   TestRound2PreflightRejectsChangedCheckpoint\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/valid\n    round_test.go:130: valid [control_database_not_ready]\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/budget\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/old-identity\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/changed-prior\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/missing-prior\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/changed-contract\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/missing-contract\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/changed-price\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/journal\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/allocated\n--- FAIL: TestRound2PreflightRejectsChangedCheckpoint (2.64s)\n    --- FAIL: TestRound2PreflightRejectsChangedCheckpoint/valid (1.27s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/budget (0.14s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/old-identity (0.13s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/changed-prior (0.16s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/missing-prior (0.14s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/changed-contract (0.15s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/missing-contract (0.14s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/changed-price (0.16s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/journal (0.16s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/allocated (0.18s)\nFAIL\nFAIL\tgithub.com/Loz888/-MGAR-v2-/eval/live\t2.665s\nFAIL\n",
+  "command": [
+    "go",
+    "test",
+    "-race",
+    "-count=1",
+    "-v",
+    "./eval/live",
+    "-run",
+    "^TestRound2PreflightRejectsChangedCheckpoint$"
+  ],
+  "exit_code": 1,
+  "log_path": "evidence/batches/P7-06H/isolated-preflight-tests.log",
+  "started_at": "2026-10-27T02:23:44.577070+00:00",
+  "finished_at": "2026-10-27T02:23:48.453360+00:00",
+  "duration_seconds": 3.875
+}

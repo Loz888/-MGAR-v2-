@@ -1,0 +1,15 @@
+{
+  "timestamp_utc": "2026-10-27T01:52:43.975732+00:00",
+  "user_request": "执行冻结的 round2，独立评分并记录预算与停止原因。",
+  "scope": "P7-06H: execute the G-frozen round2 once; independent scoring and retained PG reconciliation",
+  "provider": "deepseek",
+  "model": "flash-1017",
+  "round2_cap_micros": 1900000,
+  "prior_upper_cost_micros": 33850,
+  "project_cap_micros": 2000000,
+  "automatic_retry": false,
+  "code_changes_permitted_in_this_execution": false,
+  "network_readiness_observation": "unknown; use actual command outcomes",
+  "secret_readiness_observation": "unknown; configured binding api.deepseek.com and variable presence confirmed, no credential value logged",
+  "frozen_input_check": "evidence/batches/P7-06H/frozen-input-check.json"
+}

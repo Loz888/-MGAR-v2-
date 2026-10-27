@@ -1,0 +1,18 @@
+{
+  "stdout": "=== RUN   TestRound2PreflightRejectsChangedCheckpoint\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/valid\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/budget\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/old-identity\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/changed-prior\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/missing-prior\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/changed-contract\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/missing-contract\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/changed-price\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/journal\n=== RUN   TestRound2PreflightRejectsChangedCheckpoint/allocated\n--- PASS: TestRound2PreflightRejectsChangedCheckpoint (2.63s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/valid (1.34s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/budget (0.13s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/old-identity (0.14s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/changed-prior (0.14s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/missing-prior (0.14s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/changed-contract (0.15s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/missing-contract (0.14s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/changed-price (0.14s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/journal (0.15s)\n    --- PASS: TestRound2PreflightRejectsChangedCheckpoint/allocated (0.18s)\nPASS\nok  \tgithub.com/Loz888/-MGAR-v2-/eval/live\t3.654s\n",
+  "command": [
+    "go",
+    "test",
+    "-race",
+    "-count=1",
+    "-v",
+    "./eval/live",
+    "-run",
+    "^TestRound2PreflightRejectsChangedCheckpoint$"
+  ],
+  "exit_code": 0,
+  "log_path": "evidence/batches/P7-06H/isolated-preflight-green.log",
+  "started_at": "2026-10-27T02:24:56.045833+00:00",
+  "finished_at": "2026-10-27T02:25:00.956268+00:00",
+  "duration_seconds": 4.91
+}

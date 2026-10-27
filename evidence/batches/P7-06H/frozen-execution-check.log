@@ -1,0 +1,12 @@
+{
+  "stdout": "{\"checked_at\": \"2026-10-27T02:15:22.927584+00:00\", \"status\": \"FROZEN_INPUTS_UNCHANGED\", \"source_commit\": \"970ccc862c10dc7784e8caa2c31410768968fe72\", \"execution_source_fingerprint\": \"af44b894443ce37eb184dedf205b6fea44f194e9de54805d86393f77d10331e3\", \"plan_sha256\": \"bfffacd449d2e27a991493dcc015503b2eb6ef7502d2f5e8fae544009539e414\", \"executor_binary_sha256\": \"3d7df592afacba1c2b50b6677d8b5a44f2a22f09a0f5e5ef8c95a981f690518d\", \"allocation_mode\": \"fresh\", \"old_journal_hashes_verified\": 43, \"old_metrics_unchanged\": true, \"model_configuration_changed\": false, \"oracle_or_dataset_changed\": false, \"automatic_retry_performed\": false, \"status_from_controller\": \"EXECUTED_PENDING_INDEPENDENT_EVALUATION\"}\n",
+  "command": [
+    "python",
+    "evidence/batches/P7-06H/verify_frozen_execution.py"
+  ],
+  "exit_code": 0,
+  "log_path": "evidence/batches/P7-06H/frozen-execution-check.log",
+  "started_at": "2026-10-27T02:15:22.847669+00:00",
+  "finished_at": "2026-10-27T02:15:22.952089+00:00",
+  "duration_seconds": 0.104
+}

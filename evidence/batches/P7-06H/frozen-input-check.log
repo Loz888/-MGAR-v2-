@@ -1,0 +1,12 @@
+{
+  "stdout": "{\"checked_at\": \"2026-10-27T01:52:26.025572+00:00\", \"read_only\": true, \"round\": \"round2\", \"status\": \"FROZEN_UNUSED_VERIFIED\", \"source_commit\": \"970ccc862c10dc7784e8caa2c31410768968fe72\", \"source_fingerprint\": \"af44b894443ce37eb184dedf205b6fea44f194e9de54805d86393f77d10331e3\", \"plan_sha256\": \"bfffacd449d2e27a991493dcc015503b2eb6ef7502d2f5e8fae544009539e414\", \"protocol_and_prices_sha256\": \"f82ddafa9f150280cd59f066021cd8bc1ed488f516d4fd97b013d078b3ff119e\", \"prior_evidence_unchanged\": true, \"allocation_marker_rows\": 0, \"models\": 0, \"tools\": 0, \"runs\": 0, \"old_marker_state\": \"cancelled\", \"old_marker_epoch\": 2, \"postgres\": \"16.11 (Debian 16.11-1.pgdg12+1)\", \"go\": \"go version go1.27.3 linux/amd64\", \"python\": \"3.12.14\", \"key_variable_present\": true, \"new_cap_micros\": 1900000, \"previous_upper_cost_micros\": 33850, \"cumulative_approved_cap_micros\": 1933850}\n",
+  "command": [
+    "python",
+    ".local/round2-precheck.py"
+  ],
+  "exit_code": 0,
+  "log_path": "evidence/batches/P7-06H/frozen-input-check.log",
+  "started_at": "2026-10-27T01:52:25.701541+00:00",
+  "finished_at": "2026-10-27T01:52:26.095565+00:00",
+  "duration_seconds": 0.393
+}

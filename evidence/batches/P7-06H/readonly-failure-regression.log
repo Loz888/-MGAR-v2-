@@ -1,0 +1,12 @@
+{
+  "stdout": "{\"status\": \"OBSERVED_AS_EXPECTED\", \"old_live004_B0_status\": \"UNKNOWN\", \"round2_rows\": [{\"index\": 12, \"case_id\": \"live-004\", \"arm\": \"B0\", \"status\": \"failed\", \"data_query_statuses\": [\"failed\"], \"unknown_models\": 0, \"unknown_tools\": 0, \"known_cost_micros\": 802, \"raw_sha256\": \"bf9511dd7ede567a1c483b7fa7d92e5c0ad51086695b87e3ccae58de6a7bcc94\"}, {\"index\": 13, \"case_id\": \"live-004\", \"arm\": \"B1\", \"status\": \"failed\", \"data_query_statuses\": [\"failed\"], \"unknown_models\": 0, \"unknown_tools\": 0, \"known_cost_micros\": 900, \"raw_sha256\": \"83f6562c90a39a735249ae078322dc0b6119c63a127fcde2a4bfaafcc1b93e82\"}, {\"index\": 14, \"case_id\": \"live-004\", \"arm\": \"B2\", \"status\": \"failed\", \"data_query_statuses\": [\"failed\"], \"unknown_models\": 0, \"unknown_tools\": 0, \"known_cost_micros\": 1383, \"raw_sha256\": \"122515ca5beb0600e8ff1d86d71c2fdad2debd31d70a3613c8ebdd938c0180d0\"}, {\"index\": 15, \"case_id\": \"live-004\", \"arm\": \"B4\", \"status\": \"failed\", \"data_query_statuses\": [\"failed\"], \"unknown_models\": 0, \"unknown_tools\": 0, \"known_cost_micros\": 1461, \"raw_sha256\": \"7874992e4eced9054c8c053774e4aee65cbf1795d4337cc96fa6d73eb664791a\"}], \"later_assignment_started\": true, \"replayed\": false, \"limitation\": \"One post-fix regression on exposed cases; this observation is not a causal effect estimate.\"}\n",
+  "command": [
+    "python",
+    "evidence/batches/P7-06H/verify_readonly_regression.py"
+  ],
+  "exit_code": 0,
+  "log_path": "evidence/batches/P7-06H/readonly-failure-regression.log",
+  "started_at": "2026-10-27T01:59:12.838111+00:00",
+  "finished_at": "2026-10-27T01:59:12.864724+00:00",
+  "duration_seconds": 0.026
+}

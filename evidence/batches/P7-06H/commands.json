@@ -1,0 +1,267 @@
+[
+  {
+    "command": [
+      "python",
+      ".local/round2-precheck.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06H/frozen-input-check.log",
+    "started_at": "2026-10-27T01:52:25.701541+00:00",
+    "finished_at": "2026-10-27T01:52:26.095565+00:00",
+    "duration_seconds": 0.393
+  },
+  {
+    "command": [
+      "env",
+      "MGAR_ALLOW_PAID=1",
+      "MGAR_MAX_COST_USD=2.00",
+      "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+      "bash",
+      "scripts/eval.sh",
+      "--live",
+      "--confirm-live",
+      "--round",
+      "round2",
+      "--preflight"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06H/live-preflight.log",
+    "started_at": "2026-10-27T01:52:43.999364+00:00",
+    "finished_at": "2026-10-27T01:52:45.214328+00:00",
+    "duration_seconds": 1.214
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_live_analysis.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06H/independent-analyzer-tests.log",
+    "started_at": "2026-10-27T01:53:43.014665+00:00",
+    "finished_at": "2026-10-27T01:53:43.827652+00:00",
+    "duration_seconds": 0.812
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06H/verify_readonly_regression.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06H/readonly-failure-regression.log",
+    "started_at": "2026-10-27T01:59:12.838111+00:00",
+    "finished_at": "2026-10-27T01:59:12.864724+00:00",
+    "duration_seconds": 0.026
+  },
+  {
+    "command": [
+      "env",
+      "MGAR_ALLOW_PAID=1",
+      "MGAR_MAX_COST_USD=2.00",
+      "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+      "bash",
+      "scripts/eval.sh",
+      "--live",
+      "--confirm-live",
+      "--round",
+      "round2"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06H/frozen-round2-run.log",
+    "started_at": "2026-10-27T01:52:57.518463+00:00",
+    "finished_at": "2026-10-27T02:15:04.231633+00:00",
+    "duration_seconds": 1326.712
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06H/verify_frozen_execution.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06H/frozen-execution-check.log",
+    "started_at": "2026-10-27T02:15:22.847669+00:00",
+    "finished_at": "2026-10-27T02:15:22.952089+00:00",
+    "duration_seconds": 0.104
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06H/reconcile_retained_pg.py"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06H/retained-pg-reconciliation.log",
+    "started_at": "2026-10-27T02:15:22.839079+00:00",
+    "finished_at": "2026-10-27T02:15:23.135574+00:00",
+    "duration_seconds": 0.295
+  },
+  {
+    "command": [
+      "python",
+      "eval/live/analyze.py",
+      "--round",
+      "round2",
+      "--output",
+      "evidence/eval/live/round2-results-20261027"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06H/independent-round2-analysis.log",
+    "started_at": "2026-10-27T02:15:22.839045+00:00",
+    "finished_at": "2026-10-27T02:15:23.222292+00:00",
+    "duration_seconds": 0.382
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06H/reconcile_retained_pg.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06H/retained-pg-reconciliation-corrected.log",
+    "started_at": "2026-10-27T02:16:24.447956+00:00",
+    "finished_at": "2026-10-27T02:16:25.201331+00:00",
+    "duration_seconds": 0.752
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06H/capture_budget_stop.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06H/final-budget-and-stop.log",
+    "started_at": "2026-10-27T02:16:56.271765+00:00",
+    "finished_at": "2026-10-27T02:16:56.297107+00:00",
+    "duration_seconds": 0.025
+  },
+  {
+    "command": [
+      "env",
+      "MGAR_ALLOW_PAID=1",
+      "MGAR_MAX_COST_USD=2.00",
+      "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+      ".local/bin/mgareval",
+      "--provider",
+      "deepseek",
+      "--live",
+      "--confirm-live",
+      "--round",
+      "round2",
+      "--preflight"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06H/post-run-reentry-preflight.log",
+    "started_at": "2026-10-27T02:16:56.602874+00:00",
+    "finished_at": "2026-10-27T02:16:56.716961+00:00",
+    "duration_seconds": 0.113
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06H/extract_failure_findings.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06H/failure-findings.log",
+    "started_at": "2026-10-27T02:19:19.460966+00:00",
+    "finished_at": "2026-10-27T02:19:19.562338+00:00",
+    "duration_seconds": 0.101
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06H/offline-full.log",
+    "started_at": "2026-10-27T02:19:19.840580+00:00",
+    "finished_at": "2026-10-27T02:21:54.289386+00:00",
+    "duration_seconds": 154.448
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./eval/live",
+      "-run",
+      "^TestRound2PreflightRejectsChangedCheckpoint$"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06H/isolated-preflight-tests.log",
+    "started_at": "2026-10-27T02:23:44.577070+00:00",
+    "finished_at": "2026-10-27T02:23:48.453360+00:00",
+    "duration_seconds": 3.875
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./eval/live",
+      "-run",
+      "^TestRound2PreflightRejectsChangedCheckpoint$"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06H/isolated-preflight-green.log",
+    "started_at": "2026-10-27T02:24:56.045833+00:00",
+    "finished_at": "2026-10-27T02:25:00.956268+00:00",
+    "duration_seconds": 4.91
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06H/offline-full-after-test-isolation.log",
+    "started_at": "2026-10-27T02:25:23.012369+00:00",
+    "finished_at": "2026-10-27T02:29:36.348972+00:00",
+    "duration_seconds": 253.336
+  },
+  {
+    "command": [
+      "python",
+      ".local/final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06H/final-audit.log",
+    "started_at": "2026-10-27T02:30:26.782699+00:00",
+    "finished_at": "2026-10-27T02:30:26.980574+00:00",
+    "duration_seconds": 0.197
+  },
+  {
+    "command": [
+      "git",
+      "-c",
+      "core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol",
+      "diff",
+      "--cached",
+      "--check"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06H/staged-whitespace-check.log",
+    "started_at": "2026-10-27T02:31:16.019995+00:00",
+    "finished_at": "2026-10-27T02:31:16.044416+00:00",
+    "duration_seconds": 0.023
+  },
+  {
+    "command": [
+      "git",
+      "-c",
+      "core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol",
+      "diff",
+      "--cached",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06H/staged-whitespace-corrected.log",
+    "started_at": "2026-10-27T02:31:44.881909+00:00",
+    "finished_at": "2026-10-27T02:31:44.906108+00:00",
+    "duration_seconds": 0.023
+  }
+]

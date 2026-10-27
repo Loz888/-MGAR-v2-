@@ -1,0 +1,5 @@
+arm,assigned,evaluated,known_cost_micros,latency_p50_ms,latency_p95_ms,oracle_pass,oracle_pass_rate_all_assigned,oracle_pass_rate_observed,statuses.blocked,statuses.completed,statuses.failed,upper_cost_micros
+B0,24,24,36842,3828.3734999999997,23548.5636,15,0.625,0.625,6,15,3,36842
+B1,24,24,65843,6823.689,28548.2241,15,0.625,0.625,6,15,3,65843
+B2,24,24,85676,11009.234,34629.3804,21,0.875,0.875,6,15,3,85676
+B4,24,24,89018,10395.8495,41284.70425,6,0.25,0.25,6,N/A,18,89018

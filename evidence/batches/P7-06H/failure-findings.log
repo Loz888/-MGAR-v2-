@@ -1,0 +1,12 @@
+{
+  "stdout": "{\"status\": \"OBSERVED\", \"B4_run_errors\": {\"worker_did_not_complete\": 16, \"insufficient_evidence\": 3, \"policy_denied\": 3, \"replan_model_output_invalid\": 1, \"verification_failed_data\": 1}, \"B4_worker_errors\": {\"aggregate/policy_denied\": 13, \"data/tool_error\": 3}, \"B4_planner_states\": {\"completed\": 18}, \"B4_workflow_states\": {\"interrupted\": 16, \"blocked\": 6, \"failed\": 2}, \"strict_closure_count\": 0, \"interpretation_limit\": \"Output at the configured ceiling and a failed model record are observed. The discarded provider response text/finish reason is not retained; truncation and the exact contract mismatch require development reproduction. Generic worker policy_denied is not proof of a tool permission violation.\"}\n",
+  "command": [
+    "python",
+    "evidence/batches/P7-06H/extract_failure_findings.py"
+  ],
+  "exit_code": 0,
+  "log_path": "evidence/batches/P7-06H/failure-findings.log",
+  "started_at": "2026-10-27T02:19:19.460966+00:00",
+  "finished_at": "2026-10-27T02:19:19.562338+00:00",
+  "duration_seconds": 0.101
+}

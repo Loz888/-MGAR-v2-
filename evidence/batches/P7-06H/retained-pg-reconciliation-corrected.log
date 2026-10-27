@@ -1,0 +1,12 @@
+{
+  "stdout": "{\"checked_at\": \"2026-10-27T02:16:24.690381+00:00\", \"read_only\": true, \"experiment_id\": \"P7-06-round2-deepseek-flash-1017-20261027\", \"allocation_marker\": {\"run_id\": \"1e69bf79-5997-5fa6-84b2-e509f1d953b8\", \"state\": \"cancelled\", \"workflow_revision\": 1, \"epoch\": 1, \"lease_revision\": 0, \"budget_zero\": true}, \"old_marker_state\": \"cancelled\", \"old_marker_epoch\": 2, \"status\": \"MATCH\", \"checked_assignments\": 96, \"model_calls\": 540, \"tool_calls\": 319, \"no_unexported_round2_rows\": true, \"experiment_status\": \"EXECUTED_PENDING_INDEPENDENT_EVALUATION\", \"known_cost_micros\": 277379, \"reserved_cost_micros\": 0}\n",
+  "command": [
+    "python",
+    "evidence/batches/P7-06H/reconcile_retained_pg.py"
+  ],
+  "exit_code": 0,
+  "log_path": "evidence/batches/P7-06H/retained-pg-reconciliation-corrected.log",
+  "started_at": "2026-10-27T02:16:24.447956+00:00",
+  "finished_at": "2026-10-27T02:16:25.201331+00:00",
+  "duration_seconds": 0.752
+}

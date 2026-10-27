@@ -1,0 +1,47 @@
+{
+  "timestamp_utc": "2026-10-27T02:16:56.293142+00:00",
+  "experiment_id": "P7-06-round2-deepseek-flash-1017-20261027",
+  "controller_status": "EXECUTED_PENDING_INDEPENDENT_EVALUATION",
+  "execution_command_exit_code": 0,
+  "analysis_status": "BLOCKED",
+  "global_stop_reason": "all_96_assignments_attempted",
+  "assignment_statuses": {
+    "completed": 45,
+    "failed": 27,
+    "blocked": 24
+  },
+  "assignments_attempted": 96,
+  "assignments_evaluated": 96,
+  "oracle_passed": 57,
+  "real_model_closure_verified": false,
+  "recorded_model_calls": 540,
+  "known_model_calls": 540,
+  "budget": {
+    "unit": "USD microdollars",
+    "project_cap_micros": 2000000,
+    "new_approved_cap_micros": 1900000,
+    "new_allocated_cap_micros": 1899936,
+    "slot_cap_micros": 19791,
+    "previous_known_cost_micros": 13276,
+    "previous_retained_upper_micros": 33850,
+    "cumulative_approved_cap_micros": 1933850,
+    "new_known_cost_micros": 277379,
+    "new_reserved_ledger_cost_micros": 0,
+    "new_retained_upper_cost_micros": 277379,
+    "cumulative_known_cost_micros": 290655,
+    "cumulative_retained_upper_cost_micros": 311229,
+    "project_cap_reached": false,
+    "estimate_is_supplier_invoice": false,
+    "unused_shares_reallocated": false
+  },
+  "unknown_stop_evidence": [],
+  "automatic_replay_performed": false,
+  "analysis_report": "evidence/eval/live/round2-results-20261027/report.md",
+  "postgres_reconciliation": "evidence/batches/P7-06H/retained-pg-reconciliation.json",
+  "limitations": [
+    "Known costs use frozen worst-case prices, not a provider invoice.",
+    "The old unknown share remains retained; rounds are scored separately.",
+    "NOT_RUN is not an observed zero-cost task. No missing pair is dropped.",
+    "Post-fix regression on exposed cases is not an unseen holdout."
+  ]
+}

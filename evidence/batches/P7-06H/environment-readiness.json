@@ -1,0 +1,45 @@
+{
+  "observed_at": "2026-10-27 01:57:24 UTC",
+  "observations_current": true,
+  "observed_phase": "running",
+  "connectivity": "connected",
+  "network_policy": {
+    "mode": "restricted",
+    "state": "unknown",
+    "allowed_hosts": [
+      "api-docs.deepseek.com",
+      "api.deepseek.com",
+      "cdn.deepseek.com"
+    ]
+  },
+  "secrets": [
+    {
+      "name": "DEEPSEEK_API_KEY",
+      "target": {
+        "environment_variable": "DEEPSEEK_API_KEY",
+        "allowed_domains": [
+          "api.deepseek.com"
+        ]
+      },
+      "optional": false,
+      "state": "unknown"
+    }
+  ],
+  "runtime_variables": [
+    {
+      "environment_variable": "MGAR_LIVE_MODEL",
+      "optional": false,
+      "state": "unknown"
+    },
+    {
+      "environment_variable": "MGAR_MAX_COST_USD",
+      "optional": false,
+      "state": "unknown"
+    },
+    {
+      "environment_variable": "MGAR_LIVE_CASELIST",
+      "optional": false,
+      "state": "unknown"
+    }
+  ]
+}

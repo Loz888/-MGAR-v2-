@@ -62,8 +62,13 @@ func TestRound2FreezeAndBudget(t *testing.T) {
 	}
 }
 func TestRound2PreflightRejectsChangedCheckpoint(t *testing.T) {
-	for _, mode := range []string{"valid", "budget", "old-identity", "changed-prior", "missing-prior", "changed-contract", "missing-contract", "changed-price", "journal"} {
+	for _, mode := range []string{"valid", "budget", "old-identity", "changed-prior", "missing-prior", "changed-contract", "missing-contract", "changed-price", "journal", "allocated"} {
 		t.Run(mode, func(t *testing.T) {
+			// Readiness includes a PG marker check. Use this test's own migrated
+			// schema so a real completed round cannot invalidate the positive case.
+			s := testdb.New(t)
+			// Match the CLI E2E fixture pattern; DSN query overrides stay denied.
+			t.Setenv("PGOPTIONS", "-c search_path="+s.Pool.Config().ConnConfig.RuntimeParams["search_path"])
 			root := round2TestRoot(t)
 			t.Setenv("MGAR_ALLOW_PAID", "1")
 			t.Setenv("MGAR_MAX_COST_USD", "2.00")
@@ -100,6 +105,10 @@ func TestRound2PreflightRejectsChangedCheckpoint(t *testing.T) {
 				}
 			case "journal":
 				if e = os.MkdirAll(statePathFor(root, plan.ID), 0700); e != nil {
+					t.Fatal(e)
+				}
+			case "allocated":
+				if e = claimExperiment(context.Background(), s, plan); e != nil {
 					t.Fatal(e)
 				}
 			}

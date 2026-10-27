@@ -1,0 +1,13 @@
+{
+  "stdout": "go version go1.27.3 linux/amd64\nPython 3.12.14\nDocker Compose version v2.40.3\ncredential pattern scan passed: 3089 source/evidence files; local credentials excluded\n",
+  "command": [
+    "bash",
+    "scripts/test.sh",
+    "--offline"
+  ],
+  "exit_code": 1,
+  "log_path": "evidence/batches/P7-06H/offline-full.log",
+  "started_at": "2026-10-27T02:19:19.840580+00:00",
+  "finished_at": "2026-10-27T02:21:54.289386+00:00",
+  "duration_seconds": 154.448
+}

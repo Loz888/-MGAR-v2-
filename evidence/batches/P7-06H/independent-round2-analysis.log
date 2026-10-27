@@ -1,0 +1,16 @@
+{
+  "stdout": "{\"status\": \"BLOCKED\", \"assigned\": 96, \"recorded_model_calls\": 540, \"real_model_closure_verified\": false}\n",
+  "command": [
+    "python",
+    "eval/live/analyze.py",
+    "--round",
+    "round2",
+    "--output",
+    "evidence/eval/live/round2-results-20261027"
+  ],
+  "exit_code": 2,
+  "log_path": "evidence/batches/P7-06H/independent-round2-analysis.log",
+  "started_at": "2026-10-27T02:15:22.839045+00:00",
+  "finished_at": "2026-10-27T02:15:23.222292+00:00",
+  "duration_seconds": 0.382
+}

@@ -1,0 +1,207 @@
+{
+  "status": "OBSERVED",
+  "B4_run_errors": {
+    "worker_did_not_complete": 16,
+    "insufficient_evidence": 3,
+    "policy_denied": 3,
+    "replan_model_output_invalid": 1,
+    "verification_failed_data": 1
+  },
+  "B4_worker_errors": {
+    "aggregate/policy_denied": 13,
+    "data/tool_error": 3
+  },
+  "B4_planner_states": {
+    "completed": 18
+  },
+  "B4_workflow_states": {
+    "interrupted": 16,
+    "blocked": 6,
+    "failed": 2
+  },
+  "aggregate_failures": [
+    {
+      "case_id": "live-001",
+      "raw_path": "evidence/eval/live/P7-06-round2-deepseek-flash-1017-20261027/003.raw.json",
+      "worker_error": "policy_denied",
+      "turns": 2,
+      "tool_calls": 1,
+      "last_model_call_id": "d1c7cb95-aded-47f1-adb5-ec784a213f0d",
+      "last_model_status": "failed",
+      "last_output_tokens": 1024,
+      "usage_known": true
+    },
+    {
+      "case_id": "live-002",
+      "raw_path": "evidence/eval/live/P7-06-round2-deepseek-flash-1017-20261027/007.raw.json",
+      "worker_error": "policy_denied",
+      "turns": 2,
+      "tool_calls": 1,
+      "last_model_call_id": "88376884-8f1a-48df-b6e1-767599685ac1",
+      "last_model_status": "failed",
+      "last_output_tokens": 1024,
+      "usage_known": true
+    },
+    {
+      "case_id": "live-003",
+      "raw_path": "evidence/eval/live/P7-06-round2-deepseek-flash-1017-20261027/011.raw.json",
+      "worker_error": "policy_denied",
+      "turns": 2,
+      "tool_calls": 1,
+      "last_model_call_id": "314505d7-851d-436f-a4c6-dca1a2b31006",
+      "last_model_status": "failed",
+      "last_output_tokens": 1024,
+      "usage_known": true
+    },
+    {
+      "case_id": "live-005",
+      "raw_path": "evidence/eval/live/P7-06-round2-deepseek-flash-1017-20261027/019.raw.json",
+      "worker_error": "policy_denied",
+      "turns": 2,
+      "tool_calls": 1,
+      "last_model_call_id": "808a9e40-7dec-4e0c-8314-98c404df36a8",
+      "last_model_status": "failed",
+      "last_output_tokens": 1024,
+      "usage_known": true
+    },
+    {
+      "case_id": "live-006",
+      "raw_path": "evidence/eval/live/P7-06-round2-deepseek-flash-1017-20261027/023.raw.json",
+      "worker_error": "policy_denied",
+      "turns": 2,
+      "tool_calls": 1,
+      "last_model_call_id": "b089f2f4-686b-4fc5-b239-49e92b9d5a31",
+      "last_model_status": "failed",
+      "last_output_tokens": 1024,
+      "usage_known": true
+    },
+    {
+      "case_id": "live-009",
+      "raw_path": "evidence/eval/live/P7-06-round2-deepseek-flash-1017-20261027/035.raw.json",
+      "worker_error": "policy_denied",
+      "turns": 2,
+      "tool_calls": 1,
+      "last_model_call_id": "13e2d75a-1e83-47c0-8657-d79c67c73dc9",
+      "last_model_status": "failed",
+      "last_output_tokens": 1024,
+      "usage_known": true
+    },
+    {
+      "case_id": "live-010",
+      "raw_path": "evidence/eval/live/P7-06-round2-deepseek-flash-1017-20261027/039.raw.json",
+      "worker_error": "policy_denied",
+      "turns": 2,
+      "tool_calls": 1,
+      "last_model_call_id": "84d99c1d-5576-4815-a961-b4a5c289641c",
+      "last_model_status": "failed",
+      "last_output_tokens": 1024,
+      "usage_known": true
+    },
+    {
+      "case_id": "live-011",
+      "raw_path": "evidence/eval/live/P7-06-round2-deepseek-flash-1017-20261027/043.raw.json",
+      "worker_error": "policy_denied",
+      "turns": 2,
+      "tool_calls": 1,
+      "last_model_call_id": "99c2e194-cea9-4e66-b205-8935d91f84ee",
+      "last_model_status": "failed",
+      "last_output_tokens": 1024,
+      "usage_known": true
+    },
+    {
+      "case_id": "live-017",
+      "raw_path": "evidence/eval/live/P7-06-round2-deepseek-flash-1017-20261027/067.raw.json",
+      "worker_error": "policy_denied",
+      "turns": 2,
+      "tool_calls": 1,
+      "last_model_call_id": "edb1e2f0-3aef-48b3-9e4d-65633ab6d2db",
+      "last_model_status": "failed",
+      "last_output_tokens": 1024,
+      "usage_known": true
+    },
+    {
+      "case_id": "live-018",
+      "raw_path": "evidence/eval/live/P7-06-round2-deepseek-flash-1017-20261027/071.raw.json",
+      "worker_error": "policy_denied",
+      "turns": 2,
+      "tool_calls": 1,
+      "last_model_call_id": "707676f5-46a7-42c6-a3a3-a6e4b13e3eb9",
+      "last_model_status": "failed",
+      "last_output_tokens": 1024,
+      "usage_known": true
+    },
+    {
+      "case_id": "live-019",
+      "raw_path": "evidence/eval/live/P7-06-round2-deepseek-flash-1017-20261027/075.raw.json",
+      "worker_error": "policy_denied",
+      "turns": 2,
+      "tool_calls": 1,
+      "last_model_call_id": "dad3f400-3874-46ac-b79d-f2d0e512ab12",
+      "last_model_status": "failed",
+      "last_output_tokens": 1024,
+      "usage_known": true
+    },
+    {
+      "case_id": "live-021",
+      "raw_path": "evidence/eval/live/P7-06-round2-deepseek-flash-1017-20261027/083.raw.json",
+      "worker_error": "policy_denied",
+      "turns": 2,
+      "tool_calls": 1,
+      "last_model_call_id": "c92820e8-a2f6-45f5-8768-ecbc64ec7689",
+      "last_model_status": "failed",
+      "last_output_tokens": 1024,
+      "usage_known": true
+    },
+    {
+      "case_id": "live-022",
+      "raw_path": "evidence/eval/live/P7-06-round2-deepseek-flash-1017-20261027/087.raw.json",
+      "worker_error": "policy_denied",
+      "turns": 2,
+      "tool_calls": 1,
+      "last_model_call_id": "c1dbf85c-cb6d-4d93-9e4c-ee32d2770d61",
+      "last_model_status": "failed",
+      "last_output_tokens": 1024,
+      "usage_known": true
+    }
+  ],
+  "B4_oracle_passed_negative_cases": [
+    {
+      "case_id": "live-007",
+      "negative": true,
+      "status": "blocked",
+      "strict_closure": false
+    },
+    {
+      "case_id": "live-008",
+      "negative": true,
+      "status": "blocked",
+      "strict_closure": false
+    },
+    {
+      "case_id": "live-015",
+      "negative": true,
+      "status": "blocked",
+      "strict_closure": false
+    },
+    {
+      "case_id": "live-016",
+      "negative": true,
+      "status": "blocked",
+      "strict_closure": false
+    },
+    {
+      "case_id": "live-023",
+      "negative": true,
+      "status": "blocked",
+      "strict_closure": false
+    },
+    {
+      "case_id": "live-024",
+      "negative": true,
+      "status": "blocked",
+      "strict_closure": false
+    }
+  ],
+  "strict_closure_count": 0,
+  "interpretation_limit": "Output at the configured ceiling and a failed model record are observed. The discarded provider response text/finish reason is not retained; truncation and the exact contract mismatch require development reproduction. Generic worker policy_denied is not proof of a tool permission violation."
+}

@@ -2,9 +2,11 @@
   "card_id": "P7-06",
   "status": "BLOCKED",
   "git_commit": null,
-  "base_git_commit": "f12d6aeab8ec619ede2ebcba1a8f49615c963598",
-  "source_fingerprint": "7d046de97ab7bc47f53f36613cbeed93acc9d7a0c63cd2dcb05d78cb47444ad8",
-  "scope": "Executed approved recovered real DeepSeek experiment once; independent Oracle evaluation, retained PG reconciliation and automatic UNKNOWN stop",
+  "base_git_commit": "970ccc862c10dc7784e8caa2c31410768968fe72",
+  "scope": "Latest round2: all 24x4 scored and reconciled; strict real B4 closure remains absent",
+  "source_commit": "970ccc862c10dc7784e8caa2c31410768968fe72",
+  "execution_source_fingerprint": "af44b894443ce37eb184dedf205b6fea44f194e9de54805d86393f77d10331e3",
+  "source_fingerprint": "4b22e42641c7fcee4fb6112f6481a1656eab01de906f26d80b69ffb318e35947",
   "subcards": [
     {
       "card_id": "P7-06A",
@@ -35,44 +37,94 @@
       "status": "BLOCKED",
       "path": "evidence/batches/P7-06C/accept.json",
       "sha256": "65e5737e14b46646bce25601a69b6ee4a2591c49c0d2d803d43fe55efc8c2806"
+    },
+    {
+      "card_id": "P7-06F",
+      "status": "PASS",
+      "path": "evidence/batches/P7-06F/accept.json",
+      "sha256": "629f04f64695b743267716f103089a154b90207101145d2d59c36a4752fe3ad4"
+    },
+    {
+      "card_id": "P7-06G",
+      "status": "PASS",
+      "path": "evidence/batches/P7-06G/accept.json",
+      "sha256": "c9f3dae4bd9fb4bac3da61e9e38c6483d72c5cae2c75af2b7a6e28752aa67e93"
     }
   ],
+  "latest_execution_acceptance": "evidence/batches/P7-06H/accept.json",
+  "latest_round": {
+    "experiment_id": "P7-06-round2-deepseek-flash-1017-20261027",
+    "assigned": 96,
+    "evaluated": 96,
+    "assignment_statuses": {
+      "completed": 45,
+      "failed": 27,
+      "blocked": 24
+    },
+    "actual_paid_calls": 540,
+    "oracle_passed": 57,
+    "oracle_by_arm": {
+      "B0": 15,
+      "B1": 15,
+      "B2": 21,
+      "B4": 6
+    },
+    "real_model_closure_verified": false,
+    "global_stop_reason": "all_96_assignments_attempted",
+    "metrics_path": "evidence/eval/live/round2-results-20261027/metrics.json",
+    "metrics_sha256": "8b03c225e3dbdf67e57d4f84db7aad0c14da281e7d30327c610d051d3afeb046"
+  },
+  "historical_round": {
+    "experiment_id": "P7-06-deepseek-flash-1017-20261026",
+    "actual_paid_calls": 34,
+    "known_cost_micros": 13276,
+    "upper_cost_micros": 33850,
+    "acceptance_path": "evidence/batches/P7-06C/accept.json",
+    "unchanged": true
+  },
   "authorization": {
     "provider": "deepseek",
     "model": "flash-1017",
     "api_model": "deepseek-flash",
-    "total_cap_usd": "2.00",
-    "assignments": 96,
-    "zero_send_recovery_approved": true
+    "project_cap_usd": "2.00",
+    "round2_cap_usd": "1.90",
+    "round2_assignments": 96,
+    "round2_execution_explicitly_authorized": true
   },
+  "budget": {
+    "unit": "USD microdollars",
+    "project_cap_micros": 2000000,
+    "new_approved_cap_micros": 1900000,
+    "new_allocated_cap_micros": 1899936,
+    "slot_cap_micros": 19791,
+    "previous_known_cost_micros": 13276,
+    "previous_retained_upper_micros": 33850,
+    "cumulative_approved_cap_micros": 1933850,
+    "new_known_cost_micros": 277379,
+    "new_reserved_ledger_cost_micros": 0,
+    "new_retained_upper_cost_micros": 277379,
+    "cumulative_known_cost_micros": 290655,
+    "cumulative_retained_upper_cost_micros": 311229,
+    "project_cap_reached": false,
+    "estimate_is_supplier_invoice": false,
+    "unused_shares_reallocated": false
+  },
+  "cumulative_paid_calls": 574,
   "real_provider_callability": "PASS",
-  "actual_live_execution_status": "PARTIAL",
-  "actual_paid_calls": 34,
-  "known_cost_micros": 13276,
-  "upper_cost_micros": 33850,
-  "formal_allocation_consumed": true,
   "real_model_closure_verified": false,
-  "assignment_statuses": {
-    "completed": 6,
-    "failed": 6,
-    "UNKNOWN": 1,
-    "NOT_RUN": 83
-  },
-  "evaluated_assignments": 12,
-  "oracle_passed_assignments": 0,
   "test_summary": {
     "go": {
       "status": "PASS",
-      "tests": 597,
-      "passed": 597,
+      "tests": 635,
+      "passed": 635,
       "failed_events": 0,
       "skipped": 0,
       "complete": true
     },
     "python": {
       "status": "PASS",
-      "tests": 427,
-      "passed": 427,
+      "tests": 435,
+      "passed": 435,
       "failed": 0,
       "skipped_or_xfailed": 0,
       "complete": true,
@@ -80,43 +132,17 @@
     },
     "status": "PASS"
   },
+  "test_summary_reference": "evidence/batches/P7-06H/accept.json",
   "blockers": [
-    "Frozen task_failure data.query left one readonly tool UNKNOWN, requiring automatic whole-run stop and preserving the original share.",
-    "83 assignments have not run; no validated B4 strict real-model closure and no complete 24x4 evaluation.",
-    "Role-specific planner/business-output contracts and provable readonly failure classification need development validation before a separately reviewed frozen round."
+    "No B4 strict workflow + verifier + independent Oracle real-model business closure.",
+    "13 aggregate failures reached the 1024 output-token ceiling; development reproduction is needed before a new freeze."
   ],
   "known_limitations": [
-    "The real provider is callable, but no real B4 strict business closure passed; transport/JSON success is not task correctness.",
-    "Only first 12 assignments are independently scored; 1 UNKNOWN and 83 NOT_RUN remain. No 24-pair comparison, average effect, or multi-agent improvement claim.",
-    "The stopped readonly data.query belongs to frozen task_failure injection. Gateway labels executed tool errors unknown, so the approved whole-experiment stop retained its entire share. No old ledger entry was rewritten.",
-    "B2/B4 planner outputs were rejected, and B0/B1 completed answers did not pass independent Oracle. Findings are retained rather than tuning this holdout or replaying.",
-    "Known cost is recomputed with frozen peak cache-miss USD prices; it is a conservative estimate, not provider invoice/currency conversion.",
-    "Original marker is cancelled at epoch2; the zero-send recovery exception cannot be reused after any generation or second crash.",
-    "Controller journal hashes and PG reconciliation assume trusted infrastructure, not supplier-signed attestations.",
-    "No P8 or subsequent paid round is included."
+    "Round2 is a post-fix regression on exposed cases; do not pool trial samples.",
+    "Oracle negative-case refusal is separate from strict business closure.",
+    "Frozen worst-price costs are estimates, not supplier invoices.",
+    "Old unknown share remains retained. No replay, P8 or additional paid round."
   ],
-  "unverified": [
-    {
-      "name": "24x4_real_model_evaluation",
-      "status": "PARTIAL",
-      "evaluated": 12,
-      "unknown": 1,
-      "not_run": 83
-    },
-    {
-      "name": "real_B4_business_closure",
-      "status": "FAIL",
-      "attempted": 3,
-      "validated": 0
-    },
-    {
-      "name": "multi_agent_quality_improvement",
-      "status": "NOT_RUN",
-      "reason": "Complete 24-case pairing unavailable"
-    }
-  ],
-  "commands_reference": "evidence/batches/P7-06C/commands.json",
-  "evaluation_reference": "evidence/eval/live/actual-20261027/metrics.json",
-  "historical_acceptance": "evidence/batches/P7-06/accept-pre-recovery-20261027.json",
-  "timestamp_utc": "2026-10-27T00:42:44.141872+00:00"
+  "historical_acceptance": "evidence/batches/P7-06/accept-before-round2-20261027.json",
+  "timestamp_utc": "2026-10-27T02:31:45.287771+00:00"
 }

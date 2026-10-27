@@ -1,0 +1,12 @@
+{
+  "stdout": "Configured credential bytes absent from 3108 Git candidates; Go formatting valid.\n",
+  "command": [
+    "python",
+    ".local/final-audit.py"
+  ],
+  "exit_code": 0,
+  "log_path": "evidence/batches/P7-06H/final-audit.log",
+  "started_at": "2026-10-27T02:30:26.782699+00:00",
+  "finished_at": "2026-10-27T02:30:26.980574+00:00",
+  "duration_seconds": 0.197
+}

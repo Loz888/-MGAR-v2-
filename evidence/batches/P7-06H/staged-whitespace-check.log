@@ -1,0 +1,16 @@
+{
+  "stdout": "evidence/batches/P7-06H/test-isolation.diff:6: space before tab in indent.\n+ \t}\nevidence/batches/P7-06H/test-isolation.diff:11: space before tab in indent.\n+ \t\tt.Run(mode, func(t *testing.T) {\nevidence/batches/P7-06H/test-isolation.diff:17: space before tab in indent.\n+ \t\t\troot := round2TestRoot(t)\nevidence/batches/P7-06H/test-isolation.diff:18: space before tab in indent.\n+ \t\t\tt.Setenv(\"MGAR_ALLOW_PAID\", \"1\")\nevidence/batches/P7-06H/test-isolation.diff:19: space before tab in indent.\n+ \t\t\tt.Setenv(\"MGAR_MAX_COST_USD\", \"2.00\")\nevidence/batches/P7-06H/test-isolation.diff:21: space before tab in indent.\n+ \t\t\t\tif e = os.MkdirAll(statePathFor(root, plan.ID), 0700); e != nil {\nevidence/batches/P7-06H/test-isolation.diff:22: space before tab in indent.\n+ \t\t\t\t\tt.Fatal(e)\nevidence/batches/P7-06H/test-isolation.diff:23: space before tab in indent.\n+ \t\t\t\t}\nevidence/batches/P7-06H/test-isolation.diff:28: space before tab in indent.\n+ \t\t\t}\nevidence/batches/P7-06H/test-isolation.diff:29: space before tab in indent.\n+ \t\t\tif mode == \"budget\" || mode == \"old-identity\" {\nevidence/batches/P7-06H/test-isolation.diff:30: space before tab in indent.\n+ \t\t\t\traw, _ := json.Marshal(plan)\n",
+  "command": [
+    "git",
+    "-c",
+    "core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol",
+    "diff",
+    "--cached",
+    "--check"
+  ],
+  "exit_code": 2,
+  "log_path": "evidence/batches/P7-06H/staged-whitespace-check.log",
+  "started_at": "2026-10-27T02:31:16.019995+00:00",
+  "finished_at": "2026-10-27T02:31:16.044416+00:00",
+  "duration_seconds": 0.023
+}
