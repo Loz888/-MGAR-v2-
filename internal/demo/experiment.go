@@ -362,7 +362,11 @@ func (x *experiment) replanStrict(ctx context.Context, f *fixture, run string, o
 	if x.model != nil {
 		var payload map[string]any
 		_ = json.Unmarshal(requestBytes, &payload)
-		payload["dispatch_contract"] = map[string]any{"node": "planner", "business": f.input.Business, "input_version": f.input.Version, "required_plan": p}
+		contract, contractErr := liveDispatch("planner", f.input.Business, f.input.Version, &p, nil)
+		if contractErr != nil {
+			return p, contractErr
+		}
+		payload["dispatch_contract"] = contract
 		requestBytes = inputcontext.Canonical(payload)
 		decision, _, e = x.model.Call(ctx, resources, f.verification.claim, request.LogicalID, requestBytes)
 	} else {

@@ -1,0 +1,366 @@
+{
+  "card_id": "P7-06F",
+  "status": "PASS",
+  "git_commit": null,
+  "base_git_commit": "9dbf344e9a963aad4eda89acaf41eaf9fa69026e",
+  "source_fingerprint": "397459e077512160d23cd5b3d04940bda5200961a1f892a3a3b9883def87885c",
+  "scope": "Development-only role-specific dispatch v2 and positively stopped readonly failure settlement; old experiment immutable",
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 622,
+      "passed": 622,
+      "failed_events": 0,
+      "skipped": 0,
+      "complete": true
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 427,
+      "passed": 427,
+      "failed": 0,
+      "skipped_or_xfailed": 0,
+      "complete": true,
+      "passed_subtests": 15
+    },
+    "status": "PASS"
+  },
+  "commands": [
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./tests/security",
+        "-run",
+        "^TestGatewayReadonlyFailureClassification$"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06F/red-readonly-classification.log",
+      "timestamp_utc": "2026-10-27T00:52:44.569530+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./internal/demo",
+        "-run",
+        "^TestLiveRoleDispatchContracts$"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06F/red-role-contracts.log",
+      "timestamp_utc": "2026-10-27T00:52:44.941549+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./tests/security",
+        "-run",
+        "^TestGatewayReadonlyFailureClassification$"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06F/readonly-classification.log",
+      "timestamp_utc": "2026-10-27T00:54:51.521881+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-v",
+        "./internal/demo",
+        "-run",
+        "^TestLiveRoleDispatchContracts$"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06F/role-contracts.log",
+      "timestamp_utc": "2026-10-27T00:54:52.792568+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./tests/security",
+        "-run",
+        "^TestGatewayReadonlyFailureClassification$"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06F/readonly-classification-release-guard.log",
+      "timestamp_utc": "2026-10-27T00:57:33.114911+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06F/offline-full.log",
+      "timestamp_utc": "2026-10-27T01:01:25.755455+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./internal/demo",
+        "-run",
+        "^TestExperimentActualFaultsRetained$"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06F/retained-known-fault-regression.log",
+      "timestamp_utc": "2026-10-27T01:01:56.308990+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06F/offline-full-updated-contract.log",
+      "timestamp_utc": "2026-10-27T01:07:35.047519+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "eval/live/analyze.py",
+        "--output",
+        ".local/p706f-old-round-check-20261027"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06F/old-round-still-sealed.log",
+      "timestamp_utc": "2026-10-27T01:07:38.857055+00:00"
+    },
+    {
+      "command": [
+        "python",
+        ".local/final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06F/final-audit.log",
+      "timestamp_utc": "2026-10-27T01:08:37.235775+00:00"
+    }
+  ],
+  "positive_assertions": [
+    {
+      "name": "planner_contract_excludes_business_answer_wrapper",
+      "passed": true
+    },
+    {
+      "name": "research_data_action_and_strict_aggregate_preserve_actual_tool_observation",
+      "passed": true
+    },
+    {
+      "name": "baseline_aggregate_and_single_have_public_answer_refuse_schema_and_concrete_goals",
+      "passed": true
+    },
+    {
+      "name": "all_four_development_arms_incident_analysis_Oracle_and_B4_verifier_closures",
+      "passed": true
+    },
+    {
+      "name": "wrong_role_final_outputs_still_rejected_with_known_usage",
+      "passed": true
+    },
+    {
+      "name": "development_fault_injection_is_failed_without_unknown_tool_reservation",
+      "passed": true
+    },
+    {
+      "name": "known_stopped_readonly_errors_including_wrapped_errors_are_failed",
+      "passed": true
+    },
+    {
+      "name": "old_trial_report_and_all_journal_hashes_unchanged",
+      "passed": true
+    },
+    {
+      "name": "full_race_python_static_regression_no_skips_xfails",
+      "passed": true
+    }
+  ],
+  "negative_assertions": [
+    {
+      "name": "no_stop_proof_timeout_write_malformed_or_resource_release_error_stays_unknown",
+      "passed": true
+    },
+    {
+      "name": "failed_and_unknown_tool_ids_not_replayed",
+      "passed": true
+    },
+    {
+      "name": "no_permission_verifier_budget_or_GroundTruth_relaxation",
+      "passed": true
+    },
+    {
+      "name": "no_new_paid_calls_or_holdout_prompt_debugging",
+      "passed": true
+    }
+  ],
+  "actual_paid_calls": 0,
+  "known_limitations": [
+    "Local HTTP fixtures verify protocol and execution plumbing, not real model quality.",
+    "Old unknown is never rewritten or used to resume the old trial.",
+    "Readonly failed requires explicit trusted stop, unexpired contexts and confirmed resource release; all other uncertain outcomes stay unknown.",
+    "New-round identity/carry-over budget/plan preparation follows as a separate authorized step; no P8."
+  ],
+  "unverified": [
+    {
+      "name": "real_model_quality_with_dispatch_v2",
+      "status": "NOT_RUN",
+      "reason": "Development validation is local_stub; new frozen experiment not yet executed"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "TASK_QUEUE.md",
+      "sha256": "5144fd2b42b868eb00dc0576ce218e642c6eeb53dc0876e848f72c324c048db3"
+    },
+    {
+      "path": "docs/adr/ADR-0019.md",
+      "sha256": "554642be4a829e36aa00a4d27ea95e0666f66b844aeda9227a12637bcfe12480"
+    },
+    {
+      "path": "evidence/batches/P7-06F/commands.json",
+      "sha256": "249826803152c4b67a04a2ccbfd022d167a3cfcc10dfbde645f796045d2bec03"
+    },
+    {
+      "path": "evidence/batches/P7-06F/failed-offline-fingerprint.json",
+      "sha256": "3b53d27b5ec4d3c3b97f9266f2c5e9685077356617638d8c6dfb1b2513b3d915"
+    },
+    {
+      "path": "evidence/batches/P7-06F/failed-offline-go.json.json",
+      "sha256": "56eb78d0fed8a35e50f8528c5ce9ca180dca8fa9d7a1b9759b714710112065f5"
+    },
+    {
+      "path": "evidence/batches/P7-06F/final-audit.log",
+      "sha256": "e3f3e676dc8134f683806afd5e5c60d2dfba37d85e58f96afe4ece2e7bc8c500"
+    },
+    {
+      "path": "evidence/batches/P7-06F/offline-docs.json.json",
+      "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+    },
+    {
+      "path": "evidence/batches/P7-06F/offline-fingerprint.json",
+      "sha256": "f9f933eb0dee777dde3a924c5de99a178b067d1820ab43136744565bf098e0e8"
+    },
+    {
+      "path": "evidence/batches/P7-06F/offline-full-updated-contract.log",
+      "sha256": "8a91b67e036cc81a758cecc1b454dd042d2b1a65c30ee626094f53ff6e554dbc"
+    },
+    {
+      "path": "evidence/batches/P7-06F/offline-full.log",
+      "sha256": "4873491ae48bedda2dac8838c74967bfdc0da716253189ea0bb78f4d0e9add11"
+    },
+    {
+      "path": "evidence/batches/P7-06F/offline-go.json.json",
+      "sha256": "9596e8f414272733fa242b52c7c7c387c2321610ab2cc7a6feabe06194d200d9"
+    },
+    {
+      "path": "evidence/batches/P7-06F/offline-mypy.log.json",
+      "sha256": "8e7a0a8352a322d19e55605ee61df9b305de124895458472f4062bc11baad1c7"
+    },
+    {
+      "path": "evidence/batches/P7-06F/offline-pytest-events.json.json",
+      "sha256": "16e254c191011ddcc368ff662d5a212595ecd71fc7aa46327bb82d5f456fe3f8"
+    },
+    {
+      "path": "evidence/batches/P7-06F/offline-pytest.log.json",
+      "sha256": "57135b0682a838a0f4bbfd6cbd51bcbced8fc4041fce48e4fcfdf609ddd842b8"
+    },
+    {
+      "path": "evidence/batches/P7-06F/offline-pytest.xml.json",
+      "sha256": "0723ce40c0609648c3f1b6f6a3233673a64dace21dc718b8319377d1b5af9563"
+    },
+    {
+      "path": "evidence/batches/P7-06F/offline-report.json.json",
+      "sha256": "1d13ab9e78e973dbc0a2dacd13d8ac1775544b5dc4b5c5933b47d08b0f344e34"
+    },
+    {
+      "path": "evidence/batches/P7-06F/offline-ruff.log.json",
+      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+    },
+    {
+      "path": "evidence/batches/P7-06F/offline-vet.log.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P7-06F/old-round-still-sealed.log",
+      "sha256": "b96d7fe4c1f72d894b55e62c78ebb2f593794c829f73affba5225719fe69eccf"
+    },
+    {
+      "path": "evidence/batches/P7-06F/readonly-classification-release-guard.log",
+      "sha256": "03f4340f236dc0f070be2ce494f327a76422eea8173ce5a80ce60e5c08ce3d04"
+    },
+    {
+      "path": "evidence/batches/P7-06F/readonly-classification.log",
+      "sha256": "d7ec97455e6f6ee4871735f504bc7465366d9e5ab237043180f4ed41a0c3ede6"
+    },
+    {
+      "path": "evidence/batches/P7-06F/red-readonly-classification.log",
+      "sha256": "066baf5eef54ab5ef36417cdc4b02df50ea0ca918e591f17e03c978d09377a14"
+    },
+    {
+      "path": "evidence/batches/P7-06F/red-role-contracts.log",
+      "sha256": "50cc86225c770f53319d33cc5cc3ea0db9dacb39a8e5a1096ca25211400631e7"
+    },
+    {
+      "path": "evidence/batches/P7-06F/retained-known-fault-regression.log",
+      "sha256": "c7c53bd82e61c8921e966d2e36b43cebd0b8e2f60a74476603417486a533d9d2"
+    },
+    {
+      "path": "evidence/batches/P7-06F/role-contracts.log",
+      "sha256": "8f8fa9b062ea3815e7a16321b262a76b441d7f543004cb1c373348640b7083fe"
+    },
+    {
+      "path": "internal/demo/dispatch.go",
+      "sha256": "7a3a89bde336a3e62ffcfdccde9f96333e7fae02bcf25425aac55fb6c85941f8"
+    },
+    {
+      "path": "internal/demo/dispatch_test.go",
+      "sha256": "5cbed5a2614ccafe0a9e0db4393634162e44292d46880e0fe13f7c373dd7fdf4"
+    },
+    {
+      "path": "internal/demo/experiment.go",
+      "sha256": "97c8f7d503a6ef6d48bd3506cd2d0287d4ef5d259e0d0dd103de2721ec80dc29"
+    },
+    {
+      "path": "internal/demo/experiment_test.go",
+      "sha256": "e61f6e2ea90478b3768c941bcc018b0bbb77891413b3d8900951f1a2c43da0b2"
+    },
+    {
+      "path": "internal/demo/live_test.go",
+      "sha256": "691c23f5e55258391b82632f120084919f10f9dddc642b8a3b76562d11874bef"
+    },
+    {
+      "path": "internal/demo/worker.go",
+      "sha256": "a9f1705480239d4dc08431714fbab653a6522e03abbb5756194c269c779bfcf5"
+    },
+    {
+      "path": "internal/policy/gateway.go",
+      "sha256": "69b805e2cf9651282566d78a9c8ef8079fed4e41c85a73c6895e22073f2f0e1f"
+    },
+    {
+      "path": "tasks/P7-06F.md",
+      "sha256": "d8030117316c6bd5fc2ee3e5c5873e8fd48a4837186acd0a486cf451debc4fa1"
+    },
+    {
+      "path": "tests/security/gateway_failure_class_test.go",
+      "sha256": "f0f5ba34404976841c6164e2d128557fa7be980a71b56e9acfbaec1f51feb567"
+    }
+  ],
+  "timestamp_utc": "2026-10-27T01:08:37.317680+00:00"
+}

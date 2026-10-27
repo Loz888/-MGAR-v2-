@@ -44,6 +44,10 @@ func developmentProvider(t *testing.T, arm, mode string) (*provider.Client, *ato
 				Business string            `json:"business"`
 				Version  int               `json:"input_version"`
 				Plan     *planner.Proposal `json:"required_plan"`
+				Schema   string            `json:"schema_version"`
+				Kind     string            `json:"final_kind"`
+				Goal     string            `json:"task_goal"`
+				Output   map[string]any    `json:"output_schema"`
 			} `json:"dispatch_contract"`
 		}
 		if json.Unmarshal(raw, &request) != nil || json.Unmarshal(raw, &envelope) != nil {
@@ -52,6 +56,21 @@ func developmentProvider(t *testing.T, arm, mode string) (*provider.Client, *ato
 			return
 		}
 		d := envelope.Dispatch
+		if d.Schema != dispatchVersion || d.Kind == "" || d.Goal == "" || d.Output == nil {
+			t.Error("missing role-specific dispatch")
+			w.WriteHeader(400)
+			return
+		}
+		if d.Plan != nil && d.Kind != "plan" {
+			t.Error("planner contract mixed with report")
+			w.WriteHeader(400)
+			return
+		}
+		if d.Node == "action" && d.Kind != "tool_observation" {
+			t.Error("action must finish with test observation")
+			w.WriteHeader(400)
+			return
+		}
 		decide := mockDecision
 		if d.Plan == nil && arm != "B4" {
 			decide = baselineDecision(d.Version)
@@ -60,6 +79,10 @@ func developmentProvider(t *testing.T, arm, mode string) (*provider.Client, *ato
 			}
 		}
 		decision, e := decide(d.Node, request, d.Plan, "none")
+		if (mode == "planner-business-wrapper" && d.Plan != nil) || (mode == "leaf-business-wrapper" && d.Plan == nil && (d.Node == "research" || d.Node == "data")) {
+			decision = []byte(`{"type":"final","output":{"answer":{"decision":"answer","metrics":{},"reason":null,"input_version":1},"citations":[],"semantic_status":"unverified"}}`)
+			e = nil
+		}
 		if e != nil {
 			t.Error(e)
 			w.WriteHeader(400)
@@ -229,5 +252,47 @@ func TestLiveRetainsDurableStateAfterClosing(t *testing.T) {
 	var exists bool
 	if e = s.Pool.QueryRow(context.Background(), "SELECT EXISTS(SELECT 1 FROM information_schema.tables WHERE table_schema=$1 AND table_name='model_calls')", schema).Scan(&exists); e != nil || !exists {
 		t.Fatal("ledger removed", e)
+	}
+}
+
+func TestLiveDevelopmentRejectsWrongRoleOutput(t *testing.T) {
+	for _, mode := range []string{"planner-business-wrapper", "leaf-business-wrapper"} {
+		t.Run(mode, func(t *testing.T) {
+			o := testOptions(t)
+			o.Case = "development-001"
+			o.CostMicros = 20833
+			o.Model, _ = developmentProvider(t, "B4", mode)
+			r, e := RunExperiment(context.Background(), o, "B4")
+			if e != nil || r.ExecutionStatus == "completed" || (r.WorkflowSuccess != nil && *r.WorkflowSuccess) {
+				t.Fatal("wrong role output accepted", r.ExecutionStatus, e)
+			}
+			b := r.Result.(Report).Budget
+			if !b.Conserved || b.UnknownModels != 0 || b.SettledModels < 1 {
+				t.Fatal("known invalid output lost accounting", b)
+			}
+		})
+	}
+}
+func TestLiveDevelopmentStoppedReadonlyFault(t *testing.T) {
+	for _, arm := range []string{"B0", "B1", "B2", "B4"} {
+		t.Run(arm, func(t *testing.T) {
+			o := testOptions(t)
+			o.Case = "development-004"
+			o.CostMicros = 20833
+			o.Model, _ = developmentProvider(t, arm, "")
+			r, e := RunExperiment(context.Background(), o, arm)
+			if e != nil || r.ExecutionStatus == "completed" {
+				t.Fatal(r.ExecutionStatus, e)
+			}
+			var b budget.Report
+			if arm == "B4" {
+				b = r.Result.(Report).Budget
+			} else {
+				b = r.Result.(BaselineReport).Budget
+			}
+			if !b.Conserved || b.UnknownTools != 0 || b.PendingTools != 0 || b.UnknownModels != 0 || b.PendingModels != 0 || b.SettledTools < 1 {
+				t.Fatal("stopped fault not known failed", b)
+			}
+		})
 	}
 }

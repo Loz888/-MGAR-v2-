@@ -93,9 +93,9 @@ func TestExperimentActualFaultsRetained(t *testing.T) {
 					for _, raw := range r.Tools {
 						var tool map[string]any
 						_ = json.Unmarshal(raw, &tool)
-						// Executed tool errors are conservatively unknown in the
-						// Gateway; the SDK must stop and preserve that record.
-						failed = failed || (tool["capability"] == "data.query" && tool["status"] == "unknown")
+						// This injected readonly fault explicitly proves execution stopped.
+						// It remains a failed record; the SDK still stops without replay.
+						failed = failed || (tool["capability"] == "data.query" && tool["effect"] == "readonly" && tool["status"] == "failed")
 					}
 					if r.ExecutionStatus != "failed" || !failed {
 						t.Fatal("tool fault missing")

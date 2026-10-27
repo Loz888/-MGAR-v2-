@@ -1,0 +1,129 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./tests/security",
+      "-run",
+      "^TestGatewayReadonlyFailureClassification$"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06F/red-readonly-classification.log",
+    "timestamp_utc": "2026-10-27T00:52:44.569530+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./internal/demo",
+      "-run",
+      "^TestLiveRoleDispatchContracts$"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06F/red-role-contracts.log",
+    "timestamp_utc": "2026-10-27T00:52:44.941549+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./tests/security",
+      "-run",
+      "^TestGatewayReadonlyFailureClassification$"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06F/readonly-classification.log",
+    "timestamp_utc": "2026-10-27T00:54:51.521881+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./internal/demo",
+      "-run",
+      "^TestLiveRoleDispatchContracts$"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06F/role-contracts.log",
+    "timestamp_utc": "2026-10-27T00:54:52.792568+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./tests/security",
+      "-run",
+      "^TestGatewayReadonlyFailureClassification$"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06F/readonly-classification-release-guard.log",
+    "timestamp_utc": "2026-10-27T00:57:33.114911+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06F/offline-full.log",
+    "timestamp_utc": "2026-10-27T01:01:25.755455+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./internal/demo",
+      "-run",
+      "^TestExperimentActualFaultsRetained$"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06F/retained-known-fault-regression.log",
+    "timestamp_utc": "2026-10-27T01:01:56.308990+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06F/offline-full-updated-contract.log",
+    "timestamp_utc": "2026-10-27T01:07:35.047519+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/live/analyze.py",
+      "--output",
+      ".local/p706f-old-round-check-20261027"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06F/old-round-still-sealed.log",
+    "timestamp_utc": "2026-10-27T01:07:38.857055+00:00"
+  },
+  {
+    "command": [
+      "python",
+      ".local/final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06F/final-audit.log",
+    "timestamp_utc": "2026-10-27T01:08:37.235775+00:00"
+  }
+]

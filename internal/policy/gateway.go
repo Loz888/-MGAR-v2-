@@ -6,6 +6,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
+	"errors"
 	"io"
 	"net/http"
 	"slices"
@@ -160,6 +161,7 @@ func (g *Gateway) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		ctx, cancel := context.WithTimeout(r.Context(), d.Timeout)
 		var body []byte
 		executed := false
+		stoppedReadonlyFailure := false
 		class := "db"
 		if d.Role == "action" || d.Role == "verify" {
 			class = "cpu"
@@ -168,12 +170,12 @@ func (g *Gateway) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			executed = true
 			var callErr error
 			body, callErr = d.Execute(ctx, call.Resource, args)
+			var outcome interface{ ExecutionStopped() bool }
+			explicitStop := callErr != nil && errors.As(callErr, &outcome) && outcome.ExecutionStopped()
+			stoppedReadonlyFailure = d.Effect == "readonly" && explicitStop && ctx.Err() == nil
 			stopped := true
 			if class == "cpu" && callErr != nil {
-				stopped = false
-				if outcome, ok := callErr.(interface{ ExecutionStopped() bool }); ok {
-					stopped = outcome.ExecutionStopped()
-				}
+				stopped = explicitStop
 			}
 			return stopped, callErr
 		})
@@ -185,11 +187,26 @@ func (g *Gateway) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			if !executed {
 				status = "failed"
 			}
+			if stoppedReadonlyFailure && !expired {
+				// A typed local stop is insufficient if resource release or
+				// accounting is still unresolved. Query failure stays unknown.
+				check, done := context.WithTimeout(context.WithoutCancel(r.Context()), time.Second)
+				var pending bool
+				readErr := g.store.Pool.QueryRow(check, "SELECT EXISTS(SELECT 1 FROM resource_requests WHERE task_id=$1 AND state IN ('queued','held','unknown'))", p.claim.TaskID).Scan(&pending)
+				done()
+				if readErr == nil && !pending {
+					status = "failed"
+				}
+			}
 			body = nil
 		}
 		settle, stop := context.WithTimeout(context.WithoutCancel(r.Context()), 2*time.Second)
 		e = g.store.FinishTool(settle, p.claim, req, g.cas, body, status)
 		stop()
+		if e == nil && status == "failed" {
+			http.Error(w, `{"error":"tool_failed","retryable":false}`, 422)
+			return
+		}
 		if e != nil || status != "succeeded" {
 			http.Error(w, `{"error":"tool_unconfirmed","retryable":false}`, 409)
 			return
