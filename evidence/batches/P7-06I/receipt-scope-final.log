@@ -1,0 +1,18 @@
+{
+  "stdout": "=== RUN   TestAggregateReceiptRequiresDurableSameClaim\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/valid\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/forged\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/extra-field\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/full-body\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/no-tool\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/no-execution\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/different-task\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/wrong-owner\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/wrong-epoch\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/wrong-plan\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/pending-tool\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/unknown-tool\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/wrong-CAS-receipt\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/duplicate-tool\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/pending-model\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/unknown-model\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/pending-resource\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/unknown-resource\n=== RUN   TestAggregateReceiptRequiresDurableSameClaim/terminal\n--- PASS: TestAggregateReceiptRequiresDurableSameClaim (4.01s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/valid (0.21s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/forged (0.20s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/extra-field (0.22s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/full-body (0.20s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/no-tool (0.21s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/no-execution (0.24s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/different-task (0.22s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/wrong-owner (0.20s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/wrong-epoch (0.21s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/wrong-plan (0.21s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/pending-tool (0.21s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/unknown-tool (0.21s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/wrong-CAS-receipt (0.21s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/duplicate-tool (0.20s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/pending-model (0.22s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/unknown-model (0.20s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/pending-resource (0.21s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/unknown-resource (0.21s)\n    --- PASS: TestAggregateReceiptRequiresDurableSameClaim/terminal (0.20s)\nPASS\nok  \tgithub.com/Loz888/-MGAR-v2-/internal/demo\t5.026s\n",
+  "command": [
+    "go",
+    "test",
+    "-race",
+    "-count=1",
+    "-v",
+    "./internal/demo",
+    "-run",
+    "^TestAggregateReceiptRequiresDurableSameClaim$"
+  ],
+  "exit_code": 0,
+  "log_path": "evidence/batches/P7-06I/receipt-scope-final.log",
+  "started_at": "2026-10-27T07:15:26.328801+00:00",
+  "finished_at": "2026-10-27T07:15:33.010456+00:00",
+  "duration_seconds": 6.681
+}

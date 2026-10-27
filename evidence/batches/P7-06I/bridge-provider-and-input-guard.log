@@ -1,0 +1,18 @@
+{
+  "stdout": "ok  \tgithub.com/Loz888/-MGAR-v2-/internal/provider\t1.024s\nok  \tgithub.com/Loz888/-MGAR-v2-/internal/demo\t7.346s\n",
+  "command": [
+    "go",
+    "test",
+    "-race",
+    "-count=1",
+    "./internal/provider",
+    "./internal/demo",
+    "-run",
+    "TestDeepSeekOutputLimit|TestDevelopmentModelFailureClasses|TestModelFailureEnvelope"
+  ],
+  "exit_code": 0,
+  "log_path": "evidence/batches/P7-06I/bridge-provider-and-input-guard.log",
+  "started_at": "2026-10-27T07:14:23.857230+00:00",
+  "finished_at": "2026-10-27T07:14:32.856395+00:00",
+  "duration_seconds": 8.998
+}

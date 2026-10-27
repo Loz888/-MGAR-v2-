@@ -1,0 +1,28 @@
+{
+  "timestamp_utc": "2026-10-27T07:37:41.543902+00:00",
+  "status": "READY_FOR_REVIEW_NOT_EXECUTABLE",
+  "plan_sha256": "8977b9e47be25d1d369e3896f1463225fb5a9b9a77214a64f1dc59c69044eb14",
+  "checks": [
+    "valid_candidate",
+    "rejected_paid",
+    "rejected_budget",
+    "rejected_prior",
+    "rejected_identity",
+    "rejected_duplicate",
+    "rejected_source",
+    "rejected_model",
+    "rejected_output",
+    "rejected_manifest",
+    "rejected_retry"
+  ],
+  "allocation_marker_rows": 0,
+  "model_calls": 0,
+  "journal_exists": false,
+  "single_max_call_bound_micros": 15765,
+  "slot_cap_micros": 17187,
+  "new_cap_micros": 1650000,
+  "cumulative_candidate_cap_micros": 1961229,
+  "actual_paid_calls": 0,
+  "runtime_adapter": "NOT_IMPLEMENTED",
+  "execution": "NOT_RUN"
+}

@@ -1,11 +1,43 @@
 {
   "card_id": "P7-06I",
-  "status": "PARTIAL",
+  "status": "PASS",
   "git_commit": null,
-  "base_git_commit": "66bd828aa4ba0eaa56bdd77074fff7b31e3774cf",
-  "source_branch": "wip/p7-06i-development",
-  "scope": "Interrupted development checkpoint published at user request; not a completed acceptance",
+  "base_git_commit": "962fd0013d548200d485a81256ccab0e39263070",
+  "published_baseline_commit": "9a74aa8a2177462685bddc29b1208471aa8013d1",
+  "development_checkpoint_commit": "01ad6ce50cb027beb93a4f2e6a2db7e59974eb73",
+  "source_fingerprint": "56a16152969263835ff16afda412d1a30ed57ceef6275d49cae264cad8de0536",
+  "scope": "Offline development capacity reproduction, same-claim lossless aggregate receipt, safe model-error transport, and review-only round3 candidate; user-requested GitHub code/progress synchronization",
+  "production_files": [
+    "agentkit/mgar_agents/runtime_worker.py",
+    "internal/demo/aggregate.go",
+    "internal/demo/dispatch.go",
+    "internal/demo/model_errors.go",
+    "internal/demo/run.go",
+    "internal/demo/tools.go",
+    "internal/demo/worker.go",
+    "internal/provider/deepseek.go"
+  ],
   "actual_paid_calls": 0,
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 682,
+      "passed": 682,
+      "failed_events": 0,
+      "skipped": 0,
+      "complete": true
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 453,
+      "passed": 453,
+      "failed": 0,
+      "skipped_or_xfailed": 0,
+      "complete": true,
+      "passed_subtests": 15
+    },
+    "status": "PASS"
+  },
   "commands": [
     {
       "command": [
@@ -82,40 +114,366 @@
       "started_at": "2026-10-27T02:58:26.903592+00:00",
       "finished_at": "2026-10-27T02:58:34.350161+00:00",
       "duration_seconds": 7.445
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "./eval/live",
+        "./internal/demo",
+        "-run",
+        "TestRound2|TestModelFailureEnvelope|TestLiveRoleDispatchContracts"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06I/historical-and-model-unit.log",
+      "started_at": "2026-10-27T07:04:27.453091+00:00",
+      "finished_at": "2026-10-27T07:04:35.173670+00:00",
+      "duration_seconds": 7.719
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./internal/demo",
+        "./internal/provider",
+        "-run",
+        "TestAggregateReceipt|TestDeepSeekOutputLimitVersusUsageCertainty|TestDevelopmentAggregateCapacity|TestDevelopmentModelFailureClasses"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06I/receipt-scope-and-output-certainty.log",
+      "started_at": "2026-10-27T07:07:11.320864+00:00",
+      "finished_at": "2026-10-27T07:07:48.636823+00:00",
+      "duration_seconds": 37.315
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py",
+        "tests/unit/test_model_bridge.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06I/historical-and-bridge-python.log",
+      "started_at": "2026-10-27T07:10:37.621386+00:00",
+      "finished_at": "2026-10-27T07:10:45.533013+00:00",
+      "duration_seconds": 7.911
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./internal/demo",
+        "-run",
+        "^TestAggregateReceiptRequiresDurableSameClaim$"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06I/receipt-binding-green.log",
+      "started_at": "2026-10-27T07:11:26.305001+00:00",
+      "finished_at": "2026-10-27T07:11:31.691477+00:00",
+      "duration_seconds": 5.386
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "./internal/provider",
+        "./internal/demo",
+        "-run",
+        "TestDeepSeekOutputLimit|TestDevelopmentModelFailureClasses|TestModelFailureEnvelope"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06I/bridge-provider-and-input-guard.log",
+      "started_at": "2026-10-27T07:14:23.857230+00:00",
+      "finished_at": "2026-10-27T07:14:32.856395+00:00",
+      "duration_seconds": 8.998
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./internal/demo",
+        "-run",
+        "^TestAggregateReceiptRequiresDurableSameClaim$"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06I/receipt-scope-final.log",
+      "started_at": "2026-10-27T07:15:26.328801+00:00",
+      "finished_at": "2026-10-27T07:15:33.010456+00:00",
+      "duration_seconds": 6.681
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_model_bridge.py",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06I/bridge-final-python.log",
+      "started_at": "2026-10-27T07:15:27.698803+00:00",
+      "finished_at": "2026-10-27T07:15:37.624030+00:00",
+      "duration_seconds": 9.924
+    },
+    {
+      "command": [
+        "python",
+        "evidence/batches/P7-06I/audit_history.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06I/immutable-history-and-pg.log",
+      "started_at": "2026-10-27T07:17:22.782805+00:00",
+      "finished_at": "2026-10-27T07:17:23.835166+00:00",
+      "duration_seconds": 1.052
+    },
+    {
+      "command": [
+        "python",
+        "evidence/batches/P7-06I/build_review.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06I/round3-review-candidate.log",
+      "started_at": "2026-10-27T07:21:47.270456+00:00",
+      "finished_at": "2026-10-27T07:21:47.810976+00:00",
+      "duration_seconds": 0.54
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/eval.sh",
+        "--live",
+        "--round",
+        "round3",
+        "--preflight"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06I/round3-selector-refused.log",
+      "started_at": "2026-10-27T07:22:57.689067+00:00",
+      "finished_at": "2026-10-27T07:22:59.330661+00:00",
+      "duration_seconds": 1.641
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06I/offline-full.log",
+      "started_at": "2026-10-27T07:22:59.022037+00:00",
+      "finished_at": "2026-10-27T07:27:49.445021+00:00",
+      "duration_seconds": 290.422
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "./internal/demo",
+        "-run",
+        "TestDevelopmentForgedReceipt|TestAggregateReceipt"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06I/known-receipt-rejection.log",
+      "started_at": "2026-10-27T07:32:14.171598+00:00",
+      "finished_at": "2026-10-27T07:32:23.462914+00:00",
+      "duration_seconds": 9.291
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/e2e/incident_test.py::test_fabricated_role_cannot_succeed[aggregate]"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06I/known-rejection-e2e.log",
+      "started_at": "2026-10-27T07:34:23.874511+00:00",
+      "finished_at": "2026-10-27T07:34:36.746937+00:00",
+      "duration_seconds": 12.872
+    },
+    {
+      "command": [
+        "python",
+        "evidence/batches/P7-06I/build_review.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06I/round3-review-final.log",
+      "started_at": "2026-10-27T07:37:41.047969+00:00",
+      "finished_at": "2026-10-27T07:37:41.590049+00:00",
+      "duration_seconds": 0.541
+    },
+    {
+      "command": [
+        "python",
+        "evidence/batches/P7-06I/build_review.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06I/round3-review-budget-verified.log",
+      "started_at": "2026-10-27T07:40:47.887618+00:00",
+      "finished_at": "2026-10-27T07:40:48.452577+00:00",
+      "duration_seconds": 0.564
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06I/offline-full-final.log",
+      "started_at": "2026-10-27T07:37:41.614902+00:00",
+      "finished_at": "2026-10-27T07:42:48.952068+00:00",
+      "duration_seconds": 307.337
+    },
+    {
+      "command": [
+        "python",
+        ".local/final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06I/final-credential-format-audit.log",
+      "started_at": "2026-10-27T07:51:56.027470+00:00",
+      "finished_at": "2026-10-27T07:51:56.190549+00:00",
+      "duration_seconds": 0.162
     }
   ],
-  "completed": [
-    "Two development capacity cases and four model failure-class cases passed with real PG/Python processes and local HTTP",
-    "14 Python model-error-envelope tests passed",
-    "Initial short-receipt binding and typed model error transport implemented"
+  "positive_assertions": [
+    {
+      "name": "official_vocabulary_lower_bounds_reproduce_complete_merge_over_1024",
+      "passed": true
+    },
+    {
+      "name": "145_byte_complete_receipt_decision_preserves_full_verified_Artifact",
+      "passed": true
+    },
+    {
+      "name": "19_real_PG_receipt_binding_cases_cover_scope_CAS_uncertainty_and_terminal_rejection",
+      "passed": true
+    },
+    {
+      "name": "model_length_invalid_input_budget_resource_policy_unknown_errors_are_distinct_and_redacted",
+      "passed": true
+    },
+    {
+      "name": "known_usage_settles_failed_outputs_unknown_and_ambiguous_cleanup_keep_conservative_reporting",
+      "passed": true
+    },
+    {
+      "name": "known_bad_receipt_has_original_Verifier_failed_verdict_and_failed_workflow",
+      "passed": true
+    },
+    {
+      "name": "historical_353_files_574_models_333_tools_and_old_unknown_match_unchanged",
+      "passed": true
+    },
+    {
+      "name": "historical_metrics_identical_with_frozen_source_data_snapshot",
+      "passed": true
+    },
+    {
+      "name": "full_race_python_static_final_no_failure_skip_xfail",
+      "passed": true
+    },
+    {
+      "name": "13_candidate_review_checks_and_zero_round3_marker_model_journal",
+      "passed": true
+    },
+    {
+      "name": "user_remote_architecture_edit_and_development_checkpoint_preserved",
+      "passed": true
+    }
+  ],
+  "negative_assertions": [
+    {
+      "name": "forged_cross_task_owner_epoch_plan_or_unexecuted_receipts_never_publish_trusted_merge",
+      "passed": true
+    },
+    {
+      "name": "pending_unknown_duplicate_or_wrong_CAS_receipt_cannot_finalize",
+      "passed": true
+    },
+    {
+      "name": "malformed_duplicate_extra_retryable_mismatched_or_dropped_model_envelopes_stay_unknown_without_retry",
+      "passed": true
+    },
+    {
+      "name": "rejected_model_wrapper_cannot_equal_and_verify_as_the_full_MergeResult",
+      "passed": true
+    },
+    {
+      "name": "round3_selector_refused_without_generation",
+      "passed": true
+    }
+  ],
+  "review": {
+    "status": "READY_FOR_REVIEW_NOT_EXECUTABLE",
+    "plan_path": "evidence/batches/P7-06I/round3-review/plan.json",
+    "plan_sha256": "44daf13dd8c970959259bc5d4b73a4b0db55421acf5485f0ff18bedc0bc12afa",
+    "assignments": 96,
+    "model_calls": 0,
+    "marker_rows": 0,
+    "execution": "NOT_RUN",
+    "runtime_adapter": "NOT_IMPLEMENTED",
+    "new_cap_micros": 1650000,
+    "prior_upper_micros": 311229,
+    "cumulative_candidate_cap_micros": 1961229,
+    "project_cap_micros": 2000000
+  },
+  "known_limitations": [
+    "All new model transport tests are local_stub. No real-model repair/closure claim.",
+    "C/H real evaluation remains BLOCKED; original unknown share is retained and no trial is replayed.",
+    "Round3 is only a data/code/cost review candidate. A new runner/analyzer adapter, full process/PG tests, final freeze/preflight and execution authorization are required before any paid send.",
+    "Same exposed24 cases and lower per-slot budget than round2 prevent unseen-holdout or isolated cross-round causal claims.",
+    "Observed Data verification/replan failures still need real evaluation; model alias can move and cost estimates are not supplier invoices.",
+    "Earlier compiler/fixture setup failures and one full-suite known-receipt handling failure are retained, corrected and revalidated without weakening the existing E2E test."
   ],
   "unverified": [
     {
-      "name": "receipt_scope_and_forgery_security_cases",
+      "name": "real_model_aggregate_after_fix",
       "status": "NOT_RUN"
     },
     {
-      "name": "historical_round2_fixture_adaptation",
+      "name": "round3_runtime_adapter",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "round3_paid_execution",
       "status": "NOT_RUN"
     },
     {
-      "name": "full_engineering_regression",
+      "name": "unseen_holdout_generalization",
       "status": "NOT_RUN"
     },
     {
-      "name": "new_frozen_experiment_review",
+      "name": "P8_release",
       "status": "NOT_RUN"
     }
   ],
-  "known_limitations": [
-    "Environment outage interrupted development. Last attempted patch was not applied; current files were inspected on recovery.",
-    "This checkpoint is partial, not PASS. Existing tests still require dispatch-version and historical-fixture updates.",
-    "Historical C/H results remain BLOCKED; no real-model improvement claim."
-  ],
+  "historical_checkpoint": "evidence/batches/P7-06I/accept-checkpoint-01ad6ce.json",
+  "findings_reference": "evidence/batches/P7-06I/findings.md",
   "artifacts": [
     {
       "path": "TASK_QUEUE.md",
-      "sha256": "46ada801a1cb709b250dde299caf8fcc79222212af89d9270604d21721d6d47a"
+      "sha256": "b799361b201c9818a2a5a83d2bef196c0e8d8b4abb22dbfb10171288a51d99c0"
     },
     {
       "path": "agentkit/mgar_agents/runtime_worker.py",
@@ -123,15 +481,83 @@
     },
     {
       "path": "docs/adr/ADR-0021.md",
-      "sha256": "9a801a3580a865fa8456e02f03373aad18c86048d1a0bf4fb804c4ba6b1183c6"
+      "sha256": "4a942e1d0418406fd8d25d35b9fe0724cdc0e032f19f96c4d7550668f9e3d1a7"
+    },
+    {
+      "path": "docs/experiments/live-provider.md",
+      "sha256": "96b37cbec9001703b60e7ae91230e984b89421af013a5cb015039da68c378e86"
     },
     {
       "path": "docs/operations/development-status.md",
-      "sha256": "a1dbfc25c6d82a70374367395309a401c37141cfc0f943fbb35b98246b869aea"
+      "sha256": "ce1540343ba7e1d9719defbcc0e485984bd0b55f90ebbb91f50f014b7136c484"
+    },
+    {
+      "path": "eval/live/live_test.go",
+      "sha256": "95b441b460f50a250ceee90f99e10bbb02f4b43f6a6a73a60ed7a7e83438e3c5"
+    },
+    {
+      "path": "eval/live/round_test.go",
+      "sha256": "b28e408b52ac2952daf63fbfeb22c4189d2002bf6eebe080d4532bc30f4f9651"
+    },
+    {
+      "path": "evidence/batches/P7-06I/accept-checkpoint-01ad6ce.json",
+      "sha256": "110da3d89dc52a3d8b503c1a28bcbab6f7d9dc955d46c514d01beccb5b3e6d42"
+    },
+    {
+      "path": "evidence/batches/P7-06I/audit_history.py",
+      "sha256": "cb96631b4a8eb8014c31e2ccfd58131023cb669f0d01025c37a19254e15f0e78"
+    },
+    {
+      "path": "evidence/batches/P7-06I/bridge-final-python.log",
+      "sha256": "2f1dfd14d78415e87b67b71741ace9303661d39dc35fe0b39c9e2900fe58c4be"
+    },
+    {
+      "path": "evidence/batches/P7-06I/bridge-provider-and-input-guard.log",
+      "sha256": "12d09f9e37be7e483654b92265c7706c6acf2d6086029120a33f4803bc43a9e7"
+    },
+    {
+      "path": "evidence/batches/P7-06I/build_review.py",
+      "sha256": "2170b882df6ca118e74286f21d321fd90dadb8d6ce1e93191d0da8982ffbbae3"
+    },
+    {
+      "path": "evidence/batches/P7-06I/capacity-certificate.json",
+      "sha256": "55cd6f3bebfec3eabd08f05e647204c7b8c0c7a5ba2929a36d15860d3cbb6fce"
     },
     {
       "path": "evidence/batches/P7-06I/commands.json",
-      "sha256": "136db6f563503a0831324ec8aac0a1d197156656ca87da719395557c954d0e17"
+      "sha256": "80e947348e76ea4293563003d935d239a9aedc1668c46d6a0e3fd8235e925978"
+    },
+    {
+      "path": "evidence/batches/P7-06I/failed-full-01/fingerprint.json",
+      "sha256": "afd0951724fc8f756f43dd12ae8be4eb3fc271cb2b03f2ca95fe67184ebc4785"
+    },
+    {
+      "path": "evidence/batches/P7-06I/failed-full-01/go.json.json",
+      "sha256": "c49dea116eba265c8d040f92676cf6886e2184d92b82032826338ef94ba67ff2"
+    },
+    {
+      "path": "evidence/batches/P7-06I/failed-full-01/pytest-events.json.json",
+      "sha256": "d4b4fd1b06524719e843b01a35ef38168a6684c938f9832e0fa791154ca0851a"
+    },
+    {
+      "path": "evidence/batches/P7-06I/failed-full-01/pytest.log.json",
+      "sha256": "f49c7a43499ad314bde7374b8cf9bc65ec648ffc4c64c1cf98776f49897ae1d5"
+    },
+    {
+      "path": "evidence/batches/P7-06I/failed-full-01/pytest.xml.json",
+      "sha256": "b66e46eea9c4c843ba4e4fde46f2f517eb9c5cd9604c06fbca169c641eb7b466"
+    },
+    {
+      "path": "evidence/batches/P7-06I/failed-full-01/vet.log.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P7-06I/final-credential-format-audit.log",
+      "sha256": "1a438b348ed18d8d98a06a42412357d10cb66930888b9b915d5525262912f998"
+    },
+    {
+      "path": "evidence/batches/P7-06I/findings.md",
+      "sha256": "202bc5e0d911d529af92e6692cef9b082d443967b30832091b895c8e5cc36018"
     },
     {
       "path": "evidence/batches/P7-06I/green-development-capacity-classes.log",
@@ -142,8 +568,92 @@
       "sha256": "16d5b005ab9f4a8cc9ced850860bfac2c35986e206404ea44809e0c981d5bf12"
     },
     {
+      "path": "evidence/batches/P7-06I/historical-and-bridge-python.log",
+      "sha256": "d847ea9dabe90ff4a0eeb1bf3ba028349dda4b7e64002cdc19f63a8db1a74d98"
+    },
+    {
+      "path": "evidence/batches/P7-06I/historical-and-model-unit.log",
+      "sha256": "81f40a2bee940448a1be9ea62f98cf473f66b4714f9614c2188469eb5d80e1ef"
+    },
+    {
       "path": "evidence/batches/P7-06I/historical-inputs.json",
       "sha256": "0cff257ec668560f4fe9ed90ce6584dab35abeec891c00725700ad55ada35d10"
+    },
+    {
+      "path": "evidence/batches/P7-06I/history-audit.json",
+      "sha256": "1f2cbc18d11e20faf15c8d4c540eef34b81b6c0d52beaf729bb5d85d5d5c903f"
+    },
+    {
+      "path": "evidence/batches/P7-06I/immutable-history-and-pg.log",
+      "sha256": "b925421f4770d057e18c16bfa6423401a6dc53e05ceceb0dae1cf8e080300f77"
+    },
+    {
+      "path": "evidence/batches/P7-06I/known-receipt-rejection.log",
+      "sha256": "6e1b2441c629a9d7454debe9ea574ceef089bcb8776da30e553cca2a5a999189"
+    },
+    {
+      "path": "evidence/batches/P7-06I/known-rejection-e2e.log",
+      "sha256": "5a2b21fea8d89cb0e92d0e409feb484d3ea1a43f288540a2d9f5f5dd6975c135"
+    },
+    {
+      "path": "evidence/batches/P7-06I/offline-docs.json.json",
+      "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+    },
+    {
+      "path": "evidence/batches/P7-06I/offline-fingerprint.json",
+      "sha256": "5e7a17d8e89d7cbd5631bd1c3fa1313801f0b60f2935b0afe0c1612687f2bd9d"
+    },
+    {
+      "path": "evidence/batches/P7-06I/offline-full-final.log",
+      "sha256": "024712730a551bfe6d5e7bbbe03a76815df598cd13f10b268667f9aef8248719"
+    },
+    {
+      "path": "evidence/batches/P7-06I/offline-full.log",
+      "sha256": "bc3f19df13fb70c110d4ef7c4c34dcab786784dbd470ca18ee8db9716885c1e3"
+    },
+    {
+      "path": "evidence/batches/P7-06I/offline-go.json.json",
+      "sha256": "e64651ce440393ccce2cea34677a21cdb03e2cd1858d66ee07b0b9348ed0dbef"
+    },
+    {
+      "path": "evidence/batches/P7-06I/offline-mypy.log.json",
+      "sha256": "8e7a0a8352a322d19e55605ee61df9b305de124895458472f4062bc11baad1c7"
+    },
+    {
+      "path": "evidence/batches/P7-06I/offline-pytest-events.json.json",
+      "sha256": "265efea5df65e450c3016efbda7cdfebb2ffa3c9857ee4d076c4611613deaf8d"
+    },
+    {
+      "path": "evidence/batches/P7-06I/offline-pytest.log.json",
+      "sha256": "b0303be4a06747137d03264689e52b9d9bce1c4515600747cdc9a8b6eba52c0e"
+    },
+    {
+      "path": "evidence/batches/P7-06I/offline-pytest.xml.json",
+      "sha256": "ceae93a6fc760623bf5f326a0423a9d6f9cb05a234544c9007d8658aa7d1a103"
+    },
+    {
+      "path": "evidence/batches/P7-06I/offline-report.json.json",
+      "sha256": "a19f2c3ba1cbb39a06346d3dcbaadfdb8a94124a8ce878812f3ec5fe7cd472b0"
+    },
+    {
+      "path": "evidence/batches/P7-06I/offline-ruff.log.json",
+      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+    },
+    {
+      "path": "evidence/batches/P7-06I/offline-vet.log.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P7-06I/receipt-binding-green.log",
+      "sha256": "f953796ba974584d532c84b11d95e2a8a6aa7324cca3b8d41b7afc585cd73732"
+    },
+    {
+      "path": "evidence/batches/P7-06I/receipt-scope-and-output-certainty.log",
+      "sha256": "fbdf6d6bb6f4456c9fba1a3978f8a02909ffb74d14036dd7088f328ce0e9dfee"
+    },
+    {
+      "path": "evidence/batches/P7-06I/receipt-scope-final.log",
+      "sha256": "f33764c9ff8143f64cd9dd909e4627fc9851596a04be71ba1416ae29493f5393"
     },
     {
       "path": "evidence/batches/P7-06I/red-capacity-and-classification.log",
@@ -158,28 +668,84 @@
       "sha256": "5208350e61eff177e46d397ab07db8f54426ea1f9216c02e23eb68925838cfe7"
     },
     {
+      "path": "evidence/batches/P7-06I/round3-review-budget-verified.log",
+      "sha256": "f222b5692691034ea5a43c16e7ea9150fcb28e16a1e49d9a89096a7fe1c57694"
+    },
+    {
+      "path": "evidence/batches/P7-06I/round3-review-candidate.log",
+      "sha256": "b234512bfee73733488e054a75897e58173dc46dba711a058b1a596969ea0985"
+    },
+    {
+      "path": "evidence/batches/P7-06I/round3-review-final.log",
+      "sha256": "ee45137f5e21a4b2d2fc3b5a8d4548d7d51a3aaa4ec26f29fb4d2a5f23bb4f2c"
+    },
+    {
+      "path": "evidence/batches/P7-06I/round3-review/README.md",
+      "sha256": "9b486b620c9de26619e41cdb8f7543a53263e35fe51e390677b0313af509919f"
+    },
+    {
+      "path": "evidence/batches/P7-06I/round3-review/plan.before-known-rejection-fix.json",
+      "sha256": "fd738cc7920e0e2f97ca7bf022bae43dbfbd03b9084706f7ddb48b2d961f0b27"
+    },
+    {
+      "path": "evidence/batches/P7-06I/round3-review/plan.before-price-metadata.json",
+      "sha256": "8977b9e47be25d1d369e3896f1463225fb5a9b9a77214a64f1dc59c69044eb14"
+    },
+    {
+      "path": "evidence/batches/P7-06I/round3-review/plan.json",
+      "sha256": "44daf13dd8c970959259bc5d4b73a4b0db55421acf5485f0ff18bedc0bc12afa"
+    },
+    {
+      "path": "evidence/batches/P7-06I/round3-review/review-checks.before-known-rejection-fix.json",
+      "sha256": "7bfe090150bb04ea7a362ca7ef6d1a855e740bc4dac36e4b82f73e8387c3e667"
+    },
+    {
+      "path": "evidence/batches/P7-06I/round3-review/review-checks.before-price-metadata.json",
+      "sha256": "c6f16129b78487654c53ce3bb7716a00e04639ae8492d3616a908768027f6d3a"
+    },
+    {
+      "path": "evidence/batches/P7-06I/round3-review/review-checks.json",
+      "sha256": "a2b62cdfbb63369b43891e115474e7e2a910aada502e203db071f23f9ebd7592"
+    },
+    {
+      "path": "evidence/batches/P7-06I/round3-selector-refused.log",
+      "sha256": "8061a13cae2b45e0311fddab6d039a6edd719747bcb879c3b14c23b7453eacf4"
+    },
+    {
       "path": "internal/demo/aggregate.go",
-      "sha256": "fe91e5181f31b46e6f920d1eaf1d1d39a8d5ab003f9ad8df0e564ff959d7ec6b"
+      "sha256": "baff088b25a1c28938fcdaadf3afde4afb8b922993b01cd3731affc9cb091426"
+    },
+    {
+      "path": "internal/demo/aggregate_binding_test.go",
+      "sha256": "8edbec81d61810aebfbfd99d864df52a2f14ffe157d66abd353b4b82766ad9b5"
     },
     {
       "path": "internal/demo/aggregate_capacity_test.go",
-      "sha256": "7316941715581bd92d2e4292a85b1c5793fc543e7e8b5655c3687bc983751c43"
+      "sha256": "30897a6769d026b4d37415e26ece597a6f59e9606a927fce6a71f968891388e6"
     },
     {
       "path": "internal/demo/dispatch.go",
       "sha256": "3ea290108aefb3bef0a61a96eca8f6e5abf8cbf9a949b912b28acc812db7c6d0"
     },
     {
+      "path": "internal/demo/dispatch_test.go",
+      "sha256": "b4879281bd1472e204269abdaffe35197ed45ba168c1f34c44b825b7bfa416b3"
+    },
+    {
       "path": "internal/demo/live_test.go",
-      "sha256": "00c097121685a6a2c58a9c5437b8adb928fb76c8a4406da040b20545e2ac5e95"
+      "sha256": "81c46c523871fc4ab19f9bbd21cfbc84b223991f912f8f719e40c8e23ffd6b47"
     },
     {
       "path": "internal/demo/model_errors.go",
-      "sha256": "b47bbc85416d15b5fac3c12115527c4c8c4eccb01074678fcd16fa10e8855d6c"
+      "sha256": "94c3546202b71d90eb4e18b72991e9c7e3d9b17a662d1fd7c631a791283147ea"
+    },
+    {
+      "path": "internal/demo/model_errors_test.go",
+      "sha256": "96e58808c8a33f65091d1a40d8f7066b7f463bc08724144f1d438fe6aee95d37"
     },
     {
       "path": "internal/demo/run.go",
-      "sha256": "d2d1462f3c0eaeda95a0d34ddf7884d93ca3d0155be5d1de41584bfa1e9b1c9f"
+      "sha256": "c18b54293c572bafd54d846df0bdc9e1b94b90c0a26a6cf95fe3f04256facdf3"
     },
     {
       "path": "internal/demo/tools.go",
@@ -187,11 +753,15 @@
     },
     {
       "path": "internal/demo/worker.go",
-      "sha256": "cfefc09759d23bcec37c7f7fc10a14c7ba922aefa93488e0874ed8eb10342a41"
+      "sha256": "591754812a058a77523ca490d609e656e2b10fd3e910755bb6100e7bcd32e781"
     },
     {
       "path": "internal/provider/deepseek.go",
       "sha256": "c2d973f22d5ba0e6f987e74262fe568a485bb7e5c2ccf62b9795f2a2e4cb5ec1"
+    },
+    {
+      "path": "internal/provider/deepseek_test.go",
+      "sha256": "ed8c7563fa47950f6ee4ebf430b9b6fc80bf5b17a54d144db5a5f995f87f3800"
     },
     {
       "path": "tasks/P7-06I.md",
@@ -202,9 +772,13 @@
       "sha256": "bb33dfab3be0d517b00c5083439d00483a1173d7ec025e2e8c76376f0ff24abc"
     },
     {
+      "path": "tests/unit/test_live_analysis.py",
+      "sha256": "5ad21102b56eb0940986f888228fa988c97a96d9b1d1b47f92e1fc6f9356d31b"
+    },
+    {
       "path": "tests/unit/test_model_bridge.py",
-      "sha256": "0754b73d8f924921c4ba06a73c288a35f9c3c89eebcf2d2a174561fdeec44bc6"
+      "sha256": "8d6e7d6d87a09effb168d781d3194d1437b9e4e85aa56887c2f2386b8065b84d"
     }
   ],
-  "timestamp_utc": "2026-10-27T06:59:40.475684+00:00"
+  "timestamp_utc": "2026-10-27T07:55:09.596699+00:00"
 }

@@ -1,0 +1,15 @@
+{
+  "stdout": ".                                                                        [100%]\n1 passed in 12.49s\n",
+  "command": [
+    "python",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/e2e/incident_test.py::test_fabricated_role_cannot_succeed[aggregate]"
+  ],
+  "exit_code": 0,
+  "log_path": "evidence/batches/P7-06I/known-rejection-e2e.log",
+  "started_at": "2026-10-27T07:34:23.874511+00:00",
+  "finished_at": "2026-10-27T07:34:36.746937+00:00",
+  "duration_seconds": 12.872
+}

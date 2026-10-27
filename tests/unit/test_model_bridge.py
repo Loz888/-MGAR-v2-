@@ -22,6 +22,9 @@ def bridge(status, body):
     class Handler(BaseHTTPRequestHandler):
         def do_POST(self):
             requests.append(self.rfile.read(int(self.headers['Content-Length'])))
+            if status is None:
+                self.close_connection = True
+                return
             self.send_response(status)
             self.send_header('Content-Length', str(len(body)))
             self.end_headers()
@@ -60,12 +63,16 @@ def test_model_failure_reaches_sdk_without_policy_alias_or_retry(status, kind, u
 
 
 @pytest.mark.parametrize('status,payload', [
+    (None, b''),
     (503, b'Bearer synthetic-leak-marker'), (422, b'{broken'),
     (403, json.dumps(envelope('model_output_limit', 'known')).encode()),
     (422, json.dumps(envelope('model_output_limit', 'unknown')).encode()),
     (422, json.dumps(envelope('model_output_limit', 'known') | {'retryable': True}).encode()),
     (422, json.dumps(envelope('model_output_limit', 'known') | {'details': 'synthetic-leak-marker'}).encode()),
     (422, b'x' * 65537),
+    (422, b'{"schema_version":"model-error.v1","error":"model_output_limit","error":"policy_denied","usage_status":"known","retryable":false}'),
+    (422, json.dumps(envelope('model_output_limit', 'known') | {'retryable': 0}).encode()),
+    (422, json.dumps(envelope('model_output_limit', 'known') | {'schema_version': 'model-error.v2'}).encode()),
 ])
 def test_invalid_or_mismatched_envelopes_stay_unknown_and_redacted(status, payload):
     request = ModelRequest('run', 'task', 1, 1, 'call', 'development-fixture', 'goal', '{}', (), '[]')

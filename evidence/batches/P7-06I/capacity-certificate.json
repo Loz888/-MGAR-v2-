@@ -1,0 +1,29 @@
+{
+  "archive_sha256": "e7310d1dafe0a86d8a5629fe78a7c763760f651db9b8682718a1781dcd6fe495",
+  "tokenizer_sha256": "89085f12ef79460ac5f66d1119325ddfc694b4ab209d80bbd81d35f081dc9614",
+  "normalizer": {
+    "type": "Sequence",
+    "normalizers": []
+  },
+  "decoder": {
+    "type": "ByteLevel",
+    "add_prefix_space": true,
+    "trim_offsets": true,
+    "use_regex": true
+  },
+  "added_tokens": 1283,
+  "added_tokens_strip_whitespace": false,
+  "method": "Minimum valid-vocabulary segmentation is a lower bound; UTF8 bytes are an upper bound under the already audited reference byte-level BPE. Neither is a claimed full provider tokenizer.",
+  "observed_legacy_decision_bytes": [
+    4019,
+    3100
+  ],
+  "observed_legacy_minimum_tokens": [
+    1472,
+    1108
+  ],
+  "compact_complete_decision_byte_upper": 145,
+  "output_limit": 1024,
+  "real_provider_reproduction": false,
+  "usage_source": "local_stub"
+}

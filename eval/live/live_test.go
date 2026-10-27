@@ -135,6 +135,9 @@ func TestLiveJournalChild(t *testing.T) {
 	}
 	root, _ := filepath.Abs("../..")
 	p, e := LoadPlanRound(root, os.Getenv("MGAR_LIVE_TEST_ROUND"))
+	if os.Getenv("MGAR_LIVE_TEST_ROUND") == "round2" {
+		p, e = LoadPlanRound(round2TestRoot(t), "round2")
+	}
 	if e != nil {
 		t.Fatal(e)
 	}

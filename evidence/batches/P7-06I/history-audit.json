@@ -1,0 +1,41 @@
+{
+  "timestamp_utc": "2026-10-27T07:17:23.782944+00:00",
+  "status": "UNCHANGED",
+  "read_only": true,
+  "historical_file_hashes": 353,
+  "historical_analysis": [
+    {
+      "experiment_id": "P7-06-deepseek-flash-1017-20261026",
+      "metrics_identical": true,
+      "model_calls": 34,
+      "upper_cost_micros": 33850
+    },
+    {
+      "experiment_id": "P7-06-round2-deepseek-flash-1017-20261027",
+      "metrics_identical": true,
+      "model_calls": 540,
+      "upper_cost_micros": 277379
+    }
+  ],
+  "checked_assignments": 109,
+  "model_rows": 574,
+  "tool_rows": 333,
+  "old_unknown_tool_rows_retained": 1,
+  "cumulative_retained_upper_micros": 311229,
+  "allocation_markers": [
+    {
+      "run_id": "92d7ff2b-cf3d-5ec3-a1a0-c938f24aa4a7",
+      "state": "cancelled",
+      "epoch": 2,
+      "lease_revision": 1
+    },
+    {
+      "run_id": "1e69bf79-5997-5fa6-84b2-e509f1d953b8",
+      "state": "cancelled",
+      "epoch": 1,
+      "lease_revision": 0
+    }
+  ],
+  "paid_calls_added": 0,
+  "method": "Re-evaluate immutable journals with the frozen source-data snapshot; no archived code executed and no old freeze hash updated."
+}

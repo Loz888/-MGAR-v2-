@@ -15,6 +15,8 @@ import (
 func writeModelFailure(w http.ResponseWriter, err error, call budget.ModelCall) {
 	status, kind, usage := http.StatusConflict, "model_usage_unknown", "unknown"
 	switch {
+	case errors.Is(err, provider.ErrUnknown), errors.Is(err, store.ErrResourceUnconfirmed):
+		// Explicit uncertainty wins over joined semantic/admission labels.
 	case errors.Is(err, provider.ErrOutputLimit):
 		status, kind, usage = http.StatusUnprocessableEntity, "model_output_limit", "known"
 	case errors.Is(err, provider.ErrDecision):
@@ -26,7 +28,7 @@ func writeModelFailure(w http.ResponseWriter, err error, call budget.ModelCall) 
 		status, kind, usage = http.StatusRequestEntityTooLarge, "model_input_limit", "not_sent"
 	case errors.Is(err, store.ErrBudget):
 		status, kind, usage = http.StatusPaymentRequired, "budget_exhausted", "not_sent"
-	case errors.Is(err, store.ErrResourceDeadline):
+	case errors.Is(err, store.ErrResourceDeadline), errors.Is(err, store.ErrResourceFull):
 		status, kind, usage = http.StatusLocked, "resource_exhausted", "not_sent"
 	case errors.Is(err, provider.ErrPolicy), errors.Is(err, store.ErrPolicy), errors.Is(err, store.ErrFenced), errors.Is(err, store.ErrLeaseExpired), errors.Is(err, store.ErrBadState):
 		status, kind, usage = http.StatusForbidden, "policy_denied", "not_sent"

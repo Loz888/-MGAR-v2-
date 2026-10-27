@@ -1,0 +1,17 @@
+{
+  "stdout": "ok  \tgithub.com/Loz888/-MGAR-v2-/internal/demo\t7.704s\n",
+  "command": [
+    "go",
+    "test",
+    "-race",
+    "-count=1",
+    "./internal/demo",
+    "-run",
+    "TestDevelopmentForgedReceipt|TestAggregateReceipt"
+  ],
+  "exit_code": 0,
+  "log_path": "evidence/batches/P7-06I/known-receipt-rejection.log",
+  "started_at": "2026-10-27T07:32:14.171598+00:00",
+  "finished_at": "2026-10-27T07:32:23.462914+00:00",
+  "duration_seconds": 9.291
+}

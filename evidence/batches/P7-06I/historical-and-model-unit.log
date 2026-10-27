@@ -1,0 +1,18 @@
+{
+  "stdout": "ok  \tgithub.com/Loz888/-MGAR-v2-/eval/live\t5.046s\nok  \tgithub.com/Loz888/-MGAR-v2-/internal/demo\t1.032s\n",
+  "command": [
+    "go",
+    "test",
+    "-race",
+    "-count=1",
+    "./eval/live",
+    "./internal/demo",
+    "-run",
+    "TestRound2|TestModelFailureEnvelope|TestLiveRoleDispatchContracts"
+  ],
+  "exit_code": 0,
+  "log_path": "evidence/batches/P7-06I/historical-and-model-unit.log",
+  "started_at": "2026-10-27T07:04:27.453091+00:00",
+  "finished_at": "2026-10-27T07:04:35.173670+00:00",
+  "duration_seconds": 7.719
+}

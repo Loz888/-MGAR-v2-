@@ -1,0 +1,13 @@
+{
+  "stdout": "go version go1.27.3 linux/amd64\nPython 3.12.14\nDocker Compose version v2.40.3\ncredential pattern scan passed: 3161 source/evidence files; local credentials excluded\n{\n  \"go\": {\n    \"status\": \"PASS\",\n    \"tests\": 682,\n    \"passed\": 682,\n    \"failed_events\": 0,\n    \"skipped\": 0,\n    \"complete\": true\n  },\n  \"python\": {\n    \"status\": \"PASS\",\n    \"tests\": 453,\n    \"passed\": 453,\n    \"failed\": 0,\n    \"skipped_or_xfailed\": 0,\n    \"complete\": true,\n    \"passed_subtests\": 15\n  },\n  \"status\": \"PASS\"\n}\n",
+  "command": [
+    "bash",
+    "scripts/test.sh",
+    "--offline"
+  ],
+  "exit_code": 0,
+  "log_path": "evidence/batches/P7-06I/offline-full-final.log",
+  "started_at": "2026-10-27T07:37:41.614902+00:00",
+  "finished_at": "2026-10-27T07:42:48.952068+00:00",
+  "duration_seconds": 307.337
+}

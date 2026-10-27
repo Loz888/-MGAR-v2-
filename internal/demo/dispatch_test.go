@@ -25,7 +25,7 @@ func TestLiveRoleDispatchContracts(t *testing.T) {
 			if e != nil {
 				t.Fatal(e)
 			}
-			if d["schema_version"] != "demo.live-dispatch.v2" || d["final_kind"] != tc.kind || d["task_goal"] == "" || d["output_schema"] == nil {
+			if d["schema_version"] != "demo.live-dispatch.v3" || d["final_kind"] != tc.kind || d["task_goal"] == "" || d["output_schema"] == nil {
 				t.Fatal(d)
 			}
 			if _, mixed := d["baseline_final"]; mixed {

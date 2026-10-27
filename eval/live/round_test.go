@@ -16,9 +16,20 @@ func round2TestRoot(t *testing.T) string {
 	t.Helper()
 	root := copyLiveInputs(t)
 	source, _ := filepath.Abs("../..")
+	// Preserve the old experiment's exact protocol when testing its checkpoint.
+	var historical struct {
+		Files map[string]string `json:"files"`
+	}
+	data, e := os.ReadFile(filepath.Join(source, "tests/fixtures/round2-protocol.json"))
+	if e != nil || json.Unmarshal(data, &historical) != nil || len(historical.Files) != 5 {
+		t.Fatal("historical protocol fixture invalid")
+	}
 	names := []string{"eval/live/round2/plan.json", "eval/live/pricing.json", "eval/live/official-evidence.json", "evidence/eval/live/" + experimentID + "/report.json", "internal/demo/dispatch.go", "internal/demo/worker.go", "internal/policy/gateway.go"}
 	for _, name := range names {
 		raw, e := os.ReadFile(filepath.Join(source, name))
+		if original, ok := historical.Files[name]; ok {
+			raw, e = []byte(original), nil
+		}
 		if e != nil {
 			t.Fatal(e)
 		}
@@ -34,7 +45,7 @@ func round2TestRoot(t *testing.T) string {
 }
 func TestRound2FreezeAndBudget(t *testing.T) {
 	source, _ := filepath.Abs("../..")
-	p, e := LoadPlanRound(source, "round2")
+	p, e := LoadPlanRound(round2TestRoot(t), "round2")
 	if e != nil {
 		t.Fatal(e)
 	}
@@ -156,8 +167,7 @@ func TestRound2TwoProcessesAndLostJournal(t *testing.T) {
 	if wins != 1 || denied != 1 {
 		t.Fatal(wins, denied)
 	}
-	source, _ := filepath.Abs("../..")
-	p, e := LoadPlanRound(source, "round2")
+	p, e := LoadPlanRound(round2TestRoot(t), "round2")
 	if e != nil {
 		t.Fatal(e)
 	}

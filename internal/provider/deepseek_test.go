@@ -2,6 +2,8 @@ package provider
 
 import (
 	"context"
+	"encoding/json"
+	"errors"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -9,6 +11,54 @@ import (
 
 	"github.com/Loz888/-MGAR-v2-/internal/budget"
 )
+
+func TestDeepSeekOutputLimitVersusUsageCertainty(t *testing.T) {
+	for _, mode := range []string{"length", "stop-at-cap", "invalid-json", "missing-usage", "over-cap-usage"} {
+		t.Run(mode, func(t *testing.T) {
+			finish, content := "stop", `{"type":"final","output":{}}`
+			if mode == "length" || mode == "missing-usage" || mode == "over-cap-usage" {
+				finish = "length"
+			}
+			if mode == "invalid-json" {
+				content = `{"broken":`
+			}
+			output := 1024
+			if mode == "over-cap-usage" {
+				output++
+			}
+			wire := map[string]any{"model": "deepseek-flash", "choices": []any{map[string]any{"finish_reason": finish, "message": map[string]string{"content": content}}}, "usage": map[string]int{"prompt_tokens": 10, "completion_tokens": output, "total_tokens": 10 + output}}
+			if mode == "missing-usage" {
+				delete(wire, "usage")
+			}
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { _ = json.NewEncoder(w).Encode(wire) }))
+			defer server.Close()
+			client, e := NewLoopback(testConfig(), server.URL)
+			if e != nil {
+				t.Fatal(e)
+			}
+			defer client.Close()
+			_, u, e := client.send(context.Background(), []byte(`{}`))
+			switch mode {
+			case "length":
+				if !errors.Is(e, ErrOutputLimit) || !u.Known || u.Status != "failed" {
+					t.Fatal(u, e)
+				}
+			case "stop-at-cap":
+				if e != nil || !u.Known || u.Status != "succeeded" {
+					t.Fatal("exact ceiling is not evidence of truncation", u, e)
+				}
+			case "invalid-json":
+				if !errors.Is(e, ErrDecision) || !u.Known || u.Status != "failed" {
+					t.Fatal(u, e)
+				}
+			default:
+				if !errors.Is(e, ErrUnknown) || u.Known {
+					t.Fatal("invalid usage cannot become a known length failure", u, e)
+				}
+			}
+		})
+	}
+}
 
 func testConfig() Config {
 	return Config{Price: budget.Pricing{Provider: "deepseek", Model: "flash-1017", Version: "synthetic.v1", InputMicrosPerMillion: 100, OutputMicrosPerMillion: 100}, ContextTokens: 65536, OutputTokens: 1024, MaxPromptBytes: 65536, EvidenceSHA256: strings.Repeat("a", 64)}

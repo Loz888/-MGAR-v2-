@@ -84,6 +84,9 @@ func developmentProvider(t *testing.T, arm, mode string) (*provider.Client, *ato
 			decision = []byte(`{"type":"final","output":{"answer":{"decision":"answer","metrics":{},"reason":null,"input_version":1},"citations":[],"semantic_status":"unverified"}}`)
 			e = nil
 		}
+		if mode == "receipt-forge" && d.Node == "aggregate" && request.Turn > 1 {
+			decision = []byte(`{"type":"final","output":{"schema_version":"merge-receipt.v1","merge_sha256":"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"}}`)
+		}
 		if e != nil {
 			t.Error(e)
 			w.WriteHeader(400)
@@ -116,7 +119,11 @@ func developmentProvider(t *testing.T, arm, mode string) (*provider.Client, *ato
 		price = 100_000_000
 	}
 	proof := provider.OfficialTextInputBound()
-	c, e := provider.NewLoopback(provider.Config{Price: budget.Pricing{Provider: "deepseek", Model: "flash-1017", Version: provider.TextBoundPriceVersion("development-local.v1"), InputMicrosPerMillion: price, OutputMicrosPerMillion: price}, ContextTokens: 1048576, OutputTokens: 1024, MaxPromptBytes: 48000, InputBound: &proof}, server.URL)
+	maxPrompt := 48000
+	if mode == "input-cap" {
+		maxPrompt = 1
+	}
+	c, e := provider.NewLoopback(provider.Config{Price: budget.Pricing{Provider: "deepseek", Model: "flash-1017", Version: provider.TextBoundPriceVersion("development-local.v1"), InputMicrosPerMillion: price, OutputMicrosPerMillion: price}, ContextTokens: 1048576, OutputTokens: 1024, MaxPromptBytes: maxPrompt, InputBound: &proof}, server.URL)
 	if e != nil {
 		t.Fatal(e)
 	}

@@ -1,0 +1,16 @@
+{
+  "stdout": "............................................................             [100%]\n60 passed in 7.54s\n",
+  "command": [
+    "python",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_live_analysis.py",
+    "tests/unit/test_model_bridge.py"
+  ],
+  "exit_code": 0,
+  "log_path": "evidence/batches/P7-06I/historical-and-bridge-python.log",
+  "started_at": "2026-10-27T07:10:37.621386+00:00",
+  "finished_at": "2026-10-27T07:10:45.533013+00:00",
+  "duration_seconds": 7.911
+}

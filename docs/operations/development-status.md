@@ -1,17 +1,15 @@
 # 项目进度 · 2026-10-27
 
-main 已合入已验证基线 `66bd828` 的全部工程代码与 round2 证据，并保留远端架构文档编辑 `f2c038d`。
+已完成的真实round2保留96项独立评分：540次模型调用、319次工具调用，Oracle通过
+B0/B1/B2/B4分别15/15/21/6（每组24）。B4严格业务闭环仍为0，P7-06保持BLOCKED。
+累计费用保守上界USD0.311229，原预算上限USD2。见[真实结果](../../evidence/batches/P7-06H/findings.md)。
 
-round2 已完成全部96项执行与独立评分：45项执行完成、27项失败、24项blocked，UNKNOWN/NOT_RUN均0。
-540次模型调用、319次工具调用已与PG对账。Oracle通过B0/B1/B2/B4分别15/15/21/6（每组24项）。
-B4严格业务闭环仍为0，P7-06保持BLOCKED；累计费用保守上界USD0.311229，原项目预算上限USD2。
-完整结果见[round2记录](../../evidence/batches/P7-06H/findings.md)。
+P7-06I修复开发集聚合容量与模型失败分类：完整聚合证据由Go保存，模型回显145字节短回执；
+当前身份、成功工具账本、CAS、未知预留和原有Verifier共同约束发布。
+模型输出长度、输入容量、无效响应、预算、资源、权限和未知用量分别报告。
+开发检查点01ad6ce保留于`wip/p7-06i-development`历史；当前工程验收状态和完整测试数以
+[本卡验收](../../evidence/batches/P7-06I/accept.json)及[TASK_QUEUE](../../TASK_QUEUE.md)为准。
 
-P7-06I开发检查点 `01ad6ce` 已保存到
-[开发分支](https://github.com/Loz888/-MGAR-v2-/tree/wip/p7-06i-development)，状态PARTIAL。
-[开发任务](https://github.com/Loz888/-MGAR-v2-/blob/wip/p7-06i-development/tasks/P7-06I.md)与
-[检查点证据](https://github.com/Loz888/-MGAR-v2-/blob/wip/p7-06i-development/evidence/batches/P7-06I/accept.json)可独立查看。
-
-已完成聚合容量复现、短回执和模型错误信封初版，两道开发题及四类错误分类定向验证退出0，
-14项Python错误信封测试退出0。以上均为本地HTTP/真实PG开发验证；完整回归和回执安全负例未完成，
-新冻结实验仍待整理审阅，尚未新增付费调用。该开发分支尚未合入main。
+本卡无新增付费调用。新的[round3审阅候选](../../evidence/batches/P7-06I/round3-review/plan.json)
+拟用USD1.65，加旧轮保留上界后累计USD1.961229，低于原USD2；候选不可执行。
+仍需后续执行器适配、完整预检、最终冻结和执行授权，不能将本地开发验证算作真实模型闭环。

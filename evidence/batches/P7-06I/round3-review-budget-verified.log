@@ -1,0 +1,12 @@
+{
+  "stdout": "{\"timestamp_utc\": \"2026-10-27T07:40:48.406166+00:00\", \"status\": \"READY_FOR_REVIEW_NOT_EXECUTABLE\", \"plan_sha256\": \"44daf13dd8c970959259bc5d4b73a4b0db55421acf5485f0ff18bedc0bc12afa\", \"checks\": [\"valid_candidate\", \"rejected_paid\", \"rejected_budget\", \"rejected_prior\", \"rejected_identity\", \"rejected_duplicate\", \"rejected_source\", \"rejected_model\", \"rejected_output\", \"rejected_manifest\", \"rejected_price\", \"rejected_bound\", \"rejected_retry\"], \"allocation_marker_rows\": 0, \"model_calls\": 0, \"journal_exists\": false, \"single_max_call_bound_micros\": 15765, \"slot_cap_micros\": 17187, \"new_cap_micros\": 1650000, \"cumulative_candidate_cap_micros\": 1961229, \"actual_paid_calls\": 0, \"runtime_adapter\": \"NOT_IMPLEMENTED\", \"execution\": \"NOT_RUN\"}\n",
+  "command": [
+    "python",
+    "evidence/batches/P7-06I/build_review.py"
+  ],
+  "exit_code": 0,
+  "log_path": "evidence/batches/P7-06I/round3-review-budget-verified.log",
+  "started_at": "2026-10-27T07:40:47.887618+00:00",
+  "finished_at": "2026-10-27T07:40:48.452577+00:00",
+  "duration_seconds": 0.564
+}

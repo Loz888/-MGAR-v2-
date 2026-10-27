@@ -180,3 +180,21 @@ MGAR_ALLOW_PAID=1 MGAR_MAX_COST_USD=2.00 MGAR_LIVE_CASELIST=eval/cases/frozen-li
 独立只读评价为 `python eval/live/analyze.py --round round2 --output evidence/eval/live/<新的输出目录>`。
 未运行会输出完整96项NOT_RUN并退出2，显示已知用量N/A和保留的前轮上界；任何新调用
 按本轮份额重新对账，累计上界加回前轮保留额。B3/A1/A2仍未运行，不声称策略收益。
+
+## P7-06I 聚合容量与模型失败分类
+
+开发集在官方词表允许的最少切分下，完整聚合决策仍超过1024输出token。
+严格聚合工具现在返回`merge-receipt.v1`，包含完整MergeResult的SHA256；模型回显短回执。
+Go按当前owner/epoch/plan读取成功工具行与CAS回执，拒绝未完成账本/资源、跨任务、
+伪造或重复调用，再发布完整MergeResult并走原Verifier。Worker保留实际回执输出，
+Artifact保留完整来源；模型输出不获得验证或操作权限。dispatch升级为v3，输出仍为1024。
+
+Go到Python采用闭合`model-error.v1`信封，区分输出长度、无效响应、输入容量、预算、
+资源、真正权限拒绝和未知用量。已知失败照常结算，未知不释放预留、不自动重试。
+信封不包含原始供应商响应、Prompt或凭据；缺失/损坏/状态不匹配保守归为未知。
+
+旧轮C/H日志和指标不改写；旧协议测试与回顾分析使用固定历史源码数据快照。
+新开发验证均为local_stub，不代表真实模型闭环。新轮候选见
+[round3审阅提案](../../evidence/batches/P7-06I/round3-review/plan.json)。
+该提案不可执行，当前CLI拒绝round3；下一卡仍须适配执行器、完整预检和重新冻结，
+通过审批后才能启动新轮。本卡不发新的付费请求，也不进入P8。

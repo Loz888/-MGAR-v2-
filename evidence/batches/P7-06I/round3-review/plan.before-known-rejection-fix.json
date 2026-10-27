@@ -1,0 +1,754 @@
+{
+  "schema_version": "live-experiment.proposal.v1",
+  "experiment_id": "P7-06-round3-deepseek-flash-1017-20261027",
+  "review_status": "READY_FOR_REVIEW",
+  "executable": false,
+  "execution_authorized": false,
+  "purpose": "post_fix_regression_on_exposed_cases",
+  "provider": "deepseek",
+  "model": "flash-1017",
+  "approved_cap_micros": 1650000,
+  "project_cap_micros": 2000000,
+  "prior_upper_cost_micros": 311229,
+  "cumulative_candidate_cap_micros": 1961229,
+  "prior": [
+    {
+      "experiment_id": "P7-06-deepseek-flash-1017-20261026",
+      "report_path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/report.json",
+      "report_sha256": "5ce3bc0799cc2811ec7cd93bbeb3a1143ec7d8ef4b01fa31579077d1d70a4d87",
+      "metrics_path": "evidence/eval/live/actual-20261027/metrics.json",
+      "metrics_sha256": "843ca60a32baf4c255d085c0bc5dfacba95017fa7c8d3f4d8a18d417cccbb28b",
+      "known_cost_micros": 13276,
+      "retained_upper_cost_micros": 33850
+    },
+    {
+      "experiment_id": "P7-06-round2-deepseek-flash-1017-20261027",
+      "report_path": "evidence/eval/live/P7-06-round2-deepseek-flash-1017-20261027/report.json",
+      "report_sha256": "5e0581a0f8f2a5b79e7e15c6f3a74f965a0089e3bb515377a000d2d858093dca",
+      "metrics_path": "evidence/eval/live/round2-results-20261027/metrics.json",
+      "metrics_sha256": "8b03c225e3dbdf67e57d4f84db7aad0c14da281e7d30327c610d051d3afeb046",
+      "known_cost_micros": 277379,
+      "retained_upper_cost_micros": 277379
+    }
+  ],
+  "temperature": 0,
+  "output_tokens": 1024,
+  "input_reservation_tokens": 48454,
+  "max_context_bytes": 48000,
+  "max_context_tokens": 12000,
+  "planner_scope": "fixed_business_dag_template",
+  "manifest_sha256": "ec6d5576a75fc2724756abeef2628189c2922038f09cb9258d7a1972e493c8ab",
+  "dataset_manifest_sha256": "0b48a86008574d0a8bdbde1d88d37e718d45e75fe33363075fdcd48f0eb2d511",
+  "source_fingerprint": "68077a20049b5ed6dd887e0b55ba8df98b6d9430a8a3edf92c168e0e46b182ea",
+  "source_sha256": {
+    "internal/provider/deepseek.go": "c2d973f22d5ba0e6f987e74262fe568a485bb7e5c2ccf62b9795f2a2e4cb5ec1",
+    "internal/demo/model_errors.go": "94c3546202b71d90eb4e18b72991e9c7e3d9b17a662d1fd7c631a791283147ea",
+    "internal/demo/worker.go": "591754812a058a77523ca490d609e656e2b10fd3e910755bb6100e7bcd32e781",
+    "agentkit/mgar_agents/runtime_worker.py": "656314f724d58de83a3a818d3a9fb6dbb9be8ceb409aed0bb9bc2ff9d5571b4c",
+    "internal/demo/aggregate.go": "32ef83c0dfc8115fe93f00d0c650269677f0b8a07b569b96abc28febacc11e8a",
+    "internal/demo/tools.go": "a3954a4aab81c617cea1e60af53afdf740e98ad7114f717b8ec6de149f02a476",
+    "internal/demo/run.go": "d2d1462f3c0eaeda95a0d34ddf7884d93ca3d0155be5d1de41584bfa1e9b1c9f",
+    "internal/demo/dispatch.go": "3ea290108aefb3bef0a61a96eca8f6e5abf8cbf9a949b912b28acc812db7c6d0",
+    "internal/policy/gateway.go": "69b805e2cf9651282566d78a9c8ef8079fed4e41c85a73c6895e22073f2f0e1f",
+    "internal/provider/input_bound.go": "f0af6b63a05355830ee0f5a612c4906ddb9af6a1456dd0884ae2fe05d0823441",
+    "eval/live/pricing.json": "84488462e7acbefa9f9f1fb7ec72cf42f9e4529eaf5f4c82e132d9df3bb923ff",
+    "eval/live/official-evidence.json": "4de4fffe49cfc8c2e87971743b824d9a91e383f828b8c2a5c67ca3a5049ed139"
+  },
+  "not_run_arms": [
+    "B3",
+    "A1",
+    "A2"
+  ],
+  "automatic_retry": false,
+  "unknown_stops_all": true,
+  "allocation_run_id": "76941446-f4d8-55db-be6a-0ea81fa26ffd",
+  "assignments": [
+    {
+      "case_id": "live-001",
+      "arm": "B0",
+      "run_id": "abf7c579-89ec-5907-9751-a837068d528d",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-001",
+      "arm": "B1",
+      "run_id": "4ba484b0-e40f-5d31-9fc8-c4f8fc21f9ef",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-001",
+      "arm": "B2",
+      "run_id": "3a2186f0-9278-53c4-a255-3f0b788e6355",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-001",
+      "arm": "B4",
+      "run_id": "c4612e5d-7e6c-575a-87a2-068f442953d0",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-002",
+      "arm": "B0",
+      "run_id": "dd2115d4-9ad9-52e0-b655-1dd9efb1bced",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-002",
+      "arm": "B1",
+      "run_id": "e962920e-7e76-5326-a4a8-5995b383bc9a",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-002",
+      "arm": "B2",
+      "run_id": "28f1ad2f-2658-5a90-8e6e-7ba1f9152c7a",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-002",
+      "arm": "B4",
+      "run_id": "484a5e5a-d878-5944-baa9-3abab79b17c7",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-003",
+      "arm": "B0",
+      "run_id": "26345118-2060-511a-a1b8-7939c72290c2",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-003",
+      "arm": "B1",
+      "run_id": "9b41283e-d319-53ba-9c5b-aeedd603b756",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-003",
+      "arm": "B2",
+      "run_id": "acbff1d0-82f6-55ac-8bba-b8a07aa6490a",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-003",
+      "arm": "B4",
+      "run_id": "ccac8172-2bbc-5222-8f5e-c9650d360b09",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-004",
+      "arm": "B0",
+      "run_id": "ac67698c-bbcc-563e-8ca5-14fcce9d2169",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-004",
+      "arm": "B1",
+      "run_id": "cca66ddd-a059-583b-9f11-3302cc099ea4",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-004",
+      "arm": "B2",
+      "run_id": "3dd7d69b-ff61-5fe6-b0af-a666c53655cf",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-004",
+      "arm": "B4",
+      "run_id": "46a90bca-c3a2-5149-a14d-d7f23c42bf94",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-005",
+      "arm": "B0",
+      "run_id": "48c9f380-bd99-58aa-8beb-058d1e124a6f",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-005",
+      "arm": "B1",
+      "run_id": "85672cb4-e9bf-51ed-80bd-d59ff2980e45",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-005",
+      "arm": "B2",
+      "run_id": "3da5c180-c665-5fb3-9c6e-f5b8dd592441",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-005",
+      "arm": "B4",
+      "run_id": "18f8ab51-8eb6-5007-96be-3cfe6fc5a476",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-006",
+      "arm": "B0",
+      "run_id": "a25371dc-c06d-5b87-88ec-f22e30a2f62e",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-006",
+      "arm": "B1",
+      "run_id": "fe34e692-4845-53fe-8a72-2abe58fcd2e9",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-006",
+      "arm": "B2",
+      "run_id": "c602312f-a25a-5936-8222-c372e3d8c241",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-006",
+      "arm": "B4",
+      "run_id": "a933a2a6-d1ae-539c-8f64-3de0016c1d05",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-007",
+      "arm": "B0",
+      "run_id": "041f7b69-fa3e-5add-9030-bcb489d649c7",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-007",
+      "arm": "B1",
+      "run_id": "6094a096-6289-5284-a6eb-defd12986aed",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-007",
+      "arm": "B2",
+      "run_id": "00a3a126-8378-59f2-9059-9a4cb74be22e",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-007",
+      "arm": "B4",
+      "run_id": "c4db03c0-26d4-51ff-bd28-a2c742421023",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-008",
+      "arm": "B0",
+      "run_id": "83570bd5-ba86-520e-83e2-7f4a2b524e6b",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-008",
+      "arm": "B1",
+      "run_id": "bf021157-274b-52f0-b2d5-4caeb3520c65",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-008",
+      "arm": "B2",
+      "run_id": "38d752d6-8c35-5358-a5f0-f57007333cfd",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-008",
+      "arm": "B4",
+      "run_id": "d6e041fa-8631-50f8-8580-b6876f9cecd2",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-009",
+      "arm": "B0",
+      "run_id": "65fc26ea-cf77-500f-8e24-9938f27b3cb6",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-009",
+      "arm": "B1",
+      "run_id": "999ecda1-9d12-5247-9ad5-6baf93b07373",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-009",
+      "arm": "B2",
+      "run_id": "1400003a-a0a0-5bd2-9e12-cfa6f246ce5b",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-009",
+      "arm": "B4",
+      "run_id": "23aef222-4b21-5f5c-95a2-5e5cff6f880b",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-010",
+      "arm": "B0",
+      "run_id": "4062163d-27d9-58cd-bf12-806a571d13fa",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-010",
+      "arm": "B1",
+      "run_id": "534cbc42-52e9-5525-9e0d-a98a61b98c4c",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-010",
+      "arm": "B2",
+      "run_id": "31c961cf-8274-507a-a1d4-f7ff35952cd5",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-010",
+      "arm": "B4",
+      "run_id": "2effefa6-badf-59db-b597-12728f91f871",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-011",
+      "arm": "B0",
+      "run_id": "b9ca0d3d-5150-5c0a-8a47-77f2f44d868d",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-011",
+      "arm": "B1",
+      "run_id": "e25ae490-c3be-588f-b967-22ef665d849f",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-011",
+      "arm": "B2",
+      "run_id": "998b9f8f-90a0-5877-abdf-d8dd32cd2ba9",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-011",
+      "arm": "B4",
+      "run_id": "ba71e3ec-d0a9-51b8-8e38-5fe6ea7c90d2",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-012",
+      "arm": "B0",
+      "run_id": "6f61ce28-84d2-57c0-b7a9-5b5f5235e7ec",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-012",
+      "arm": "B1",
+      "run_id": "f5cc9caf-eb89-5253-827d-2a37e4494ae0",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-012",
+      "arm": "B2",
+      "run_id": "1cc73c05-12ee-5650-a415-71663778f29c",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-012",
+      "arm": "B4",
+      "run_id": "b24aa382-e725-589b-938c-feb2cbbcac2f",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-013",
+      "arm": "B0",
+      "run_id": "c52f7821-fd71-5f63-8e57-36e4fd66d7f6",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-013",
+      "arm": "B1",
+      "run_id": "24db5a12-a7ff-5d6b-b96f-46ced697c298",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-013",
+      "arm": "B2",
+      "run_id": "8762f63f-d401-5ea8-8f9f-9713c23d2c6d",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-013",
+      "arm": "B4",
+      "run_id": "cf18f21a-b60a-5070-9b77-1d8e85854d7e",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-014",
+      "arm": "B0",
+      "run_id": "fb3d2c89-1a9f-5a50-87ba-42de0f911996",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-014",
+      "arm": "B1",
+      "run_id": "2601a9fb-a7b4-5ae9-bba8-5aa04bcf3525",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-014",
+      "arm": "B2",
+      "run_id": "947fc470-1ed2-5aaa-b4c8-a19cd4ffa57f",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-014",
+      "arm": "B4",
+      "run_id": "536c7830-a4a9-51ea-9b93-c53962292d44",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-015",
+      "arm": "B0",
+      "run_id": "4ce76fde-cca3-57a4-84f6-0d94a5844c74",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-015",
+      "arm": "B1",
+      "run_id": "00bbc6e5-2e2f-5591-80b4-511d487c4c43",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-015",
+      "arm": "B2",
+      "run_id": "bf25d19a-f092-5a7f-8735-c7f47fded9f4",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-015",
+      "arm": "B4",
+      "run_id": "56a7063d-5ec2-5b75-8436-397317b581d2",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-016",
+      "arm": "B0",
+      "run_id": "0f767be8-d387-59b4-80af-4a0812ed1f88",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-016",
+      "arm": "B1",
+      "run_id": "b68231be-cdcd-523d-b234-0f6a808257e9",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-016",
+      "arm": "B2",
+      "run_id": "59b9ee63-03c6-5fd6-b7c0-4b665b938538",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-016",
+      "arm": "B4",
+      "run_id": "a519d973-b023-5f05-9d52-49177d14afa9",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-017",
+      "arm": "B0",
+      "run_id": "20b8ad56-e794-58b3-8625-8437c4afa331",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-017",
+      "arm": "B1",
+      "run_id": "302f0f03-8e2d-59e1-8258-4d11c8eb6775",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-017",
+      "arm": "B2",
+      "run_id": "d0f4f59b-2e96-5695-9503-f36371152c25",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-017",
+      "arm": "B4",
+      "run_id": "ff09848e-0964-534a-aa00-bef435f1a9fd",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-018",
+      "arm": "B0",
+      "run_id": "984ddba7-c1c8-5b47-ad0d-8548a330172a",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-018",
+      "arm": "B1",
+      "run_id": "1f50ab08-5250-5df7-b28e-f1328309fa72",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-018",
+      "arm": "B2",
+      "run_id": "61114610-9a92-5b02-8e11-7d7bfe5990fe",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-018",
+      "arm": "B4",
+      "run_id": "362b593c-e0e7-5456-9193-9c103a1d2d93",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-019",
+      "arm": "B0",
+      "run_id": "f3964870-c962-59d8-9c73-616c4bfdb467",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-019",
+      "arm": "B1",
+      "run_id": "0b789fef-012b-5f9b-ac48-156a098ecb5b",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-019",
+      "arm": "B2",
+      "run_id": "45665a0a-f339-583f-9cdf-80e1e0cf4ee7",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-019",
+      "arm": "B4",
+      "run_id": "71cfdb55-e82b-5c90-93ca-bcc01c5e5cdf",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-020",
+      "arm": "B0",
+      "run_id": "40a305dc-4236-5bab-ab6f-53629e7aa887",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-020",
+      "arm": "B1",
+      "run_id": "c3f6e2f4-8222-55af-b9c3-7476f6adc278",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-020",
+      "arm": "B2",
+      "run_id": "36f7d11f-cda6-5cc5-a446-c787629c2061",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-020",
+      "arm": "B4",
+      "run_id": "c823e6f8-05b5-5887-b045-823924fe3dd9",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-021",
+      "arm": "B0",
+      "run_id": "935807e7-5b60-521d-8b1c-c98113a3e3dc",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-021",
+      "arm": "B1",
+      "run_id": "1656a5c4-23e6-50c1-bf39-570a3369cb6d",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-021",
+      "arm": "B2",
+      "run_id": "3f5053ce-b5c7-5734-acaa-db3b48b38509",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-021",
+      "arm": "B4",
+      "run_id": "5ca24e8a-d73f-575d-94b5-388ca9476281",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-022",
+      "arm": "B0",
+      "run_id": "72e71bea-7c24-5420-870c-c48c98f18c60",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-022",
+      "arm": "B1",
+      "run_id": "feac1b06-b710-5d9d-adbb-96755487f519",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-022",
+      "arm": "B2",
+      "run_id": "a0fb8446-4731-538b-a693-f39fbd5a3405",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-022",
+      "arm": "B4",
+      "run_id": "a32241de-f6bf-55a1-a25e-bb98e62022ae",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-023",
+      "arm": "B0",
+      "run_id": "b1c29c67-80b5-5100-9da8-48a6fe0b0f9a",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-023",
+      "arm": "B1",
+      "run_id": "2df0a076-2341-5809-b190-193f6d4d8c9e",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-023",
+      "arm": "B2",
+      "run_id": "9387cd1b-0125-50a9-8f88-288d35b7f7de",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-023",
+      "arm": "B4",
+      "run_id": "8a4d1b1d-17d3-5eca-85a2-fe71579948bb",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-024",
+      "arm": "B0",
+      "run_id": "1c30dd60-9556-5ab3-91cc-100e6a6a9dd2",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-024",
+      "arm": "B1",
+      "run_id": "5d99f4b7-fa44-56e2-b155-2ef4829ac7f3",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-024",
+      "arm": "B2",
+      "run_id": "97a07726-1d87-53a2-91f2-d4ae3f80500c",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    },
+    {
+      "case_id": "live-024",
+      "arm": "B4",
+      "run_id": "19ad3c4c-4f9f-50f1-988c-4d1105bd01b5",
+      "cap_micros": 17187,
+      "status": "NOT_RUN"
+    }
+  ],
+  "remaining_gates": [
+    "Review the protocol/cost/identity candidate.",
+    "Implement a new separately reviewed round selector, cumulative checkpoint and independent analysis adapter.",
+    "Run all PG/race/process/unknown-budget tests and re-freeze final executor source before activation.",
+    "Check unchanged quote freshness, secret/network operation and unused marker/journal read-only.",
+    "Only a separately authorized one-shot execution may send paid requests."
+  ],
+  "limitations": [
+    "The same exposed24 cases are used. This is not an unseen holdout and rounds must not be pooled.",
+    "Per-slot17187 is lower than round2 share19791. Cross-round gains cannot be attributed only to receipt changes.",
+    "Development HTTP fixtures are local_stub, not model quality evidence.",
+    "Data-verification and replan failures observed in round2 still require real evaluation.",
+    "No old UNKNOWN reservation is released; unused shares are never transferred.",
+    "A moving provider alias and worst-price estimates do not pin model weights or prove an invoice."
+  ]
+}

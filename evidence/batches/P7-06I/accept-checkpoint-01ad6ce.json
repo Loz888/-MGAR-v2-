@@ -1,0 +1,210 @@
+{
+  "card_id": "P7-06I",
+  "status": "PARTIAL",
+  "git_commit": null,
+  "base_git_commit": "66bd828aa4ba0eaa56bdd77074fff7b31e3774cf",
+  "source_branch": "wip/p7-06i-development",
+  "scope": "Interrupted development checkpoint published at user request; not a completed acceptance",
+  "actual_paid_calls": 0,
+  "commands": [
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-v",
+        "./internal/demo",
+        "-run",
+        "TestDevelopmentAggregateCapacity|TestDevelopmentModelFailureClasses"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06I/red-capacity-and-classification.log",
+      "started_at": "2026-10-27T02:52:19.737687+00:00",
+      "finished_at": "2026-10-27T02:52:19.918315+00:00",
+      "duration_seconds": 0.18
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-v",
+        "./internal/demo",
+        "-run",
+        "TestDevelopmentAggregateCapacity|TestDevelopmentModelFailureClasses"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06I/red-runtime-reproduction.log",
+      "started_at": "2026-10-27T02:52:27.028178+00:00",
+      "finished_at": "2026-10-27T02:52:53.881465+00:00",
+      "duration_seconds": 26.852
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_model_bridge.py"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06I/red-python-error-envelope.log",
+      "started_at": "2026-10-27T02:53:11.353218+00:00",
+      "finished_at": "2026-10-27T02:53:18.435918+00:00",
+      "duration_seconds": 7.082
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-v",
+        "./internal/demo",
+        "-run",
+        "TestDevelopmentAggregateCapacity|TestDevelopmentModelFailureClasses"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06I/green-development-capacity-classes.log",
+      "started_at": "2026-10-27T02:57:51.432754+00:00",
+      "finished_at": "2026-10-27T02:58:21.438485+00:00",
+      "duration_seconds": 30.005
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_model_bridge.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06I/green-python-error-envelope.log",
+      "started_at": "2026-10-27T02:58:26.903592+00:00",
+      "finished_at": "2026-10-27T02:58:34.350161+00:00",
+      "duration_seconds": 7.445
+    }
+  ],
+  "completed": [
+    "Two development capacity cases and four model failure-class cases passed with real PG/Python processes and local HTTP",
+    "14 Python model-error-envelope tests passed",
+    "Initial short-receipt binding and typed model error transport implemented"
+  ],
+  "unverified": [
+    {
+      "name": "receipt_scope_and_forgery_security_cases",
+      "status": "NOT_RUN"
+    },
+    {
+      "name": "historical_round2_fixture_adaptation",
+      "status": "NOT_RUN"
+    },
+    {
+      "name": "full_engineering_regression",
+      "status": "NOT_RUN"
+    },
+    {
+      "name": "new_frozen_experiment_review",
+      "status": "NOT_RUN"
+    }
+  ],
+  "known_limitations": [
+    "Environment outage interrupted development. Last attempted patch was not applied; current files were inspected on recovery.",
+    "This checkpoint is partial, not PASS. Existing tests still require dispatch-version and historical-fixture updates.",
+    "Historical C/H results remain BLOCKED; no real-model improvement claim."
+  ],
+  "artifacts": [
+    {
+      "path": "TASK_QUEUE.md",
+      "sha256": "46ada801a1cb709b250dde299caf8fcc79222212af89d9270604d21721d6d47a"
+    },
+    {
+      "path": "agentkit/mgar_agents/runtime_worker.py",
+      "sha256": "656314f724d58de83a3a818d3a9fb6dbb9be8ceb409aed0bb9bc2ff9d5571b4c"
+    },
+    {
+      "path": "docs/adr/ADR-0021.md",
+      "sha256": "9a801a3580a865fa8456e02f03373aad18c86048d1a0bf4fb804c4ba6b1183c6"
+    },
+    {
+      "path": "docs/operations/development-status.md",
+      "sha256": "a1dbfc25c6d82a70374367395309a401c37141cfc0f943fbb35b98246b869aea"
+    },
+    {
+      "path": "evidence/batches/P7-06I/commands.json",
+      "sha256": "136db6f563503a0831324ec8aac0a1d197156656ca87da719395557c954d0e17"
+    },
+    {
+      "path": "evidence/batches/P7-06I/green-development-capacity-classes.log",
+      "sha256": "18cc8ade1f1b6e853c8151aeb8a67b85b2abe0abac4316f14150a6027b99f519"
+    },
+    {
+      "path": "evidence/batches/P7-06I/green-python-error-envelope.log",
+      "sha256": "16d5b005ab9f4a8cc9ced850860bfac2c35986e206404ea44809e0c981d5bf12"
+    },
+    {
+      "path": "evidence/batches/P7-06I/historical-inputs.json",
+      "sha256": "0cff257ec668560f4fe9ed90ce6584dab35abeec891c00725700ad55ada35d10"
+    },
+    {
+      "path": "evidence/batches/P7-06I/red-capacity-and-classification.log",
+      "sha256": "54cbd5bf55385c2581b20ff337731db39f8a6ef356568375d47e66f4ab194d34"
+    },
+    {
+      "path": "evidence/batches/P7-06I/red-python-error-envelope.log",
+      "sha256": "8ab8ccc6de1505986b4fa6084753fe90a7b2174e976d090048af2ce4b664fb6a"
+    },
+    {
+      "path": "evidence/batches/P7-06I/red-runtime-reproduction.log",
+      "sha256": "5208350e61eff177e46d397ab07db8f54426ea1f9216c02e23eb68925838cfe7"
+    },
+    {
+      "path": "internal/demo/aggregate.go",
+      "sha256": "fe91e5181f31b46e6f920d1eaf1d1d39a8d5ab003f9ad8df0e564ff959d7ec6b"
+    },
+    {
+      "path": "internal/demo/aggregate_capacity_test.go",
+      "sha256": "7316941715581bd92d2e4292a85b1c5793fc543e7e8b5655c3687bc983751c43"
+    },
+    {
+      "path": "internal/demo/dispatch.go",
+      "sha256": "3ea290108aefb3bef0a61a96eca8f6e5abf8cbf9a949b912b28acc812db7c6d0"
+    },
+    {
+      "path": "internal/demo/live_test.go",
+      "sha256": "00c097121685a6a2c58a9c5437b8adb928fb76c8a4406da040b20545e2ac5e95"
+    },
+    {
+      "path": "internal/demo/model_errors.go",
+      "sha256": "b47bbc85416d15b5fac3c12115527c4c8c4eccb01074678fcd16fa10e8855d6c"
+    },
+    {
+      "path": "internal/demo/run.go",
+      "sha256": "d2d1462f3c0eaeda95a0d34ddf7884d93ca3d0155be5d1de41584bfa1e9b1c9f"
+    },
+    {
+      "path": "internal/demo/tools.go",
+      "sha256": "a3954a4aab81c617cea1e60af53afdf740e98ad7114f717b8ec6de149f02a476"
+    },
+    {
+      "path": "internal/demo/worker.go",
+      "sha256": "cfefc09759d23bcec37c7f7fc10a14c7ba922aefa93488e0874ed8eb10342a41"
+    },
+    {
+      "path": "internal/provider/deepseek.go",
+      "sha256": "c2d973f22d5ba0e6f987e74262fe568a485bb7e5c2ccf62b9795f2a2e4cb5ec1"
+    },
+    {
+      "path": "tasks/P7-06I.md",
+      "sha256": "3212379800c22a59312a8e6a2d2341aefed0d5cae3293d397e746d6237ab1ffb"
+    },
+    {
+      "path": "tests/fixtures/round2-protocol.json",
+      "sha256": "bb33dfab3be0d517b00c5083439d00483a1173d7ec025e2e8c76376f0ff24abc"
+    },
+    {
+      "path": "tests/unit/test_model_bridge.py",
+      "sha256": "0754b73d8f924921c4ba06a73c288a35f9c3c89eebcf2d2a174561fdeec44bc6"
+    }
+  ],
+  "timestamp_utc": "2026-10-27T06:59:40.475684+00:00"
+}

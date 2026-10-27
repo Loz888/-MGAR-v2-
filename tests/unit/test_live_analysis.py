@@ -349,10 +349,14 @@ def round2_root(tmp_path):
              'evidence/eval/live/P7-06-deepseek-flash-1017-20261026/report.json',
              'internal/demo/dispatch.go', 'internal/demo/worker.go', 'internal/policy/gateway.go',
              'eval/live/pricing.json', 'eval/live/official-evidence.json']
+    historical = json.loads((ROOT / 'tests/fixtures/round2-protocol.json').read_text())['files']
     for name in names:
         target = root / name
         target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(ROOT / name, target)
+        if name in historical:
+            target.write_text(historical[name])
+        else:
+            shutil.copyfile(ROOT / name, target)
     return root
 
 

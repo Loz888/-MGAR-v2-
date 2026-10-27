@@ -19,6 +19,7 @@ type mergeReceipt struct {
 }
 
 var errMergeReceipt = errors.New("aggregate_receipt_rejected")
+var errMergeDecision = errors.New("aggregate_receipt_invalid")
 
 func receiptFor(body []byte) []byte {
 	return inputcontext.Canonical(mergeReceipt{Schema: "merge-receipt.v1", Hash: artifact.Digest(body)})
@@ -28,15 +29,14 @@ func receiptFor(body []byte) []byte {
 // trusted memory and is published only after same-claim durable success + CAS
 // checks. Returning these bytes does not replace the subsequent Verifier.
 func (f *fixture) resolveAggregate(ctx context.Context, c store.TaskClaim, state *taskTools, output []byte) ([]byte, error) {
-	var receipt mergeReceipt
-	if c.Role != "aggregate" || len(output) > 256 || verifier.StrictJSON(output, &receipt) != nil || receipt.Schema != "merge-receipt.v1" {
+	if c.Role != "aggregate" {
 		return nil, errMergeReceipt
 	}
 	state.mu.Lock()
 	body, executed := bytes.Clone(state.expected), state.executed
 	state.mu.Unlock()
 	var merged handoff.MergeResult
-	if executed != 1 || len(body) == 0 || len(body) > 60000 || verifier.StrictJSON(body, &merged) != nil || !merged.CanFinalize || receipt.Hash != artifact.Digest(body) {
+	if executed != 1 || len(body) == 0 || len(body) > 60000 || verifier.StrictJSON(body, &merged) != nil || merged.SchemaVersion != "merge_result.v1" || !merged.CanFinalize {
 		return nil, errMergeReceipt
 	}
 	if f.s.ValidateToolClaim(ctx, c) != nil {
@@ -71,6 +71,13 @@ func (f *fixture) resolveAggregate(ctx context.Context, c store.TaskClaim, state
 	observed, e := f.s.ToolResult(ctx, c, requests[0], f.cas)
 	if e != nil || !bytes.Equal(observed, receiptFor(body)) {
 		return nil, errMergeReceipt
+	}
+	var receipt mergeReceipt
+	if len(output) > 256 || verifier.StrictJSON(output, &receipt) != nil || receipt.Schema != "merge-receipt.v1" || receipt.Hash != artifact.Digest(body) {
+		// Binding and accounting are confirmed. The caller may preserve the
+		// untrusted model bytes for a failed Verifier verdict, never use the
+		// trusted full result as if the model had returned a valid receipt.
+		return nil, errMergeDecision
 	}
 	return body, nil
 }

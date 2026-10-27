@@ -12,6 +12,7 @@ import (
 	"testing"
 
 	"github.com/Loz888/-MGAR-v2-/internal/artifact"
+	inputcontext "github.com/Loz888/-MGAR-v2-/internal/context"
 	"github.com/Loz888/-MGAR-v2-/internal/provider"
 )
 
@@ -151,12 +152,32 @@ func TestDevelopmentAggregateCapacity(t *testing.T) {
 				t.Fatalf("bounded output must close: status=%s kind=%s err=%v", r.ExecutionStatus, kind, e)
 			}
 			t.Log("local HTTP with published-vocabulary lower-bound quota and real PG/Verifier closes under fixed 1024 output limit")
+			report := r.Result.(Report)
+			if r.ExternalOracle["passed"] != true || !report.SourceUnchanged {
+				t.Fatal("missing independent verification")
+			}
+			for _, worker := range report.Workers {
+				if worker.Role != "aggregate" {
+					continue
+				}
+				wire := inputcontext.Canonical(map[string]any{"type": "final", "output": worker.Output})
+				var receipt mergeReceipt
+				if json.Unmarshal(worker.Output, &receipt) != nil || receipt.Schema != "merge-receipt.v1" || len(wire) > 1024 {
+					t.Fatal("receipt lacks a proved byte upper bound")
+				}
+				full := inputcontext.Canonical(map[string]any{"type": "final", "output": report.Merge})
+				minimum, err := minimumReferenceTokens(full)
+				if err != nil || minimum <= 1024 {
+					t.Fatal("development case must stress full output", minimum, err)
+				}
+				t.Logf("full minimum=%d tokens; complete receipt decision byte upper=%d <=1024; full provenance retained in verified Artifact", minimum, len(wire))
+			}
 		})
 	}
 }
 
 func TestDevelopmentModelFailureClasses(t *testing.T) {
-	for _, tc := range []struct{ mode, expected string }{{"aggregate-length", "model_output_limit"}, {"aggregate-invalid", "model_invalid_response"}, {"unknown", "model_usage_unknown"}, {"unaffordable", "budget_exhausted"}} {
+	for _, tc := range []struct{ mode, expected string }{{"aggregate-length", "model_output_limit"}, {"aggregate-invalid", "model_invalid_response"}, {"unknown", "model_usage_unknown"}, {"unaffordable", "budget_exhausted"}, {"input-cap", "model_input_limit"}} {
 		t.Run(tc.mode, func(t *testing.T) {
 			o := testOptions(t)
 			o.Case, o.CostMicros = "development-002", 20833
@@ -174,15 +195,51 @@ func TestDevelopmentModelFailureClasses(t *testing.T) {
 				}
 			}
 			if !found {
-				t.Fatalf("expected %s; workers=%+v", tc.expected, report.Workers)
+				actual := []string{}
+				for _, w := range report.Workers {
+					if w.ErrorKind != nil {
+						actual = append(actual, w.Role+":"+*w.ErrorKind)
+					}
+				}
+				t.Fatalf("expected %s; actual=%v", tc.expected, actual)
 			}
 			if tc.mode == "unknown" {
 				if report.Budget.UnknownModels != 1 || report.Budget.ReservedCostMicros == 0 || sent.Load() != 1 {
 					t.Fatal("unknown not retained")
 				}
-			} else if report.Budget.ReservedModels != 0 || report.Budget.UnknownModels != 0 || (tc.mode == "unaffordable" && sent.Load() != 0) {
+			} else if report.Budget.ReservedModels != 0 || report.Budget.UnknownModels != 0 || ((tc.mode == "unaffordable" || tc.mode == "input-cap") && sent.Load() != 0) {
 				t.Fatal("known/not-sent failure misaccounted")
 			}
 		})
+	}
+}
+
+func TestDevelopmentForgedReceiptHasFailedVerdict(t *testing.T) {
+	o := testOptions(t)
+	o.Case, o.CostMicros = "development-002", 20833
+	o.Model, _ = developmentProvider(t, "B4", "receipt-forge")
+	r, e := RunExperiment(context.Background(), o, "B4")
+	if e != nil {
+		t.Fatal(e)
+	}
+	report := r.Result.(Report)
+	if r.ExecutionStatus != "failed" || report.State != "failed" || report.Budget.UnknownModels+report.Budget.PendingModels+report.Budget.UnknownTools+report.Budget.PendingTools != 0 {
+		t.Fatal("known invalid receipt must be a settled failure", report.State, report.ErrorKind)
+	}
+	found := false
+	for _, a := range report.Artifacts {
+		if a.Metadata.Kind == "report" && a.Verdict.Status == "failed" {
+			var rejected struct {
+				Schema string          `json:"schema_version"`
+				Output json.RawMessage `json:"model_output"`
+			}
+			if json.Unmarshal([]byte(a.Body), &rejected) != nil || rejected.Schema != "rejected-merge-receipt.v1" || len(rejected.Output) == 0 {
+				t.Fatal("failure must preserve a rejected-model wrapper, never the trusted full result")
+			}
+			found = true
+		}
+	}
+	if !found || (r.WorkflowSuccess != nil && *r.WorkflowSuccess) {
+		t.Fatal("forged receipt lacked independent rejection")
 	}
 }

@@ -171,7 +171,7 @@ func (f *fixture) workerWith(ctx context.Context, o Options, c store.TaskClaim, 
 			return
 		}
 		var decision []byte
-		_, err = resources.Model(r.Context(), c, req, func(context.Context) (budget.ModelUsage, bool, error) {
+		call, err := resources.Model(r.Context(), c, req, func(context.Context) (budget.ModelUsage, bool, error) {
 			decision, err = decide(c.NodeKey, request, proposal, o.Fault)
 			if err != nil {
 				return budget.ModelUsage{}, true, err
@@ -180,7 +180,7 @@ func (f *fixture) workerWith(ctx context.Context, o Options, c store.TaskClaim, 
 			return budget.ModelUsage{Status: "succeeded", Known: true, Source: "local_stub", InputTokens: input, OutputTokens: output, Tokens: input + output, PricingVersion: quote.Version}, true, nil
 		})
 		if err != nil {
-			deny()
+			writeModelFailure(w, err, call)
 			return
 		}
 		next++

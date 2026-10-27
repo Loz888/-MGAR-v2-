@@ -74,5 +74,245 @@
     "started_at": "2026-10-27T02:58:26.903592+00:00",
     "finished_at": "2026-10-27T02:58:34.350161+00:00",
     "duration_seconds": 7.445
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./eval/live",
+      "./internal/demo",
+      "-run",
+      "TestRound2|TestModelFailureEnvelope|TestLiveRoleDispatchContracts"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06I/historical-and-model-unit.log",
+    "started_at": "2026-10-27T07:04:27.453091+00:00",
+    "finished_at": "2026-10-27T07:04:35.173670+00:00",
+    "duration_seconds": 7.719
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./internal/demo",
+      "./internal/provider",
+      "-run",
+      "TestAggregateReceipt|TestDeepSeekOutputLimitVersusUsageCertainty|TestDevelopmentAggregateCapacity|TestDevelopmentModelFailureClasses"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06I/receipt-scope-and-output-certainty.log",
+    "started_at": "2026-10-27T07:07:11.320864+00:00",
+    "finished_at": "2026-10-27T07:07:48.636823+00:00",
+    "duration_seconds": 37.315
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_live_analysis.py",
+      "tests/unit/test_model_bridge.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06I/historical-and-bridge-python.log",
+    "started_at": "2026-10-27T07:10:37.621386+00:00",
+    "finished_at": "2026-10-27T07:10:45.533013+00:00",
+    "duration_seconds": 7.911
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./internal/demo",
+      "-run",
+      "^TestAggregateReceiptRequiresDurableSameClaim$"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06I/receipt-binding-green.log",
+    "started_at": "2026-10-27T07:11:26.305001+00:00",
+    "finished_at": "2026-10-27T07:11:31.691477+00:00",
+    "duration_seconds": 5.386
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./internal/provider",
+      "./internal/demo",
+      "-run",
+      "TestDeepSeekOutputLimit|TestDevelopmentModelFailureClasses|TestModelFailureEnvelope"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06I/bridge-provider-and-input-guard.log",
+    "started_at": "2026-10-27T07:14:23.857230+00:00",
+    "finished_at": "2026-10-27T07:14:32.856395+00:00",
+    "duration_seconds": 8.998
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./internal/demo",
+      "-run",
+      "^TestAggregateReceiptRequiresDurableSameClaim$"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06I/receipt-scope-final.log",
+    "started_at": "2026-10-27T07:15:26.328801+00:00",
+    "finished_at": "2026-10-27T07:15:33.010456+00:00",
+    "duration_seconds": 6.681
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_model_bridge.py",
+      "tests/unit/test_live_analysis.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06I/bridge-final-python.log",
+    "started_at": "2026-10-27T07:15:27.698803+00:00",
+    "finished_at": "2026-10-27T07:15:37.624030+00:00",
+    "duration_seconds": 9.924
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06I/audit_history.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06I/immutable-history-and-pg.log",
+    "started_at": "2026-10-27T07:17:22.782805+00:00",
+    "finished_at": "2026-10-27T07:17:23.835166+00:00",
+    "duration_seconds": 1.052
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06I/build_review.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06I/round3-review-candidate.log",
+    "started_at": "2026-10-27T07:21:47.270456+00:00",
+    "finished_at": "2026-10-27T07:21:47.810976+00:00",
+    "duration_seconds": 0.54
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/eval.sh",
+      "--live",
+      "--round",
+      "round3",
+      "--preflight"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06I/round3-selector-refused.log",
+    "started_at": "2026-10-27T07:22:57.689067+00:00",
+    "finished_at": "2026-10-27T07:22:59.330661+00:00",
+    "duration_seconds": 1.641
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06I/offline-full.log",
+    "started_at": "2026-10-27T07:22:59.022037+00:00",
+    "finished_at": "2026-10-27T07:27:49.445021+00:00",
+    "duration_seconds": 290.422
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./internal/demo",
+      "-run",
+      "TestDevelopmentForgedReceipt|TestAggregateReceipt"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06I/known-receipt-rejection.log",
+    "started_at": "2026-10-27T07:32:14.171598+00:00",
+    "finished_at": "2026-10-27T07:32:23.462914+00:00",
+    "duration_seconds": 9.291
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/e2e/incident_test.py::test_fabricated_role_cannot_succeed[aggregate]"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06I/known-rejection-e2e.log",
+    "started_at": "2026-10-27T07:34:23.874511+00:00",
+    "finished_at": "2026-10-27T07:34:36.746937+00:00",
+    "duration_seconds": 12.872
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06I/build_review.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06I/round3-review-final.log",
+    "started_at": "2026-10-27T07:37:41.047969+00:00",
+    "finished_at": "2026-10-27T07:37:41.590049+00:00",
+    "duration_seconds": 0.541
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06I/build_review.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06I/round3-review-budget-verified.log",
+    "started_at": "2026-10-27T07:40:47.887618+00:00",
+    "finished_at": "2026-10-27T07:40:48.452577+00:00",
+    "duration_seconds": 0.564
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06I/offline-full-final.log",
+    "started_at": "2026-10-27T07:37:41.614902+00:00",
+    "finished_at": "2026-10-27T07:42:48.952068+00:00",
+    "duration_seconds": 307.337
+  },
+  {
+    "command": [
+      "python",
+      ".local/final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06I/final-credential-format-audit.log",
+    "started_at": "2026-10-27T07:51:56.027470+00:00",
+    "finished_at": "2026-10-27T07:51:56.190549+00:00",
+    "duration_seconds": 0.162
   }
 ]

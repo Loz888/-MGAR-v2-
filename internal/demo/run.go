@@ -310,7 +310,13 @@ func (f *fixture) batchWith(ctx context.Context, o Options, r *Report, owner sto
 			body, resolveErr = f.resolveAggregate(ctx, j.claim, j.state, body)
 			if resolveErr != nil {
 				failed = errors.Join(failed, resolveErr)
-				continue
+				if !errors.Is(resolveErr, errMergeDecision) {
+					continue
+				}
+				// A confirmed tool/ledger with an invalid model receipt is known
+				// bad evidence. Preserve those untrusted bytes for the existing
+				// failing verdict; do not publish the trusted expanded result.
+				body = inputcontext.Canonical(map[string]any{"schema_version": "rejected-merge-receipt.v1", "model_output": j.result.Output})
 			}
 		}
 		a, e := f.s.PublishArtifact(ctx, j.claim, f.cas, j.node.OutputKind, "application/json", "demo.v1", body)
