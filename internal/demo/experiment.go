@@ -107,7 +107,7 @@ func RunExperiment(ctx context.Context, o Options, arm string) (r ExperimentRepo
 		}
 		if o.Model.Local() && strings.HasPrefix(o.Case, "development-") {
 			manifest = "eval/cases/development.json"
-		} else if !o.Model.Local() && strings.HasPrefix(o.Case, "live-") && o.RunID == LiveRunID(o.Case, arm) && o.CostMicros == 20833 {
+		} else if !o.Model.Local() && strings.HasPrefix(o.Case, "live-") && o.RunID == LiveRunIDForRound(o.Round, o.Case, arm) && o.CostMicros == LiveCostMicros(o.Round) && LiveCostMicros(o.Round) > 0 {
 			manifest = "eval/cases/frozen-live-24.json"
 		} else {
 			return r, errors.New("live_case_identity_denied")

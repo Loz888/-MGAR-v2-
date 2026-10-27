@@ -154,3 +154,29 @@ epoch2后即使进程SIGKILL或lease过期也拒绝再次接管。普通live启�
 做只读检查；E验收通过后，同一命令省略 `--preflight` 才完成原初始化并执行原96项。
 不是用于恢复任何已发送/未知调用的开关；不删除标记、不改身份或费用，不调holdout。
 执行器元数据保留allocation_mode和recovery_proof_sha256，独立评价继续使用相同Oracle。
+
+## 开发集修复与修复后回归轮
+
+P7-06F 将角色契约分为Planner Proposal、真实工具Observation、严格MergeResult、
+基线业务报告；只对有可信停止证明且资源已释放的只读错误结算failed。其他未知保护
+保持，旧轮unknown/报告不改写。开发集本地HTTP证明协议和控制流程，不代替模型质量。
+
+P7-06G 冻结 `eval/live/round2/plan.json`：同24题×四组、96个新UUID及独立PG/journal。
+实验为post_fix_regression，已有暴露题目，不是新未见holdout；不合并两轮样本。
+新轮批准上限USD1.90，每份19791微美元（合计1.899936）；前轮上界0.033850保留，
+累计批准上界1.933850小于原USD2。前轮report和新契约/网关源码hash绑定到配置，变更
+或缺失拒绝。原数据/Oracle、模型/温度、工具能力、Verifier与token上限均不变。
+
+加载本仓库dev-env并保留已注入密钥后，可用以下命令只读预检：
+
+```bash
+MGAR_ALLOW_PAID=1 MGAR_MAX_COST_USD=2.00 MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json bash scripts/eval.sh --live --confirm-live --round round2 --preflight
+```
+
+真正执行使用同一命令省略 `--preflight`；本批仅完成准备，不默认执行新付费轮。
+选择器只支持original/round2，不能把旧恢复开关用于新轮。新轮仍用独占文件与固定
+零消费PG标记、原子模型预留；未知停止，不提供force或自动重播。默认仍选择original。
+
+独立只读评价为 `python eval/live/analyze.py --round round2 --output evidence/eval/live/<新的输出目录>`。
+未运行会输出完整96项NOT_RUN并退出2，显示已知用量N/A和保留的前轮上界；任何新调用
+按本轮份额重新对账，累计上界加回前轮保留额。B3/A1/A2仍未运行，不声称策略收益。

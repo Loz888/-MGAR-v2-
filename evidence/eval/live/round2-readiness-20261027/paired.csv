@@ -1,0 +1,13 @@
+ci95,delta,left,metric,missing_pairs,pairs,reason,right
+N/A,N/A,B0,oracle_pass,24,0,all_24_pairs_required_no_pair_dropping,B1
+N/A,N/A,B0,estimated_cost_usd,24,0,all_24_pairs_required_no_pair_dropping,B1
+N/A,N/A,B0,latency_ms,24,0,all_24_pairs_required_no_pair_dropping,B1
+N/A,N/A,B1,oracle_pass,24,0,all_24_pairs_required_no_pair_dropping,B2
+N/A,N/A,B1,estimated_cost_usd,24,0,all_24_pairs_required_no_pair_dropping,B2
+N/A,N/A,B1,latency_ms,24,0,all_24_pairs_required_no_pair_dropping,B2
+N/A,N/A,B2,oracle_pass,24,0,all_24_pairs_required_no_pair_dropping,B4
+N/A,N/A,B2,estimated_cost_usd,24,0,all_24_pairs_required_no_pair_dropping,B4
+N/A,N/A,B2,latency_ms,24,0,all_24_pairs_required_no_pair_dropping,B4
+N/A,N/A,B0,oracle_pass,24,0,all_24_pairs_required_no_pair_dropping,B4
+N/A,N/A,B0,estimated_cost_usd,24,0,all_24_pairs_required_no_pair_dropping,B4
+N/A,N/A,B0,latency_ms,24,0,all_24_pairs_required_no_pair_dropping,B4

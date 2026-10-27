@@ -1,0 +1,51 @@
+{
+  "status": "FROZEN_PREPARED_NOT_RUN",
+  "round": "round2",
+  "experiment_id": "P7-06-round2-deepseek-flash-1017-20261027",
+  "purpose": "post_fix_regression",
+  "plan_path": "eval/live/round2/plan.json",
+  "plan_sha256": "bfffacd449d2e27a991493dcc015503b2eb6ef7502d2f5e8fae544009539e414",
+  "protocol_and_prices_sha256": "f82ddafa9f150280cd59f066021cd8bc1ed488f516d4fd97b013d078b3ff119e",
+  "source_fingerprint": "af44b894443ce37eb184dedf205b6fea44f194e9de54805d86393f77d10331e3",
+  "model": "flash-1017",
+  "provider": "deepseek",
+  "assignments": 96,
+  "new_round_cap_usd": "1.90",
+  "previous_upper_usd": "0.033850",
+  "cumulative_approved_cap_usd": "1.933850",
+  "project_cap_usd": "2.00",
+  "read_only_preflight_command": [
+    "env",
+    "MGAR_ALLOW_PAID=1",
+    "MGAR_MAX_COST_USD=2.00",
+    "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+    "bash",
+    "scripts/eval.sh",
+    "--live",
+    "--confirm-live",
+    "--round",
+    "round2",
+    "--preflight"
+  ],
+  "execution_command_not_run": [
+    "env",
+    "MGAR_ALLOW_PAID=1",
+    "MGAR_MAX_COST_USD=2.00",
+    "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+    "bash",
+    "scripts/eval.sh",
+    "--live",
+    "--confirm-live",
+    "--round",
+    "round2"
+  ],
+  "analysis_command": [
+    "python",
+    "eval/live/analyze.py",
+    "--round",
+    "round2",
+    "--output",
+    "evidence/eval/live/round2-results-NEW-OUTPUT"
+  ],
+  "automatic_retry": false
+}

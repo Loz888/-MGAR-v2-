@@ -19,11 +19,16 @@ func main() {
 	provider := flag.String("provider", "mock", "mock only")
 	isLive := flag.Bool("live", false, "the approved immutable 24x4 experiment")
 	confirm := flag.Bool("confirm-live", false, "explicit paid experiment confirmation")
+	round := flag.String("round", "original", "frozen round selector: original or round2")
 	recovery := flag.Bool("recover-zero-send", false, "approved one-time recovery of the original zero-send allocation")
 	preflight := flag.Bool("preflight", false, "print configuration and blockers without sending")
 	flag.Parse()
-	if flag.NArg() != 0 || (!*isLive && (*provider != "mock" || *confirm || *preflight || *recovery)) || (*isLive && *provider != "deepseek") {
+	if flag.NArg() != 0 || (!*isLive && (*provider != "mock" || *confirm || *preflight || *recovery || *round != "original")) || (*isLive && *provider != "deepseek") {
 		fmt.Fprintln(os.Stderr, "experiment_configuration_denied")
+		os.Exit(2)
+	}
+	if (*round != "original" && *round != "round2") || (*recovery && *round != "original") {
+		fmt.Fprintln(os.Stderr, "round_selection_denied")
 		os.Exit(2)
 	}
 	root, e := os.Getwd()
@@ -41,7 +46,7 @@ func main() {
 			fmt.Fprintln(os.Stderr, "live_assignments_are_immutable")
 			os.Exit(2)
 		}
-		checked := live.Preflight(root, *confirm)
+		checked := live.PreflightRound(root, *confirm, *round)
 		if *preflight && *recovery && checked.Ready {
 			recovered, err := live.RecoveryPreflight(context.Background(), root)
 			if err != nil {
@@ -67,7 +72,7 @@ func main() {
 		if *recovery {
 			result, err = live.RunRecovered(context.Background(), root, *confirm)
 		} else {
-			result, err = live.Run(context.Background(), root, *confirm)
+			result, err = live.RunRound(context.Background(), root, *confirm, *round)
 		}
 		if json.NewEncoder(os.Stdout).Encode(result) != nil {
 			os.Exit(1)

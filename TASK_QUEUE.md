@@ -50,6 +50,7 @@
 | [P7-06C](tasks/P7-06C.md) | P7 | 真实执行、独立评价与对账 | P7-06B、可证明的输入预算上界 | BLOCKED | `evidence/batches/P7-06C/accept.json` |
 | [P7-06E](tasks/P7-06E.md) | P7 | 零发送初始化恢复（待审阅） | P7-06D、恢复例外批准 | PASS | 提案 `docs/adr/ADR-0018.md`，未实施 |
 | [P7-06F](tasks/P7-06F.md) | P7 | 开发集角色契约与只读失败分类 | P7-06C真实失败、用户修复授权 | PASS | `evidence/batches/P7-06F/accept.json` |
+| [P7-06G](tasks/P7-06G.md) | P7 | 新回归轮冻结与执行预检 | P7-06F、用户安排授权 | PASS | `evidence/batches/P7-06G/accept.json` |
 | [P8-01](tasks/P8-01.md) | P8 | 安全与一致性审计 | P7-06 | TODO | `evidence/batches/P8-01/accept.json` |
 | [P8-02](tasks/P8-02.md) | P8 | 干净环境复现与最终发布门禁 | P8-01 | TODO | `evidence/batches/P8-02/accept.json` |
 | [P8-03](tasks/P8-03.md) | P8 | 面试 Demo 与项目证据包 | P8-02 | TODO | `evidence/batches/P8-03/accept.json` |
@@ -118,3 +119,5 @@ P0-01 的原始未提交快照与失败记录保留于 `evidence/batches/P0-01/a
 **本批授权：** 用户要求开发集修复角色输出契约和只读工具故障分类，再安排新冻结实验。先实施F开发集修复，保留旧轮全部证据和unknown，不追加模型/预算，不默认执行新付费轮。
 
 **P7-06F通过：** 开发集角色契约v2、可信停止的只读失败分类已修复；622 Go含race、427 Python、15子测试与静态检查全通过。已保留红测试和旧语义全量失败日志，修订断言后重验通过。四组development闭环、错误输出拒绝、故障known failed均验证；旧轮报告与所有journal hash不变，本卡新增付费调用0。下一步按用户要求准备独立新轮的冻结配置和只读预检，不进P8。
+
+**P7-06G冻结准备通过：** round2独立96 UUID、PG/journal和round-aware分析器已就绪；协议/网关/报价及旧报告hash固定。新上限1.90美元、每份19791微美元，旧上界0.033850保留，累计批准上界1.933850小于2。634 Go含race、435 Python、15子测试全通过；真实PG双进程/丢日志拒绝、只读预检通过。新轮96项NOT_RUN、正式marker0、模型调用0；旧轮指标与日志hash完全一致。执行命令见G/freeze-and-runbook.json，本批未启动新增付费轮；这是修复后回归，不是新未见holdout，不进P8。

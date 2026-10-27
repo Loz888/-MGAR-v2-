@@ -37,33 +37,36 @@ type Assignment struct {
 	Status    string `json:"status"`
 }
 type Plan struct {
-	Schema           string       `json:"schema_version"`
-	ID               string       `json:"experiment_id"`
-	Provider         string       `json:"provider"`
-	Model            string       `json:"model"`
-	CapMicros        int64        `json:"approved_cap_micros"`
-	ManifestSHA      string       `json:"manifest_sha256"`
-	DatasetSHA       string       `json:"dataset_manifest_sha256"`
-	Temperature      int          `json:"temperature"`
-	PlannerScope     string       `json:"planner_scope"`
-	MaxContextBytes  int          `json:"max_context_bytes"`
-	MaxContextTokens int          `json:"max_context_tokens"`
-	Arms             []string     `json:"arms"`
-	DeferredArms     []string     `json:"not_run_arms"`
-	Assignments      []Assignment `json:"assignments"`
+	Schema           string           `json:"schema_version"`
+	ID               string           `json:"experiment_id"`
+	Provider         string           `json:"provider"`
+	Model            string           `json:"model"`
+	CapMicros        int64            `json:"approved_cap_micros"`
+	ManifestSHA      string           `json:"manifest_sha256"`
+	DatasetSHA       string           `json:"dataset_manifest_sha256"`
+	Temperature      int              `json:"temperature"`
+	PlannerScope     string           `json:"planner_scope"`
+	MaxContextBytes  int              `json:"max_context_bytes"`
+	MaxContextTokens int              `json:"max_context_tokens"`
+	Arms             []string         `json:"arms"`
+	DeferredArms     []string         `json:"not_run_arms"`
+	Assignments      []Assignment     `json:"assignments"`
+	Purpose          string           `json:"purpose,omitempty"`
+	Previous         *RoundCheckpoint `json:"previous,omitempty"`
 }
 
 func (p Plan) Validate() error {
 	if p.PlannerScope != "fixed_business_dag_template" {
 		return ErrGate
 	}
-	if p.Schema != "live-experiment.v1" || p.ID != experimentID || p.Provider != "deepseek" || p.Model != "flash-1017" || p.CapMicros != 2_000_000 || p.ManifestSHA != ManifestSHA || p.DatasetSHA != DatasetSHA || p.Temperature != 0 || p.MaxContextBytes != 48000 || p.MaxContextTokens != 12000 || !slices.Equal(p.Arms, []string{"B0", "B1", "B2", "B4"}) || !slices.Equal(p.DeferredArms, []string{"B3", "A1", "A2"}) || len(p.Assignments) != 96 {
+	cap, share, valid := p.roundSpec()
+	if !valid || p.Provider != "deepseek" || p.Model != "flash-1017" || p.CapMicros != cap || p.ManifestSHA != ManifestSHA || p.DatasetSHA != DatasetSHA || p.Temperature != 0 || p.MaxContextBytes != 48000 || p.MaxContextTokens != 12000 || !slices.Equal(p.Arms, []string{"B0", "B1", "B2", "B4"}) || !slices.Equal(p.DeferredArms, []string{"B3", "A1", "A2"}) || len(p.Assignments) != 96 {
 		return ErrGate
 	}
 	for i, a := range p.Assignments {
 		id := fmt.Sprintf("live-%03d", i/4+1)
 		arm := p.Arms[i%4]
-		if a.Case != id || a.Arm != arm || a.RunID != demo.LiveRunID(id, arm) || a.CapMicros != 20833 || a.Status != "NOT_RUN" {
+		if a.Case != id || a.Arm != arm || a.RunID != demo.LiveRunIDForRound(p.roundName(), id, arm) || a.CapMicros != share || a.Status != "NOT_RUN" {
 			return ErrGate
 		}
 	}
@@ -80,8 +83,16 @@ func readJSON(path string, out any) error {
 	}
 	return nil
 }
-func LoadPlan(root string) (p Plan, err error) {
-	if readJSON(filepath.Join(root, "eval/live/plan.json"), &p) != nil || p.Validate() != nil {
+func LoadPlan(root string) (p Plan, err error) { return LoadPlanRound(root, "") }
+func LoadPlanRound(root, round string) (p Plan, err error) {
+	round = normalizeRound(round)
+	name := "eval/live/plan.json"
+	if round == "round2" {
+		name = "eval/live/round2/plan.json"
+	} else if round != "" {
+		return p, ErrGate
+	}
+	if readJSON(filepath.Join(root, name), &p) != nil || p.Validate() != nil || p.roundName() != round || verifyRoundCheckpoint(root, p) != nil {
 		return p, ErrGate
 	}
 	for name, hash := range map[string]string{"eval/cases/frozen-live-24.json": ManifestSHA, "eval/dataset_manifest.json": DatasetSHA} {
@@ -118,15 +129,18 @@ type PricingEvidence struct {
 	ReviewedAt string          `json:"reviewed_at"`
 }
 type PreflightReport struct {
-	Ready                  bool            `json:"ready"`
-	Assigned               int             `json:"assigned"`
-	CapMicros              int64           `json:"cap_micros"`
-	AllocatedMicros        int64           `json:"allocated_micros"`
-	Blockers               []string        `json:"blockers"`
-	Network                string          `json:"network"`
-	Assignments            []Assignment    `json:"assignments"`
-	Pricing                PricingEvidence `json:"pricing"`
-	InputReservationTokens int64           `json:"input_reservation_tokens"`
+	Ready                   bool            `json:"ready"`
+	Assigned                int             `json:"assigned"`
+	CapMicros               int64           `json:"cap_micros"`
+	AllocatedMicros         int64           `json:"allocated_micros"`
+	Blockers                []string        `json:"blockers"`
+	Network                 string          `json:"network"`
+	Assignments             []Assignment    `json:"assignments"`
+	Pricing                 PricingEvidence `json:"pricing"`
+	InputReservationTokens  int64           `json:"input_reservation_tokens"`
+	PreviousUpperCostMicros int64           `json:"previous_upper_cost_micros,omitempty"`
+	CumulativeCapMicros     int64           `json:"cumulative_cap_micros,omitempty"`
+	Round                   string          `json:"round,omitempty"`
 }
 
 func statePath(root string) string { return filepath.Join(root, "evidence/eval/live", experimentID) }
@@ -144,7 +158,7 @@ func claimExperiment(ctx context.Context, s *store.Store, p Plan) error {
 		return ErrGate
 	}
 	raw, _ := json.Marshal(p)
-	w, c, e := s.CreateRunClaimed(ctx, demo.LiveRunID("allocation", "all"), "Live allocation "+p.ID+" plan_sha256="+artifact.Digest(raw), 1, "live-allocation-gate", time.Minute)
+	w, c, e := s.CreateRunClaimed(ctx, p.allocationID(), "Live allocation "+p.ID+" plan_sha256="+artifact.Digest(raw), 1, "live-allocation-gate", time.Minute)
 	if e != nil {
 		return ErrUsed
 	}
@@ -196,17 +210,24 @@ func allocationSchemaReady(ctx context.Context, s *store.Store) bool {
 	return tx.Commit(ctx) == nil
 }
 
-func Preflight(root string, confirm bool) (r PreflightReport) {
+func Preflight(root string, confirm bool) PreflightReport { return PreflightRound(root, confirm, "") }
+func PreflightRound(root string, confirm bool, round string) (r PreflightReport) {
 	r.Blockers = []string{}
 	r.Network = "NOT_PROBED: check managed environment readiness before invocation"
-	p, e := LoadPlan(root)
+	p, e := LoadPlanRound(root, round)
 	if e != nil {
 		r.Blockers = append(r.Blockers, "frozen_plan_or_dataset_invalid")
 		return r
 	}
 	r.Assigned = 96
 	r.CapMicros = p.CapMicros
-	r.AllocatedMicros = 96 * 20833
+	_, share, _ := p.roundSpec()
+	r.AllocatedMicros = 96 * share
+	if p.Previous != nil {
+		r.PreviousUpperCostMicros = p.Previous.UpperCostMicros
+		r.CumulativeCapMicros = p.CapMicros + p.Previous.UpperCostMicros
+		r.Round = "round2"
+	}
 	r.Assignments = p.Assignments
 	if !confirm {
 		r.Blockers = append(r.Blockers, "confirm_live_required")
@@ -238,12 +259,26 @@ func Preflight(root string, confirm bool) (r PreflightReport) {
 		price, priceErr := cfg.Price.Cost(input, cfg.OutputTokens)
 		if boundErr != nil {
 			r.Blockers = append(r.Blockers, "verified_input_bound_invalid")
-		} else if priceErr != nil || price > 20833 || input+cfg.OutputTokens > 65536 {
+		} else if priceErr != nil || price > share || input+cfg.OutputTokens > 65536 {
 			r.Blockers = append(r.Blockers, "conservative_call_bound_exceeds_slot_budget")
 		}
 	}
-	if _, e = os.Lstat(statePath(root)); !errors.Is(e, os.ErrNotExist) {
+	if _, e = os.Lstat(statePathFor(root, p.ID)); !errors.Is(e, os.ErrNotExist) {
 		r.Blockers = append(r.Blockers, "experiment_already_started_or_state_uncertain")
+	}
+	if p.Previous != nil && len(r.Blockers) == 0 {
+		ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+		allocation, openErr := store.Open(ctx, os.Getenv("MGAR_TEST_DATABASE_URL"))
+		if openErr != nil {
+			r.Blockers = append(r.Blockers, "control_database_not_ready")
+		} else {
+			checkErr := allocationReadiness(ctx, allocation, p)
+			allocation.Pool.Close()
+			if checkErr != nil {
+				r.Blockers = append(r.Blockers, "control_schema_or_allocation_not_ready")
+			}
+		}
+		cancel()
 	}
 	r.Ready = len(r.Blockers) == 0
 	return r
@@ -397,19 +432,25 @@ func completeLedger(b budget.Report, observed demo.ExperimentReport, a Assignmen
 }
 
 func Run(ctx context.Context, root string, confirm bool) (Report, error) {
-	return run(ctx, root, confirm, false)
+	return run(ctx, root, confirm, false, "")
 }
 
 // RunRecovered is enabled only by the separately approved zero-send CLI mode.
 func RunRecovered(ctx context.Context, root string, confirm bool) (Report, error) {
-	return run(ctx, root, confirm, true)
+	return run(ctx, root, confirm, true, "")
 }
-func run(ctx context.Context, root string, confirm, recoverZeroSend bool) (Report, error) {
-	checked := Preflight(root, confirm)
+func RunRound(ctx context.Context, root string, confirm bool, round string) (Report, error) {
+	return run(ctx, root, confirm, false, round)
+}
+func run(ctx context.Context, root string, confirm, recoverZeroSend bool, round string) (Report, error) {
+	if recoverZeroSend && normalizeRound(round) != "" {
+		return Report{}, ErrGate
+	}
+	checked := PreflightRound(root, confirm, round)
 	if !checked.Ready {
 		return Report{}, ErrGate
 	}
-	p, e := LoadPlan(root)
+	p, e := LoadPlanRound(root, round)
 	if e != nil {
 		return Report{}, e
 	}
@@ -435,7 +476,7 @@ func run(ctx context.Context, root string, confirm, recoverZeroSend bool) (Repor
 	if e != nil {
 		return Report{}, e
 	}
-	path, e := begin(statePath(root), p)
+	path, e := begin(statePathFor(root, p.ID), p)
 	if e != nil {
 		return Report{}, e
 	}
@@ -459,6 +500,6 @@ func run(ctx context.Context, root string, confirm, recoverZeroSend bool) (Repor
 			return demo.ExperimentReport{}, e
 		}
 		defer client.Close()
-		return demo.RunExperiment(ctx, demo.Options{Root: root, Case: a.Case, Fault: "none", Model: client, RunID: a.RunID, CostMicros: a.CapMicros}, a.Arm)
+		return demo.RunExperiment(ctx, demo.Options{Root: root, Case: a.Case, Fault: "none", Model: client, RunID: a.RunID, CostMicros: a.CapMicros, Round: p.roundName()}, a.Arm)
 	})
 }

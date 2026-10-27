@@ -21,6 +21,8 @@ MANIFEST_SHA = 'ec6d5576a75fc2724756abeef2628189c2922038f09cb9258d7a1972e493c8ab
 DATASET_SHA = '0b48a86008574d0a8bdbde1d88d37e718d45e75fe33363075fdcd48f0eb2d511'
 ARMS = ['B0', 'B1', 'B2', 'B4']
 CAP = 20833
+ROUND2_EXPERIMENT = 'P7-06-round2-deepseek-flash-1017-20261027'
+ROUND2_CHECKPOINT = {'experiment_id': 'P7-06-deepseek-flash-1017-20261026', 'report_sha256': '5ce3bc0799cc2811ec7cd93bbeb3a1143ec7d8ef4b01fa31579077d1d70a4d87', 'upper_cost_micros': 33850, 'protocol_sha256': 'f82ddafa9f150280cd59f066021cd8bc1ed488f516d4fd97b013d078b3ff119e'}
 
 
 def require(ok, reason):
@@ -66,17 +68,37 @@ def read_json(path):
                       parse_constant=lambda _: require(False, 'NONFINITE_JSON'))
 
 
-def frozen(root):
-    plan = read_json(root / 'eval/live/plan.json')
+def frozen(root, round_name='original'):
+    require(round_name in ['original', 'round2'], 'ROUND_SELECTION')
+    second = round_name == 'round2'
+    plan = read_json(root / ('eval/live/round2/plan.json' if second else 'eval/live/plan.json'))
+    prefix = 'mgar/P7-06/deepseek/flash-1017/' + ('2026-10-27/round2' if second else '2026-10-26')
+    cap = 19791 if second else CAP
     expected = [{'case_id': f'live-{i:03d}', 'arm': arm,
-                 'run_id': str(uuid.uuid5(uuid.NAMESPACE_URL, f'mgar/P7-06/deepseek/flash-1017/2026-10-26/live-{i:03d}/{arm}')),
-                 'cap_micros': CAP, 'status': 'NOT_RUN'} for i in range(1, 25) for arm in ARMS]
-    require(plan == {'schema_version': 'live-experiment.v1', 'experiment_id': EXPERIMENT,
-                     'provider': 'deepseek', 'model': 'flash-1017', 'approved_cap_micros': 2000000,
+                 'run_id': str(uuid.uuid5(uuid.NAMESPACE_URL, f'{prefix}/live-{i:03d}/{arm}')),
+                 'cap_micros': cap, 'status': 'NOT_RUN'} for i in range(1, 25) for arm in ARMS]
+    expected_plan = {'schema_version': 'live-experiment.v2' if second else 'live-experiment.v1',
+                     'experiment_id': ROUND2_EXPERIMENT if second else EXPERIMENT,
+                     'provider': 'deepseek', 'model': 'flash-1017', 'approved_cap_micros': 1900000 if second else 2000000,
                      'manifest_sha256': MANIFEST_SHA, 'dataset_manifest_sha256': DATASET_SHA,
                      'temperature': 0, 'max_context_bytes': 48000, 'max_context_tokens': 12000,
                      'planner_scope': 'fixed_business_dag_template', 'arms': ARMS,
-                     'not_run_arms': ['B3', 'A1', 'A2'], 'assignments': expected}, 'FROZEN_ASSIGNMENT_CHANGED')
+                     'not_run_arms': ['B3', 'A1', 'A2'], 'assignments': expected}
+    if second:
+        expected_plan.update(purpose='post_fix_regression', previous=ROUND2_CHECKPOINT)
+    require(plan == expected_plan, 'FROZEN_ASSIGNMENT_CHANGED')
+    if second:
+        prior_path = root / 'evidence/eval/live' / EXPERIMENT / 'report.json'
+        prior_raw = read_bytes(prior_path)
+        require(digest(prior_raw) == ROUND2_CHECKPOINT['report_sha256'], 'PREVIOUS_CHECKPOINT')
+        prior = json.loads(prior_raw, object_pairs_hook=unique_object)
+        require(prior.get('status') == 'STOPPED_UNKNOWN' and prior.get('experiment_id') == EXPERIMENT
+                and prior.get('upper_cost_micros') == ROUND2_CHECKPOINT['upper_cost_micros']
+                and 1900000 + ROUND2_CHECKPOINT['upper_cost_micros'] <= 2000000, 'PREVIOUS_CHECKPOINT')
+        files = ['internal/demo/dispatch.go', 'internal/demo/worker.go', 'internal/policy/gateway.go',
+                 'eval/live/pricing.json', 'eval/live/official-evidence.json']
+        protocol = ''.join(name + '\n' + digest(read_bytes(root / name)) + '\n' for name in files)
+        require(digest(protocol.encode()) == ROUND2_CHECKPOINT['protocol_sha256'], 'PROTOCOL_FINGERPRINT')
     for name, sha in [('eval/cases/frozen-live-24.json', MANIFEST_SHA), ('eval/dataset_manifest.json', DATASET_SHA)]:
         require(digest(read_bytes(root / name)) == sha, 'FROZEN_MANIFEST_CHANGED')
     manifest = read_json(root / 'eval/dataset_manifest.json')
@@ -143,7 +165,8 @@ def launch_price(path, plan, root):
     preflight = read_json(path / 'preflight.json')
     require(preflight.get('ready') is True and preflight.get('blockers') == []
             and preflight.get('assignments') == plan['assignments']
-            and preflight.get('cap_micros') == 2000000 and preflight.get('allocated_micros') == 96 * CAP,
+            and preflight.get('cap_micros') == plan['approved_cap_micros']
+            and preflight.get('allocated_micros') == 96 * plan['assignments'][0]['cap_micros'],
             'INVALID_LAUNCH_PREFLIGHT')
     evidence = preflight.get('pricing') or {}
     cfg = evidence.get('config') or {}
@@ -183,10 +206,11 @@ def execution_pass(raw, case):
 
 
 def audit_raw(raw, assignment, price, case, seen, bound=None):
+    cap = integer(assignment['cap_micros'])
     require(raw.get('run_id') == assignment['run_id'] and raw.get('arm') == assignment['arm']
             and (raw.get('case') or {}).get('case_id') == case['case_id'], 'RAW_IDENTITY')
     expected_case = {k: case[k] for k in ['case_id', 'category', 'seed', 'negative', 'limits']}
-    expected_case['limits'] = case['limits'] | {'cost_micros': CAP}
+    expected_case['limits'] = case['limits'] | {'cost_micros': cap}
     require(raw.get('schema_version') == 'experiment.v1' and canonical(raw.get('case')) == canonical(expected_case)
             and canonical(raw.get('treatment')) == canonical(dict(zip(KEYS, TREATMENTS[assignment['arm']], strict=True))),
             'RAW_EXPERIMENT_CONTRACT')
@@ -206,7 +230,7 @@ def audit_raw(raw, assignment, price, case, seen, bound=None):
             reserved_tokens += call['reservation']['tokens']
     budget = (raw.get('result') or {}).get('budget') or {}
     require(budget.get('run_id') == assignment['run_id'] and budget.get('conserved') is True
-            and (budget.get('limits') or {}).get('cost_micros') == CAP and upper <= CAP, 'RAW_BUDGET')
+            and (budget.get('limits') or {}).get('cost_micros') == cap and upper <= cap, 'RAW_BUDGET')
     limits = expected_case['limits']
     expected_limits = {k: limits[k] for k in ['model_calls', 'tool_calls', 'tokens', 'cost_micros']}
     expected_limits.update(concurrent_calls=4, task_concurrency=4, delegations=32)
@@ -270,9 +294,11 @@ def summary(rows):
             'latency_p95_ms': percentile([r['latency_ms'] for r in rows if r['latency_ms'] is not None], 95)}
 
 
-def analyze(input_dir, *, root=ROOT):
+def analyze(input_dir, *, root=ROOT, round_name='original'):
     root, path = safe_path(root), safe_path(input_dir)
-    plan, cases, inputs, truths = frozen(root)
+    plan, cases, inputs, truths = frozen(root, round_name)
+    cap = plan['assignments'][0]['cap_micros']
+    experiment = plan['experiment_id']
     exists = path.exists()
     if exists:
         require(read_json(path / 'assignment.json') == plan, 'ASSIGNMENT_CHANGED')
@@ -294,7 +320,7 @@ def analyze(input_dir, *, root=ROOT):
             continue
         require(not stopped, 'NONSEQUENTIAL_JOURNAL')
         require(read_json(started) == assignment, 'START_ASSIGNMENT_CHANGED')
-        row.update(status='UNKNOWN', upper_cost_micros=CAP, reason='incomplete_execution_or_accounting')
+        row.update(status='UNKNOWN', upper_cost_micros=cap, reason='incomplete_execution_or_accounting')
         if not result.exists():
             stopped = True
             continue
@@ -308,7 +334,7 @@ def analyze(input_dir, *, root=ROOT):
         # complete ledger, even if the partial JSON happens to contain zero calls.
         if status == 'UNKNOWN' and not (raw.get('result') or {}).get('budget'):
             require(integer(record.get('known_cost_micros')) == 0
-                    and integer(record.get('upper_cost_micros')) == CAP, 'UNKNOWN_COST_BOUND')
+                    and integer(record.get('upper_cost_micros')) == cap, 'UNKNOWN_COST_BOUND')
             stopped = True
             continue
         if price is None:
@@ -316,13 +342,13 @@ def analyze(input_dir, *, root=ROOT):
         known, upper, settled, reserved = audit_raw(raw, assignment, price, cases[assignment['case_id']], seen, input_bound)
         require(integer(record.get('known_cost_micros')) == known, 'RESULT_COST_CHANGED')
         if status == 'UNKNOWN':
-            require(integer(record.get('upper_cost_micros')) == CAP, 'UNKNOWN_COST_BOUND')
+            require(integer(record.get('upper_cost_micros')) == cap, 'UNKNOWN_COST_BOUND')
             stopped = True
         else:
             require(integer(raw['result']['budget'].get('reserved_tools')) == 0, 'UNFINISHED_TOOL_ACCOUNTING')
             require(reserved == 0 and raw.get('execution_status') == status
                     and integer(record.get('upper_cost_micros')) == upper, 'RESULT_ACCOUNTING_CHANGED')
-        row.update(status=status, known_cost_micros=known, upper_cost_micros=CAP if status == 'UNKNOWN' else upper,
+        row.update(status=status, known_cost_micros=known, upper_cost_micros=cap if status == 'UNKNOWN' else upper,
                    model_calls=settled + reserved, known_model_calls=settled,
                    response_models=sorted({c['usage']['response_model'] for c in raw.get('model_calls') or [] if c['usage_known']}))
         if status == 'UNKNOWN':
@@ -350,17 +376,17 @@ def analyze(input_dir, *, root=ROOT):
     closure = any(r['real_model_closure_verified'] for r in rows)
     known = sum(r['known_cost_micros'] for r in rows)
     upper = sum(r['upper_cost_micros'] for r in rows)
-    require(known <= upper <= 96 * CAP, 'GLOBAL_COST_BOUND')
+    require(known <= upper <= 96 * cap, 'GLOBAL_COST_BOUND')
     if (path / 'report.json').exists():
         aggregate = read_json(path / 'report.json')
-        require(aggregate.get('experiment_id') == EXPERIMENT
+        require(aggregate.get('experiment_id') == experiment
                 and integer(aggregate.get('known_cost_micros')) == known
                 and integer(aggregate.get('upper_cost_micros')) == upper
                 and len(aggregate.get('records', [])) == 96, 'AGGREGATE_RECONCILIATION')
         for record, row, assignment in zip(aggregate['records'], rows, plan['assignments'], strict=True):
             require(record.get('assignment') == assignment and all(record.get(k) == row[k] for k in
                     ['status', 'known_cost_micros', 'upper_cost_micros']), 'AGGREGATE_RECORD_CHANGED')
-    return {'schema_version': 'live-analysis.v1', 'experiment_id': EXPERIMENT,
+    result = {'schema_version': 'live-analysis.v1', 'experiment_id': experiment,
             'status': 'EVALUATED' if complete and closure else 'BLOCKED',
             'assigned': 96, 'real_model_closure_verified': closure, 'all_assignments_evaluated': complete,
             'known_cost_micros': known, 'upper_cost_micros': upper,
@@ -382,11 +408,18 @@ def analyze(input_dir, *, root=ROOT):
                             'B3/A1/A2 were not run; no causal claim about their effects.']}
 
 
-def generate(input_dir, output):
+    if round_name == 'round2':
+        result.update(round=round_name, purpose=plan['purpose'], previous_upper_cost_micros=33850,
+                      cumulative_upper_cost_micros=33850 + upper)
+        require(result['cumulative_upper_cost_micros'] <= 2000000, 'CUMULATIVE_COST_BOUND')
+        result['limitations'].append('Post-fix regression on the same 24 cases; not a new unseen holdout or a pooled sample with the previous round.')
+    return result
+
+def generate(input_dir, output, round_name='original'):
     output = safe_path(output)
     require(any(output.is_relative_to(ROOT / part) for part in ['evidence/eval/live', '.local']), 'UNSAFE_OUTPUT_PATH')
     require(not output.exists() and not output.is_relative_to(safe_path(input_dir)), 'OUTPUT_ALREADY_EXISTS_OR_OVERLAPS_INPUT')
-    result = analyze(input_dir)
+    result = analyze(input_dir, round_name=round_name)
     output.mkdir(parents=True, exist_ok=False)
     (output / 'metrics.json').write_text(json.dumps(result, indent=2, ensure_ascii=False, allow_nan=False) + '\n')
     for name, rows in [('per_case', result['per_case']), ('by_arm', [dict(arm=a, **s) for a, s in result['arms'].items()]),
@@ -404,11 +437,13 @@ def generate(input_dir, output):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--input', type=Path, default=ROOT / 'evidence/eval/live' / EXPERIMENT)
+    parser.add_argument('--input', type=Path)
+    parser.add_argument('--round', choices=['original', 'round2'], default='original')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     try:
-        report = generate(args.input, args.output)
+        input_dir = args.input or ROOT / 'evidence/eval/live' / (ROUND2_EXPERIMENT if args.round == 'round2' else EXPERIMENT)
+        report = generate(input_dir, args.output, args.round)
     except (ValueError, OSError, KeyError, TypeError) as exc:
         print(json.dumps({'status': 'INVALID_EVIDENCE', 'error_type': type(exc).__name__}))
         return 1

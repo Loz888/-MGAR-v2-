@@ -1,0 +1,251 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./eval/live",
+      "-run",
+      "^TestRound2"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06G/red-round2.log",
+    "timestamp_utc": "2026-10-27T01:10:38.050250+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./eval/live",
+      "-run",
+      "^TestRound2"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06G/round2-targeted.log",
+    "timestamp_utc": "2026-10-27T01:11:52.386463+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_live_analysis.py",
+      "-k",
+      "round2"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06G/red-round2-analysis.log",
+    "timestamp_utc": "2026-10-27T01:13:02.570251+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-v",
+      "./eval/live",
+      "-run",
+      "^TestRound2"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06G/round2-go-green.log",
+    "timestamp_utc": "2026-10-27T01:13:31.017862+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_live_analysis.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06G/round2-analysis.log",
+    "timestamp_utc": "2026-10-27T01:13:31.900662+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./eval/live",
+      "-run",
+      "TestRound2|TestFrozenLivePlan|TestLiveJournal|TestLivePostgres|TestZeroSend"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06G/round2-pg-process-guards.log",
+    "timestamp_utc": "2026-10-27T01:15:11.663644+00:00"
+  },
+  {
+    "command": [
+      "env",
+      "MGAR_ALLOW_PAID=1",
+      "MGAR_MAX_COST_USD=2.00",
+      "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+      "bash",
+      "scripts/eval.sh",
+      "--live",
+      "--confirm-live",
+      "--round",
+      "round2",
+      "--preflight"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06G/round2-preflight.log",
+    "timestamp_utc": "2026-10-27T01:16:45.859872+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/live/analyze.py",
+      "--round",
+      "round2",
+      "--output",
+      "evidence/eval/live/round2-readiness-20261027"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06G/round2-ready-report.log",
+    "timestamp_utc": "2026-10-27T01:19:06.178271+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_live_analysis.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06G/analysis-round-separation.log",
+    "timestamp_utc": "2026-10-27T01:20:32.375490+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./eval/live"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06G/all-live-guards.log",
+    "timestamp_utc": "2026-10-27T01:20:45.989364+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./eval/live",
+      "-run",
+      "^TestRound2"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06G/readonly-database-preflight.log",
+    "timestamp_utc": "2026-10-27T01:21:49.077200+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./eval/live",
+      "-run",
+      "^TestRound2"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06G/round-and-price-freeze.log",
+    "timestamp_utc": "2026-10-27T01:23:15.454697+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_live_analysis.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06G/round-analysis-price-freeze.log",
+    "timestamp_utc": "2026-10-27T01:23:16.308379+00:00"
+  },
+  {
+    "command": [
+      "env",
+      "MGAR_ALLOW_PAID=1",
+      "MGAR_MAX_COST_USD=2.00",
+      "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+      "bash",
+      "scripts/eval.sh",
+      "--live",
+      "--confirm-live",
+      "--round",
+      "round2",
+      "--preflight"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06G/final-frozen-preflight.log",
+    "timestamp_utc": "2026-10-27T01:25:18.515073+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/live/analyze.py",
+      "--round",
+      "round2",
+      "--output",
+      "evidence/eval/live/round2-frozen-20261027"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06G/final-not-run-report.log",
+    "timestamp_utc": "2026-10-27T01:25:50.381546+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06G/offline-full.log",
+    "timestamp_utc": "2026-10-27T01:28:15.421483+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06G/verify_prepared.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06G/prepared-state.log",
+    "timestamp_utc": "2026-10-27T01:29:34.764294+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/live/analyze.py",
+      "--output",
+      ".local/p706g-old-round-check-20261027"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06G/old-round-analysis-compatibility.log",
+    "timestamp_utc": "2026-10-27T01:29:34.867861+00:00"
+  },
+  {
+    "command": [
+      "python",
+      ".local/final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06G/final-audit.log",
+    "timestamp_utc": "2026-10-27T01:30:58.098296+00:00"
+  }
+]

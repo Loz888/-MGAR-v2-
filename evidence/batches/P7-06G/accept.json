@@ -1,0 +1,600 @@
+{
+  "card_id": "P7-06G",
+  "status": "PASS",
+  "git_commit": null,
+  "base_git_commit": "1f14ed8c6241675bbc44fcbabbb6574251d87055",
+  "source_fingerprint": "af44b894443ce37eb184dedf205b6fea44f194e9de54805d86393f77d10331e3",
+  "scope": "New 24x4 post-fix regression round with new IDs, bounded carry-over budget, frozen code/prices, read-only readiness and independent round-aware analysis",
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 634,
+      "passed": 634,
+      "failed_events": 0,
+      "skipped": 0,
+      "complete": true
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 435,
+      "passed": 435,
+      "failed": 0,
+      "skipped_or_xfailed": 0,
+      "complete": true,
+      "passed_subtests": 15
+    },
+    "status": "PASS"
+  },
+  "commands": [
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./eval/live",
+        "-run",
+        "^TestRound2"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06G/red-round2.log",
+      "timestamp_utc": "2026-10-27T01:10:38.050250+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-v",
+        "./eval/live",
+        "-run",
+        "^TestRound2"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06G/round2-targeted.log",
+      "timestamp_utc": "2026-10-27T01:11:52.386463+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py",
+        "-k",
+        "round2"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06G/red-round2-analysis.log",
+      "timestamp_utc": "2026-10-27T01:13:02.570251+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-v",
+        "./eval/live",
+        "-run",
+        "^TestRound2"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06G/round2-go-green.log",
+      "timestamp_utc": "2026-10-27T01:13:31.017862+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06G/round2-analysis.log",
+      "timestamp_utc": "2026-10-27T01:13:31.900662+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./eval/live",
+        "-run",
+        "TestRound2|TestFrozenLivePlan|TestLiveJournal|TestLivePostgres|TestZeroSend"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06G/round2-pg-process-guards.log",
+      "timestamp_utc": "2026-10-27T01:15:11.663644+00:00"
+    },
+    {
+      "command": [
+        "env",
+        "MGAR_ALLOW_PAID=1",
+        "MGAR_MAX_COST_USD=2.00",
+        "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+        "bash",
+        "scripts/eval.sh",
+        "--live",
+        "--confirm-live",
+        "--round",
+        "round2",
+        "--preflight"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06G/round2-preflight.log",
+      "timestamp_utc": "2026-10-27T01:16:45.859872+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "eval/live/analyze.py",
+        "--round",
+        "round2",
+        "--output",
+        "evidence/eval/live/round2-readiness-20261027"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06G/round2-ready-report.log",
+      "timestamp_utc": "2026-10-27T01:19:06.178271+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06G/analysis-round-separation.log",
+      "timestamp_utc": "2026-10-27T01:20:32.375490+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "./eval/live"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06G/all-live-guards.log",
+      "timestamp_utc": "2026-10-27T01:20:45.989364+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./eval/live",
+        "-run",
+        "^TestRound2"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06G/readonly-database-preflight.log",
+      "timestamp_utc": "2026-10-27T01:21:49.077200+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./eval/live",
+        "-run",
+        "^TestRound2"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06G/round-and-price-freeze.log",
+      "timestamp_utc": "2026-10-27T01:23:15.454697+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06G/round-analysis-price-freeze.log",
+      "timestamp_utc": "2026-10-27T01:23:16.308379+00:00"
+    },
+    {
+      "command": [
+        "env",
+        "MGAR_ALLOW_PAID=1",
+        "MGAR_MAX_COST_USD=2.00",
+        "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+        "bash",
+        "scripts/eval.sh",
+        "--live",
+        "--confirm-live",
+        "--round",
+        "round2",
+        "--preflight"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06G/final-frozen-preflight.log",
+      "timestamp_utc": "2026-10-27T01:25:18.515073+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "eval/live/analyze.py",
+        "--round",
+        "round2",
+        "--output",
+        "evidence/eval/live/round2-frozen-20261027"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06G/final-not-run-report.log",
+      "timestamp_utc": "2026-10-27T01:25:50.381546+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06G/offline-full.log",
+      "timestamp_utc": "2026-10-27T01:28:15.421483+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "evidence/batches/P7-06G/verify_prepared.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06G/prepared-state.log",
+      "timestamp_utc": "2026-10-27T01:29:34.764294+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "eval/live/analyze.py",
+        "--output",
+        ".local/p706g-old-round-check-20261027"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06G/old-round-analysis-compatibility.log",
+      "timestamp_utc": "2026-10-27T01:29:34.867861+00:00"
+    },
+    {
+      "command": [
+        "python",
+        ".local/final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06G/final-audit.log",
+      "timestamp_utc": "2026-10-27T01:30:58.098296+00:00"
+    }
+  ],
+  "preparation_status": "FROZEN_PREPARED_NOT_RUN",
+  "actual_paid_calls": 0,
+  "round2_marker_created": false,
+  "round2_assignments_started": 0,
+  "runbook": "evidence/batches/P7-06G/freeze-and-runbook.json",
+  "budget": {
+    "new_approved_cap_micros": 1900000,
+    "assigned_cap_micros": 1899936,
+    "slot_cap_micros": 19791,
+    "previous_upper_cost_micros": 33850,
+    "cumulative_approved_cap_micros": 1933850,
+    "project_cap_micros": 2000000
+  },
+  "positive_assertions": [
+    {
+      "name": "96_new_run_UUIDs_and_separate_allocation_marker_journal",
+      "passed": true
+    },
+    {
+      "name": "same24_four_arms_and_oracle_are_retained_without_tuning",
+      "passed": true
+    },
+    {
+      "name": "immutable_prior_report_and_conservative_upper_preserved",
+      "passed": true
+    },
+    {
+      "name": "contract_gateway_and_official_price_hashes_frozen",
+      "passed": true
+    },
+    {
+      "name": "missing_changed_over_budget_or_old_identity_checkpoint_refused",
+      "passed": true
+    },
+    {
+      "name": "PG_read_only_preflight_checks_current_schema_and_existing_marker",
+      "passed": true
+    },
+    {
+      "name": "two_OS_processes_one_admission_lost_journal_cannot_mint_again",
+      "passed": true
+    },
+    {
+      "name": "analyzer_uses_19791_share_and_33850_prior_upper_and_rejects_mixed_rounds",
+      "passed": true
+    },
+    {
+      "name": "full_race_python_static_regression_no_failures_skips_xfails",
+      "passed": true
+    },
+    {
+      "name": "old_trial_metrics_and_all_journal_hashes_unchanged",
+      "passed": true
+    }
+  ],
+  "known_limitations": [
+    "This is a post-fix regression of previously exposed cases, not an unseen holdout; rounds must not be pooled.",
+    "Local development/PG/HTTP tests establish implementation behavior, not real model quality under dispatch v2.",
+    "New round remains NOT_RUN. Preflight readiness does not imply that any business task succeeded.",
+    "Frozen quote remains subject to the existing seven-day evidence freshness gate and mutable model alias limitation.",
+    "Old unknown reservation stays retained; its failure record is never released, rewritten, or replayed.",
+    "No additional budget, new DDL, production DB operation, or P8 work."
+  ],
+  "unverified": [
+    {
+      "name": "round2_real_generation",
+      "status": "NOT_RUN",
+      "assignments": 96
+    },
+    {
+      "name": "round2_real_B4_closure",
+      "status": "NOT_RUN"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "TASK_QUEUE.md",
+      "sha256": "f6970b5956df6beb913fedc93d6e9dcf9deac8b947b212204fe6b1b6a15e38cf"
+    },
+    {
+      "path": "cmd/mgareval/main.go",
+      "sha256": "7f5653425bc065602062d67f4c2b31428f1e7df2c5ce7e012b6704ec41653d11"
+    },
+    {
+      "path": "docs/adr/ADR-0020.md",
+      "sha256": "cb31c02f76a30aaba24bcd043503518a34a27a3d37b9d46e8615575beb70f84f"
+    },
+    {
+      "path": "docs/experiments/live-provider.md",
+      "sha256": "17b5d32ab8f78694db0f7d21a1c73405682ef78979cdf1bbb9d48a35d3c1e66c"
+    },
+    {
+      "path": "eval/live/analyze.py",
+      "sha256": "afa2a64efe6ec524dbae25882500a6258d662926dd5222de2e00d7caba3543b2"
+    },
+    {
+      "path": "eval/live/live.go",
+      "sha256": "0b2d9380e4d8d3af2ecd1bdd0a97442d238918f1717cdaabea36985812696821"
+    },
+    {
+      "path": "eval/live/live_test.go",
+      "sha256": "80cfa29e22b695773b62f749b512c35476f058d0a4b817e6591d25ce43a78516"
+    },
+    {
+      "path": "eval/live/round.go",
+      "sha256": "34ed2840508cf472c2d28aae4713562d9ba708aae07536185e92a245e796a620"
+    },
+    {
+      "path": "eval/live/round2/plan.json",
+      "sha256": "bfffacd449d2e27a991493dcc015503b2eb6ef7502d2f5e8fae544009539e414"
+    },
+    {
+      "path": "eval/live/round_test.go",
+      "sha256": "a5ab8f75c617a253845890cac8c2c1e4f61354df1d5971a555e7f657a5b3587a"
+    },
+    {
+      "path": "evidence/batches/P7-06G/all-live-guards.log",
+      "sha256": "04b1a97d255c280f70fc1b6e253beb7a7dee1ad5e39a18b28b026958ad6ebe17"
+    },
+    {
+      "path": "evidence/batches/P7-06G/analysis-round-separation.log",
+      "sha256": "c1e7ee9dcb31c3ab1d03ac802b48f818b1b39b4bd7ce0aefee53ca4b3bc2547b"
+    },
+    {
+      "path": "evidence/batches/P7-06G/commands.json",
+      "sha256": "734aee9b24f686c003cd211240716ec02213320008e867d3b444e39c9c6215f6"
+    },
+    {
+      "path": "evidence/batches/P7-06G/final-audit.log",
+      "sha256": "5bcd101bf8cb9c2290a4e9a0e24a6c6e3ade21669553362a941a565f319b2b68"
+    },
+    {
+      "path": "evidence/batches/P7-06G/final-frozen-preflight.log",
+      "sha256": "78f149179b090330a0381fc64c9cef756b09ec2ef61830b3f3eca2c3c6ad71e8"
+    },
+    {
+      "path": "evidence/batches/P7-06G/final-not-run-report.log",
+      "sha256": "559587591fe39a82a117fda98c08e97c93383275706a5277ec0ef85561b884f4"
+    },
+    {
+      "path": "evidence/batches/P7-06G/freeze-and-runbook.json",
+      "sha256": "b72abed582a1a21770d3de46aec328fe8016c6bdb3ff2ce2ae2188557dd7093f"
+    },
+    {
+      "path": "evidence/batches/P7-06G/offline-docs.json.json",
+      "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+    },
+    {
+      "path": "evidence/batches/P7-06G/offline-fingerprint.json",
+      "sha256": "dc7b2203edc860803f464e44351bb1fadb11c91a821a1bfff4262dd0adf7c3ea"
+    },
+    {
+      "path": "evidence/batches/P7-06G/offline-full.log",
+      "sha256": "3ba112679e184ccac0a526f93e43ebb4d0dd497fa9812f1339bf5776634dcf39"
+    },
+    {
+      "path": "evidence/batches/P7-06G/offline-go.json.json",
+      "sha256": "d4a318ba95ad2b8cd4f57421626eb72fef73b397984015fff2de78ec8c080530"
+    },
+    {
+      "path": "evidence/batches/P7-06G/offline-mypy.log.json",
+      "sha256": "8e7a0a8352a322d19e55605ee61df9b305de124895458472f4062bc11baad1c7"
+    },
+    {
+      "path": "evidence/batches/P7-06G/offline-pytest-events.json.json",
+      "sha256": "ee95247aa6b824b8bb4a4cc1ea3c0cf896aee315c186edd89488138a56f9c786"
+    },
+    {
+      "path": "evidence/batches/P7-06G/offline-pytest.log.json",
+      "sha256": "91febeb3fb9c8b43d012ee64f2367fb05bdb128d0b4f9b52fc6fa25df503162a"
+    },
+    {
+      "path": "evidence/batches/P7-06G/offline-pytest.xml.json",
+      "sha256": "5ac7a3941d764bcac534b35aa9ac92b49010ee79ac8307b44b61529c38bf1025"
+    },
+    {
+      "path": "evidence/batches/P7-06G/offline-report.json.json",
+      "sha256": "c8a94643d42e6c0d480c5176a0fa629c9e8c167ea9a26eb500b623c45a43398f"
+    },
+    {
+      "path": "evidence/batches/P7-06G/offline-ruff.log.json",
+      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+    },
+    {
+      "path": "evidence/batches/P7-06G/offline-vet.log.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P7-06G/old-round-analysis-compatibility.log",
+      "sha256": "b96d7fe4c1f72d894b55e62c78ebb2f593794c829f73affba5225719fe69eccf"
+    },
+    {
+      "path": "evidence/batches/P7-06G/prepared-state.json",
+      "sha256": "06875ef64bfff6ddc3ea6516b8a540311897300776f0833b790c1a64a8240fff"
+    },
+    {
+      "path": "evidence/batches/P7-06G/prepared-state.log",
+      "sha256": "deb0afbfb799882af2063229d6ce18986fa108433f1ab3e78b19325aa0e085d4"
+    },
+    {
+      "path": "evidence/batches/P7-06G/readonly-database-preflight.log",
+      "sha256": "6874ff8fd8c9d83fcd484b4531ac2da8310848568b5397dd3aadc3a8139e39c2"
+    },
+    {
+      "path": "evidence/batches/P7-06G/red-round2-analysis.log",
+      "sha256": "404e9bb431e865edf1c806869c6293472d44f286b512172919a1add29262e114"
+    },
+    {
+      "path": "evidence/batches/P7-06G/red-round2.log",
+      "sha256": "60b09200a96a0c255c2fe537eb0572a5353a0450f80f28d073b4a9bf8a60c3af"
+    },
+    {
+      "path": "evidence/batches/P7-06G/round-analysis-price-freeze.log",
+      "sha256": "d8fa292853e3d8fd3730f8fa2ea451660a73a8026a145d2a80398b0bbddcd4fa"
+    },
+    {
+      "path": "evidence/batches/P7-06G/round-and-price-freeze.log",
+      "sha256": "cec36a4fa72a415c8b3db3bcdf7b249f9a994d034610cc295e8a95b1f3ceb6c3"
+    },
+    {
+      "path": "evidence/batches/P7-06G/round2-analysis.log",
+      "sha256": "0733e058e142b870bdc09e91b74610ad00da2d264c6ec0208f18ce7fe1b9a6e7"
+    },
+    {
+      "path": "evidence/batches/P7-06G/round2-go-green.log",
+      "sha256": "f0a1caa9dc53eb60f50f36e2bfd13a5014a017fb7a1533d135903cac948bbb00"
+    },
+    {
+      "path": "evidence/batches/P7-06G/round2-pg-process-guards.log",
+      "sha256": "5abcdedea9211d5debda12d7acc9117490c36a6c0e465461b6f04563e8a2747b"
+    },
+    {
+      "path": "evidence/batches/P7-06G/round2-preflight.log",
+      "sha256": "78f149179b090330a0381fc64c9cef756b09ec2ef61830b3f3eca2c3c6ad71e8"
+    },
+    {
+      "path": "evidence/batches/P7-06G/round2-ready-report.log",
+      "sha256": "559587591fe39a82a117fda98c08e97c93383275706a5277ec0ef85561b884f4"
+    },
+    {
+      "path": "evidence/batches/P7-06G/round2-targeted.log",
+      "sha256": "f638bebcb3f38e09bc21180158af0c4f94f9120dcd93a3936066be4d61ab9cb9"
+    },
+    {
+      "path": "evidence/batches/P7-06G/verify_prepared.py",
+      "sha256": "a16c0dca6dbb95cafb4297cc9093dd4a5911e13d99928e684257931f97e101b2"
+    },
+    {
+      "path": "evidence/eval/live/round2-frozen-20261027/by_arm.csv",
+      "sha256": "81002b27713951e48b7d8b580da26db30485324f0ea1ff8b078a11ce706ae300"
+    },
+    {
+      "path": "evidence/eval/live/round2-frozen-20261027/by_category.csv",
+      "sha256": "df5457ad08f50e9cfdc3813f6d54e4bfd8dd25f2eccae2e9ecbb35a76c512421"
+    },
+    {
+      "path": "evidence/eval/live/round2-frozen-20261027/files.sha256.json",
+      "sha256": "3bef395307c18bba41cad21659106fc68fb2affe38d637365c99a3ec50284169"
+    },
+    {
+      "path": "evidence/eval/live/round2-frozen-20261027/metrics.json",
+      "sha256": "91ac5310e09b561575f29587c00fa1b0a5f3f26575a77b46adf13631bae8e1ea"
+    },
+    {
+      "path": "evidence/eval/live/round2-frozen-20261027/paired.csv",
+      "sha256": "ea9e49b0df29d363086eaafc389d160b3d9cb5b9d5d11fb77fa2cba895b8fc41"
+    },
+    {
+      "path": "evidence/eval/live/round2-frozen-20261027/per_case.csv",
+      "sha256": "32d8f93220c960134d3104b5a8327e3239c769712510232652eec11e101517fb"
+    },
+    {
+      "path": "evidence/eval/live/round2-frozen-20261027/report.md",
+      "sha256": "1529444254da6a7ab9f90c222edd901063174295bc87f478c50311ffb5b71292"
+    },
+    {
+      "path": "evidence/eval/live/round2-readiness-20261027/by_arm.csv",
+      "sha256": "81002b27713951e48b7d8b580da26db30485324f0ea1ff8b078a11ce706ae300"
+    },
+    {
+      "path": "evidence/eval/live/round2-readiness-20261027/by_category.csv",
+      "sha256": "df5457ad08f50e9cfdc3813f6d54e4bfd8dd25f2eccae2e9ecbb35a76c512421"
+    },
+    {
+      "path": "evidence/eval/live/round2-readiness-20261027/files.sha256.json",
+      "sha256": "3bef395307c18bba41cad21659106fc68fb2affe38d637365c99a3ec50284169"
+    },
+    {
+      "path": "evidence/eval/live/round2-readiness-20261027/metrics.json",
+      "sha256": "91ac5310e09b561575f29587c00fa1b0a5f3f26575a77b46adf13631bae8e1ea"
+    },
+    {
+      "path": "evidence/eval/live/round2-readiness-20261027/paired.csv",
+      "sha256": "ea9e49b0df29d363086eaafc389d160b3d9cb5b9d5d11fb77fa2cba895b8fc41"
+    },
+    {
+      "path": "evidence/eval/live/round2-readiness-20261027/per_case.csv",
+      "sha256": "32d8f93220c960134d3104b5a8327e3239c769712510232652eec11e101517fb"
+    },
+    {
+      "path": "evidence/eval/live/round2-readiness-20261027/report.md",
+      "sha256": "1529444254da6a7ab9f90c222edd901063174295bc87f478c50311ffb5b71292"
+    },
+    {
+      "path": "internal/demo/experiment.go",
+      "sha256": "aff42435f52d46c99a49d2a874d4c3bfaaa7f23dd75d09e8b94154b1e15147d6"
+    },
+    {
+      "path": "internal/demo/fixture.go",
+      "sha256": "25e85aa919a89db674e637268cdfc6501a81c03c53aa6ea52e1ed425ed5deaa2"
+    },
+    {
+      "path": "tasks/P7-06G.md",
+      "sha256": "8aa43fad12a3d7a7a834745aefe2ea4d9cadca6ba673aaec6667665d201236c1"
+    },
+    {
+      "path": "tests/unit/test_live_analysis.py",
+      "sha256": "a2aca0479721802400d850cd35e4245c1a37d4533e217d74dbc87647f141b904"
+    }
+  ],
+  "timestamp_utc": "2026-10-27T01:30:58.215333+00:00"
+}

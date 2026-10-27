@@ -1,0 +1,18 @@
+{
+  "checked_at": "2026-10-27T01:29:34.714634+00:00",
+  "read_only": true,
+  "round": "round2",
+  "plan_sha256": "bfffacd449d2e27a991493dcc015503b2eb6ef7502d2f5e8fae544009539e414",
+  "allocation_run_id": "1e69bf79-5997-5fa6-84b2-e509f1d953b8",
+  "allocation_marker_rows": 0,
+  "model_calls": 0,
+  "assigned": 96,
+  "status": "PREPARED_NOT_RUN",
+  "new_cap_micros": 1900000,
+  "previous_upper_cost_micros": 33850,
+  "cumulative_approved_cap_micros": 1933850,
+  "allocated_micros": 1899936,
+  "old_marker_state": "cancelled",
+  "old_marker_epoch": 2,
+  "prior_report_hash_matches": true
+}

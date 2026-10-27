@@ -1,0 +1,3 @@
+{
+  "stdout": "# github.com/Loz888/-MGAR-v2-/eval/live [github.com/Loz888/-MGAR-v2-/eval/live.test]\neval/live/round_test.go:24:39: undefined: LoadPlanRound\neval/live/round_test.go:28:83: undefined: demo.LiveRunIDForRound\neval/live/round_test.go:29:27: old.allocationID undefined (type Plan has no field or method allocationID)\neval/live/round_test.go:30:10: undefined: demo.LiveRunIDForRound\neval/live/round_test.go:36:11: undefined: LoadPlanRound\neval/live/round_test.go:44:35: undefined: statePathFor\neval/live/round_test.go:47:6: undefined: PreflightRound\nFAIL\tgithub.com/Loz888/-MGAR-v2-/eval/live [build failed]\nFAIL\n"
+}

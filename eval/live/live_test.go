@@ -134,7 +134,7 @@ func TestLiveJournalChild(t *testing.T) {
 		return
 	}
 	root, _ := filepath.Abs("../..")
-	p, e := LoadPlan(root)
+	p, e := LoadPlanRound(root, os.Getenv("MGAR_LIVE_TEST_ROUND"))
 	if e != nil {
 		t.Fatal(e)
 	}

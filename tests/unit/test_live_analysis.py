@@ -340,3 +340,63 @@ def test_live_forged_summary_rejected(tmp_path):
     (journal / 'report.json').write_text(json.dumps({'experiment_id': 'forged', 'records': []}))
     with pytest.raises(ValueError, match='AGGREGATE_RECONCILIATION'):
         analyze(journal, root=root)
+
+
+def round2_root(tmp_path):
+    root = tmp_path / 'root'
+    manifest = json.loads((ROOT / 'eval/dataset_manifest.json').read_text())
+    names = [*manifest['files'], 'eval/dataset_manifest.json', 'eval/live/round2/plan.json',
+             'evidence/eval/live/P7-06-deepseek-flash-1017-20261026/report.json',
+             'internal/demo/dispatch.go', 'internal/demo/worker.go', 'internal/policy/gateway.go',
+             'eval/live/pricing.json', 'eval/live/official-evidence.json']
+    for name in names:
+        target = root / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / name, target)
+    return root
+
+
+def test_round2_not_run_and_crash_keep_prior_upper(tmp_path):
+    root = round2_root(tmp_path)
+    absent = tmp_path / 'absent'
+    r = analyze(absent, root=root, round_name='round2')
+    assert r['assigned'] == 96 and all(x['status'] == 'NOT_RUN' and x['cap_micros'] == 19791 for x in r['per_case'])
+    assert r['previous_upper_cost_micros'] == r['cumulative_upper_cost_micros'] == 33850
+    assert r['purpose'] == 'post_fix_regression' and r['estimated_cost_usd'] is None
+    absent.mkdir()
+    plan = json.loads((root / 'eval/live/round2/plan.json').read_text())
+    (absent / 'assignment.json').write_text(json.dumps(plan))
+    (absent / '000.started.json').write_text(json.dumps(plan['assignments'][0]))
+    r = analyze(absent, root=root, round_name='round2')
+    assert r['per_case'][0]['status'] == 'UNKNOWN' and r['upper_cost_micros'] == 19791
+    assert r['cumulative_upper_cost_micros'] == 33850 + 19791
+
+
+@pytest.mark.parametrize('mode', ['prior', 'contract', 'price', 'budget', 'identity', 'selector'])
+def test_round2_changed_freeze_refused(tmp_path, mode):
+    root = round2_root(tmp_path)
+    if mode == 'prior':
+        (root / 'evidence/eval/live/P7-06-deepseek-flash-1017-20261026/report.json').write_text('{}')
+    elif mode == 'contract':
+        (root / 'internal/demo/dispatch.go').write_text('changed')
+    elif mode == 'price':
+        (root / 'eval/live/pricing.json').write_text('{}')
+    elif mode in ['budget', 'identity']:
+        path = root / 'eval/live/round2/plan.json'
+        plan = json.loads(path.read_text())
+        if mode == 'budget':
+            plan['approved_cap_micros'] = 2000000
+        else:
+            plan['assignments'][0]['run_id'] = json.loads((ROOT / 'eval/live/plan.json').read_text())['assignments'][0]['run_id']
+        path.write_text(json.dumps(plan))
+    with pytest.raises(ValueError):
+        analyze(tmp_path / 'absent', root=root, round_name='invalid' if mode == 'selector' else 'round2')
+
+
+def test_round2_cannot_analyze_original_assignment_as_new_round(tmp_path):
+    root = round2_root(tmp_path)
+    journal = tmp_path / 'journal'
+    journal.mkdir()
+    shutil.copyfile(ROOT / 'eval/live/plan.json', journal / 'assignment.json')
+    with pytest.raises(ValueError, match='ASSIGNMENT_CHANGED'):
+        analyze(journal, root=root, round_name='round2')

@@ -45,6 +45,7 @@ type Options struct {
 	Model             *provider.Client
 	RunID             string
 	CostMicros        int64
+	Round             string
 }
 type fixture struct {
 	verification             *verificationTask
@@ -66,7 +67,7 @@ var caseName = regexp.MustCompile(`^(offline|development)-[0-9]{3}$`)
 
 func newFixture(ctx context.Context, o Options) (_ *fixture, err error) {
 	live := strings.HasPrefix(o.Case, "live-")
-	if (!caseName.MatchString(o.Case) && !live) || (live && (o.Model == nil || o.Model.Local() || o.CostMicros != 20833 || o.RunID == "")) {
+	if (!caseName.MatchString(o.Case) && !live) || (live && (o.Model == nil || o.Model.Local() || o.CostMicros != LiveCostMicros(o.Round) || LiveCostMicros(o.Round) == 0 || o.RunID == "")) {
 		return nil, errors.New("case_not_authorized")
 	}
 	f := &fixture{root: o.Root, original: map[string]string{}, retain: live}
@@ -255,4 +256,25 @@ func (f *fixture) close() error {
 // One identity per approved assignment, shared by admission and execution.
 func LiveRunID(caseID, arm string) string {
 	return uuid.NewSHA1(uuid.NameSpaceURL, []byte("mgar/P7-06/deepseek/flash-1017/2026-10-26/"+caseID+"/"+arm)).String()
+}
+
+// LiveRunIDForRound preserves the original namespace and admits only the new
+// explicitly frozen regression namespace. Unknown round selectors have no id.
+func LiveRunIDForRound(round, caseID, arm string) string {
+	switch round {
+	case "", "original":
+		return LiveRunID(caseID, arm)
+	case "round2":
+		return uuid.NewSHA1(uuid.NameSpaceURL, []byte("mgar/P7-06/deepseek/flash-1017/2026-10-27/round2/"+caseID+"/"+arm)).String()
+	}
+	return ""
+}
+func LiveCostMicros(round string) int64 {
+	switch round {
+	case "", "original":
+		return 20833
+	case "round2":
+		return 19791
+	}
+	return 0
 }
