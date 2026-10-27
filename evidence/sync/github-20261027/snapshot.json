@@ -1,0 +1,32 @@
+{
+  "timestamp_utc": "2026-10-27T07:02:08.315989+00:00",
+  "purpose": "Publish verified code and explicit partial development progress at user request",
+  "verified_baseline": "66bd828aa4ba0eaa56bdd77074fff7b31e3774cf",
+  "preserved_remote_commit": "f2c038df4a9e4d003252d26bf08d3246455ade88",
+  "development_checkpoint": "01ad6ce",
+  "development_branch": "wip/p7-06i-development",
+  "development_status": "PARTIAL",
+  "real_evaluation_status": "BLOCKED",
+  "cumulative_upper_cost_micros": 311229,
+  "additional_paid_calls": 0,
+  "commands": [
+    {
+      "command": [
+        "/workspace/-MGAR-v2-/.venv/bin/python",
+        "scripts/validate_plan_docs.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/sync/github-20261027/docs.log"
+    },
+    {
+      "command": [
+        "/workspace/-MGAR-v2-/.venv/bin/python",
+        "scripts/check_secrets.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/sync/github-20261027/secrets.log"
+    }
+  ],
+  "full_test_reference": "evidence/batches/P7-06H/accept.json",
+  "merge_policy": "normal merge, no force push; preserve remote history"
+}

@@ -1,5 +1,7 @@
 # MGAR v2 · Multi-Agent Orchestration Platform
 
+最新工程与实验进度见[项目进度](docs/operations/development-status.md)。
+
 **Codex 分批实施任务书 · 版本 2.0 · 2026-10-22**
 
 > 文档用途：指导 Codex **每次只完成一个任务卡**，通过分层验收，将项目逐步构建为可独立运行、真实协作、故障可恢复、结果可验证、有完整实验的多智能体平台。本包是**实施规格而非已实现代码**；任何通过/性能/效果须以实际测试证据为准。
