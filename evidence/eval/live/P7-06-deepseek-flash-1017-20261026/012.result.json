@@ -1,0 +1,1 @@
+{"assignment":{"case_id":"live-004","arm":"B0","run_id":"2383dea6-b7cb-5c27-b3c3-dbc0a5870855","cap_micros":20833,"status":"NOT_RUN"},"status":"UNKNOWN","reason":"execution_or_accounting_unconfirmed","raw_sha256":"0e08bb1e136d09d96ff6ffabd88173ab39bd991226b896af40327e11ca314434","known_cost_micros":259,"upper_cost_micros":20833}

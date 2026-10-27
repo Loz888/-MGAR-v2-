@@ -1,0 +1,3 @@
+{
+  "stdout": "{\"marker_state\": \"cancelled\", \"epoch\": 2, \"stop_status\": \"STOPPED_UNKNOWN\", \"unknown_assignments\": 1, \"replay\": false}\n"
+}

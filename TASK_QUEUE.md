@@ -43,11 +43,11 @@
 | [P7-03B](tasks/P7-03B.md) | P7 | 七组公平 runner 与失败保留 | P7-03A | PASS | `evidence/batches/P7-03B/accept.json` |
 | [P7-04](tasks/P7-04.md) | P7 | 消融与统计分析报告 | P7-03 | PASS | `evidence/batches/P7-04/accept.json` |
 | [P7-05](tasks/P7-05.md) | P7 | 压力、并发和单机混沌实验总验收 | P7-04 | PASS | `evidence/batches/P7-05/accept.json` |
-| [P7-06](tasks/P7-06.md) | P7 | 真实模型有限预算评测与对账 | P7-05、P7-06A/B/C | ACTIVE | `evidence/batches/P7-06/accept.json` |
+| [P7-06](tasks/P7-06.md) | P7 | 真实模型有限预算评测与对账 | P7-05、P7-06A/B/C | BLOCKED | `evidence/batches/P7-06/accept.json` |
 | [P7-06A](tasks/P7-06A.md) | P7 | 可信 Provider 与持久账本接通 | P7-05 | PASS | `evidence/batches/P7-06A/accept.json` |
 | [P7-06B](tasks/P7-06B.md) | P7 | 冻结 live runner 与总预算 | P7-06A | PASS | `evidence/batches/P7-06B/accept.json` |
 | [P7-06D](tasks/P7-06D.md) | P7 | 官方 tokenizer 与可证明输入预算上界 | P7-06B、官方 tokenizer 数据 | PASS | `evidence/batches/P7-06D/accept.json` |
-| [P7-06C](tasks/P7-06C.md) | P7 | 真实执行、独立评价与对账 | P7-06B、可证明的输入预算上界 | ACTIVE | `evidence/batches/P7-06C/accept.json` |
+| [P7-06C](tasks/P7-06C.md) | P7 | 真实执行、独立评价与对账 | P7-06B、可证明的输入预算上界 | BLOCKED | `evidence/batches/P7-06C/accept.json` |
 | [P7-06E](tasks/P7-06E.md) | P7 | 零发送初始化恢复（待审阅） | P7-06D、恢复例外批准 | PASS | 提案 `docs/adr/ADR-0018.md`，未实施 |
 | [P8-01](tasks/P8-01.md) | P8 | 安全与一致性审计 | P7-06 | TODO | `evidence/batches/P8-01/accept.json` |
 | [P8-02](tasks/P8-02.md) | P8 | 干净环境复现与最终发布门禁 | P8-01 | TODO | `evidence/batches/P8-02/accept.json` |
@@ -111,3 +111,5 @@ P0-01 的原始未提交快照与失败记录保留于 `evidence/batches/P0-01/a
 **P7-06E 已批准：** 用户回复“是，请继续”。按ADR-0018与审阅补充实施严格零发送初始化恢复，仅一次epoch1→2，原96 UUID、Flash-1017及整轮USD2保持不变。E先离线验收，再继续已授权C；无任何新的费用或模型授权问题。
 
 **P7-06E 验收通过（2026-10-27）：** 597 Go含race、427 Python、15子测试及静态检查全部通过，无失败/跳过/xfail。原分配只读恢复预检ready且epoch1未消费；真实请求将在本卡提交后按原C授权运行。原容器停止造成的连接失败日志保留，启动同一容器/数据卷后原marker与迁移完整，未重建库或分配。
+
+**真实C结果（2026-10-27）：** E在原marker完成epoch1→2，未删除/重建分配。共34次真实DeepSeek生成，34次供应商用量已知；12项已评分（6执行完成、6失败），独立Oracle通过0/12；另1项只读data.query未知触发STOPPED_UNKNOWN，83项NOT_RUN。原24×4和真实B4闭环均未通过，不进入P8。已知最高价估算USD0.013276，整项未知保留后的上界USD0.033850，总上限仍2美元。停止由冻结task_failure工具错误的unknown分类触发，未因预算用尽。账本与13项原始导出全部匹配，未修改Prompt/Oracle或重放。见 `evidence/eval/live/actual-20261027/report.md` 与 `evidence/batches/P7-06C/actual-findings.md`。C/父卡保持BLOCKED；下一批仅建议在development修复角色输出契约及只读失败分类，再审阅新的冻结实验。

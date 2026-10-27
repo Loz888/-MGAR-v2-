@@ -2,15 +2,16 @@
   "card_id": "P7-06C",
   "status": "BLOCKED",
   "git_commit": null,
-  "base_git_commit": "801668a4ba18ae246ed4b5512c2b973094166b0e",
-  "source_fingerprint": "ceecdbfce26241955eaae671f75eb8496b806ba5c2acb30f49643e05a9d952bc",
-  "scope": "Executed formal start once, preserved zero-send initialization failure, repaired existing control migrations and added pre-marker read-only schema gates",
+  "base_git_commit": "f12d6aeab8ec619ede2ebcba1a8f49615c963598",
+  "source_commit": "f12d6aeab8ec619ede2ebcba1a8f49615c963598",
+  "source_fingerprint": "7d046de97ab7bc47f53f36613cbeed93acc9d7a0c63cd2dcb05d78cb47444ad8",
+  "scope": "Executed approved recovered real DeepSeek experiment once; independent Oracle evaluation, retained PG reconciliation and automatic UNKNOWN stop",
   "offline_tooling_status": "PASS",
   "test_summary": {
     "go": {
       "status": "PASS",
-      "tests": 569,
-      "passed": 569,
+      "tests": 597,
+      "passed": 597,
       "failed_events": 0,
       "skipped": 0,
       "complete": true
@@ -26,6 +27,7 @@
     },
     "status": "PASS"
   },
+  "test_summary_reference": "evidence/batches/P7-06E/accept.json",
   "commands": [
     {
       "command": [
@@ -548,6 +550,69 @@
       "exit_code": 0,
       "log_path": "evidence/batches/P7-06C/c-final-credential-and-format.log",
       "timestamp_utc": "2026-10-26T15:30:23.389312+00:00"
+    },
+    {
+      "command": [
+        "env",
+        "MGAR_ALLOW_PAID=1",
+        "MGAR_MAX_COST_USD=2.00",
+        "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+        "bash",
+        "scripts/eval.sh",
+        "--live",
+        "--confirm-live",
+        "--recover-zero-send"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/actual-recovered-live-run.log",
+      "timestamp_utc": "2026-10-27T00:32:14.977522+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "eval/live/analyze.py",
+        "--output",
+        "evidence/eval/live/actual-20261027"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06C/actual-independent-analysis.log",
+      "timestamp_utc": "2026-10-27T00:33:35.553987+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "evidence/batches/P7-06C/reconcile_retained_pg.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/actual-retained-pg-reconciliation.log",
+      "timestamp_utc": "2026-10-27T00:34:39.953102+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "evidence/batches/P7-06C/capture_recovery_result.py"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06C/recovery-activation-and-stop.log",
+      "timestamp_utc": "2026-10-27T00:39:21.281965+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "evidence/batches/P7-06C/capture_recovery_result.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/recovery-activation-and-stop-verified.log",
+      "timestamp_utc": "2026-10-27T00:39:27.082524+00:00"
+    },
+    {
+      "command": [
+        "python",
+        ".local/final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/actual-final-credential-format-audit.log",
+      "timestamp_utc": "2026-10-27T00:42:44.069113+00:00"
     }
   ],
   "authorization": {
@@ -556,300 +621,396 @@
     "api_model": "deepseek-flash",
     "total_cap_usd": "2.00",
     "assignments": 96,
-    "still_valid": true
+    "zero_send_recovery_approved": true
+  },
+  "real_provider_callability": "PASS",
+  "actual_live_execution_status": "PARTIAL",
+  "actual_paid_calls": 34,
+  "known_model_calls": 34,
+  "known_cost_micros": 13276,
+  "upper_cost_micros": 33850,
+  "supplier_invoice_cost_usd": null,
+  "formal_allocation_consumed": true,
+  "formal_assignment_started": 13,
+  "assignment_statuses": {
+    "completed": 6,
+    "failed": 6,
+    "UNKNOWN": 1,
+    "NOT_RUN": 83
+  },
+  "evaluated_assignments": 12,
+  "oracle_passed_assignments": 0,
+  "real_model_closure_verified": false,
+  "paired_comparisons": "N/A: all 24 pairs required",
+  "allocation_state": {
+    "run_id": "92d7ff2b-cf3d-5ec3-a1a0-c938f24aa4a7",
+    "goal": "Live allocation P7-06-deepseek-flash-1017-20261026 plan_sha256=aa54bfa2fcad41545ad5ebf0c513ccd58ba0a6d17778921ba97c8979a99cdbf2",
+    "state": "cancelled",
+    "workflow_revision": 1,
+    "owner_id": "live-zero-send-recovery",
+    "epoch": 2,
+    "lease_revision": 1
+  },
+  "automatic_replay_performed": false,
+  "evaluation": {
+    "path": "evidence/eval/live/actual-20261027/metrics.json",
+    "status": "BLOCKED",
+    "all_assignments_evaluated": false,
+    "not_run_arms": [
+      "B3",
+      "A1",
+      "A2"
+    ]
   },
   "positive_assertions": [
     {
-      "name": "known_failed_reports_keep_settled_usage_even_with_control_error",
+      "name": "original_marker_recovered_once_epoch1_to2_without_new_identity",
       "passed": true
     },
     {
-      "name": "uncertain_model_or_tool_effect_stops_whole_experiment",
+      "name": "34_real_provider_usage_records_not_local_stub",
       "passed": true
     },
     {
-      "name": "official_request_input_proof_and_budget_gates_D_accepted",
+      "name": "known_cost_recomputed_from_frozen_prices_and_matches_retained_PG",
       "passed": true
     },
     {
-      "name": "formal_card_command_actually_executed_once_exit_1",
+      "name": "13_exported_assignment_ledgers_match_retained_PG_exactly",
       "passed": true
     },
     {
-      "name": "public_missing_005_006_root_cause_confirmed_and_existing_migrations_applied",
+      "name": "unknown_tool_stops_remaining83_assignments_and_preserves_share",
       "passed": true
     },
     {
-      "name": "old_or_drifted_schema_rejected_before_any_marker_write_in_real_PG",
+      "name": "all96_assigned_rows_failures_unknown_and_NOT_RUN_retained",
       "passed": true
     },
     {
-      "name": "full_go_race_python_static_regression_passed_without_failures_skips_xfails",
+      "name": "independent_Oracle_scores12_without_model_self_judgment",
       "passed": true
     },
     {
-      "name": "independent_report_retains_all_96_NOT_RUN_and_missing_pairs_NA",
+      "name": "no_live_prompt_truth_model_budget_or_UUID_changes_mid_round",
       "passed": true
     },
     {
-      "name": "before_after_zero_usage_diagnosis_retains_original_queued_marker",
+      "name": "full_engineering_regression_passed_for_the_executed_source",
       "passed": true
     }
   ],
-  "negative_assertions": [
+  "failed_acceptance_requirements": [
     {
-      "name": "no_generation_requests_sent",
-      "passed": true
+      "name": "complete_24x4_evaluation",
+      "met": false
     },
     {
-      "name": "no_marker_delete_reset_or_rerun",
-      "passed": true
-    },
-    {
-      "name": "no_new_allocation_UUID_or_increased_budget",
-      "passed": true
-    },
-    {
-      "name": "no_live_prompt_or_truth_tuning",
-      "passed": true
-    },
-    {
-      "name": "no_production_DB_writes_or_new_DDL_files",
-      "passed": true
-    },
-    {
-      "name": "no_configured_credentials_in_evidence",
-      "passed": true
+      "name": "at_least_one_B4_strict_real_model_closure",
+      "met": false
     }
   ],
   "blockers": [
-    "Formal one-use allocation marker was committed before initialization failed; existing protocol refuses automatic reuse even with no generation.",
-    "P7-06E/ADR-0018 proposes a narrow zero-send initialization recovery preserving original identity/cap. Its protocol exception awaits review."
+    "Frozen task_failure data.query left one readonly tool UNKNOWN, requiring automatic whole-run stop and preserving the original share.",
+    "83 assignments have not run; no validated B4 strict real-model closure and no complete 24x4 evaluation.",
+    "Role-specific planner/business-output contracts and provable readonly failure classification need development validation before a separately reviewed frozen round."
   ],
   "known_limitations": [
-    "The official configuration preflight checks configuration; it did not establish public DB schema readiness. This execution preparation error is recorded, not attributed to credentials or budget shortage.",
-    "Full test fixtures migrate their own random namespaces and did not prove the public schema was current; new old-schema PG tests cover the failure before marker writes.",
-    "Only existing synthetic control migrations 005/006 were applied. Original queued marker remains unchanged; no delete/reset/retry/recovery was performed.",
-    "Zero generation is proved by failure before journal/provider creation and read-only checks of all 96 identities; analysis correctly retains NOT_RUN and N/A costs/pairs.",
-    "USD 2, Flash-1017, all 96 assignment UUIDs, caps, permissions and Verifier rules are unchanged. No P8 work.",
-    "P7-06E is a reviewable zero-send recovery proposal only; no recovery implementation is included."
+    "The real provider is callable, but no real B4 strict business closure passed; transport/JSON success is not task correctness.",
+    "Only first 12 assignments are independently scored; 1 UNKNOWN and 83 NOT_RUN remain. No 24-pair comparison, average effect, or multi-agent improvement claim.",
+    "The stopped readonly data.query belongs to frozen task_failure injection. Gateway labels executed tool errors unknown, so the approved whole-experiment stop retained its entire share. No old ledger entry was rewritten.",
+    "B2/B4 planner outputs were rejected, and B0/B1 completed answers did not pass independent Oracle. Findings are retained rather than tuning this holdout or replaying.",
+    "Known cost is recomputed with frozen peak cache-miss USD prices; it is a conservative estimate, not provider invoice/currency conversion.",
+    "Original marker is cancelled at epoch2; the zero-send recovery exception cannot be reused after any generation or second crash.",
+    "Controller journal hashes and PG reconciliation assume trusted infrastructure, not supplier-signed attestations.",
+    "No P8 or subsequent paid round is included."
   ],
-  "actual_paid_calls": 0,
-  "known_model_spending_micros": 0,
-  "formal_allocation_consumed": true,
-  "formal_assignment_started": 0,
-  "allocation_state": {
-    "run_id": "92d7ff2b-cf3d-5ec3-a1a0-c938f24aa4a7",
-    "state": "queued",
-    "revision": 0,
-    "formal_journal_exists": false,
-    "pending_model_calls": 0,
-    "unknown_model_calls": 0,
-    "model_calls_all_assignments": 0
-  },
-  "evaluation": {
-    "status": "BLOCKED",
-    "path": "evidence/eval/live/post-init-failure-20261026/metrics.json",
-    "assigned": 96,
-    "not_run": 96,
-    "real_model_closure_verified": false,
-    "estimated_cost_usd": null
-  },
   "unverified": [
     {
       "name": "24x4_real_model_evaluation",
-      "status": "NOT_RUN",
-      "reason": "Formal one-use allocation marker was committed before initialization failed; existing protocol refuses automatic reuse even with no generation."
+      "status": "PARTIAL",
+      "evaluated": 12,
+      "unknown": 1,
+      "not_run": 83
     },
     {
-      "name": "real_model_closure",
-      "status": "NOT_RUN",
-      "reason": "No model generation sent"
+      "name": "real_B4_business_closure",
+      "status": "FAIL",
+      "attempted": 3,
+      "validated": 0
     },
     {
-      "name": "zero_send_initialization_recovery",
+      "name": "multi_agent_quality_improvement",
       "status": "NOT_RUN",
-      "reason": "P7-06E is proposed, not implemented or approved"
+      "reason": "Complete 24-case pairing unavailable"
     }
   ],
-  "historical_acceptance": "evidence/batches/P7-06C/accept-pre-live-execution-20261026.json",
+  "historical_acceptance": "evidence/batches/P7-06C/accept-pre-recovery-20261027.json",
   "artifacts": [
     {
-      "path": "CHANGE_REQUEST.md",
-      "sha256": "af42bd9384b22f74bd73fe416d9fbadfcd5ce0087c62a221028e1ceaec31fc69"
-    },
-    {
       "path": "TASK_QUEUE.md",
-      "sha256": "2d1673b78dd4a47447237c094c3517f598550869629332071d2e717ceff2dd57"
+      "sha256": "250bad786c8373c3f487faebedbf879badb2a46c0c1ce21ef734eabbf2eb5c9c"
     },
     {
-      "path": "docs/adr/ADR-0018.md",
-      "sha256": "1acf28ef0d7c54b2fbdb96af0b0cfe332e4611c0f298c9ac09c8a8b0e2909d8d"
+      "path": "evidence/batches/P7-06/accept-pre-recovery-20261027.json",
+      "sha256": "18fbf9a7a5b151d271b8aa3dee0bb80dba859f1dd28205afe8e9411464e4762e"
     },
     {
-      "path": "docs/experiments/live-provider.md",
-      "sha256": "d3efef644e881932165c5649484e2ee90402099840e4c52c461d16f538083b63"
+      "path": "evidence/batches/P7-06C/accept-pre-recovery-20261027.json",
+      "sha256": "904b772c2077b8534f484998ae339ef73d26be0b18fd9f32ce6ff1dc0ceaaca9"
     },
     {
-      "path": "eval/live/live.go",
-      "sha256": "d527fe6d346c887587ce04770b295e2ba2acddc39530282145c08f365bf27125"
+      "path": "evidence/batches/P7-06C/actual-final-credential-format-audit.log",
+      "sha256": "05cd3b05e90fe8dc3395c2a7afa01ecbdeb59af782854816b1127c21475c4cf3"
     },
     {
-      "path": "eval/live/live_test.go",
-      "sha256": "90427a5fb7992325843e17d635a4638c02c15208ce598f8942ea59148eb5e160"
+      "path": "evidence/batches/P7-06C/actual-findings.md",
+      "sha256": "c2c8cba68d11557df1ccb0a32146cc1ca0b73210de928f3644fca46007afa0b9"
     },
     {
-      "path": "evidence/batches/P7-06C/P7-06E-review-addendum.md",
-      "sha256": "988fdf2c041c93f0990915279b32645106b80a3ea499bf6ac1d327324ef3d7d3"
+      "path": "evidence/batches/P7-06C/actual-independent-analysis.log",
+      "sha256": "b96d7fe4c1f72d894b55e62c78ebb2f593794c829f73affba5225719fe69eccf"
     },
     {
-      "path": "evidence/batches/P7-06C/actual-live-run.log",
-      "sha256": "e4c2e417ed2ade93201df051a747d63aef4584458b0515dbdfb18d6515e57c6d"
+      "path": "evidence/batches/P7-06C/actual-recovered-live-run.log",
+      "sha256": "bc95f55be9aca26a310a590142cde57f9464b85734be136f742cb843d70df577"
     },
     {
-      "path": "evidence/batches/P7-06C/after-launch-allocation-check.log",
-      "sha256": "bb659c7ca9e0824ed0a242af3a2759fd649189a686611a068fa9528aca5e993b"
+      "path": "evidence/batches/P7-06C/actual-retained-pg-reconciliation.log",
+      "sha256": "ffe7c68614d270a0737e4bbf4cc524dec3ba4dcd9cb1d4628246ba4aab72fd51"
     },
     {
-      "path": "evidence/batches/P7-06C/allocation-lease-readonly.json",
-      "sha256": "3b050527aee2197e3170efb5b12c263398562ee71ef140c4bd46b689ee14bf24"
-    },
-    {
-      "path": "evidence/batches/P7-06C/apply-existing-control-migrations.log",
-      "sha256": "f49a5641a86051351ae8340198de889feb920abef8c37d522567f5507a4f5846"
-    },
-    {
-      "path": "evidence/batches/P7-06C/c-final-credential-and-format.log",
-      "sha256": "7a8bc4c90dde512583b2f4273560dda307f2314af8e00d867768e1c5e1095309"
-    },
-    {
-      "path": "evidence/batches/P7-06C/c-final-offline-full.log",
-      "sha256": "e07d1b8e0fce1f879867d6a814cd0d57e9b5c45c81bf6902d9353a26df41c7b8"
-    },
-    {
-      "path": "evidence/batches/P7-06C/c-red-resource-readiness.log",
-      "sha256": "173c51922c5d737457913f696a0304576263015f60d8943a54bce737e7d58f85"
-    },
-    {
-      "path": "evidence/batches/P7-06C/c-red-schema-readiness.log",
-      "sha256": "7236d3c6ad0c19e9346f49229cd15c3512f23b0e4d4bc641b8a95d45e591ec7f"
-    },
-    {
-      "path": "evidence/batches/P7-06C/c-resource-readiness.log",
-      "sha256": "01f3c30827fb222f18edb024f2f161e7bf10675b9032891f740fcbdb4f8401a4"
-    },
-    {
-      "path": "evidence/batches/P7-06C/c-schema-readiness.log",
-      "sha256": "54149a7c52870b67395c451cc2fe6a9855acdae5c91be40e7c7317f1dec3a677"
+      "path": "evidence/batches/P7-06C/capture_recovery_result.py",
+      "sha256": "5e8ac17eae61f873b55be6af62191b0431c86be6a0074ae64df79a26149f0f5f"
     },
     {
       "path": "evidence/batches/P7-06C/commands.json",
-      "sha256": "9538013f9a1ada25be71a79467e486584103d3212f926aa7f0aaa55ff1e29d60"
+      "sha256": "9e9ce5b995aa2b7745dfc60a92394fde46ae6ca0e2fac05908e00e773bc35efd"
     },
     {
-      "path": "evidence/batches/P7-06C/diagnose_allocation.py",
-      "sha256": "ac143ca8a506ab55122b359b10f7bfa63bd2fe2893ecc9cfb67bf9b90745e44a"
+      "path": "evidence/batches/P7-06C/reconcile_retained_pg.py",
+      "sha256": "4ec0bdab211dc815e3ede1260d0f094c2e38046257da4f95c12b1b72aa374cdc"
     },
     {
-      "path": "evidence/batches/P7-06C/final-offline-docs.json.json",
-      "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+      "path": "evidence/batches/P7-06C/recovery-activation-and-stop-verified.log",
+      "sha256": "997853d005a2c4a9b0c730393533fa28fe62c0caa7dcc8385c461b54a0a1a5c5"
     },
     {
-      "path": "evidence/batches/P7-06C/final-offline-fingerprint.json",
-      "sha256": "7d0b4e108cf515cb3f851130384575e9ae540f62d72ec1a5f6830e757f20e33a"
+      "path": "evidence/batches/P7-06C/recovery-activation-and-stop.json",
+      "sha256": "aeb7e4b8c0c18c308ad3db2f9108d4a603af074813e2364e3f56b6bf5be41e5c"
     },
     {
-      "path": "evidence/batches/P7-06C/final-offline-go.json.json",
-      "sha256": "497b2e8e4222ff17e4e6eab52cca18164ed32181b266b408f7e32ac749c5df99"
+      "path": "evidence/batches/P7-06C/recovery-activation-and-stop.log",
+      "sha256": "409f8233383d2fe4762d55d2f4f52ee3575ed707a3820bd887ce06a43917b36b"
     },
     {
-      "path": "evidence/batches/P7-06C/final-offline-mypy.log.json",
-      "sha256": "8e7a0a8352a322d19e55605ee61df9b305de124895458472f4062bc11baad1c7"
+      "path": "evidence/batches/P7-06C/recovery-launch-provenance.json",
+      "sha256": "9093fb49a79624055270d6564a9605e0b02def2e75b3825d03c3643e027bce6b"
     },
     {
-      "path": "evidence/batches/P7-06C/final-offline-pytest-events.json.json",
-      "sha256": "25b2546edb4801971c0063a00b41ff4a175e474e490379c3f372564bed5dc063"
+      "path": "evidence/batches/P7-06C/retained-pg-reconciliation.json",
+      "sha256": "04cea440ae5c808af752ec64154c844d5639a3684f436fba6695c573383374f2"
     },
     {
-      "path": "evidence/batches/P7-06C/final-offline-pytest.log.json",
-      "sha256": "142f940781b7a4eb3dd269ad35445d4bf74971d8a85db20c09c4bf9d9875ef8d"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/000.raw.json",
+      "sha256": "fa5a91b29042a0f71ba310888a97e78fccbede06d236c82ef70ddd94cb3ab6ca"
     },
     {
-      "path": "evidence/batches/P7-06C/final-offline-pytest.xml.json",
-      "sha256": "c3cada20572086697963de992c3bff074785c140721a484bad745d5635b00b2a"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/000.result.json",
+      "sha256": "79f141eebbfec085fa33525bb4e05d3bb917005a025c3cfbfbc1e180a91dc77a"
     },
     {
-      "path": "evidence/batches/P7-06C/final-offline-report.json.json",
-      "sha256": "93e0574b429223716635e453e78327e2b50583414189cd5ae34341813406d659"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/000.started.json",
+      "sha256": "bbf42b570c6bebc4ed80d9bb20872ce50f7213e988cb680140960b395681edd9"
     },
     {
-      "path": "evidence/batches/P7-06C/final-offline-ruff.log.json",
-      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/001.raw.json",
+      "sha256": "14739ef06aae51ba54e94e64c897c4d4723eacf52f7330a62a8169261f80e4e8"
     },
     {
-      "path": "evidence/batches/P7-06C/final-offline-vet.log.json",
-      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/001.result.json",
+      "sha256": "3df811f3c65de9aa3b3766919c5a84316e46380152b4a82a60a0e5f15150082d"
     },
     {
-      "path": "evidence/batches/P7-06C/launch-provenance.json",
-      "sha256": "5f6f9a98fedfbab10a2309cd71c73194792f454ab07d60b91ce2942e69f00d3e"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/001.started.json",
+      "sha256": "6b4668f425715363a19b0d1da8c9331cf531d0468b795bddf017e46e50b78be7"
     },
     {
-      "path": "evidence/batches/P7-06C/original-allocation-lease.log",
-      "sha256": "fe4d7ae20fcf4daebaa619b97e4f976aa7542ceefc8790955d4e1ada7fa97e8a"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/002.raw.json",
+      "sha256": "1f0c00ee05581ec15ce8e375153e8b8a5707876c08684295baa86a3e094b465f"
     },
     {
-      "path": "evidence/batches/P7-06C/post-init-independent-analysis.log",
-      "sha256": "559587591fe39a82a117fda98c08e97c93383275706a5277ec0ef85561b884f4"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/002.result.json",
+      "sha256": "26fe3b4ad47733dbebc02371535fecb46ea22c553142ef1afae29e64ce934f49"
     },
     {
-      "path": "evidence/batches/P7-06C/schema-after-repair.json",
-      "sha256": "20f659a768eade81d09020e4f1f9f0fca46a0130d12d3bfad69b8b8c4ad416ef"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/002.started.json",
+      "sha256": "6b85939f534a0df760ebe673c94e7c178d513fa9e7863c373180244e550c891f"
     },
     {
-      "path": "evidence/batches/P7-06C/schema-after-repair.log",
-      "sha256": "18e7827bb9383d6bb8d2f4dcdf55795b5c54a201d3c9f53737605f8ff25c658f"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/003.raw.json",
+      "sha256": "19219039883a72ccd55c094c79982a02af6f93c6121785c25ff04a5d4f2c2594"
     },
     {
-      "path": "evidence/batches/P7-06C/schema-before-repair.json",
-      "sha256": "10a1cb2f06fc92811effd8c31b4e809f9a340a95a16fd9164f38529dd96a95cf"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/003.result.json",
+      "sha256": "f888e44d2cac8ec2dce2af201cfafeff1d0cea42aeb95e2657b87c275169c597"
     },
     {
-      "path": "evidence/batches/P7-06C/schema-before-repair.log",
-      "sha256": "a17c44225e373c757270c74fae9230fe125fbdbebdef2fbcc1f72421270f02a3"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/003.started.json",
+      "sha256": "58c34ac856817b3f36395622ea39832bb556b684d5fed335ab07bb005d2d377c"
     },
     {
-      "path": "evidence/eval/live/post-init-failure-20261026/by_arm.csv",
-      "sha256": "81002b27713951e48b7d8b580da26db30485324f0ea1ff8b078a11ce706ae300"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/004.raw.json",
+      "sha256": "3e298dc20e0881248ff4a51ac1bddcbfb401bc8c82740e1dfd68b17aa83004ab"
     },
     {
-      "path": "evidence/eval/live/post-init-failure-20261026/by_category.csv",
-      "sha256": "df5457ad08f50e9cfdc3813f6d54e4bfd8dd25f2eccae2e9ecbb35a76c512421"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/004.result.json",
+      "sha256": "285e18b8b4ce3f016890cce9775767da313cca03c43e0dd88a6ff807ebc5d218"
     },
     {
-      "path": "evidence/eval/live/post-init-failure-20261026/files.sha256.json",
-      "sha256": "6a2ef393ee2e5c7fc262e156f325ecb2a715bb4234a811bdb72704026bd2baf4"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/004.started.json",
+      "sha256": "3686b8a3cb10ce6be6411b36c975b9134816fc1433db4afbb41d698c285dc04f"
     },
     {
-      "path": "evidence/eval/live/post-init-failure-20261026/metrics.json",
-      "sha256": "b4325c1c01bb584688fa1140a6c9415c7c626315cb4d0ac84429eac7d1a14b04"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/005.raw.json",
+      "sha256": "3779ceaad9a84e78a24ef4d9e899946e608f764dd5c101af77809b3b6e6e42ed"
     },
     {
-      "path": "evidence/eval/live/post-init-failure-20261026/paired.csv",
-      "sha256": "ea9e49b0df29d363086eaafc389d160b3d9cb5b9d5d11fb77fa2cba895b8fc41"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/005.result.json",
+      "sha256": "441073377ade32ea21c6b7f7fb8c5d7acdeaac830e5bb21dbb803ec465681ee0"
     },
     {
-      "path": "evidence/eval/live/post-init-failure-20261026/per_case.csv",
-      "sha256": "3857eef09179451111010476fdb5f3329d9ca66e11b4899df7f6e52ec67e6930"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/005.started.json",
+      "sha256": "4ce76fa9cd22b35984baf9dd17e7d6a5d2966f004edc5d5c57633a81dbe91581"
     },
     {
-      "path": "evidence/eval/live/post-init-failure-20261026/report.md",
-      "sha256": "39ef7056ddcfc27338f35df13dcf4a9b6cf5e76facb609ac4aa21d760ace0d80"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/006.raw.json",
+      "sha256": "44368dfd9d2439ad8de339edeb6afaf857633d767be454a601a5b4e12b8230ac"
     },
     {
-      "path": "tasks/P7-06E.md",
-      "sha256": "ac3e81b437e4305ad59317e9022b1c4245d2844e7a4340da19405547664f065a"
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/006.result.json",
+      "sha256": "6a4224beee80bb8c89a64e4df16bd2291f078e265b300cf9ace6f8d6fbbe88a6"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/006.started.json",
+      "sha256": "8eab7b44bede190fbac8c89be6efe0773dbddfa44940464da6fca9a069134b06"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/007.raw.json",
+      "sha256": "b01c92aa25252a0c7016966121690710e279a265bba0b087fe74f9aa78d579c4"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/007.result.json",
+      "sha256": "80a9f361c2eaab920ed9e07755b4358cc69ef7744ef204bea8654b39e8818b25"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/007.started.json",
+      "sha256": "c9da6b416b1151424056d1371f59a2260d154d1ea2a99f7bdf70fd1448fe9156"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/008.raw.json",
+      "sha256": "f2cb54311c2b6338c9f84066960068d50985a517a8088d9f32152cf411feda5a"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/008.result.json",
+      "sha256": "d71d2d8b860f8102eb6d8f79a86e1706e6bf41af7a9e5406ad381051bdd089b5"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/008.started.json",
+      "sha256": "95fc8a6765db13ab97761f8573fb7f5e6d3f90bd85ab00248d53c570ea1151cc"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/009.raw.json",
+      "sha256": "a081ab06418b678ef6a834dbacd54fa659c6e3919f5bac9fb638b8c8f5d3829e"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/009.result.json",
+      "sha256": "31ec0f39acb4b8326dafe2bc71384e7d6ffd5dfa18700fcc9a8676bd458eb8e9"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/009.started.json",
+      "sha256": "8fc245a4275b0e2491367f8f82dbc4d7a1b54c04836f8785a7d91a7e03a3b698"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/010.raw.json",
+      "sha256": "52c42113773cd11cafe630f5ff9f6fff65d3d3fe2c7dbe42e32d6766d9cf4aa2"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/010.result.json",
+      "sha256": "83baecc58f832f74ec268017c2f4de8379d5c8a25e5dffd4d130a50eb6fc23e0"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/010.started.json",
+      "sha256": "378b4b70cc745bf588415dcbef7f58ec435798538aa402e60e36aedf845c6951"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/011.raw.json",
+      "sha256": "7169989573496afe7aaffbb10ec68a77686bc16bddb74157dc098a6f7d053d39"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/011.result.json",
+      "sha256": "5d9a6b72968c83e835cad9e56f1072bb29f4f4fe74a850cef06fed855bb67c7d"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/011.started.json",
+      "sha256": "1a9632afbc2fce4224f604ecd1cbacbfc490519c0e1c5e40705473db95e2c440"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/012.raw.json",
+      "sha256": "0e08bb1e136d09d96ff6ffabd88173ab39bd991226b896af40327e11ca314434"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/012.result.json",
+      "sha256": "6d1e210ff87ff685a101af85d6c64e3ab1541267a8fda8559132ae326502f3eb"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/012.started.json",
+      "sha256": "572cc4ef34f45fcc350396daa0c69c5433794898452ec2bc5df0542e4b821e9e"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/assignment.json",
+      "sha256": "14bbdcfe1b5ac79a29728b381a17291a867fe1ad967f7e3f896b69b0117372d5"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/executor.json",
+      "sha256": "c49f65aa9eb48b1201bc8c9d29ba7e2b4ece51d34263bd008fc5e51f5699ddf8"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/preflight.json",
+      "sha256": "24db97a702ef7282cf5a8ac7dc451fb2a47e10d36ffaf4b55335b72ae1c2da68"
+    },
+    {
+      "path": "evidence/eval/live/P7-06-deepseek-flash-1017-20261026/report.json",
+      "sha256": "5ce3bc0799cc2811ec7cd93bbeb3a1143ec7d8ef4b01fa31579077d1d70a4d87"
+    },
+    {
+      "path": "evidence/eval/live/actual-20261027/by_arm.csv",
+      "sha256": "e80d05553c669dc6f49b36f0230e764aabd5ca14c411d17dc66ab75f93ed7ee3"
+    },
+    {
+      "path": "evidence/eval/live/actual-20261027/by_category.csv",
+      "sha256": "82858060afb459f3f63cf28e1c0377828c5e7aff85058bfdad5da17e8639b0d0"
+    },
+    {
+      "path": "evidence/eval/live/actual-20261027/files.sha256.json",
+      "sha256": "3c110cc3a9f437f2a8dfb1be9ec4297e33ea0d100dc1b2f17104d3d7b083c905"
+    },
+    {
+      "path": "evidence/eval/live/actual-20261027/metrics.json",
+      "sha256": "843ca60a32baf4c255d085c0bc5dfacba95017fa7c8d3f4d8a18d417cccbb28b"
+    },
+    {
+      "path": "evidence/eval/live/actual-20261027/paired.csv",
+      "sha256": "2ee3e92623245d57c0eacc1bf84848d2617ebbec9170df13f63db73ce1b4b813"
+    },
+    {
+      "path": "evidence/eval/live/actual-20261027/per_case.csv",
+      "sha256": "3d4581f099cf054c2513bd4d6802b8bf6170b58f3f9c8966e9a12301108470bd"
+    },
+    {
+      "path": "evidence/eval/live/actual-20261027/report.md",
+      "sha256": "72bef680ede7775daccb625ee499e9cad39aa11fbc6a0c8e1049a9ec86b022be"
     }
   ],
-  "timestamp_utc": "2026-10-26T15:30:23.486382+00:00"
+  "timestamp_utc": "2026-10-27T00:42:44.141872+00:00"
 }

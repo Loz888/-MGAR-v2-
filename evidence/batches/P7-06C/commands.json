@@ -520,5 +520,68 @@
     "exit_code": 0,
     "log_path": "evidence/batches/P7-06C/c-final-credential-and-format.log",
     "timestamp_utc": "2026-10-26T15:30:23.389312+00:00"
+  },
+  {
+    "command": [
+      "env",
+      "MGAR_ALLOW_PAID=1",
+      "MGAR_MAX_COST_USD=2.00",
+      "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+      "bash",
+      "scripts/eval.sh",
+      "--live",
+      "--confirm-live",
+      "--recover-zero-send"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/actual-recovered-live-run.log",
+    "timestamp_utc": "2026-10-27T00:32:14.977522+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "eval/live/analyze.py",
+      "--output",
+      "evidence/eval/live/actual-20261027"
+    ],
+    "exit_code": 2,
+    "log_path": "evidence/batches/P7-06C/actual-independent-analysis.log",
+    "timestamp_utc": "2026-10-27T00:33:35.553987+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06C/reconcile_retained_pg.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/actual-retained-pg-reconciliation.log",
+    "timestamp_utc": "2026-10-27T00:34:39.953102+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06C/capture_recovery_result.py"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06C/recovery-activation-and-stop.log",
+    "timestamp_utc": "2026-10-27T00:39:21.281965+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06C/capture_recovery_result.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/recovery-activation-and-stop-verified.log",
+    "timestamp_utc": "2026-10-27T00:39:27.082524+00:00"
+  },
+  {
+    "command": [
+      "python",
+      ".local/final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06C/actual-final-credential-format-audit.log",
+    "timestamp_utc": "2026-10-27T00:42:44.069113+00:00"
   }
 ]

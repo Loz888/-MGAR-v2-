@@ -1,0 +1,138 @@
+{
+  "checked_at": "2026-10-27T00:34:39.862617+00:00",
+  "read_only": true,
+  "assignments": [
+    {
+      "raw": "000.raw.json",
+      "run_id": "e9291094-dbfc-535f-8b44-ffcefde25634",
+      "namespace": "mgar_demo_b70a5216ff03dc37",
+      "model_calls": 2,
+      "tool_calls": 1,
+      "known_cost_micros": 810,
+      "reserved_cost_micros": 0,
+      "status": "MATCH"
+    },
+    {
+      "raw": "001.raw.json",
+      "run_id": "ede45bf0-a039-5bbc-8354-e25755cc1813",
+      "namespace": "mgar_demo_b7af7540e80db016",
+      "model_calls": 8,
+      "tool_calls": 4,
+      "known_cost_micros": 3291,
+      "reserved_cost_micros": 0,
+      "status": "MATCH"
+    },
+    {
+      "raw": "002.raw.json",
+      "run_id": "3834d430-c6bd-5017-8239-b88c55aa93d9",
+      "namespace": "mgar_demo_2a72cae00a577af1",
+      "model_calls": 1,
+      "tool_calls": 0,
+      "known_cost_micros": 329,
+      "reserved_cost_micros": 0,
+      "status": "MATCH"
+    },
+    {
+      "raw": "003.raw.json",
+      "run_id": "ed4db011-6cf1-598f-ad2e-3e6b606473ed",
+      "namespace": "mgar_demo_d4c9db3ac112ac00",
+      "model_calls": 1,
+      "tool_calls": 0,
+      "known_cost_micros": 385,
+      "reserved_cost_micros": 0,
+      "status": "MATCH"
+    },
+    {
+      "raw": "004.raw.json",
+      "run_id": "fe584b22-6026-5ff2-a4bd-b3de66aa91a8",
+      "namespace": "mgar_demo_bb92447b5a5f80e6",
+      "model_calls": 2,
+      "tool_calls": 1,
+      "known_cost_micros": 681,
+      "reserved_cost_micros": 0,
+      "status": "MATCH"
+    },
+    {
+      "raw": "005.raw.json",
+      "run_id": "1f887897-f205-51b2-8a84-d97dbb89e2aa",
+      "namespace": "mgar_demo_bec7bc4aeaf1ebe7",
+      "model_calls": 5,
+      "tool_calls": 2,
+      "known_cost_micros": 1596,
+      "reserved_cost_micros": 0,
+      "status": "MATCH"
+    },
+    {
+      "raw": "006.raw.json",
+      "run_id": "f166f602-62ef-5592-b51e-bb65e14a75ed",
+      "namespace": "mgar_demo_e202808639f0e0b6",
+      "model_calls": 1,
+      "tool_calls": 0,
+      "known_cost_micros": 302,
+      "reserved_cost_micros": 0,
+      "status": "MATCH"
+    },
+    {
+      "raw": "007.raw.json",
+      "run_id": "cb085e05-41a0-5161-8026-23a7ebe681de",
+      "namespace": "mgar_demo_29afdf7d0645cf16",
+      "model_calls": 1,
+      "tool_calls": 0,
+      "known_cost_micros": 312,
+      "reserved_cost_micros": 0,
+      "status": "MATCH"
+    },
+    {
+      "raw": "008.raw.json",
+      "run_id": "a96cdaad-67b0-5dbb-bd2f-898a6c982f46",
+      "namespace": "mgar_demo_112ecd1472095156",
+      "model_calls": 2,
+      "tool_calls": 1,
+      "known_cost_micros": 838,
+      "reserved_cost_micros": 0,
+      "status": "MATCH"
+    },
+    {
+      "raw": "009.raw.json",
+      "run_id": "39ffa707-4d11-5e9b-bbd1-c28819a927c3",
+      "namespace": "mgar_demo_966b436fb7ff8282",
+      "model_calls": 8,
+      "tool_calls": 4,
+      "known_cost_micros": 3492,
+      "reserved_cost_micros": 0,
+      "status": "MATCH"
+    },
+    {
+      "raw": "010.raw.json",
+      "run_id": "e6d070cb-aadc-5fb4-b921-c13f824f0f27",
+      "namespace": "mgar_demo_54408d41e9466b79",
+      "model_calls": 1,
+      "tool_calls": 0,
+      "known_cost_micros": 642,
+      "reserved_cost_micros": 0,
+      "status": "MATCH"
+    },
+    {
+      "raw": "011.raw.json",
+      "run_id": "26a8fb8f-2992-5795-9065-d250eca2c689",
+      "namespace": "mgar_demo_765f782cefa9ef40",
+      "model_calls": 1,
+      "tool_calls": 0,
+      "known_cost_micros": 339,
+      "reserved_cost_micros": 0,
+      "status": "MATCH"
+    },
+    {
+      "raw": "012.raw.json",
+      "run_id": "2383dea6-b7cb-5c27-b3c3-dbc0a5870855",
+      "namespace": "mgar_demo_aea6ca660d850765",
+      "model_calls": 1,
+      "tool_calls": 1,
+      "known_cost_micros": 259,
+      "reserved_cost_micros": 0,
+      "status": "MATCH"
+    }
+  ],
+  "allocation_marker": "cancelled",
+  "status": "MATCH"
+}

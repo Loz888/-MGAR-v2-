@@ -2,9 +2,9 @@
   "card_id": "P7-06",
   "status": "BLOCKED",
   "git_commit": null,
-  "base_git_commit": "801668a4ba18ae246ed4b5512c2b973094166b0e",
-  "source_fingerprint": "ceecdbfce26241955eaae671f75eb8496b806ba5c2acb30f49643e05a9d952bc",
-  "scope": "Executed formal start once, preserved zero-send initialization failure, repaired existing control migrations and added pre-marker read-only schema gates",
+  "base_git_commit": "f12d6aeab8ec619ede2ebcba1a8f49615c963598",
+  "source_fingerprint": "7d046de97ab7bc47f53f36613cbeed93acc9d7a0c63cd2dcb05d78cb47444ad8",
+  "scope": "Executed approved recovered real DeepSeek experiment once; independent Oracle evaluation, retained PG reconciliation and automatic UNKNOWN stop",
   "subcards": [
     {
       "card_id": "P7-06A",
@@ -25,10 +25,16 @@
       "sha256": "f28bdfe7957f59156ba9c732148f7e7ae92d765d9861d946c69eb223cf6ea717"
     },
     {
+      "card_id": "P7-06E",
+      "status": "PASS",
+      "path": "evidence/batches/P7-06E/accept.json",
+      "sha256": "13cecbe08c380e472ba7951b95ffb2cd329c0b0b50de98a7fa2c21cac2e189cb"
+    },
+    {
       "card_id": "P7-06C",
       "status": "BLOCKED",
       "path": "evidence/batches/P7-06C/accept.json",
-      "sha256": "904b772c2077b8534f484998ae339ef73d26be0b18fd9f32ce6ff1dc0ceaaca9"
+      "sha256": "65e5737e14b46646bce25601a69b6ee4a2591c49c0d2d803d43fe55efc8c2806"
     }
   ],
   "authorization": {
@@ -37,17 +43,28 @@
     "api_model": "deepseek-flash",
     "total_cap_usd": "2.00",
     "assignments": 96,
-    "still_valid": true
+    "zero_send_recovery_approved": true
   },
-  "blockers": [
-    "Formal one-use allocation marker was committed before initialization failed; existing protocol refuses automatic reuse even with no generation.",
-    "P7-06E/ADR-0018 proposes a narrow zero-send initialization recovery preserving original identity/cap. Its protocol exception awaits review."
-  ],
+  "real_provider_callability": "PASS",
+  "actual_live_execution_status": "PARTIAL",
+  "actual_paid_calls": 34,
+  "known_cost_micros": 13276,
+  "upper_cost_micros": 33850,
+  "formal_allocation_consumed": true,
+  "real_model_closure_verified": false,
+  "assignment_statuses": {
+    "completed": 6,
+    "failed": 6,
+    "UNKNOWN": 1,
+    "NOT_RUN": 83
+  },
+  "evaluated_assignments": 12,
+  "oracle_passed_assignments": 0,
   "test_summary": {
     "go": {
       "status": "PASS",
-      "tests": 569,
-      "passed": 569,
+      "tests": 597,
+      "passed": 597,
       "failed_events": 0,
       "skipped": 0,
       "complete": true
@@ -63,40 +80,43 @@
     },
     "status": "PASS"
   },
-  "known_limitations": [
-    "The official configuration preflight checks configuration; it did not establish public DB schema readiness. This execution preparation error is recorded, not attributed to credentials or budget shortage.",
-    "Full test fixtures migrate their own random namespaces and did not prove the public schema was current; new old-schema PG tests cover the failure before marker writes.",
-    "Only existing synthetic control migrations 005/006 were applied. Original queued marker remains unchanged; no delete/reset/retry/recovery was performed.",
-    "Zero generation is proved by failure before journal/provider creation and read-only checks of all 96 identities; analysis correctly retains NOT_RUN and N/A costs/pairs.",
-    "USD 2, Flash-1017, all 96 assignment UUIDs, caps, permissions and Verifier rules are unchanged. No P8 work.",
-    "P7-06E is a reviewable zero-send recovery proposal only; no recovery implementation is included."
+  "blockers": [
+    "Frozen task_failure data.query left one readonly tool UNKNOWN, requiring automatic whole-run stop and preserving the original share.",
+    "83 assignments have not run; no validated B4 strict real-model closure and no complete 24x4 evaluation.",
+    "Role-specific planner/business-output contracts and provable readonly failure classification need development validation before a separately reviewed frozen round."
   ],
-  "actual_paid_calls": 0,
-  "formal_allocation_consumed": true,
+  "known_limitations": [
+    "The real provider is callable, but no real B4 strict business closure passed; transport/JSON success is not task correctness.",
+    "Only first 12 assignments are independently scored; 1 UNKNOWN and 83 NOT_RUN remain. No 24-pair comparison, average effect, or multi-agent improvement claim.",
+    "The stopped readonly data.query belongs to frozen task_failure injection. Gateway labels executed tool errors unknown, so the approved whole-experiment stop retained its entire share. No old ledger entry was rewritten.",
+    "B2/B4 planner outputs were rejected, and B0/B1 completed answers did not pass independent Oracle. Findings are retained rather than tuning this holdout or replaying.",
+    "Known cost is recomputed with frozen peak cache-miss USD prices; it is a conservative estimate, not provider invoice/currency conversion.",
+    "Original marker is cancelled at epoch2; the zero-send recovery exception cannot be reused after any generation or second crash.",
+    "Controller journal hashes and PG reconciliation assume trusted infrastructure, not supplier-signed attestations.",
+    "No P8 or subsequent paid round is included."
+  ],
   "unverified": [
     {
       "name": "24x4_real_model_evaluation",
-      "status": "NOT_RUN",
-      "reason": "Formal one-use allocation marker was committed before initialization failed; existing protocol refuses automatic reuse even with no generation."
+      "status": "PARTIAL",
+      "evaluated": 12,
+      "unknown": 1,
+      "not_run": 83
     },
     {
-      "name": "real_model_closure",
-      "status": "NOT_RUN",
-      "reason": "No model generation sent"
+      "name": "real_B4_business_closure",
+      "status": "FAIL",
+      "attempted": 3,
+      "validated": 0
     },
     {
-      "name": "zero_send_initialization_recovery",
+      "name": "multi_agent_quality_improvement",
       "status": "NOT_RUN",
-      "reason": "P7-06E is proposed, not implemented or approved"
+      "reason": "Complete 24-case pairing unavailable"
     }
   ],
   "commands_reference": "evidence/batches/P7-06C/commands.json",
-  "historical_acceptance": "evidence/batches/P7-06/accept-pre-live-execution-20261026.json",
-  "proposed_recovery": {
-    "status": "PROPOSED",
-    "card": "tasks/P7-06E.md",
-    "adr": "docs/adr/ADR-0018.md",
-    "required_addendum": "evidence/batches/P7-06C/P7-06E-review-addendum.md"
-  },
-  "timestamp_utc": "2026-10-26T15:30:23.486382+00:00"
+  "evaluation_reference": "evidence/eval/live/actual-20261027/metrics.json",
+  "historical_acceptance": "evidence/batches/P7-06/accept-pre-recovery-20261027.json",
+  "timestamp_utc": "2026-10-27T00:42:44.141872+00:00"
 }

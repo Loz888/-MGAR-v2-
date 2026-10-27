@@ -37,7 +37,7 @@ def main():
             actual = {m['call_id']: {k: m[k] for k in fields} for m in models}
             exported = {m['call_id']: {k: m[k] for k in fields} for m in raw['model_calls']}
             assert actual == exported, 'retained_model_ledger_mismatch'
-            query = sql.SQL('SELECT status,count(*) FROM {}.tool_invocations WHERE run_id=%s GROUP BY status').format(sql.Identifier(namespace))
+            query = sql.SQL('SELECT v.status,count(*) FROM {}.tool_invocations v JOIN {}.task_instances t USING(task_id) WHERE t.run_id=%s GROUP BY v.status').format(sql.Identifier(namespace), sql.Identifier(namespace))
             tools = dict(conn.execute(query, (raw['run_id'],)))
             assert tools == dict(Counter(t['status'] for t in raw['tool_calls'])), 'retained_tool_ledger_mismatch'
             query = sql.SQL('SELECT max_cost_usd,settled_cost,reserved_cost FROM {}.run_budgets WHERE run_id=%s').format(sql.Identifier(namespace))

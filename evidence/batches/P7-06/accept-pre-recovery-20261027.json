@@ -1,0 +1,102 @@
+{
+  "card_id": "P7-06",
+  "status": "BLOCKED",
+  "git_commit": null,
+  "base_git_commit": "801668a4ba18ae246ed4b5512c2b973094166b0e",
+  "source_fingerprint": "ceecdbfce26241955eaae671f75eb8496b806ba5c2acb30f49643e05a9d952bc",
+  "scope": "Executed formal start once, preserved zero-send initialization failure, repaired existing control migrations and added pre-marker read-only schema gates",
+  "subcards": [
+    {
+      "card_id": "P7-06A",
+      "status": "PASS",
+      "path": "evidence/batches/P7-06A/accept.json",
+      "sha256": "148617294c746ef150ab79e43d22e102053cdc21737e9ef54e51facb3112caf2"
+    },
+    {
+      "card_id": "P7-06B",
+      "status": "PASS",
+      "path": "evidence/batches/P7-06B/accept.json",
+      "sha256": "b3ddfdbb73262d9c2c1708497f49da5ce822050769cfd85fbe7c10a2fb0cf168"
+    },
+    {
+      "card_id": "P7-06D",
+      "status": "PASS",
+      "path": "evidence/batches/P7-06D/accept.json",
+      "sha256": "f28bdfe7957f59156ba9c732148f7e7ae92d765d9861d946c69eb223cf6ea717"
+    },
+    {
+      "card_id": "P7-06C",
+      "status": "BLOCKED",
+      "path": "evidence/batches/P7-06C/accept.json",
+      "sha256": "904b772c2077b8534f484998ae339ef73d26be0b18fd9f32ce6ff1dc0ceaaca9"
+    }
+  ],
+  "authorization": {
+    "provider": "deepseek",
+    "model": "flash-1017",
+    "api_model": "deepseek-flash",
+    "total_cap_usd": "2.00",
+    "assignments": 96,
+    "still_valid": true
+  },
+  "blockers": [
+    "Formal one-use allocation marker was committed before initialization failed; existing protocol refuses automatic reuse even with no generation.",
+    "P7-06E/ADR-0018 proposes a narrow zero-send initialization recovery preserving original identity/cap. Its protocol exception awaits review."
+  ],
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 569,
+      "passed": 569,
+      "failed_events": 0,
+      "skipped": 0,
+      "complete": true
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 427,
+      "passed": 427,
+      "failed": 0,
+      "skipped_or_xfailed": 0,
+      "complete": true,
+      "passed_subtests": 15
+    },
+    "status": "PASS"
+  },
+  "known_limitations": [
+    "The official configuration preflight checks configuration; it did not establish public DB schema readiness. This execution preparation error is recorded, not attributed to credentials or budget shortage.",
+    "Full test fixtures migrate their own random namespaces and did not prove the public schema was current; new old-schema PG tests cover the failure before marker writes.",
+    "Only existing synthetic control migrations 005/006 were applied. Original queued marker remains unchanged; no delete/reset/retry/recovery was performed.",
+    "Zero generation is proved by failure before journal/provider creation and read-only checks of all 96 identities; analysis correctly retains NOT_RUN and N/A costs/pairs.",
+    "USD 2, Flash-1017, all 96 assignment UUIDs, caps, permissions and Verifier rules are unchanged. No P8 work.",
+    "P7-06E is a reviewable zero-send recovery proposal only; no recovery implementation is included."
+  ],
+  "actual_paid_calls": 0,
+  "formal_allocation_consumed": true,
+  "unverified": [
+    {
+      "name": "24x4_real_model_evaluation",
+      "status": "NOT_RUN",
+      "reason": "Formal one-use allocation marker was committed before initialization failed; existing protocol refuses automatic reuse even with no generation."
+    },
+    {
+      "name": "real_model_closure",
+      "status": "NOT_RUN",
+      "reason": "No model generation sent"
+    },
+    {
+      "name": "zero_send_initialization_recovery",
+      "status": "NOT_RUN",
+      "reason": "P7-06E is proposed, not implemented or approved"
+    }
+  ],
+  "commands_reference": "evidence/batches/P7-06C/commands.json",
+  "historical_acceptance": "evidence/batches/P7-06/accept-pre-live-execution-20261026.json",
+  "proposed_recovery": {
+    "status": "PROPOSED",
+    "card": "tasks/P7-06E.md",
+    "adr": "docs/adr/ADR-0018.md",
+    "required_addendum": "evidence/batches/P7-06C/P7-06E-review-addendum.md"
+  },
+  "timestamp_utc": "2026-10-26T15:30:23.486382+00:00"
+}
