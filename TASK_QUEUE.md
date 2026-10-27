@@ -52,6 +52,7 @@
 | [P7-06F](tasks/P7-06F.md) | P7 | 开发集角色契约与只读失败分类 | P7-06C真实失败、用户修复授权 | PASS | `evidence/batches/P7-06F/accept.json` |
 | [P7-06G](tasks/P7-06G.md) | P7 | 新回归轮冻结与执行预检 | P7-06F、用户安排授权 | PASS | `evidence/batches/P7-06G/accept.json` |
 | [P7-06H](tasks/P7-06H.md) | P7 | round2真实执行、独立评分与预算对账 | P7-06G、用户执行授权 | BLOCKED | `evidence/batches/P7-06H/accept.json` |
+| [P7-06I](https://github.com/Loz888/-MGAR-v2-/blob/wip/p7-06i-development/tasks/P7-06I.md) | P7 | 开发集聚合容量/模型错误与新冻结轮审阅 | P7-06H、用户开发集授权 | PARTIAL | 开发分支 `wip/p7-06i-development`，检查点 `01ad6ce` |
 | [P8-01](tasks/P8-01.md) | P8 | 安全与一致性审计 | P7-06 | TODO | `evidence/batches/P8-01/accept.json` |
 | [P8-02](tasks/P8-02.md) | P8 | 干净环境复现与最终发布门禁 | P8-01 | TODO | `evidence/batches/P8-02/accept.json` |
 | [P8-03](tasks/P8-03.md) | P8 | 面试 Demo 与项目证据包 | P8-02 | TODO | `evidence/batches/P8-03/accept.json` |
@@ -126,3 +127,5 @@ P0-01 的原始未提交快照与失败记录保留于 `evidence/batches/P0-01/a
 **P7-06H执行授权（2026-10-27）：** 用户明确要求执行冻结round2、独立评分并记录预算和停止原因。本卡保持G冻结代码/配置与96身份，预算1.90美元加旧轮上界0.033850，累计不超过原2美元；不重跑旧轮，不自动恢复UNKNOWN，不进入P8。执行前已核实完整冻结source fingerprint与旧日志hash一致；仅追加验收记录。
 
 **P7-06H真实round2结果（2026-10-27）：** G冻结轮已单次执行并独立评分全部96项：45执行完成、27失败、24blocked，UNKNOWN/NOT_RUN均0；540次模型用量全部已知，319次工具调用与PG逐项匹配。Oracle通过B0/B1/B2/B4分别15/15/21/6（各24）；B4的6项仅负例拒绝，严格真实业务闭环仍0，H与父卡BLOCKED，不进入P8。新轮最高单价估算USD0.277379，加旧轮上界0.033850后的累计上界USD0.311229，未耗尽2美元；结束原因为96项均已尝试。旧日志和旧unknown原账不变、无重播；live-004四组只读失败均known failed并继续。13个B4聚合末次输出达到1024 token且failed，建议development复现容量/错误归因；本卡未改生产契约。完整实验前后冻结指纹一致；执行后仅修复预检测试使用已消费正式marker的隔离缺陷，并保留初次全量失败证据。详见H/accept.json、budget-and-stop.json与round2-results-20261027独立报告。
+
+**GitHub进度同步（2026-10-27）：** 已验证代码与round2完整证据保留在main，远端架构文档修改正常合并；P7-06I初版代码与部分验证记录发布在独立开发分支，未作为PASS或真实闭环结果。详见docs/operations/development-status.md。
