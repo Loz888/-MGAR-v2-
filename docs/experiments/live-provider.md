@@ -141,4 +141,16 @@ normalizer、无前导空格的 ByteLevel、完整 256 字节字母表、只合�
 独立分析退出2。旧schema曾使marker写入后才失败，现增加写入前的只读迁移/结构门禁，
 测试使用真实PG旧schema复现。随后补应用既有005/006，未删除或恢复原queued marker。
 零发送初始化恢复例外见 [ADR-0018](../adr/ADR-0018.md)/[P7-06E](../../tasks/P7-06E.md)，
-尚待审阅；原USD2和模型授权不变。实际诊断/日志/计数见本卡accept和正式分析报告。
+已按用户确认批准；原USD2和模型授权不变。实际诊断/日志/计数见本卡accept和正式分析报告。
+
+
+## P7-06E 一次性零发送恢复
+
+`--recover-zero-send` 只绑定本次原失败：固定证据hash、原marker与lease过期时间、
+完整可读的namespace/账本零使用证明，且没有journal/CAS执行历史。只允许epoch1→2，
+epoch2后即使进程SIGKILL或lease过期也拒绝再次接管。普通live启动仍按原一次性规则。
+
+先按原paid环境门禁运行 `bash scripts/eval.sh --live --confirm-live --recover-zero-send --preflight`
+做只读检查；E验收通过后，同一命令省略 `--preflight` 才完成原初始化并执行原96项。
+不是用于恢复任何已发送/未知调用的开关；不删除标记、不改身份或费用，不调holdout。
+执行器元数据保留allocation_mode和recovery_proof_sha256，独立评价继续使用相同Oracle。

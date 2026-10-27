@@ -1,0 +1,12 @@
+{
+  "run_id": "92d7ff2b-cf3d-5ec3-a1a0-c938f24aa4a7",
+  "goal": "Live allocation P7-06-deepseek-flash-1017-20261026 plan_sha256=aa54bfa2fcad41545ad5ebf0c513ccd58ba0a6d17778921ba97c8979a99cdbf2",
+  "state": "queued",
+  "workflow_revision": 0,
+  "owner_id": "live-allocation-gate",
+  "epoch": 1,
+  "lease_revision": 0,
+  "lease_until": "2026-10-26 15:16:21.542269+00:00",
+  "checked_at": "2026-10-26T15:28:49.118433+00:00",
+  "read_only": true
+}

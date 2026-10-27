@@ -1,0 +1,143 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./eval/live",
+      "-run",
+      "^TestZeroSend"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06E/red-recovery.log",
+    "timestamp_utc": "2026-10-26T15:50:47.587078+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./eval/live",
+      "-run",
+      "^TestZeroSend"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06E/recovery-targeted.log",
+    "timestamp_utc": "2026-10-26T15:52:11.892139+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./eval/live"
+    ],
+    "exit_code": 1,
+    "log_path": "evidence/batches/P7-06E/init-and-recovery.log",
+    "timestamp_utc": "2026-10-27T00:21:03.220827+00:00"
+  },
+  {
+    "command": [
+      "docker",
+      "--host=unix:///var/run/docker.sock",
+      "start",
+      "mgar-v2-dev-postgres-1"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06E/restart-existing-postgres.log",
+    "timestamp_utc": "2026-10-27T00:22:16.058404+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./eval/live"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06E/init-and-recovery-post-restart.log",
+    "timestamp_utc": "2026-10-27T00:22:32.940517+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./eval/live",
+      "-run",
+      "^TestZeroSend"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06E/recovery-final-targeted.log",
+    "timestamp_utc": "2026-10-27T00:24:11.242869+00:00"
+  },
+  {
+    "command": [
+      "env",
+      "MGAR_ALLOW_PAID=1",
+      "MGAR_MAX_COST_USD=2.00",
+      "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+      "bash",
+      "scripts/eval.sh",
+      "--live",
+      "--confirm-live",
+      "--recover-zero-send",
+      "--preflight"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06E/original-recovery-preflight.log",
+    "timestamp_utc": "2026-10-27T00:24:38.715891+00:00"
+  },
+  {
+    "command": [
+      "python",
+      "evidence/batches/P7-06E/probe_models.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06E/official-models-current.log",
+    "timestamp_utc": "2026-10-27T00:25:11.491091+00:00"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-v",
+      "./tests/integration",
+      "-run",
+      "^TestDeepSeekVerifiedInputBoundAndAutomaticStop$"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06E/retained-provider-budget-gates.log",
+    "timestamp_utc": "2026-10-27T00:25:41.440218+00:00"
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/test.sh",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06E/offline-full.log",
+    "timestamp_utc": "2026-10-27T00:29:58.329768+00:00"
+  },
+  {
+    "command": [
+      "python",
+      ".local/final-audit.py"
+    ],
+    "exit_code": 0,
+    "log_path": "evidence/batches/P7-06E/archived-credential-format-audit.log",
+    "timestamp_utc": "2026-10-27T00:30:18.041635+00:00"
+  }
+]

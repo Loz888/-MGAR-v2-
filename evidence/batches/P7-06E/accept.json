@@ -1,0 +1,427 @@
+{
+  "card_id": "P7-06E",
+  "status": "PASS",
+  "git_commit": null,
+  "base_git_commit": "b01594e486e216fc05034aae40a80693f93b423a",
+  "source_fingerprint": "7d046de97ab7bc47f53f36613cbeed93acc9d7a0c63cd2dcb05d78cb47444ad8",
+  "scope": "Approved one-time recovery of the original zero-send allocation; pinned complete proof, original lease CAS epoch1->2, default-disabled CLI and unchanged experiment accounting",
+  "authorization": {
+    "approved": true,
+    "provider": "deepseek",
+    "model": "flash-1017",
+    "total_cap_usd": "2.00",
+    "assignments": 96,
+    "source": "User approved P7-06E and review addendum, then requested continuation"
+  },
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 597,
+      "passed": 597,
+      "failed_events": 0,
+      "skipped": 0,
+      "complete": true
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 427,
+      "passed": 427,
+      "failed": 0,
+      "skipped_or_xfailed": 0,
+      "complete": true,
+      "passed_subtests": 15
+    },
+    "status": "PASS"
+  },
+  "commands": [
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "./eval/live",
+        "-run",
+        "^TestZeroSend"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06E/red-recovery.log",
+      "timestamp_utc": "2026-10-26T15:50:47.587078+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./eval/live",
+        "-run",
+        "^TestZeroSend"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06E/recovery-targeted.log",
+      "timestamp_utc": "2026-10-26T15:52:11.892139+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./eval/live"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06E/init-and-recovery.log",
+      "timestamp_utc": "2026-10-27T00:21:03.220827+00:00"
+    },
+    {
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "start",
+        "mgar-v2-dev-postgres-1"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06E/restart-existing-postgres.log",
+      "timestamp_utc": "2026-10-27T00:22:16.058404+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./eval/live"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06E/init-and-recovery-post-restart.log",
+      "timestamp_utc": "2026-10-27T00:22:32.940517+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./eval/live",
+        "-run",
+        "^TestZeroSend"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06E/recovery-final-targeted.log",
+      "timestamp_utc": "2026-10-27T00:24:11.242869+00:00"
+    },
+    {
+      "command": [
+        "env",
+        "MGAR_ALLOW_PAID=1",
+        "MGAR_MAX_COST_USD=2.00",
+        "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+        "bash",
+        "scripts/eval.sh",
+        "--live",
+        "--confirm-live",
+        "--recover-zero-send",
+        "--preflight"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06E/original-recovery-preflight.log",
+      "timestamp_utc": "2026-10-27T00:24:38.715891+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "evidence/batches/P7-06E/probe_models.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06E/official-models-current.log",
+      "timestamp_utc": "2026-10-27T00:25:11.491091+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./tests/integration",
+        "-run",
+        "^TestDeepSeekVerifiedInputBoundAndAutomaticStop$"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06E/retained-provider-budget-gates.log",
+      "timestamp_utc": "2026-10-27T00:25:41.440218+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06E/offline-full.log",
+      "timestamp_utc": "2026-10-27T00:29:58.329768+00:00"
+    },
+    {
+      "command": [
+        "python",
+        ".local/final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06E/archived-credential-format-audit.log",
+      "timestamp_utc": "2026-10-27T00:30:18.041635+00:00"
+    }
+  ],
+  "recovery_preflight": {
+    "assigned": 96,
+    "cap_micros": 2000000,
+    "epoch": 1,
+    "generation_requests_sent": 0,
+    "mode": "approved_zero_send_epoch_1_to_2",
+    "proof_sha256": "c232b722664b64a6dd40b26481052c3c68618f8af2e16fc3b27de54a3fff17fc",
+    "ready": true
+  },
+  "positive_assertions": [
+    {
+      "name": "original_failure_six_artifact_hashes_fixed_and_reviewed",
+      "passed": true
+    },
+    {
+      "name": "real_PG_exact_marker_goal_state_revision_version_lease_and_zero_budget_verified",
+      "passed": true
+    },
+    {
+      "name": "complete_namespace_enumeration_missing_or_unreadable_is_not_zero",
+      "passed": true
+    },
+    {
+      "name": "two_OS_processes_exactly_one_epoch2_winner",
+      "passed": true
+    },
+    {
+      "name": "actual_SIGKILL_after_CAS_retains_epoch2_and_no_restart_epoch3",
+      "passed": true
+    },
+    {
+      "name": "original_96_UUIDs_and_shares_survive_initialization_no_new_allocation",
+      "passed": true
+    },
+    {
+      "name": "local_HTTP_real_PG_reservation_unknown_and_budget_stop_regression_passes",
+      "passed": true
+    },
+    {
+      "name": "official_models_readonly_HTTP200_with_current_credential",
+      "passed": true
+    },
+    {
+      "name": "full_engineering_regression_no_failure_skip_xfail",
+      "passed": true
+    }
+  ],
+  "negative_assertions": [
+    {
+      "name": "active_or_wrong_lease_goal_state_revision_version_or_plan_refused",
+      "passed": true
+    },
+    {
+      "name": "nonzero_or_changed_budget_hidden_run_unknown_call_missing_table_namespace_or_checksum_refused",
+      "passed": true
+    },
+    {
+      "name": "existing_journal_CAS_history_symlink_or_missing_changed_proof_refused",
+      "passed": true
+    },
+    {
+      "name": "no_marker_deletion_recreation_share_transfer_or_extra_budget",
+      "passed": true
+    },
+    {
+      "name": "no_new_DDL_or_business_permission_change",
+      "passed": true
+    },
+    {
+      "name": "normal_start_still_refuses_existing_allocation",
+      "passed": true
+    },
+    {
+      "name": "no_live_generation_or_holdout_prompt_tuning_before_E_acceptance",
+      "passed": true
+    }
+  ],
+  "known_limitations": [
+    "Recovery is solely for this recorded zero-send failure. Any failure after the persistent epoch2 CAS remains sealed, including crashes before generation.",
+    "Trusts controller/PG and reviewed evidence integrity; hashes are not supplier attestation.",
+    "Provider aliases can move; conservative frozen USD estimates are not invoices.",
+    "Current cloud metadata readiness is unknown; actual Docker/PG/HTTPS results are recorded.",
+    "The container was stopped after environment restart; same container/volume was started and original marker retained. Failed connection test log preserved."
+  ],
+  "actual_paid_calls": 0,
+  "formal_activation": "NOT_RUN_AT_OFFLINE_ACCEPTANCE",
+  "unverified": [
+    {
+      "name": "real_24x4_model_execution",
+      "status": "NOT_RUN",
+      "reason": "E offline prerequisite accepted; already-authorized C follows"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "CHANGE_REQUEST.md",
+      "sha256": "ccb24106aa709e71cd08b0c0d1d9279973d73f5a6ba232ee9742945b7e9c01e9"
+    },
+    {
+      "path": "TASK_QUEUE.md",
+      "sha256": "1a6cc39aa82df52320b948f6462511303c9cf1c3cc1324df3c60f32922f09aa0"
+    },
+    {
+      "path": "cmd/mgareval/main.go",
+      "sha256": "12c1b82611ca11ab61746caaca589894db5c4b07eae67602381153e99205ee2b"
+    },
+    {
+      "path": "docs/adr/ADR-0018.md",
+      "sha256": "903caab174c09264504f8f4c42e5d5a37daf8856c2040a6b02a903d0a743227c"
+    },
+    {
+      "path": "docs/experiments/live-provider.md",
+      "sha256": "61e9896f840c3be5ce3ad2e767c25e22a64a0cc1d7f5bf5e7e3f6228ae33385e"
+    },
+    {
+      "path": "eval/live/live.go",
+      "sha256": "ab7ca2a2ba7260bdd0edd289d146edac37f52f2d355a666b09533d37b9342a81"
+    },
+    {
+      "path": "eval/live/recovery.go",
+      "sha256": "e178a1432d85bdaa2868b3c88793b82051c11b15b7e992e4496e110ccd9f195e"
+    },
+    {
+      "path": "eval/live/recovery_test.go",
+      "sha256": "d40a7f1d247ea875a9ead590d9171526802059f89d872ae12b27df9fed38e15e"
+    },
+    {
+      "path": "evidence/batches/P7-06E/archived-credential-format-audit.log",
+      "sha256": "9745885bd6419ad25fdd7827eb342e9d376808745b10bdf255d02ca7272fa214"
+    },
+    {
+      "path": "evidence/batches/P7-06E/commands.json",
+      "sha256": "953beb4c6303534e7863be16e349d0bc33c07ae295bafe99ecf7b638ad6079f4"
+    },
+    {
+      "path": "evidence/batches/P7-06E/init-and-recovery-post-restart.log",
+      "sha256": "d58c5359cdfe1bd2a7ed14737d841b822d3f9dd37707860e971e0038c54f1235"
+    },
+    {
+      "path": "evidence/batches/P7-06E/init-and-recovery.log",
+      "sha256": "85afe5c963c2a0435f85715572aa1fcd12bc25d65886cccf3e87a5f13a026b9f"
+    },
+    {
+      "path": "evidence/batches/P7-06E/official-models-current.log",
+      "sha256": "f5217958952836dff44b631e8793b525af4e6bd82a54ec9f5a47c5054a8033c6"
+    },
+    {
+      "path": "evidence/batches/P7-06E/offline-docs.json.json",
+      "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+    },
+    {
+      "path": "evidence/batches/P7-06E/offline-fingerprint.json",
+      "sha256": "49b9a5725c81829b21869c9263dd1ceff4234bf5feda6b8f5f5b4453f6474070"
+    },
+    {
+      "path": "evidence/batches/P7-06E/offline-full.log",
+      "sha256": "0511820ef3c2ae2c833a4fc9004c7c521a7adaf3de80d2c50d14f6fab82d3e2c"
+    },
+    {
+      "path": "evidence/batches/P7-06E/offline-go.json.json",
+      "sha256": "b99a69a77db7277b798efbfd78fc80f9598fc5b7fbe9e3b4ef2481c746e3ca86"
+    },
+    {
+      "path": "evidence/batches/P7-06E/offline-mypy.log.json",
+      "sha256": "8e7a0a8352a322d19e55605ee61df9b305de124895458472f4062bc11baad1c7"
+    },
+    {
+      "path": "evidence/batches/P7-06E/offline-pytest-events.json.json",
+      "sha256": "37a15bab4c4b9bc164d58bfba6b47b8f82bdd1879220f9947db46f1e60e6f0b3"
+    },
+    {
+      "path": "evidence/batches/P7-06E/offline-pytest.log.json",
+      "sha256": "a86e48437c9e4287bff6a9797d2ab5ae42818b9f38d1a49a4dffe3a79f2b0473"
+    },
+    {
+      "path": "evidence/batches/P7-06E/offline-pytest.xml.json",
+      "sha256": "f5a8daf9c5a8c72c2047cb0ee411e5f723728f4318dd01bc8666efb820ee09e8"
+    },
+    {
+      "path": "evidence/batches/P7-06E/offline-report.json.json",
+      "sha256": "13777e17bf022779e5279d860cba3b34cf4a0199875990b3a93752d0b177b27d"
+    },
+    {
+      "path": "evidence/batches/P7-06E/offline-ruff.log.json",
+      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+    },
+    {
+      "path": "evidence/batches/P7-06E/offline-vet.log.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P7-06E/original-recovery-preflight.log",
+      "sha256": "c81ef697c7fc50389ac12dd4af0470182a10a31a6f384f2f7c19d0588d09352d"
+    },
+    {
+      "path": "evidence/batches/P7-06E/original/actual-live-run.log",
+      "sha256": "e4c2e417ed2ade93201df051a747d63aef4584458b0515dbdfb18d6515e57c6d"
+    },
+    {
+      "path": "evidence/batches/P7-06E/original/allocation-lease-readonly.json",
+      "sha256": "3b050527aee2197e3170efb5b12c263398562ee71ef140c4bd46b689ee14bf24"
+    },
+    {
+      "path": "evidence/batches/P7-06E/original/launch-provenance.json",
+      "sha256": "5f6f9a98fedfbab10a2309cd71c73194792f454ab07d60b91ce2942e69f00d3e"
+    },
+    {
+      "path": "evidence/batches/P7-06E/original/schema-after-repair.json",
+      "sha256": "20f659a768eade81d09020e4f1f9f0fca46a0130d12d3bfad69b8b8c4ad416ef"
+    },
+    {
+      "path": "evidence/batches/P7-06E/original/schema-before-repair.json",
+      "sha256": "10a1cb2f06fc92811effd8c31b4e809f9a340a95a16fd9164f38529dd96a95cf"
+    },
+    {
+      "path": "evidence/batches/P7-06E/probe_models.py",
+      "sha256": "936a998082245d41cbf6124165aa07fe6ebdac3e3b272af0090e59ca8c007751"
+    },
+    {
+      "path": "evidence/batches/P7-06E/recovery-final-targeted.log",
+      "sha256": "a5f9f8ca4611388ce4665ff5deb70b24e8bb6f869e64e21f94431745ad6909f1"
+    },
+    {
+      "path": "evidence/batches/P7-06E/recovery-targeted.log",
+      "sha256": "b41e00bef08137f13e4765502b888b4f477b75b3243ecbca9fde29e329bf3eb3"
+    },
+    {
+      "path": "evidence/batches/P7-06E/red-recovery.log",
+      "sha256": "e87ec3bfe9615aed6fa172009d267136679c8c9866ce61d5831f0a38b469c3f4"
+    },
+    {
+      "path": "evidence/batches/P7-06E/restart-existing-postgres.log",
+      "sha256": "6a885534f9e7e9e6e61304fd13c67b5753343a4728005c67ac324ead6fc51d39"
+    },
+    {
+      "path": "evidence/batches/P7-06E/retained-provider-budget-gates.log",
+      "sha256": "599fb91c4ab43bd1694f51b16e7ab3f030809bcd09fb9538896cc6496252130d"
+    },
+    {
+      "path": "internal/store/one_time_claim.go",
+      "sha256": "86a7e8c92a4d33a27ad7426f7bfaf531c21674c8d9483c0eee298ed74a63615a"
+    },
+    {
+      "path": "tasks/P7-06E.md",
+      "sha256": "fac1619e263ccdc8c46823140465593cf0c0ab7b6f69dec19d285168566a162f"
+    }
+  ],
+  "timestamp_utc": "2026-10-27T00:30:18.116031+00:00"
+}

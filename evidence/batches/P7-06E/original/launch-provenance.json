@@ -1,0 +1,16 @@
+{
+  "started_at": "2026-10-26T15:15:20.319277+00:00",
+  "source_commit": "801668a4ba18ae246ed4b5512c2b973094166b0e",
+  "source_fingerprint": "b30cb75858fe248920294c1de45a6f44bb78369d42e46020fda20e3c09bf54b7",
+  "approved_cap_micros": 2000000,
+  "allocated_micros": 1999968,
+  "assignments": 96,
+  "automatic_retry": false,
+  "frozen_inputs": {
+    "eval/live/plan.json": "0d22c2fff7ae8a1fe507d770cbfb53cffb4f699452e4277b9682d8795f6ba972",
+    "eval/live/pricing.json": "84488462e7acbefa9f9f1fb7ec72cf42f9e4529eaf5f4c82e132d9df3bb923ff",
+    "eval/live/official-evidence.json": "4de4fffe49cfc8c2e87971743b824d9a91e383f828b8c2a5c67ca3a5049ed139",
+    "eval/cases/frozen-live-24.json": "ec6d5576a75fc2724756abeef2628189c2922038f09cb9258d7a1972e493c8ab",
+    "eval/dataset_manifest.json": "0b48a86008574d0a8bdbde1d88d37e718d45e75fe33363075fdcd48f0eb2d511"
+  }
+}

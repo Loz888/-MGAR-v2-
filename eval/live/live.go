@@ -397,6 +397,14 @@ func completeLedger(b budget.Report, observed demo.ExperimentReport, a Assignmen
 }
 
 func Run(ctx context.Context, root string, confirm bool) (Report, error) {
+	return run(ctx, root, confirm, false)
+}
+
+// RunRecovered is enabled only by the separately approved zero-send CLI mode.
+func RunRecovered(ctx context.Context, root string, confirm bool) (Report, error) {
+	return run(ctx, root, confirm, true)
+}
+func run(ctx context.Context, root string, confirm, recoverZeroSend bool) (Report, error) {
 	checked := Preflight(root, confirm)
 	if !checked.Ready {
 		return Report{}, ErrGate
@@ -409,7 +417,20 @@ func Run(ctx context.Context, root string, confirm bool) (Report, error) {
 	if e != nil {
 		return Report{}, ErrGate
 	}
-	e = claimExperiment(ctx, allocation, p)
+	mode := "fresh"
+	proofSHA := ""
+	if recoverZeroSend {
+		proof, proofErr := loadRecoveryProof(root)
+		if proofErr != nil {
+			allocation.Pool.Close()
+			return Report{}, proofErr
+		}
+		e = finishZeroSend(ctx, root, allocation, p, proof)
+		mode = "approved_zero_send_epoch_1_to_2"
+		proofSHA = proof.Fingerprint
+	} else {
+		e = claimExperiment(ctx, allocation, p)
+	}
 	allocation.Pool.Close()
 	if e != nil {
 		return Report{}, e
@@ -429,7 +450,7 @@ func Run(ctx context.Context, root string, confirm bool) (Report, error) {
 	if e != nil {
 		return Report{}, e
 	}
-	if e = saveNew(filepath.Join(path, "executor.json"), map[string]string{"sha256": artifact.Digest(binary), "started_at": time.Now().UTC().Format(time.RFC3339)}); e != nil {
+	if e = saveNew(filepath.Join(path, "executor.json"), map[string]string{"sha256": artifact.Digest(binary), "started_at": time.Now().UTC().Format(time.RFC3339), "allocation_mode": mode, "recovery_proof_sha256": proofSHA}); e != nil {
 		return Report{}, e
 	}
 	return execute(ctx, path, p, func(ctx context.Context, a Assignment) (demo.ExperimentReport, error) {

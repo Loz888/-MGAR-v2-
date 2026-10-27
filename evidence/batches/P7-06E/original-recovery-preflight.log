@@ -1,0 +1,3 @@
+{
+  "stdout": "{\"assigned\":96,\"cap_micros\":2000000,\"epoch\":1,\"generation_requests_sent\":0,\"mode\":\"approved_zero_send_epoch_1_to_2\",\"proof_sha256\":\"c232b722664b64a6dd40b26481052c3c68618f8af2e16fc3b27de54a3fff17fc\",\"ready\":true}\n"
+}

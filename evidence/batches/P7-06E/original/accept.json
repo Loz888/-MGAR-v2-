@@ -1,0 +1,855 @@
+{
+  "card_id": "P7-06C",
+  "status": "BLOCKED",
+  "git_commit": null,
+  "base_git_commit": "801668a4ba18ae246ed4b5512c2b973094166b0e",
+  "source_fingerprint": "ceecdbfce26241955eaae671f75eb8496b806ba5c2acb30f49643e05a9d952bc",
+  "scope": "Executed formal start once, preserved zero-send initialization failure, repaired existing control migrations and added pre-marker read-only schema gates",
+  "offline_tooling_status": "PASS",
+  "test_summary": {
+    "go": {
+      "status": "PASS",
+      "tests": 569,
+      "passed": 569,
+      "failed_events": 0,
+      "skipped": 0,
+      "complete": true
+    },
+    "python": {
+      "status": "PASS",
+      "tests": 427,
+      "passed": 427,
+      "failed": 0,
+      "skipped_or_xfailed": 0,
+      "complete": true,
+      "passed_subtests": 15
+    },
+    "status": "PASS"
+  },
+  "commands": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06C/red-analysis.log",
+      "timestamp_utc": "2026-10-26T01:57:16.397792+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/analysis-tests.log",
+      "timestamp_utc": "2026-10-26T09:28:13.270497+00:00"
+    },
+    {
+      "command": [
+        "ruff",
+        "check",
+        "--isolated",
+        "eval/live/analyze.py",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/analyzer-lint.log",
+      "timestamp_utc": "2026-10-26T09:28:23.004671+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06C/red-journal-contract.log",
+      "timestamp_utc": "2026-10-26T09:29:57.415172+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/journal-contract-tests.log",
+      "timestamp_utc": "2026-10-26T09:30:28.154934+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/accounting-contract-tests.log",
+      "timestamp_utc": "2026-10-26T09:31:47.118009+00:00"
+    },
+    {
+      "command": [
+        "env",
+        "MGAR_ALLOW_PAID=1",
+        "MGAR_MAX_COST_USD=2.00",
+        "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+        "bash",
+        "scripts/eval.sh",
+        "--live",
+        "--confirm-live",
+        "--preflight"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06C/live-preflight.log",
+      "timestamp_utc": "2026-10-26T09:35:29.186509+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "eval/live/analyze.py",
+        "--output",
+        "evidence/eval/live/readiness-20261026"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06C/blocked-report.log",
+      "timestamp_utc": "2026-10-26T09:36:09.929120+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/final-audit.log",
+      "timestamp_utc": "2026-10-26T09:37:47.461763+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/offline-full.log",
+      "timestamp_utc": "2026-10-26T09:37:48.588402+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "-c",
+        "core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/whitespace-check.log",
+      "timestamp_utc": "2026-10-26T09:39:45.172089+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./tests/integration",
+        "-run",
+        "^TestDeepSeekDurableTransport$"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06C/red-official-wire-contract.log",
+      "timestamp_utc": "2026-10-26T12:23:32.842583+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./internal/provider",
+        "./tests/integration",
+        "-run",
+        "TestDeepSeek"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/official-wire-contract.log",
+      "timestamp_utc": "2026-10-26T12:24:00.194378+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./eval/live",
+        "-run",
+        "^TestOfficialFlash1017QuoteRejectsBeforeAllocation$"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06C/red-published-quote.log",
+      "timestamp_utc": "2026-10-26T12:25:02.188891+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "evidence/batches/P7-06C/freeze_official.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/freeze-official.log",
+      "timestamp_utc": "2026-10-26T12:26:21.853096+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./eval/live",
+        "-run",
+        "TestOfficialFlash1017QuoteRejectsBeforeAllocation|TestLivePreflight"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/published-quote-gate.log",
+      "timestamp_utc": "2026-10-26T12:26:22.685483+00:00"
+    },
+    {
+      "command": [
+        "env",
+        "MGAR_ALLOW_PAID=1",
+        "MGAR_MAX_COST_USD=2.00",
+        "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+        "bash",
+        "scripts/eval.sh",
+        "--live",
+        "--confirm-live",
+        "--preflight"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06C/runtime-live-preflight.log",
+      "timestamp_utc": "2026-10-26T12:29:09.980394+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "eval/live/analyze.py",
+        "--output",
+        "evidence/eval/live/runtime-check-20261026"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06C/runtime-blocked-report.log",
+      "timestamp_utc": "2026-10-26T12:30:36.857693+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "evidence/batches/P7-06C/probe_official.py",
+        "evidence/batches/P7-06C/official-check-20261026"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/official-check-20261026/fetch.json",
+      "timestamp_utc": "2026-10-26T12:17:01.570714+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./..."
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/runtime-plain-go.log",
+      "timestamp_utc": "2026-10-26T12:32:18.093717+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/runtime-credential-and-format-audit.log",
+      "timestamp_utc": "2026-10-26T12:37:53.028770+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/runtime-offline-full.log",
+      "timestamp_utc": "2026-10-26T12:37:59.792298+00:00"
+    },
+    {
+      "command": [
+        "env",
+        "MGAR_ALLOW_PAID=1",
+        "MGAR_MAX_COST_USD=2.00",
+        "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+        "bash",
+        "scripts/eval.sh",
+        "--live",
+        "--confirm-live"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06C/runtime-card-command.log",
+      "timestamp_utc": "2026-10-26T12:41:09.836056+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "-c",
+        "core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/runtime-whitespace-check.log",
+      "timestamp_utc": "2026-10-26T12:41:40.816260+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-v",
+        "./eval/live",
+        "-run",
+        "^TestLiveKnownFailureAccountingAndUncertainTools$"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06C/c-red-accounting-go.log",
+      "timestamp_utc": "2026-10-26T15:07:27.761897+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py",
+        "-k",
+        "unfinished_tool"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06C/c-red-accounting-python.log",
+      "timestamp_utc": "2026-10-26T15:07:32.452854+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./eval/live"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/c-accounting-go.log",
+      "timestamp_utc": "2026-10-26T15:08:55.851815+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_live_analysis.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/c-accounting-python.log",
+      "timestamp_utc": "2026-10-26T15:09:05.843158+00:00"
+    },
+    {
+      "command": [
+        "env",
+        "MGAR_ALLOW_PAID=1",
+        "MGAR_MAX_COST_USD=2.00",
+        "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+        "bash",
+        "scripts/eval.sh",
+        "--live",
+        "--confirm-live",
+        "--preflight"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/c-live-preflight.log",
+      "timestamp_utc": "2026-10-26T15:11:20.569155+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/c-offline-full.log",
+      "timestamp_utc": "2026-10-26T15:14:39.439425+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/c-prelive-audit.log",
+      "timestamp_utc": "2026-10-26T15:15:12.602050+00:00"
+    },
+    {
+      "command": [
+        "env",
+        "MGAR_ALLOW_PAID=1",
+        "MGAR_MAX_COST_USD=2.00",
+        "MGAR_LIVE_CASELIST=eval/cases/frozen-live-24.json",
+        "bash",
+        "scripts/eval.sh",
+        "--live",
+        "--confirm-live"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06C/actual-live-run.log",
+      "timestamp_utc": "2026-10-26T15:15:21.554779+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "evidence/batches/P7-06D/check_allocation.py"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06C/after-launch-allocation-check.log",
+      "timestamp_utc": "2026-10-26T15:15:52.531320+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-v",
+        "./eval/live",
+        "-run",
+        "^TestLivePostgresSchemaReadinessBeforeAllocation$"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06C/c-red-schema-readiness.log",
+      "timestamp_utc": "2026-10-26T15:19:33.790852+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "evidence/batches/P7-06C/diagnose_allocation.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/schema-before-repair.log",
+      "timestamp_utc": "2026-10-26T15:21:04.734939+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "eval/live/analyze.py",
+        "--output",
+        "evidence/eval/live/post-init-failure-20261026"
+      ],
+      "exit_code": 2,
+      "log_path": "evidence/batches/P7-06C/post-init-independent-analysis.log",
+      "timestamp_utc": "2026-10-26T15:21:36.380056+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "run",
+        "./cmd/mgarmigrate"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/apply-existing-control-migrations.log",
+      "timestamp_utc": "2026-10-26T15:21:37.245164+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./eval/live"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/c-schema-readiness.log",
+      "timestamp_utc": "2026-10-26T15:22:18.706565+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "evidence/batches/P7-06C/diagnose_allocation.py",
+        "schema-after-repair.json"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/schema-after-repair.log",
+      "timestamp_utc": "2026-10-26T15:22:56.709492+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-v",
+        "./eval/live",
+        "-run",
+        "^TestLivePostgresSchemaReadinessBeforeAllocation$/missing-resource"
+      ],
+      "exit_code": 1,
+      "log_path": "evidence/batches/P7-06C/c-red-resource-readiness.log",
+      "timestamp_utc": "2026-10-26T15:23:29.707055+00:00"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-v",
+        "./eval/live"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/c-resource-readiness.log",
+      "timestamp_utc": "2026-10-26T15:24:11.419835+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-allocation-lease.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/original-allocation-lease.log",
+      "timestamp_utc": "2026-10-26T15:28:49.165767+00:00"
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/test.sh",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/c-final-offline-full.log",
+      "timestamp_utc": "2026-10-26T15:29:34.891477+00:00"
+    },
+    {
+      "command": [
+        "python",
+        "/tmp/mgar-final-audit.py"
+      ],
+      "exit_code": 0,
+      "log_path": "evidence/batches/P7-06C/c-final-credential-and-format.log",
+      "timestamp_utc": "2026-10-26T15:30:23.389312+00:00"
+    }
+  ],
+  "authorization": {
+    "provider": "deepseek",
+    "model": "flash-1017",
+    "api_model": "deepseek-flash",
+    "total_cap_usd": "2.00",
+    "assignments": 96,
+    "still_valid": true
+  },
+  "positive_assertions": [
+    {
+      "name": "known_failed_reports_keep_settled_usage_even_with_control_error",
+      "passed": true
+    },
+    {
+      "name": "uncertain_model_or_tool_effect_stops_whole_experiment",
+      "passed": true
+    },
+    {
+      "name": "official_request_input_proof_and_budget_gates_D_accepted",
+      "passed": true
+    },
+    {
+      "name": "formal_card_command_actually_executed_once_exit_1",
+      "passed": true
+    },
+    {
+      "name": "public_missing_005_006_root_cause_confirmed_and_existing_migrations_applied",
+      "passed": true
+    },
+    {
+      "name": "old_or_drifted_schema_rejected_before_any_marker_write_in_real_PG",
+      "passed": true
+    },
+    {
+      "name": "full_go_race_python_static_regression_passed_without_failures_skips_xfails",
+      "passed": true
+    },
+    {
+      "name": "independent_report_retains_all_96_NOT_RUN_and_missing_pairs_NA",
+      "passed": true
+    },
+    {
+      "name": "before_after_zero_usage_diagnosis_retains_original_queued_marker",
+      "passed": true
+    }
+  ],
+  "negative_assertions": [
+    {
+      "name": "no_generation_requests_sent",
+      "passed": true
+    },
+    {
+      "name": "no_marker_delete_reset_or_rerun",
+      "passed": true
+    },
+    {
+      "name": "no_new_allocation_UUID_or_increased_budget",
+      "passed": true
+    },
+    {
+      "name": "no_live_prompt_or_truth_tuning",
+      "passed": true
+    },
+    {
+      "name": "no_production_DB_writes_or_new_DDL_files",
+      "passed": true
+    },
+    {
+      "name": "no_configured_credentials_in_evidence",
+      "passed": true
+    }
+  ],
+  "blockers": [
+    "Formal one-use allocation marker was committed before initialization failed; existing protocol refuses automatic reuse even with no generation.",
+    "P7-06E/ADR-0018 proposes a narrow zero-send initialization recovery preserving original identity/cap. Its protocol exception awaits review."
+  ],
+  "known_limitations": [
+    "The official configuration preflight checks configuration; it did not establish public DB schema readiness. This execution preparation error is recorded, not attributed to credentials or budget shortage.",
+    "Full test fixtures migrate their own random namespaces and did not prove the public schema was current; new old-schema PG tests cover the failure before marker writes.",
+    "Only existing synthetic control migrations 005/006 were applied. Original queued marker remains unchanged; no delete/reset/retry/recovery was performed.",
+    "Zero generation is proved by failure before journal/provider creation and read-only checks of all 96 identities; analysis correctly retains NOT_RUN and N/A costs/pairs.",
+    "USD 2, Flash-1017, all 96 assignment UUIDs, caps, permissions and Verifier rules are unchanged. No P8 work.",
+    "P7-06E is a reviewable zero-send recovery proposal only; no recovery implementation is included."
+  ],
+  "actual_paid_calls": 0,
+  "known_model_spending_micros": 0,
+  "formal_allocation_consumed": true,
+  "formal_assignment_started": 0,
+  "allocation_state": {
+    "run_id": "92d7ff2b-cf3d-5ec3-a1a0-c938f24aa4a7",
+    "state": "queued",
+    "revision": 0,
+    "formal_journal_exists": false,
+    "pending_model_calls": 0,
+    "unknown_model_calls": 0,
+    "model_calls_all_assignments": 0
+  },
+  "evaluation": {
+    "status": "BLOCKED",
+    "path": "evidence/eval/live/post-init-failure-20261026/metrics.json",
+    "assigned": 96,
+    "not_run": 96,
+    "real_model_closure_verified": false,
+    "estimated_cost_usd": null
+  },
+  "unverified": [
+    {
+      "name": "24x4_real_model_evaluation",
+      "status": "NOT_RUN",
+      "reason": "Formal one-use allocation marker was committed before initialization failed; existing protocol refuses automatic reuse even with no generation."
+    },
+    {
+      "name": "real_model_closure",
+      "status": "NOT_RUN",
+      "reason": "No model generation sent"
+    },
+    {
+      "name": "zero_send_initialization_recovery",
+      "status": "NOT_RUN",
+      "reason": "P7-06E is proposed, not implemented or approved"
+    }
+  ],
+  "historical_acceptance": "evidence/batches/P7-06C/accept-pre-live-execution-20261026.json",
+  "artifacts": [
+    {
+      "path": "CHANGE_REQUEST.md",
+      "sha256": "af42bd9384b22f74bd73fe416d9fbadfcd5ce0087c62a221028e1ceaec31fc69"
+    },
+    {
+      "path": "TASK_QUEUE.md",
+      "sha256": "2d1673b78dd4a47447237c094c3517f598550869629332071d2e717ceff2dd57"
+    },
+    {
+      "path": "docs/adr/ADR-0018.md",
+      "sha256": "1acf28ef0d7c54b2fbdb96af0b0cfe332e4611c0f298c9ac09c8a8b0e2909d8d"
+    },
+    {
+      "path": "docs/experiments/live-provider.md",
+      "sha256": "d3efef644e881932165c5649484e2ee90402099840e4c52c461d16f538083b63"
+    },
+    {
+      "path": "eval/live/live.go",
+      "sha256": "d527fe6d346c887587ce04770b295e2ba2acddc39530282145c08f365bf27125"
+    },
+    {
+      "path": "eval/live/live_test.go",
+      "sha256": "90427a5fb7992325843e17d635a4638c02c15208ce598f8942ea59148eb5e160"
+    },
+    {
+      "path": "evidence/batches/P7-06C/P7-06E-review-addendum.md",
+      "sha256": "988fdf2c041c93f0990915279b32645106b80a3ea499bf6ac1d327324ef3d7d3"
+    },
+    {
+      "path": "evidence/batches/P7-06C/actual-live-run.log",
+      "sha256": "e4c2e417ed2ade93201df051a747d63aef4584458b0515dbdfb18d6515e57c6d"
+    },
+    {
+      "path": "evidence/batches/P7-06C/after-launch-allocation-check.log",
+      "sha256": "bb659c7ca9e0824ed0a242af3a2759fd649189a686611a068fa9528aca5e993b"
+    },
+    {
+      "path": "evidence/batches/P7-06C/allocation-lease-readonly.json",
+      "sha256": "3b050527aee2197e3170efb5b12c263398562ee71ef140c4bd46b689ee14bf24"
+    },
+    {
+      "path": "evidence/batches/P7-06C/apply-existing-control-migrations.log",
+      "sha256": "f49a5641a86051351ae8340198de889feb920abef8c37d522567f5507a4f5846"
+    },
+    {
+      "path": "evidence/batches/P7-06C/c-final-credential-and-format.log",
+      "sha256": "7a8bc4c90dde512583b2f4273560dda307f2314af8e00d867768e1c5e1095309"
+    },
+    {
+      "path": "evidence/batches/P7-06C/c-final-offline-full.log",
+      "sha256": "e07d1b8e0fce1f879867d6a814cd0d57e9b5c45c81bf6902d9353a26df41c7b8"
+    },
+    {
+      "path": "evidence/batches/P7-06C/c-red-resource-readiness.log",
+      "sha256": "173c51922c5d737457913f696a0304576263015f60d8943a54bce737e7d58f85"
+    },
+    {
+      "path": "evidence/batches/P7-06C/c-red-schema-readiness.log",
+      "sha256": "7236d3c6ad0c19e9346f49229cd15c3512f23b0e4d4bc641b8a95d45e591ec7f"
+    },
+    {
+      "path": "evidence/batches/P7-06C/c-resource-readiness.log",
+      "sha256": "01f3c30827fb222f18edb024f2f161e7bf10675b9032891f740fcbdb4f8401a4"
+    },
+    {
+      "path": "evidence/batches/P7-06C/c-schema-readiness.log",
+      "sha256": "54149a7c52870b67395c451cc2fe6a9855acdae5c91be40e7c7317f1dec3a677"
+    },
+    {
+      "path": "evidence/batches/P7-06C/commands.json",
+      "sha256": "9538013f9a1ada25be71a79467e486584103d3212f926aa7f0aaa55ff1e29d60"
+    },
+    {
+      "path": "evidence/batches/P7-06C/diagnose_allocation.py",
+      "sha256": "ac143ca8a506ab55122b359b10f7bfa63bd2fe2893ecc9cfb67bf9b90745e44a"
+    },
+    {
+      "path": "evidence/batches/P7-06C/final-offline-docs.json.json",
+      "sha256": "48af2811beeab2553bb10894b93b5081cd6b4d4db311ed62df56da4f0f7ed0eb"
+    },
+    {
+      "path": "evidence/batches/P7-06C/final-offline-fingerprint.json",
+      "sha256": "7d0b4e108cf515cb3f851130384575e9ae540f62d72ec1a5f6830e757f20e33a"
+    },
+    {
+      "path": "evidence/batches/P7-06C/final-offline-go.json.json",
+      "sha256": "497b2e8e4222ff17e4e6eab52cca18164ed32181b266b408f7e32ac749c5df99"
+    },
+    {
+      "path": "evidence/batches/P7-06C/final-offline-mypy.log.json",
+      "sha256": "8e7a0a8352a322d19e55605ee61df9b305de124895458472f4062bc11baad1c7"
+    },
+    {
+      "path": "evidence/batches/P7-06C/final-offline-pytest-events.json.json",
+      "sha256": "25b2546edb4801971c0063a00b41ff4a175e474e490379c3f372564bed5dc063"
+    },
+    {
+      "path": "evidence/batches/P7-06C/final-offline-pytest.log.json",
+      "sha256": "142f940781b7a4eb3dd269ad35445d4bf74971d8a85db20c09c4bf9d9875ef8d"
+    },
+    {
+      "path": "evidence/batches/P7-06C/final-offline-pytest.xml.json",
+      "sha256": "c3cada20572086697963de992c3bff074785c140721a484bad745d5635b00b2a"
+    },
+    {
+      "path": "evidence/batches/P7-06C/final-offline-report.json.json",
+      "sha256": "93e0574b429223716635e453e78327e2b50583414189cd5ae34341813406d659"
+    },
+    {
+      "path": "evidence/batches/P7-06C/final-offline-ruff.log.json",
+      "sha256": "ea1dc22ae821018dd305859b34a0c0f4407cf0c47cc14e0f8a1ab08e01ea3778"
+    },
+    {
+      "path": "evidence/batches/P7-06C/final-offline-vet.log.json",
+      "sha256": "5059e00432c1f93e3153588cce0970bf9571f9f4ec429c198bc880521d455e1f"
+    },
+    {
+      "path": "evidence/batches/P7-06C/launch-provenance.json",
+      "sha256": "5f6f9a98fedfbab10a2309cd71c73194792f454ab07d60b91ce2942e69f00d3e"
+    },
+    {
+      "path": "evidence/batches/P7-06C/original-allocation-lease.log",
+      "sha256": "fe4d7ae20fcf4daebaa619b97e4f976aa7542ceefc8790955d4e1ada7fa97e8a"
+    },
+    {
+      "path": "evidence/batches/P7-06C/post-init-independent-analysis.log",
+      "sha256": "559587591fe39a82a117fda98c08e97c93383275706a5277ec0ef85561b884f4"
+    },
+    {
+      "path": "evidence/batches/P7-06C/schema-after-repair.json",
+      "sha256": "20f659a768eade81d09020e4f1f9f0fca46a0130d12d3bfad69b8b8c4ad416ef"
+    },
+    {
+      "path": "evidence/batches/P7-06C/schema-after-repair.log",
+      "sha256": "18e7827bb9383d6bb8d2f4dcdf55795b5c54a201d3c9f53737605f8ff25c658f"
+    },
+    {
+      "path": "evidence/batches/P7-06C/schema-before-repair.json",
+      "sha256": "10a1cb2f06fc92811effd8c31b4e809f9a340a95a16fd9164f38529dd96a95cf"
+    },
+    {
+      "path": "evidence/batches/P7-06C/schema-before-repair.log",
+      "sha256": "a17c44225e373c757270c74fae9230fe125fbdbebdef2fbcc1f72421270f02a3"
+    },
+    {
+      "path": "evidence/eval/live/post-init-failure-20261026/by_arm.csv",
+      "sha256": "81002b27713951e48b7d8b580da26db30485324f0ea1ff8b078a11ce706ae300"
+    },
+    {
+      "path": "evidence/eval/live/post-init-failure-20261026/by_category.csv",
+      "sha256": "df5457ad08f50e9cfdc3813f6d54e4bfd8dd25f2eccae2e9ecbb35a76c512421"
+    },
+    {
+      "path": "evidence/eval/live/post-init-failure-20261026/files.sha256.json",
+      "sha256": "6a2ef393ee2e5c7fc262e156f325ecb2a715bb4234a811bdb72704026bd2baf4"
+    },
+    {
+      "path": "evidence/eval/live/post-init-failure-20261026/metrics.json",
+      "sha256": "b4325c1c01bb584688fa1140a6c9415c7c626315cb4d0ac84429eac7d1a14b04"
+    },
+    {
+      "path": "evidence/eval/live/post-init-failure-20261026/paired.csv",
+      "sha256": "ea9e49b0df29d363086eaafc389d160b3d9cb5b9d5d11fb77fa2cba895b8fc41"
+    },
+    {
+      "path": "evidence/eval/live/post-init-failure-20261026/per_case.csv",
+      "sha256": "3857eef09179451111010476fdb5f3329d9ca66e11b4899df7f6e52ec67e6930"
+    },
+    {
+      "path": "evidence/eval/live/post-init-failure-20261026/report.md",
+      "sha256": "39ef7056ddcfc27338f35df13dcf4a9b6cf5e76facb609ac4aa21d760ace0d80"
+    },
+    {
+      "path": "tasks/P7-06E.md",
+      "sha256": "ac3e81b437e4305ad59317e9022b1c4245d2844e7a4340da19405547664f065a"
+    }
+  ],
+  "timestamp_utc": "2026-10-26T15:30:23.486382+00:00"
+}
